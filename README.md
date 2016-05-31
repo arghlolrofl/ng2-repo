@@ -12,10 +12,18 @@ Simply install all dependencies with
 ```
 npm install
 ```
+maybe you have to install ruby and scss as well
+```
+gem install scss
+```
 
-### Start
+### Start (dev environment)
 You can start the dev-environment by executing the command
 ```
 npm start
 ```
 
+### Build SCSS
+```
+npm run scss
+```
