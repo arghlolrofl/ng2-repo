@@ -1,0 +1,50 @@
+/**
+ * Base Styles
+ *
+ * @package TWT Sass Prototyp
+ * @author Sebastian Sauer <sebastian.sauer@twt.de>
+ */
+
+
+/* Base
+/* ----------------------------- */
+/* Bei der Verwendung von Bootstrap:
+In "base/_variables.scss" können die Basis Bootstrap Variablen überschrieben werden.
+Eine Liste aller Bootstrap Variablen ist hier zu finden: http://getbootstrap.com/customize/#less-variables */
+
+@import "base/mixins";
+@import "base/variables";
+
+
+/* Vendor
+/* ----------------------------- */
+/* Bei der Verwendung von Bootstrap:
+In "vendor/bootstrap-v3-3-6/_bootstrap.scss" werden durch Ein- und Auskommentieren der Includes, die Bootstrap Module geladen oder entfernt.
+Grundsätzlich werden Vendor Dateien aber nicht bearbeitet.
+Sollen Bootstrap Elemente umgestylt werden, müssen die CSS Regeln in den "layout" und "components" Scss Dateien überschrieben werden. */
+
+@import "vendor/bootstrap-v3-3-6/bootstrap";
+
+
+/* Layout
+/* ----------------------------- */
+
+@import "layout/reset";
+@import "layout/typography";
+@import "layout/template";
+@import "layout/header";
+@import "layout/footer";
+@import "layout/navigation";
+@import "layout/print";
+
+/* Die Datei "layout/icons" wird durch den Grunt Icon Font Task generiert und sollte nicht bearbeitet werden.
+Änderungen gehen nach dem erneuten Ausführen des Grunt Icon Font Tasks verloren. */
+@import "layout/icons";
+
+
+/* Components
+/* ----------------------------- */
+
+@import "components/form";
+@import "components/slider";
+@import "components/teaser";
