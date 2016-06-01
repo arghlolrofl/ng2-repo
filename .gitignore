@@ -6,3 +6,4 @@ typings/
 npm-debug.log
 app/**/*.js
 app/**/*.map
+assets/css
