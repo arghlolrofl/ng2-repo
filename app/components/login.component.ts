@@ -2,14 +2,16 @@ import {Component} from '@angular/core';
 import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
 @Component({
-    selector: 'fp-shipping',
-    templateUrl: 'app/templates/shipping.component.html',
+    selector: 'fp-login',
+    templateUrl: 'app/templates/login.component.html',
     pipes: [
         TranslatePipe
     ]
 })
 
 /**
- * Shipping component.
+ * Login component.
  */
-export default class ShippingComponent {}
+export default class LoginComponent {
+
+}

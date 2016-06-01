@@ -1,10 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
-import ProfileService from '../services/profile.service';
-
 @Component({
-    selector: 'franking-profile',
+    selector: 'fp-profile',
     templateUrl: 'app/templates/profile.component.html',
     pipes: [
         TranslatePipe
@@ -21,16 +19,13 @@ export default class ProfileComponent implements OnInit {
      * Sample variable that is loaded dynamically by a service.
      * @type {string}
      */
-    private username = '';
+    private username: string = '';
 
     // TODO remove if unnecessary
     /**
      * @constructor
-     * @param profileService The sample profile service to be injected
      */
-    constructor(
-        private profileService: ProfileService
-    ) {}
+    constructor() {}
 
     /**
      * Initilize the application on load.
@@ -45,6 +40,6 @@ export default class ProfileComponent implements OnInit {
      * Wrapper for the asynchronous getUsername method of ProfileService.
      */
     getUsername() {
-        this.profileService.getUsername().then(username => this.username = username);
+        this.username = 'placeholder';
     }
 }
