@@ -1,8 +1,8 @@
-<h1>{{title}}</h1>
+<h1>{{ 'TITLE' | translate }}</h1>
 <nav>
-    <a [routerLink]="['Dashboard']">Dashboard</a>
-    <a [routerLink]="['Shipping']">Shipping</a>
-    <a [routerLink]="['Administration']">Administration</a>
-    <a [routerLink]="['Profile']">Profile</a>
+    <a [routerLink]="['Dashboard']">{{ 'DASHBOARD_NAV' | translate }}</a>
+    <a [routerLink]="['Shipping']">{{ 'SHIPPING_NAV' | translate }}</a>
+    <a [routerLink]="['Administration']">{{ 'ADMINISTRATION_NAV' | translate }}</a>
+    <a [routerLink]="['Profile']">{{ 'PROFILE_NAV' | translate }}</a>
 </nav>
 <router-outlet></router-outlet>

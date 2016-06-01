@@ -1,0 +1,12 @@
+{
+  "TITLE": "Frankierungs-App",
+  "DASHBOARD_HEADLINE": "Dashboard",
+  "SHIPPING_HEADLINE": "Frankierung",
+  "ADMINISTRATION_HEADLINE": "Administration",
+  "PROFILE_HEADLINE": "Profil",
+  "DASHBOARD_NAV": "Dashboard",
+  "SHIPPING_NAV": "Frankierung",
+  "ADMINISTRATION_NAV": "Administration",
+  "PROFILE_NAV": "Profil",
+  "PROFILE_MSG": "Ihr Benutzername lautet: {{username}}"
+}

@@ -1,10 +1,14 @@
 import {Component, OnInit} from '@angular/core';
+import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
 import ProfileService from '../services/profile.service';
 
 @Component({
     selector: 'franking-profile',
-    templateUrl: 'app/templates/profile.component.html'
+    templateUrl: 'app/templates/profile.component.html',
+    pipes: [
+        TranslatePipe
+    ]
 })
 
 /**

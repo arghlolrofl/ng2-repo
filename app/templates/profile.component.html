@@ -1,3 +1,3 @@
-<h2>Profile Component</h2>
+<h2>{{ 'PROFILE_HEADLINE' | translate }}</h2>
 
-<p *ngIf="username">Your current username is: {{username}}</p>
+<p *ngIf="username">{{ 'PROFILE_MSG' | translate: {username: username} }}</p>
