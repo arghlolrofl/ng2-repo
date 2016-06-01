@@ -1,0 +1,12 @@
+{
+  "TITLE": "Franking App",
+  "DASHBOARD_HEADLINE": "Dashboard",
+  "SHIPPING_HEADLINE": "Shipping",
+  "ADMINISTRATION_HEADLINE": "Administration",
+  "PROFILE_HEADLINE": "Profile",
+  "DASHBOARD_NAV": "Dashboard",
+  "SHIPPING_NAV": "Shipping",
+  "ADMINISTRATION_NAV": "Administration",
+  "PROFILE_NAV": "Profile",
+  "PROFILE_MSG": "Your username is: {{username}}"
+}
