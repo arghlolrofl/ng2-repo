@@ -41,7 +41,15 @@ export default class LoginService {
      * Returns true if user is logged in and API requests can be done.
      * @returns {boolean}
      */
-    isLoggedIn() {
+    public isLoggedIn():boolean {
         return !!this.token;
+    }
+
+    /**
+     * Get the bearer token back.
+     * @returns {string}
+     */
+    public getToken():string {
+        return this.token;
     }
 }

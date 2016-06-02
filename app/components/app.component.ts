@@ -6,8 +6,9 @@ import {CookieService} from 'angular2-cookie/core';
 
 import {AVAILABLE_LOCALES} from '../config';
 import {ROUTER_CONFIG} from '../router/app.routes';
-import LoginService from '../services/login.service';
 import LoginComponent from './login.component';
+import LoginService from '../services/login.service';
+import APIClient from "../services/api-client.service";
 
 @RouteConfig(ROUTER_CONFIG)
 
@@ -23,7 +24,8 @@ import LoginComponent from './login.component';
         HTTP_PROVIDERS, 
         TRANSLATE_PROVIDERS,
         CookieService,
-        LoginService
+        LoginService,
+        APIClient
     ],
     pipes: [
         TranslatePipe
@@ -35,6 +37,10 @@ import LoginComponent from './login.component';
  */
 export default class AppComponent implements OnInit {
 
+    /**
+     * Current login state.
+     * @type {boolean}
+     */
     private loggedIn: boolean = false;
 
     /**
@@ -54,12 +60,18 @@ export default class AppComponent implements OnInit {
         this.bindEvents();
     }
 
-    ngOnInit() {
+    /**
+     * Initialize the application.
+     */
+    public ngOnInit() {
         this.loggedIn = this.loginService.isLoggedIn();
         this.router.navigate(['Shipping']); // TODO should be replaced with dashboard for go live
     }
 
-    bindEvents() {
+    /**
+     * Binds all events.
+     */
+    private bindEvents() {
         this.loginService.loginChanged.subscribe((data) => {
             this.loggedIn = data.loggedIn;
         });
