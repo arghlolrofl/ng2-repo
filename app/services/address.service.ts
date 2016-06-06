@@ -12,12 +12,17 @@ import AddressDisplayInfo from '../models/address-display-info';
  */
 @Injectable()
 export default class AddressService {
-
     /**
      * @constructor
      * @param {APIClient} apiClient the APIClient
      */
     constructor(private apiClient:APIClient) {
+    }
+
+
+    public searchAddressesByAddressGroupName(groupName:string, searchTerm:string):Observable<AddressDisplayInfo> {
+        // TODO replace with actual search logic
+        return this.getFilteredAddressesByAddressGroupName(groupName);
     }
 
     public getFilteredAddressesByAddressGroupName(groupName:string,

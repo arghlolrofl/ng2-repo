@@ -8,5 +8,6 @@
   "SHIPPING_NAV": "Frankierung",
   "ADMINISTRATION_NAV": "Administration",
   "PROFILE_NAV": "Profil",
-  "PROFILE_MSG": "Ihr Benutzername lautet: {{username}}"
+  "PROFILE_MSG": "Ihr Benutzername lautet: {{username}}",
+  "SENDER_PLACEHOLDER": "Absender..."
 }

@@ -8,5 +8,6 @@
   "SHIPPING_NAV": "Shipping",
   "ADMINISTRATION_NAV": "Administration",
   "PROFILE_NAV": "Profile",
-  "PROFILE_MSG": "Your username is: {{username}}"
+  "PROFILE_MSG": "Your username is: {{username}}",
+  "SENDER_PLACEHOLDER": "Sender..."
 }
