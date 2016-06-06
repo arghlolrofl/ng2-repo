@@ -5,4 +5,7 @@
     <a [routerLink]="['Administration']">{{ 'ADMINISTRATION_NAV' | translate }}</a>
     <a [routerLink]="['Profile']">{{ 'PROFILE_NAV' | translate }}</a>
 </nav>
-<router-outlet></router-outlet>
+
+<fp-login *ngIf="!loggedIn"></fp-login>
+
+<router-outlet *ngIf="loggedIn"></router-outlet>
