@@ -5,13 +5,7 @@ import AddressGroupInfo from './address-group-info'
  */
 export default class PagedResultOfAddressGroupInfo {
 
-    /**
-     * TotalItemCount.
-     */
     TotalItemCount: number;
 
-    /**
-     * ItemList.
-     */
     ItemList: AddressGroupInfo[];
 }

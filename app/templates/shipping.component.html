@@ -1,1 +1,7 @@
 <h2>{{ 'SHIPPING_HEADLINE' | translate }}</h2>
+
+<ul>
+    <li *ngFor="let sender of senders">
+        {{sender.FirstName}} {{sender.LastName}}
+    </li>
+</ul>

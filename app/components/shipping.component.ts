@@ -1,7 +1,8 @@
-import {Component} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
-import AddressGroupService from "../services/address-group.service";
+import AddressService from "../services/address.service";
+import AddressDisplayInfo from "../models/address-display-info";
 
 @Component({
     selector: 'fp-shipping',
@@ -10,25 +11,47 @@ import AddressGroupService from "../services/address-group.service";
         TranslatePipe
     ],
     providers: [
-        AddressGroupService
+        AddressService
     ]
 })
 
 /**
  * Shipping component.
  */
-export default class ShippingComponent {
+export default class ShippingComponent implements OnInit, OnDestroy {
+
+    /**
+     * Error to display (if there is one).
+     */
+    private error:Error;
+
+    /**
+     * Senders to display.
+     */
+    private senders:AddressDisplayInfo[];
 
     /**
      * @constructor
-     * @param addressGroupService
+     * @param {AddressService} addressService the address information service
      */
-    constructor(private addressGroupService:AddressGroupService) {
-
-        this.addressGroupService.getFiltered('Favorites')
-            .subscribe(
-                (addressGroupInfo) => console.log(addressGroupInfo),
-                (error) => console.warn(error));
+    constructor(private addressService:AddressService) {
+        this.senders = [];
     }
 
+    /**
+     * OnInit.
+     */
+    public ngOnInit() {
+        this.addressService.getFilteredAddressesByAddressGroupName('Sender', 0, 1)
+            .subscribe(
+                (addressDisplayInfo:AddressDisplayInfo) => this.senders.push(addressDisplayInfo),
+                (error) => this.error = error);
+    }
+
+    /**
+     * OnDestroy.
+     */
+    public ngOnDestroy() {
+        this.senders = [];
+    }
 }
