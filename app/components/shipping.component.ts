@@ -67,10 +67,22 @@ export default class ShippingComponent implements OnInit, OnDestroy {
 
         // initialize product calculation
         this.productCalculationForm = formBuilder.group({
-            'weight': ['', Validators.required],
-            'length': ['', Validators.required],
-            'width': ['', Validators.required],
-            'height': ['', Validators.required]
+            'weight': ['', Validators.compose([
+                Validators.required,
+                Validators.pattern('[0-9]+(\.[0-9]{1,}?)?')
+            ])],
+            'length': ['', Validators.compose([
+                Validators.required,
+                Validators.pattern('[0-9]+(\.[0-9]{1,}?)?')
+            ])],
+            'width': ['', Validators.compose([
+                Validators.required,
+                Validators.pattern('[0-9]+(\.[0-9]{1,}?)?')
+            ])],
+            'height': ['', Validators.compose([
+                Validators.required,
+                Validators.pattern('[0-9]+(\.[0-9]{1,}?)?')
+            ])]
         });
 
         this.bindEvents();
