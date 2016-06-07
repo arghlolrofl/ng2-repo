@@ -8,3 +8,20 @@
         </li>
     </ul>
 </form>
+
+<form [ngFormModel]="productCalculationForm" (ngSubmit)="recalculateProduct()">
+    <input ngControl="weight"
+           [class.error]="!productCalculationForm.controls['weight'].valid && productCalculationForm.controls['weight'].touched"
+           placeholder="TODO"/>
+    <input ngControl="length"
+           [class.error]="!productCalculationForm.controls['length'].valid && productCalculationForm.controls['length'].touched"
+           placeholder="TODO"/>
+    <input ngControl="width"
+           [class.error]="!productCalculationForm.controls['width'].valid && productCalculationForm.controls['width'].touched"
+           placeholder="TODO"/>
+    <input ngControl="height"
+           [class.error]="!productCalculationForm.controls['height'].valid && productCalculationForm.controls['height'].touched"
+           placeholder="TODO"/>
+
+    <button type="submit" [disabled]="!productCalculationForm.valid">Find / Recalculate</button>
+</form>
