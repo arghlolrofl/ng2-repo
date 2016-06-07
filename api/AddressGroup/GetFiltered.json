@@ -1,0 +1,17 @@
+{
+  "TotalItemCount": 2,
+  "ItemList": [
+    {
+      "GroupName": "Sender",
+      "AddressCount": 2,
+      "IsDefault": true,
+      "Id": 1
+    },
+    {
+      "GroupName": "Favorites",
+      "AddressCount": 3,
+      "IsDefault": false,
+      "Id": 2
+    }
+  ]
+}

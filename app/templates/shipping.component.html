@@ -1,1 +1,10 @@
 <h2>{{ 'SHIPPING_HEADLINE' | translate }}</h2>
+
+<form [ngFormModel]="sendersForm">
+    <input ngControl="sender" placeholder="{{ 'SENDER_PLACEHOLDER' | translate }}"/>
+    <ul>
+        <li *ngFor="let sender of senders">
+            {{sender.FirstName}} {{sender.LastName}}
+        </li>
+    </ul>
+</form>
