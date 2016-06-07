@@ -1,0 +1,67 @@
+{
+  "TotalItemCount": 2,
+  "ItemList": [
+    {
+      "Country": {
+        "CountryName": "sample string 1",
+        "FrenchCountryName": "sample string 2",
+        "Alpha3Code": "sample string 3",
+        "IsoM49Code": 4,
+        "Id": 5
+      },
+      "FirstName": "sample string 1",
+      "LastName": "sample string 2",
+      "City": "sample string 3",
+      "Company": "sample string 4",
+      "IsValidated": true,
+      "Title": "sample string 6",
+      "MiddleName": "sample string 7",
+      "Region": "sample string 8",
+      "RegionAbbreviation": "sample string 9",
+      "PostalAddress": "sample string 10",
+      "AdditionalPostalAddress": "sample string 11",
+      "ZipCode": "sample string 12",
+      "AdditionalZipCode": "sample string 13",
+      "ValidationHash": "sample string 14",
+      "EMailAddress": "sample string 15",
+      "PhoneNumber": "sample string 16",
+      "MobilePhoneNumber": "sample string 17",
+      "FaxNumber": "sample string 18",
+      "AdditionalInformation": "sample string 19",
+      "IsPostOfficeBox": true,
+      "AddressType": 0,
+      "Id": 21
+    },
+    {
+      "Country": {
+        "CountryName": "sample string 1",
+        "FrenchCountryName": "sample string 2",
+        "Alpha3Code": "sample string 3",
+        "IsoM49Code": 4,
+        "Id": 5
+      },
+      "FirstName": "sample string 1",
+      "LastName": "sample string 2",
+      "City": "sample string 3",
+      "Company": "sample string 4",
+      "IsValidated": true,
+      "Title": "sample string 6",
+      "MiddleName": "sample string 7",
+      "Region": "sample string 8",
+      "RegionAbbreviation": "sample string 9",
+      "PostalAddress": "sample string 10",
+      "AdditionalPostalAddress": "sample string 11",
+      "ZipCode": "sample string 12",
+      "AdditionalZipCode": "sample string 13",
+      "ValidationHash": "sample string 14",
+      "EMailAddress": "sample string 15",
+      "PhoneNumber": "sample string 16",
+      "MobilePhoneNumber": "sample string 17",
+      "FaxNumber": "sample string 18",
+      "AdditionalInformation": "sample string 19",
+      "IsPostOfficeBox": true,
+      "AddressType": 0,
+      "Id": 21
+    }
+  ]
+}
