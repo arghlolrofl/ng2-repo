@@ -1,11 +1,29 @@
-<h1>{{ 'TITLE' | translate }}</h1>
-<nav>
-    <a [routerLink]="['Dashboard']">{{ 'DASHBOARD_NAV' | translate }}</a>
-    <a [routerLink]="['Shipping']">{{ 'SHIPPING_NAV' | translate }}</a>
-    <a [routerLink]="['Administration']">{{ 'ADMINISTRATION_NAV' | translate }}</a>
-    <a [routerLink]="['Profile']">{{ 'PROFILE_NAV' | translate }}</a>
-</nav>
+<header class="main-header">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="brand">
+        <a href="#">
+          <img src="assets/img/frankotyp-logo.png" class="logo" alt="Francotyp" title="Francotyp">
+        </a>
+      </div>
+      <div class="main-menu-container">
+        <nav class="main-menu">
+          <ul>
+            <li><a [routerLink]="['Dashboard']">{{ 'DASHBOARD_NAV' | translate }}</a></li>
+            <li><a [routerLink]="['Shipping']">{{ 'SHIPPING_NAV' | translate }}</a></li>
+            <li><a [routerLink]="['Administration']">{{ 'ADMINISTRATION_NAV' | translate }}</a></li>
+            <li><a [routerLink]="['Profile']">{{ 'PROFILE_NAV' | translate }}</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <div class="deco-container"></div>
+</header>
 
-<fp-login *ngIf="!loggedIn"></fp-login>
-
-<router-outlet *ngIf="loggedIn"></router-outlet>
+<main>
+  <div class="container-fluid">
+    <fp-login *ngIf="!loggedIn"></fp-login>
+    <router-outlet *ngIf="loggedIn"></router-outlet>
+  </div>
+</main>

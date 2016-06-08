@@ -2,7 +2,6 @@
 // Popovers
 // --------------------------------------------------
 
-
 .popover {
   position: absolute;
   top: 0;
@@ -21,13 +20,21 @@
   border: 1px solid $popover-fallback-border-color;
   border: 1px solid $popover-border-color;
   border-radius: $border-radius-large;
-  @include box-shadow(0 5px 10px rgba(0,0,0,.2));
+  @include box-shadow(0 5px 10px rgba(0, 0, 0, .2));
 
   // Offset the popover to account for the popover arrow
-  &.top     { margin-top: -$popover-arrow-width; }
-  &.right   { margin-left: $popover-arrow-width; }
-  &.bottom  { margin-top: $popover-arrow-width; }
-  &.left    { margin-left: -$popover-arrow-width; }
+  &.top {
+    margin-top: -$popover-arrow-width;
+  }
+  &.right {
+    margin-left: $popover-arrow-width;
+  }
+  &.bottom {
+    margin-top: $popover-arrow-width;
+  }
+  &.left {
+    margin-left: -$popover-arrow-width;
+  }
 }
 
 .popover-title {
@@ -45,11 +52,11 @@
 
 // Arrows
 //
-// .arrow is outer, .arrow:after is inner
+// .arrow is outer, .arrow::after is inner
 
 .popover > .arrow {
   &,
-  &:after {
+  &::after {
     position: absolute;
     display: block;
     width: 0;
@@ -58,10 +65,12 @@
     border-style: solid;
   }
 }
+
 .popover > .arrow {
   border-width: $popover-arrow-outer-width;
 }
-.popover > .arrow:after {
+
+.popover > .arrow::after {
   border-width: $popover-arrow-width;
   content: "";
 }
@@ -74,7 +83,7 @@
     border-top-color: $popover-arrow-outer-fallback-color; // IE8 fallback
     border-top-color: $popover-arrow-outer-color;
     bottom: -$popover-arrow-outer-width;
-    &:after {
+    &::after {
       content: " ";
       bottom: 1px;
       margin-left: -$popover-arrow-width;
@@ -89,7 +98,7 @@
     border-left-width: 0;
     border-right-color: $popover-arrow-outer-fallback-color; // IE8 fallback
     border-right-color: $popover-arrow-outer-color;
-    &:after {
+    &::after {
       content: " ";
       left: 1px;
       bottom: -$popover-arrow-width;
@@ -104,7 +113,7 @@
     border-bottom-color: $popover-arrow-outer-fallback-color; // IE8 fallback
     border-bottom-color: $popover-arrow-outer-color;
     top: -$popover-arrow-outer-width;
-    &:after {
+    &::after {
       content: " ";
       top: 1px;
       margin-left: -$popover-arrow-width;
@@ -120,7 +129,7 @@
     border-right-width: 0;
     border-left-color: $popover-arrow-outer-fallback-color; // IE8 fallback
     border-left-color: $popover-arrow-outer-color;
-    &:after {
+    &::after {
       content: " ";
       right: 1px;
       border-right-width: 0;

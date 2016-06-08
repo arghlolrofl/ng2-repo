@@ -1,0 +1,131 @@
+/* Inputs
+/* ----------------------------- */
+
+input[type="text"],
+input[type="password"],
+input[type="tel"],
+input[type="email"],
+input[type="number"],
+input[type="search"] {
+  width: 100%;
+  outline: none;
+  height: 40px;
+  border: 1px solid $brand-gray-1;
+  font-size: 1.7rem;
+  line-height: 4.0rem;
+  color: $brand-gray-2;
+  padding: 0 40px 0 10px;
+  background: $white;
+}
+
+/* Search Box Icon
+/* ----------------------------- */
+
+.box-icon {
+  button {
+    border: 1px solid $brand-secondary;
+    font-size: 1.7rem;
+    line-height: 3.8rem;
+    background: $white;
+    height: 40px;
+    width: 40px;
+    position: relative;
+    border-radius: 2px;
+
+    [class^="icon-"]::before,
+    [class*="icon-"]::before {
+      position: absolute;
+      top: 0;
+      left: 10px;
+      color: $brand-secondary;
+      line-height: 3.8rem;
+      font-size: 1.7rem;
+      padding: 0;
+      margin: 0;
+    }
+  }
+}
+
+/* Search field
+/* ----------------------------- */
+.text-field {
+  margin: 0;
+  position: relative;
+}
+
+.text-field-search {
+  margin: 0;
+  position: relative;
+
+  input[type="text"],
+  input[type="password"],
+  input[type="tel"],
+  input[type="email"],
+  input[type="number"],
+  input[type="search"] {
+    padding-left: 40px;
+  }
+}
+
+.search-submit {
+  position: absolute;
+  top: 0;
+  left: 15px;
+  background: none;
+  border: none;
+  padding: 0;
+  height: 40px;
+
+  [class^="icon-"]::before,
+  [class*=" icon-"]::before {
+    color: $brand-gray-2;
+    line-height: 4.0rem;
+    font-size: 1.7rem;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.clear-submit {
+  position: absolute;
+  top: 0;
+  right: 15px;
+  background: none;
+  border: none;
+  padding: 0;
+  height: 40px;
+
+  [class^="icon-"]::before,
+  [class*=" icon-"]::before {
+    color: $brand-alert;
+    line-height: 4.0rem;
+    font-size: 1.7rem;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+@include tablet {
+  .search-field {
+    margin: 0;
+
+    input {
+      display: none;
+    }
+  }
+
+  .search-submit {
+    position: relative;
+    top: auto;
+    right: auto;
+
+    [class^="icon-"]::before,
+    [class*=" icon-"]::before {
+      color: $brand-primary;
+      line-height: 3.1rem;
+      font-size: 1.4rem;
+      padding: 0;
+      margin: 0;
+    }
+  }
+}

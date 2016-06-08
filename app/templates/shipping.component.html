@@ -1,27 +1,276 @@
-<h2>{{ 'SHIPPING_HEADLINE' | translate }}</h2>
+<div class="row">
+  <div class="col-md-6">
 
-<form [ngFormModel]="sendersForm">
-    <input ngControl="sender" placeholder="{{ 'SENDER_PLACEHOLDER' | translate }}"/>
-    <ul>
-        <li *ngFor="let sender of senders">
-            {{sender.FirstName}} {{sender.LastName}}
-        </li>
-    </ul>
-</form>
+    <section class="sender">
+      <h4>Sender</h4>
+      <form [ngFormModel]="sendersForm">
 
-<form [ngFormModel]="productCalculationForm" (ngSubmit)="recalculateProduct()">
-    <input ngControl="weight"
-           [class.error]="!productCalculationForm.controls['weight'].valid && productCalculationForm.controls['weight'].touched"
-           placeholder="TODO"/>
-    <input ngControl="length"
-           [class.error]="!productCalculationForm.controls['length'].valid && productCalculationForm.controls['length'].touched"
-           placeholder="TODO"/>
-    <input ngControl="width"
-           [class.error]="!productCalculationForm.controls['width'].valid && productCalculationForm.controls['width'].touched"
-           placeholder="TODO"/>
-    <input ngControl="height"
-           [class.error]="!productCalculationForm.controls['height'].valid && productCalculationForm.controls['height'].touched"
-           placeholder="TODO"/>
+        <div class="row">
+          <div class="col-md-10">
+            <div class="field-container text-field-search">
+              <button class="search-submit">
+                <span class="icon-search"></span>
+              </button>
+              <input type="text" name="text-input" value="" placeholder="sender">
+              <button class="clear-submit">
+                <span class="icon-close"></span>
+              </button>
+            </div>
 
-    <button type="submit" [disabled]="!productCalculationForm.valid">Find / Recalculate</button>
-</form>
+            <ul>
+              <li *ngFor="let sender of senders">
+                {{sender.FirstName}} {{sender.LastName}}
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-md-1">
+            <div class="field-container box-icon">
+              <button>
+                <span class="icon-search"></span>
+              </button>
+            </div>
+          </div>
+
+          <div class="col-md-1">
+            <div class="field-container box-icon">
+              <button>
+                <span class="icon-plus"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            shipping point
+          </div>
+          <div class="col-md-6">
+            <div class="field-container text-field">
+              <input type="text" name="text-input" value="" placeholder="shipping point">
+              <button class="clear-submit">
+                <span class="icon-close"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <hr>
+
+    <section class="recipient">
+      <h4>Recipient</h4>
+      <form>
+
+        <div class="row">
+          <div class="col-md-10">
+            <div class="field-container text-field-search">
+              <button class="search-submit">
+                <span class="icon-search"></span>
+              </button>
+              <input type="text" name="text-input" value="" placeholder="recipient">
+              <button class="clear-submit">
+                <span class="icon-close"></span>
+              </button>
+            </div>
+
+            <ul>
+              <li *ngFor="let sender of senders">
+                {{sender.FirstName}} {{sender.LastName}}
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-10">
+            <div class="field-container text-field">
+              <input type="text" name="text-input" value="" placeholder="recipient">
+              <button class="clear-submit">
+                <span class="icon-close"></span>
+              </button>
+            </div>
+          </div>
+
+          <div class="col-md-1">
+            <div class="field-container box-icon">
+              <button>
+                <span class="icon-search"></span>
+              </button>
+            </div>
+          </div>
+
+          <div class="col-md-1">
+            <div class="field-container box-icon">
+              <button>
+                <span class="icon-plus"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <hr>
+
+    <section class="costs-center">
+      <h4>Cost Center</h4>
+      <form>
+
+        <div class="row">
+          <div class="col-md-10">
+            <div class="field-container text-field-search">
+              <button class="search-submit">
+                <span class="icon-search"></span>
+              </button>
+              <input type="text" name="text-input" value="" placeholder="costs">
+              <button class="clear-submit">
+                <span class="icon-close"></span>
+              </button>
+            </div>
+          </div>
+
+          <div class="col-md-1">
+            <div class="field-container box-icon">
+              <button>
+                <span class="icon-search"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-10">
+            <div class="field-container text-field-search">
+              <button class="search-submit">
+                <span class="icon-search"></span>
+              </button>
+              <input type="text" name="text-input" value="" placeholder="costs">
+              <button class="clear-submit">
+                <span class="icon-close"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-10">
+            <div class="field-container text-field-search">
+              <button class="search-submit">
+                <span class="icon-search"></span>
+              </button>
+              <input type="text" name="text-input" value="" placeholder="costs">
+              <button class="clear-submit">
+                <span class="icon-close"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <hr>
+
+    <section class="additional-information">
+      <h4>Additional Information</h4>
+      <form>
+
+        <div class="row">
+          <div class="col-md-10">
+            <div class="field-container text-field">
+              <input type="text" name="text-input" value="" placeholder="Your Reference Number">
+              <button class="clear-submit">
+                <span class="icon-close"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-10">
+            <div class="field-container text-field">
+              <input type="text" name="text-input" value="" placeholder="Additional Reference Number">
+              <button class="clear-submit">
+                <span class="icon-close"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </section>
+
+  </div>
+
+  <div class="col-md-6">
+    <section class="product-calculation">
+      <h4>Product Calculation</h4>
+      <form [ngFormModel]="productCalculationForm" (ngSubmit)="recalculateProduct()">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="field-container text-field">
+              <input type="text"
+                     placeholder="weight"
+                     ngControl="weight"
+                     [class.error]="!productCalculationForm.controls['weight'].valid && productCalculationForm.controls['weight'].touched">
+              <button class="clear-submit">
+                <span class="icon-close"></span>
+              </button>
+            </div>
+          </div>
+
+           <div class="col-md-1">
+            <div class="field-container box-icon">
+              <button>
+                <span class="icon-weight"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-3">
+            <div class="field-container text-field">
+              <input type="text"
+                     placeholder="length"
+                     ngControl="length"
+                     [class.error]="!productCalculationForm.controls['length'].valid && productCalculationForm.controls['length'].touched">
+              <button class="clear-submit">
+                <span class="icon-close"></span>
+              </button>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="field-container text-field">
+              <input type="text"
+                     placeholder="width"
+                     ngControl="width"
+                     [class.error]="!productCalculationForm.controls['width'].valid && productCalculationForm.controls['width'].touched">
+              <button class="clear-submit">
+                <span class="icon-close"></span>
+              </button>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="field-container text-field">
+              <input type="text"
+                     placeholder="height"
+                     ngControl="height"
+                     [class.error]="!productCalculationForm.controls['height'].valid && productCalculationForm.controls['height'].touched">
+              <button class="clear-submit">
+                <span class="icon-close"></span>
+              </button>
+            </div>
+          </div>
+           <div class="col-md-1">
+            <div class="field-container box-icon">
+              <button type="submit" [disabled]="!productCalculationForm.valid">
+                <span class="icon-interface"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </section>
+  </div>
+</div>
