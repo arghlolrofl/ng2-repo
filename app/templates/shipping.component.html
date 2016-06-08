@@ -1,38 +1,37 @@
 <div class="row">
   <div class="col-md-6">
-
-    <section class="sender">
-      <h4>Sender</h4>
+    <section class="sectiontemplate">
+      <h4><i class="icon-class icon-social"></i>Sender</h4>
       <form [ngFormModel]="sendersForm">
-
         <div class="row">
-          <div class="col-md-10">
+          <div class="col-md-8 col-md-offset-1">
             <div class="field-container text-field-search">
               <button class="search-submit">
                 <span class="icon-search"></span>
               </button>
-              <input type="text" name="text-input" value="" placeholder="sender">
+              <input type="text" name="text-input" value="" placeholder="text-placeholder">
               <button class="clear-submit">
                 <span class="icon-close"></span>
               </button>
             </div>
 
-            <ul>
-              <li *ngFor="let sender of senders">
-                {{sender.FirstName}} {{sender.LastName}}
-              </li>
-            </ul>
+            <div class="row autocomplete">
+              <div class="col-md-12">
+                <ul>
+                  <li *ngFor="let sender of senders">
+                    {{sender.FirstName}} {{sender.LastName}}
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
 
-          <div class="col-md-1">
+          <div class="col-md-3">
             <div class="field-container box-icon">
               <button>
                 <span class="icon-search"></span>
               </button>
             </div>
-          </div>
-
-          <div class="col-md-1">
             <div class="field-container box-icon">
               <button>
                 <span class="icon-plus"></span>
@@ -42,12 +41,15 @@
         </div>
 
         <div class="row">
+          <div class="col-md-4 col-md-offset-1">
+            <label>
+              <i class="icon-class icon-location"></i>
+              Shipping Point
+            </label>
+          </div>
           <div class="col-md-4">
-            shipping point
-          </div>
-          <div class="col-md-6">
             <div class="field-container text-field">
-              <input type="text" name="text-input" value="" placeholder="shipping point">
+              <input type="text" name="text-input" value="" placeholder="text-placeholder">
               <button class="clear-submit">
                 <span class="icon-close"></span>
               </button>
@@ -57,51 +59,64 @@
       </form>
     </section>
 
-    <hr>
-
-    <section class="recipient">
-      <h4>Recipient</h4>
+    <section class="sectiontemplate">
+      <h4><i class="icon-class icon-mailbox"></i>Recipient</h4>
       <form>
-
         <div class="row">
-          <div class="col-md-10">
+          <div class="col-md-8 col-md-offset-1">
             <div class="field-container text-field-search">
               <button class="search-submit">
                 <span class="icon-search"></span>
               </button>
-              <input type="text" name="text-input" value="" placeholder="recipient">
+              <input type="text" name="text-input" value="" placeholder="text-placeholder">
               <button class="clear-submit">
                 <span class="icon-close"></span>
               </button>
             </div>
-
-            <ul>
-              <li *ngFor="let sender of senders">
-                {{sender.FirstName}} {{sender.LastName}}
-              </li>
-            </ul>
+            <div class="row autocomplete">
+              <div class="col-md-12">
+                <ul>
+                  <li><a href="#">sdfsdfsdf sdfsdfsdf sdfsdfsdf </a></li>
+                  <li><a href="#">sdfsdfsdf sdfsdfsdf sdfsdfsdf </a></li>
+                  <li><a href="#">sdfsdfsdf sdfsdfsdf sdfsdfsdf </a></li>
+                  <li><a href="#">sdfsdfsdf sdfsdfsdf sdfsdfsdf </a></li>
+                  <li><a href="#">sdfsdfsdf sdfsdfsdf sdfsdfsdf </a></li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="row">
-          <div class="col-md-10">
-            <div class="field-container text-field">
-              <input type="text" name="text-input" value="" placeholder="recipient">
+          <div class="col-md-8 col-md-offset-1">
+            <div class="field-container text-field-search">
+              <button class="search-submit">
+                <span class="icon-search"></span>
+              </button>
+              <input type="text" name="text-input" value="" placeholder="text-placeholder">
               <button class="clear-submit">
                 <span class="icon-close"></span>
               </button>
             </div>
+            <div class="row autocomplete">
+              <div class="col-md-12">
+                <ul>
+                  <li><a href="#">sdfsdfsdf sdfsdfsdf sdfsdfsdf </a></li>
+                  <li><a href="#">sdfsdfsdf sdfsdfsdf sdfsdfsdf </a></li>
+                  <li><a href="#">sdfsdfsdf sdfsdfsdf sdfsdfsdf </a></li>
+                  <li><a href="#">sdfsdfsdf sdfsdfsdf sdfsdfsdf </a></li>
+                  <li><a href="#">sdfsdfsdf sdfsdfsdf sdfsdfsdf </a></li>
+                </ul>
+              </div>
+            </div>
           </div>
 
-          <div class="col-md-1">
+          <div class="col-md-3">
             <div class="field-container box-icon">
               <button>
                 <span class="icon-search"></span>
               </button>
             </div>
-          </div>
-
-          <div class="col-md-1">
             <div class="field-container box-icon">
               <button>
                 <span class="icon-plus"></span>
@@ -112,26 +127,23 @@
       </form>
     </section>
 
-    <hr>
-
-    <section class="costs-center">
-      <h4>Cost Center</h4>
+    <section class="sectiontemplate">
+      <h4><i class="icon-class icon-coins"></i>Cost Center</h4>
       <form>
-
         <div class="row">
-          <div class="col-md-10">
+          <div class="col-md-8 col-md-offset-1">
             <div class="field-container text-field-search">
               <button class="search-submit">
                 <span class="icon-search"></span>
               </button>
-              <input type="text" name="text-input" value="" placeholder="costs">
+              <input type="text" name="text-input" value="" placeholder="text-placeholder">
               <button class="clear-submit">
                 <span class="icon-close"></span>
               </button>
             </div>
           </div>
 
-          <div class="col-md-1">
+          <div class="col-md-3">
             <div class="field-container box-icon">
               <button>
                 <span class="icon-search"></span>
@@ -141,12 +153,12 @@
         </div>
 
         <div class="row">
-          <div class="col-md-10">
+          <div class="col-md-8 col-md-offset-1">
             <div class="field-container text-field-search">
               <button class="search-submit">
                 <span class="icon-search"></span>
               </button>
-              <input type="text" name="text-input" value="" placeholder="costs">
+              <input type="text" name="text-input" value="" placeholder="text-placeholder">
               <button class="clear-submit">
                 <span class="icon-close"></span>
               </button>
@@ -155,12 +167,12 @@
         </div>
 
         <div class="row">
-          <div class="col-md-10">
+          <div class="col-md-8 col-md-offset-1">
             <div class="field-container text-field-search">
               <button class="search-submit">
                 <span class="icon-search"></span>
               </button>
-              <input type="text" name="text-input" value="" placeholder="costs">
+              <input type="text" name="text-input" value="" placeholder="text-placeholder">
               <button class="clear-submit">
                 <span class="icon-close"></span>
               </button>
@@ -170,16 +182,13 @@
       </form>
     </section>
 
-    <hr>
-
-    <section class="additional-information">
-      <h4>Additional Information</h4>
+    <section class="sectiontemplate">
+      <h4><i class="icon-class icon-info"></i>Additional Information</h4>
       <form>
-
         <div class="row">
-          <div class="col-md-10">
+          <div class="col-md-8 col-md-offset-1">
             <div class="field-container text-field">
-              <input type="text" name="text-input" value="" placeholder="Your Reference Number">
+              <input type="text" name="text-input" value="" placeholder="text-placeholder">
               <button class="clear-submit">
                 <span class="icon-close"></span>
               </button>
@@ -188,9 +197,9 @@
         </div>
 
         <div class="row">
-          <div class="col-md-10">
+          <div class="col-md-8 col-md-offset-1">
             <div class="field-container text-field">
-              <input type="text" name="text-input" value="" placeholder="Additional Reference Number">
+              <input type="text" name="text-input" value="" placeholder="text-placeholder">
               <button class="clear-submit">
                 <span class="icon-close"></span>
               </button>
@@ -199,66 +208,11 @@
         </div>
       </form>
     </section>
-
   </div>
+</div>
 
+<div class="row">
   <div class="col-md-6">
-    <section class="product-calculation">
-      <h4>Product Calculation</h4>
-      <form>
-        <div class="row">
-          <div class="col-md-3">
-            <div class="field-container text-field">
-              <input type="text" name="text-input" value="" placeholder="weight">
-              <button class="clear-submit">
-                <span class="icon-close"></span>
-              </button>
-            </div>
-          </div>
 
-           <div class="col-md-1">
-            <div class="field-container box-icon">
-              <button>
-                <span class="icon-weight"></span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-3">
-            <div class="field-container text-field">
-              <input type="text" name="text-input" value="" placeholder="length">
-              <button class="clear-submit">
-                <span class="icon-close"></span>
-              </button>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="field-container text-field">
-              <input type="text" name="text-input" value="" placeholder="width">
-              <button class="clear-submit">
-                <span class="icon-close"></span>
-              </button>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="field-container text-field">
-              <input type="text" name="text-input" value="" placeholder="height">
-              <button class="clear-submit">
-                <span class="icon-close"></span>
-              </button>
-            </div>
-          </div>
-           <div class="col-md-1">
-            <div class="field-container box-icon">
-              <button>
-                <span class="icon-interface"></span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </form>
-    </section>
   </div>
 </div>

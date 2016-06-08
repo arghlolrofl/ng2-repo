@@ -45,7 +45,7 @@ p {
   font-size: 1.4rem;
   line-height: 1.8rem;
   font-weight: normal;
-  color: $black;
+  color: $brand-gray-2;
 }
 
 
@@ -54,13 +54,14 @@ p {
 
 a,
 a:visited {
-  color: $brand-primary;
+  color: $brand-gray-2;
   text-decoration: none;
   transition: color $transitionFast;
 
   &:active,
   &:focus,
   &:hover {
+    color: $brand-primary;
     text-decoration: underline;
 
     &::before {
@@ -68,3 +69,13 @@ a:visited {
     }
   }
 }
+
+// icon
+i.icon-class {
+  &:before {
+    padding-right: 10px;
+    font-size: 3.0rem;
+    line-height: 2.4rem;
+  }
+}
+
