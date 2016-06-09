@@ -62,7 +62,8 @@ export default class ShippingComponent implements OnInit, OnDestroy {
         // initialize sender
         this.senders = [];
         this.sendersForm = formBuilder.group({
-            'sender': ['']
+            'sender': [''],
+            'shippingPoint': ['']
         });
 
         // initialize product calculation

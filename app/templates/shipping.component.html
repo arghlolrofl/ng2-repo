@@ -14,7 +14,8 @@
               <input type="text"
                      placeholder="sender"
                      ngControl="sender">
-              <button class="clear-submit">
+              <button class="clear-submit"
+                      (click)="sendersForm.controls['sender'].updateValue('')">
                 <span class="icon-close"></span>
               </button>
             </div>
@@ -49,8 +50,12 @@
           </div>
           <div class="col-md-6">
             <div class="field-container text-field">
-              <input type="text" name="text-input" value="" placeholder="shipping point">
-              <button class="clear-submit">
+              <input type="text"
+                     name="text-input"
+                     placeholder="shipping point"
+                     ngControl="shippingPoint">
+              <button class="clear-submit"
+                      (click)="sendersForm.controls['shippingPoint'].updateValue('')">
                 <span class="icon-close"></span>
               </button>
             </div>
@@ -71,7 +76,9 @@
               <button class="search-submit">
                 <span class="icon-search"></span>
               </button>
-              <input type="text" name="text-input" value="" placeholder="recipient">
+              <input type="text"
+                     name="text-input"
+                     placeholder="recipient">
               <button class="clear-submit">
                 <span class="icon-close"></span>
               </button>
@@ -215,13 +222,14 @@
                      placeholder="weight"
                      ngControl="weight"
                      [class.error]="!productCalculationForm.controls['weight'].valid && productCalculationForm.controls['weight'].touched">
-              <button class="clear-submit">
+              <button class="clear-submit"
+                      (click)="productCalculationForm.controls['weight'].updateValue('')">
                 <span class="icon-close"></span>
               </button>
             </div>
           </div>
 
-           <div class="col-md-1">
+          <div class="col-md-1">
             <div class="field-container box-icon">
               <button>
                 <span class="icon-weight"></span>
@@ -237,7 +245,8 @@
                      placeholder="length"
                      ngControl="length"
                      [class.error]="!productCalculationForm.controls['length'].valid && productCalculationForm.controls['length'].touched">
-              <button class="clear-submit">
+              <button class="clear-submit"
+                      (click)="productCalculationForm.controls['length'].updateValue('')">
                 <span class="icon-close"></span>
               </button>
             </div>
@@ -248,7 +257,8 @@
                      placeholder="width"
                      ngControl="width"
                      [class.error]="!productCalculationForm.controls['width'].valid && productCalculationForm.controls['width'].touched">
-              <button class="clear-submit">
+              <button class="clear-submit"
+                      (click)="productCalculationForm.controls['width'].updateValue('')">
                 <span class="icon-close"></span>
               </button>
             </div>
@@ -259,12 +269,13 @@
                      placeholder="height"
                      ngControl="height"
                      [class.error]="!productCalculationForm.controls['height'].valid && productCalculationForm.controls['height'].touched">
-              <button class="clear-submit">
+              <button class="clear-submit"
+                      (click)="productCalculationForm.controls['height'].updateValue('')">
                 <span class="icon-close"></span>
               </button>
             </div>
           </div>
-           <div class="col-md-1">
+          <div class="col-md-1">
             <div class="field-container box-icon">
               <button type="submit" [disabled]="!productCalculationForm.valid">
                 <span class="icon-interface"></span>
