@@ -118,9 +118,11 @@ export default class ShippingComponent implements OnDestroy {
     private bindEvents() {
         // sender has been changed
         this.senderChanged.subscribe((data) => {
-            const control:Control = this.sendersForm.controls['sender'];
+            const sender:Control = this.sendersForm.controls['sender'];
+            const shippingPoint:Control = this.sendersForm.controls['shippingPoint'];
             this.sender = data.sender;
-            control.updateValue(this.modelFormatter.addressDisplayInfo(this.sender), {emitEvent: false});
+            sender.updateValue(this.modelFormatter.addressDisplayInfo(this.sender), {emitEvent: false});
+            shippingPoint.updateValue(this.sender.ZipCode);
             if (data.clear) {
                 this.senderSuggestions = [];
             }

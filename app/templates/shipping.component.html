@@ -14,7 +14,8 @@
                      ngControl="sender"
                      (keydown)="senderKeypress($event)">
               <button class="clear-submit"
-                      (click)="sendersForm.controls['sender'].updateValue('')">
+                      (click)="sendersForm.controls['sender'].updateValue('');
+                               sendersForm.controls['shippingPoint'].updateValue('')">
                 <span class="icon-close"></span>
               </button>
             </div>
