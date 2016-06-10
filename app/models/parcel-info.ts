@@ -7,11 +7,11 @@ import ParcelProductInfo from "./parcel-product-info";
  */
 export default class ParcelInfo {
     
-    Characteristic:ParcelCharacteristikInfo;
+    Characteristic:ParcelCharacteristikInfo = new ParcelCharacteristikInfo();
     
     PostalCode:string;
     
-    Destination:DestinationInfo;
+    Destination:DestinationInfo = new DestinationInfo();
     
-    Product:ParcelProductInfo;
+    Product:ParcelProductInfo = new ParcelProductInfo();
 }

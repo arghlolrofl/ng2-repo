@@ -186,13 +186,10 @@ export default class ShippingComponent implements OnDestroy {
         const productInfos = this.productCalculationForm.value;
 
         let parcelInfo = new ParcelInfo();
-        parcelInfo.Characteristic = new ParcelCharacteristikInfo();
-        parcelInfo.Characteristic.Dimension = new DimensionInfo();
         parcelInfo.Characteristic.Dimension.Height = parseFloat(productInfos.height);
         parcelInfo.Characteristic.Dimension.Lenght = parseFloat(productInfos.length);
         parcelInfo.Characteristic.Dimension.Width = parseFloat(productInfos.width);
         parcelInfo.Characteristic.Dimension.Unit = ESizeUnit.Centimeter;
-        parcelInfo.Characteristic.Weight = new WeightInfo();
         parcelInfo.Characteristic.Weight.Value = parseFloat(productInfos.weight);
         parcelInfo.Characteristic.Weight.Unit = EWeightUnit.Kg;
 

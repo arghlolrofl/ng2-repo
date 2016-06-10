@@ -6,7 +6,7 @@ import WeightInfo from "./weight-info";
  */
 export default class ParcelCharacteristikInfo {
 
-    Dimension:DimensionInfo;
+    Dimension:DimensionInfo = new DimensionInfo();
 
-    Weight:WeightInfo;
+    Weight:WeightInfo = new WeightInfo();
 }

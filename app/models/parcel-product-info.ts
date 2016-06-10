@@ -7,5 +7,5 @@ export default class ParcelProductInfo {
 
     Code:string;
 
-    Options:ParcelOptionInfo[]
+    Options:ParcelOptionInfo[] = [];
 }

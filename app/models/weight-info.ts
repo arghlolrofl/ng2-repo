@@ -5,7 +5,7 @@ import {EWeightUnit} from "./eweight-unit";
  */
 export default class WeightInfo {
 
-    Unit:EWeightUnit;
+    Unit:EWeightUnit = EWeightUnit.Kg;
 
     Value:number;
 }
