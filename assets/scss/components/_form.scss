@@ -18,12 +18,18 @@ input[type="search"] {
   background: $white;
 }
 
-/* Search Box Icon
+/* Box Icon
 /* ----------------------------- */
 
 .box-icon {
+  float: left;
+
+  & + .box-icon {
+    margin-left: 15px;
+  }
+
   button {
-    border: 1px solid $brand-secondary;
+    border: 1px solid $icon-box-color;
     font-size: 1.7rem;
     line-height: 3.8rem;
     background: $white;
@@ -31,17 +37,42 @@ input[type="search"] {
     width: 40px;
     position: relative;
     border-radius: 2px;
+    transition: all $transitionFast $transitionTiming;
 
     [class^="icon-"]::before,
     [class*="icon-"]::before {
       position: absolute;
       top: 0;
       left: 10px;
-      color: $brand-secondary;
+      color: $icon-box-color;
       line-height: 3.8rem;
       font-size: 1.7rem;
       padding: 0;
       margin: 0;
+      transition: all $transitionFast $transitionTiming;
+    }
+
+    &:hover {
+      border: 1px solid $icon-box-hover-color;
+
+      [class^="icon-"]::before,
+      [class*="icon-"]::before {
+        color: $icon-box-hover-color;
+      }
+    }
+  }
+}
+
+/* Search field
+/* ----------------------------- */
+label {
+  height: 40px;
+  font-size: 1.7rem;
+  line-height: 4.0rem;
+
+  .icon-class {
+    &:before {
+      line-height: 4.0rem;
     }
   }
 }
@@ -127,5 +158,37 @@ input[type="search"] {
       padding: 0;
       margin: 0;
     }
+  }
+}
+
+/* autocomplete
+/* ----------------------------- */
+.autocomplete {
+  position: absolute;
+  left: 0;
+  display: none;
+  z-index: 2;
+  width: 100%;
+
+  ul {
+    background: $brand-gray-1;
+    margin: 0 15px;
+    padding: 0 15px;
+    width: 100%;
+
+    li {
+      text-align: left;
+      height: 30px;
+      line-height: 3.0rem;
+      border-bottom: 1px solid $brand-gray-2;
+
+      &:last-child {
+        border: none;
+      }
+    }
+  }
+
+  &.open {
+    display: block;
   }
 }

@@ -11,6 +11,9 @@ $white: #fff;
 $black: #000;
 
 $brand-text-hover: $brand-primary;
+$icon-box-color: $brand-secondary;
+$icon-box-hover-color: darken($brand-secondary, 15%);
+
 
 // Styleguide
 $sg-gray: #ddd;
@@ -44,3 +47,8 @@ $boxShadowDefault: 1px 1px 4px rgba(0, 0, 0, 0.2);
 $transitionTiming: ease-out;
 $transitionFast: .3s;
 $transitionSlow: .8s;
+
+/* Grid
+/* ----------------------------- */
+
+$grid-gutter-width: 15px !default;
