@@ -8,7 +8,7 @@ export default class DimensionInfo {
 
     Lenght:number;
 
-    Unit:ESizeUnit;
+    Unit:ESizeUnit = ESizeUnit.Centimeter;
 
     Width:number;
 }

@@ -1,0 +1,41 @@
+/* Header
+/* ----------------------------- */
+
+.main-header {
+  width: 100%;
+  min-width: $bodyMinWidth;
+  background: $white;
+  z-index: 99;
+  transition: box-shadow $transitionFast $transitionTiming;
+  box-shadow: $boxShadowDefault;
+
+  .container-fluid {
+    max-width: ($containerMaxWidth + 60);
+    padding: 30px 30px 20px;
+    transition: padding ($transitionFast / 2) $transitionTiming;
+  }
+
+  .row {
+    position: relative;
+    margin: 0;
+  }
+}
+
+/* Brand
+/* ----------------------------- */
+
+.brand {
+  transition: all $transitionFast $transitionTiming;
+  width: 130px;
+  float: left;
+}
+
+
+/* deco container
+/* ----------------------------- */
+.deco-container {
+  background: #56a2b7;
+  background: linear-gradient(to right,  #56a2b7 0%,#396071 100%);
+  height: 40px;
+  width:100%;
+}

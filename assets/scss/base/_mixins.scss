@@ -1,0 +1,82 @@
+//
+// Media queries
+// --------------------------------------
+
+@mixin desktop-large {
+  @media (min-width: ($screen-lg)) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: ($screen-md)) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: ($screen-md - 1)) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: ($screen-sm - 1)) {
+    @content;
+  }
+}
+
+@mixin mobile-small {
+  @media (max-width: ($screen-xs - 1)) {
+    @content;
+  }
+}
+
+@mixin retina {
+  @media only screen and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (min--moz-device-pixel-ratio: 2),
+  only screen and (-o-min-device-pixel-ratio: 2/1),
+  only screen and (min-device-pixel-ratio: 2),
+  only screen and (min-resolution: 192dpi),
+  only screen and (min-resolution: 2dppx) {
+    @content;
+  }
+}
+
+//
+// Font Size
+// --------------------------------------
+@function calc-font-size-tablet($num) {
+  $value: round(($num / 100) * 80);
+
+  @if $value < 1.4rem {
+    $value: 1.4rem;
+  }
+
+  @return $value;
+}
+
+@function calc-font-size-mobile($num) {
+  $value: round(($num / 100) * 70);
+
+  @if $value < 1.4rem {
+    $value: 1.4rem;
+  }
+
+  @return $value;
+}
+
+@mixin calc-font-size($font-size) {
+  font-size: $font-size;
+  line-height: $font-size + 0.4rem;
+
+  @include tablet {
+    font-size: calc-font-size-tablet($font-size);
+    line-height: calc-font-size-tablet($font-size) + 0.4rem;
+  }
+
+  @include mobile {
+    font-size: calc-font-size-mobile($font-size);
+    line-height: calc-font-size-mobile($font-size) + 0.4rem;
+  }
+}

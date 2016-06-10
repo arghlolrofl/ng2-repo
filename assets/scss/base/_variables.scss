@@ -1,12 +1,54 @@
 /* Colors
 /* ----------------------------- */
 
-$brand-primary: #337ab7;
-$brand-info:    #5bc0de;
+$brand-primary: #d21f31;
+$brand-secondary: #01a8bb;
+$brand-alert: $brand-primary;
+$brand-gray-1: #dfdfdf ;
+$brand-gray-2: #69737a;
+$brand-gray-3: #f8f8f8;
+$white: #fff;
+$black: #000;
 
+$brand-text-hover: $brand-primary;
+$icon-box-color: $brand-secondary;
+$icon-box-hover-color: darken($brand-secondary, 15%);
+
+
+// Styleguide
+$sg-gray: #ddd;
+
+/* Widths
+/* ----------------------------- */
+
+$bodyMinWidth: 320px;
+$containerMaxWidth: 1170px;
+
+$screen-lg: 1200px;
+$screen-md: 992px;
+$screen-sm: 768px;
+$screen-xs: 480px;
 
 /* Typography
 /* ----------------------------- */
 
-$font-family-sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif;
-$font-family-base:        $font-family-sans-serif
+$font-family-sans-serif: "AktivGrotesk", Helvetica, Arial, sans-serif;
+$font-family-base: $font-family-sans-serif;
+$font-base-size-px: 10px;
+
+/* Boxes
+/* ----------------------------- */
+
+$boxShadowDefault: 1px 1px 4px rgba(0, 0, 0, 0.2);
+
+/* Animations
+/* ----------------------------- */
+
+$transitionTiming: ease-out;
+$transitionFast: .3s;
+$transitionSlow: .8s;
+
+/* Grid
+/* ----------------------------- */
+
+$grid-gutter-width: 15px !default;

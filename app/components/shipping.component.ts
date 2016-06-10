@@ -1,5 +1,6 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, EventEmitter} from '@angular/core';
 import {Control, ControlGroup, FormBuilder, Validators} from '@angular/common';
+import {Observable} from 'rxjs/Observable';
 import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
 import AddressService from "../services/address.service";
@@ -12,6 +13,7 @@ import PostalProductInfo from "../models/postal-product-info";
 import ParcelCharacteristikInfo from "../models/parcel-characteristic-info";
 import DimensionInfo from "../models/dimension-info";
 import WeightInfo from "../models/weight-info";
+import ModelFormatter from "../services/model-formatter.service";
 
 @Component({
     selector: 'fp-shipping',
@@ -20,6 +22,7 @@ import WeightInfo from "../models/weight-info";
         TranslatePipe
     ],
     providers: [
+        ModelFormatter,
         AddressService,
         ShippingService
     ]
@@ -28,7 +31,7 @@ import WeightInfo from "../models/weight-info";
 /**
  * Shipping component.
  */
-export default class ShippingComponent implements OnInit, OnDestroy {
+export default class ShippingComponent implements OnDestroy {
 
     /**
      * Error to display (if there is one).
@@ -36,9 +39,27 @@ export default class ShippingComponent implements OnInit, OnDestroy {
     private error:Error;
 
     /**
-     * Senders to display.
+     * The actual selected sender.
      */
-    private senders:AddressDisplayInfo[];
+    private sender:AddressDisplayInfo;
+
+    /**
+     * Eventhandler if the sender changes.
+     * @type {EventEmitter}
+     */
+    private senderChanged:EventEmitter = new EventEmitter();
+
+    /**
+     * Eventhandler if the sender is selected from the input box.
+     * @type {EventEmitter}
+     */
+    private senderSelect:EventEmitter = new EventEmitter();
+    private senderOffset = 0;
+
+    /**
+     * Sender suggestions (autocomplete) to display.
+     */
+    private senderSuggestions:AddressDisplayInfo[];
 
     /**
      * The form for sender.
@@ -52,17 +73,20 @@ export default class ShippingComponent implements OnInit, OnDestroy {
 
     /**
      * @constructor
+     * @param {ModelFormatter} modelFormatter the model formatting service
      * @param {AddressService} addressService the address information service
      * @param {ShippingService} shippingService the shipping information service
      * @param {FormBuilder} formBuilder the form builder from angular2
      */
-    constructor(private addressService:AddressService,
+    constructor(private modelFormatter:ModelFormatter,
+                private addressService:AddressService,
                 private shippingService:ShippingService,
                 private formBuilder:FormBuilder) {
         // initialize sender
-        this.senders = [];
+        this.senderSuggestions = [];
         this.sendersForm = formBuilder.group({
-            'sender': ['']
+            'sender': [''],
+            'shippingPoint': ['']
         });
 
         // initialize product calculation
@@ -92,23 +116,66 @@ export default class ShippingComponent implements OnInit, OnDestroy {
      * Bind all events.
      */
     private bindEvents() {
+        // sender has been changed
+        this.senderChanged.subscribe((data) => {
+            const sender:Control = this.sendersForm.controls['sender'];
+            const shippingPoint:Control = this.sendersForm.controls['shippingPoint'];
+            this.sender = data.sender;
+            sender.updateValue(this.modelFormatter.addressDisplayInfo(this.sender), {emitEvent: false});
+            shippingPoint.updateValue(this.sender.ZipCode);
+            if (data.clear) {
+                this.senderSuggestions = [];
+            }
+        });
+        // something has been typed in the senders input field
         this.sendersForm.controls['sender'].valueChanges
             .debounceTime(400)
-            .do(() => this.senders = [])
+            .do(() => this.senderSuggestions = [])
             .mergeMap((term) => this.addressService.searchAddressesByAddressGroupName('Sender', term))
             .subscribe(
-                (addressDisplayInfo:AddressDisplayInfo) => this.senders.push(addressDisplayInfo),
+                (addressDisplayInfo:AddressDisplayInfo) => {
+                    this.senderSuggestions.push(addressDisplayInfo);
+                    this.senderOffset = 0;
+                },
                 (error) => this.error = error);
+        // the arrow keys has been used for the suggestion list
+        this.senderSelect.subscribe((keyCode) => {
+            if (this.senderSuggestions.length === 0) {
+                return;
+            }
+            if (!this.sender || (keyCode === 40 && (this.senderOffset + 1) >= this.senderSuggestions.length)) {
+                this.senderOffset = 0;
+            } else if (keyCode === 40) {
+                this.senderOffset++;
+            } else if (keyCode === 38 && (this.senderOffset - 1) < 0) {
+                this.senderOffset = this.senderSuggestions.length - 1;
+            } else if (keyCode === 38) {
+                this.senderOffset--;
+            }
+
+            this.senderChanged.emit({
+                sender: this.senderSuggestions[this.senderOffset],
+                clear: keyCode === 13
+            });
+        });
     }
 
     /**
-     * OnInit.
+     * Select a sender and makes it active.
+     * @param {AddressDisplayInfo} sender the sender to set active
      */
-    public ngOnInit() {
-        this.addressService.getFilteredAddressesByAddressGroupName('Sender', 0, 1)
-            .subscribe(
-                (addressDisplayInfo:AddressDisplayInfo) => this.senders.push(addressDisplayInfo),
-                (error) => this.error = error);
+    public selectSender(sender:AddressDisplayInfo) {
+        this.senderChanged.emit({
+            sender: sender,
+            clear: true
+        });
+    }
+
+    public senderKeypress(keyEvent) {
+        if (keyEvent.keyCode === 40 || keyEvent.keyCode === 38 || keyEvent.keyCode === 13) {
+            keyEvent.preventDefault();
+            this.senderSelect.emit(keyEvent.keyCode);
+        }
     }
 
     /**
@@ -121,13 +188,10 @@ export default class ShippingComponent implements OnInit, OnDestroy {
         const productInfos = this.productCalculationForm.value;
 
         let parcelInfo = new ParcelInfo();
-        parcelInfo.Characteristic = new ParcelCharacteristikInfo();
-        parcelInfo.Characteristic.Dimension = new DimensionInfo();
         parcelInfo.Characteristic.Dimension.Height = parseFloat(productInfos.height);
         parcelInfo.Characteristic.Dimension.Lenght = parseFloat(productInfos.length);
         parcelInfo.Characteristic.Dimension.Width = parseFloat(productInfos.width);
         parcelInfo.Characteristic.Dimension.Unit = ESizeUnit.Centimeter;
-        parcelInfo.Characteristic.Weight = new WeightInfo();
         parcelInfo.Characteristic.Weight.Value = parseFloat(productInfos.weight);
         parcelInfo.Characteristic.Weight.Unit = EWeightUnit.Kg;
 
@@ -141,6 +205,6 @@ export default class ShippingComponent implements OnInit, OnDestroy {
      * OnDestroy.
      */
     public ngOnDestroy() {
-        this.senders = [];
+        this.senderSuggestions = [];
     }
 }

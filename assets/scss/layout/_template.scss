@@ -1,0 +1,41 @@
+/* Global
+/* ----------------------------- */
+
+html {
+  font-size: $font-base-size-px;
+}
+
+body {
+  min-width: $bodyMinWidth;
+  background: $brand-gray-3;
+  font-family: $font-family-base;
+  font-size: 1.4rem;
+  line-height: 1.8rem;
+  color: $brand-gray-2;
+}
+
+/* Grid
+/* ----------------------------- */
+
+.container-fluid {
+  max-width: $containerMaxWidth;
+  padding: 0;
+  position: relative;
+}
+
+.row {
+  padding-bottom: 15px;
+}
+
+[class^="col-"],
+[class*="col-"] {
+  position: relative;
+}
+
+main {
+  padding: 20px 0;
+}
+
+.sectiontemplate {
+  margin-bottom: 15px;
+}
