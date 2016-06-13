@@ -1,6 +1,5 @@
 import {Component, OnDestroy, EventEmitter} from '@angular/core';
 import {Control, ControlGroup, FormBuilder, Validators} from '@angular/common';
-import {Observable} from 'rxjs/Observable';
 import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
 import AddressService from "../services/address.service";
@@ -10,9 +9,6 @@ import ParcelInfo from "../models/parcel-info";
 import {ESizeUnit} from "../models/esize-info";
 import {EWeightUnit} from "../models/eweight-unit";
 import PostalProductInfo from "../models/postal-product-info";
-import ParcelCharacteristikInfo from "../models/parcel-characteristic-info";
-import DimensionInfo from "../models/dimension-info";
-import WeightInfo from "../models/weight-info";
 import ModelFormatter from "../services/model-formatter.service";
 
 @Component({
@@ -47,13 +43,13 @@ export default class ShippingComponent implements OnDestroy {
      * Eventhandler if the sender changes.
      * @type {EventEmitter}
      */
-    private senderChanged:EventEmitter = new EventEmitter();
+    private senderChanged:EventEmitter<any> = new EventEmitter<any>();
 
     /**
      * Eventhandler if the sender is selected from the input box.
      * @type {EventEmitter}
      */
-    private senderSelect:EventEmitter = new EventEmitter();
+    private senderSelect:EventEmitter<any> = new EventEmitter<any>();
     private senderOffset = 0;
 
     /**
@@ -118,8 +114,8 @@ export default class ShippingComponent implements OnDestroy {
     private bindEvents() {
         // sender has been changed
         this.senderChanged.subscribe((data) => {
-            const sender:Control = this.sendersForm.controls['sender'];
-            const shippingPoint:Control = this.sendersForm.controls['shippingPoint'];
+            const sender = <Control> this.sendersForm.controls['sender'];
+            const shippingPoint = <Control> this.sendersForm.controls['shippingPoint'];
             this.sender = data.sender;
             sender.updateValue(this.modelFormatter.addressDisplayInfo(this.sender), {emitEvent: false});
             shippingPoint.updateValue(this.sender.ZipCode);
