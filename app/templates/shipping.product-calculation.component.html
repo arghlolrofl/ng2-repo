@@ -1,0 +1,73 @@
+<section class="product-calculation">
+  <h4>Product Calculation</h4>
+  <form [ngFormModel]="productCalculationForm" (ngSubmit)="recalculateProduct()">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="field-container text-field">
+          <input type="text"
+                 placeholder="weight"
+                 ngControl="weight"
+                 [class.error]="!productCalculationForm.controls['weight'].valid && productCalculationForm.controls['weight'].touched">
+          <button class="clear-submit"
+                  (click)="productCalculationForm.controls['weight'].updateValue('')">
+            <span class="icon-close"></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="col-md-1">
+        <div class="field-container box-icon">
+          <button>
+            <span class="icon-weight"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3">
+        <div class="field-container text-field">
+          <input type="text"
+                 placeholder="length"
+                 ngControl="length"
+                 [class.error]="!productCalculationForm.controls['length'].valid && productCalculationForm.controls['length'].touched">
+          <button class="clear-submit"
+                  (click)="productCalculationForm.controls['length'].updateValue('')">
+            <span class="icon-close"></span>
+          </button>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="field-container text-field">
+          <input type="text"
+                 placeholder="width"
+                 ngControl="width"
+                 [class.error]="!productCalculationForm.controls['width'].valid && productCalculationForm.controls['width'].touched">
+          <button class="clear-submit"
+                  (click)="productCalculationForm.controls['width'].updateValue('')">
+            <span class="icon-close"></span>
+          </button>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="field-container text-field">
+          <input type="text"
+                 placeholder="height"
+                 ngControl="height"
+                 [class.error]="!productCalculationForm.controls['height'].valid && productCalculationForm.controls['height'].touched">
+          <button class="clear-submit"
+                  (click)="productCalculationForm.controls['height'].updateValue('')">
+            <span class="icon-close"></span>
+          </button>
+        </div>
+      </div>
+      <div class="col-md-1">
+        <div class="field-container box-icon">
+          <button type="submit" [disabled]="!productCalculationForm.valid">
+            <span class="icon-interface"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</section>
