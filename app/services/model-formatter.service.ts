@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 
 import AddressDisplayInfo from "../models/address-display-info";
+import AddressGroupInfo from "../models/address-group-info";
 
 /**
  * Formats the models to strings.
@@ -16,5 +17,15 @@ export default class ModelFormatter {
      */
     public addressDisplayInfo(model:AddressDisplayInfo) {
         return `${model.FirstName} ${model.LastName}`;
+    }
+
+    //noinspection JSMethodCanBeStatic
+    /**
+     * Format the AddressGroupInfo.
+     * @param {AddressGroupInfo} model the model to be formatted
+     * @returns {string}
+     */
+    public addressGroupInfo(model:AddressGroupInfo) {
+        return `${model.GroupName}`;
     }
 }

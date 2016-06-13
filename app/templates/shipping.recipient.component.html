@@ -1,6 +1,6 @@
 <section class="sectiontemplate">
   <h4><i class="icon-class icon-mailbox"></i>Recipient</h4>
-  <form>
+  <form [ngFormModel]="recipientsForm">
     <div class="row">
       <div class="col-md-8 col-md-offset-1">
         <div class="field-container text-field-search">
@@ -8,20 +8,22 @@
             <span class="icon-search"></span>
           </button>
           <input type="text"
-                 name="text-input"
-                 placeholder="recipient">
-          <button class="clear-submit">
+                 placeholder="filter"
+                 ngControl="addressGroup"
+                 (keydown)="addressGroupKeypress($event)">
+          <button class="clear-submit"
+                  (click)="recipientsForm.controls['addressGroup'].updateValue('')">
             <span class="icon-close"></span>
           </button>
         </div>
-        <div class="row autocomplete">
+        <div class="row autocomplete"
+             [class.open]="addressGroupSuggestions.length > 0 && recipientsForm.controls['addressGroup'].value.length > 0">
           <div class="col-md-12">
             <ul>
-              <li><a href="#">sdfsdfsdf sdfsdfsdf sdfsdfsdf </a></li>
-              <li><a href="#">sdfsdfsdf sdfsdfsdf sdfsdfsdf </a></li>
-              <li><a href="#">sdfsdfsdf sdfsdfsdf sdfsdfsdf </a></li>
-              <li><a href="#">sdfsdfsdf sdfsdfsdf sdfsdfsdf </a></li>
-              <li><a href="#">sdfsdfsdf sdfsdfsdf sdfsdfsdf </a></li>
+              <li *ngFor="let addressGroup of addressGroupSuggestions"
+                  (click)="selectAddressGroup(addressGroup)">
+                {{modelFormatter.addressGroupInfo(addressGroup)}}
+              </li>
             </ul>
           </div>
         </div>
@@ -34,19 +36,23 @@
           <button class="search-submit">
             <span class="icon-search"></span>
           </button>
-          <input type="text" name="text-input" value="" placeholder="text-placeholder">
-          <button class="clear-submit">
+          <input type="text"
+                 placeholder="recipient"
+                 ngControl="recipient"
+                 (keydown)="recipientKeypress($event)">
+          <button class="clear-submit"
+                  (click)="recipientsForm.controls['recipient'].updateValue('')">
             <span class="icon-close"></span>
           </button>
         </div>
-        <div class="row autocomplete">
+        <div class="row autocomplete"
+             [class.open]="recipientSuggestions.length > 0 && recipientsForm.controls['recipient'].value.length > 0">
           <div class="col-md-12">
             <ul>
-              <li><a href="#">sdfsdfsdf sdfsdfsdf sdfsdfsdf </a></li>
-              <li><a href="#">sdfsdfsdf sdfsdfsdf sdfsdfsdf </a></li>
-              <li><a href="#">sdfsdfsdf sdfsdfsdf sdfsdfsdf </a></li>
-              <li><a href="#">sdfsdfsdf sdfsdfsdf sdfsdfsdf </a></li>
-              <li><a href="#">sdfsdfsdf sdfsdfsdf sdfsdfsdf </a></li>
+              <li *ngFor="let recipient of recipientSuggestions"
+                  (click)="selectRecipient(recipient)">
+                {{modelFormatter.addressDisplayInfo(recipient)}}
+              </li>
             </ul>
           </div>
         </div>

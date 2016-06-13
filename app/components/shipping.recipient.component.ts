@@ -5,6 +5,7 @@ import {TranslatePipe} from 'ng2-translate/ng2-translate';
 import AddressService from "../services/address.service";
 import AddressDisplayInfo from "../models/address-display-info";
 import ModelFormatter from "../services/model-formatter.service";
+import AddressGroupInfo from "../models/address-group-info";
 
 @Component({
     selector: 'fp-shipping-recipient',
@@ -31,46 +32,72 @@ export default class ShippingRecipientComponent implements OnDestroy {
     public onError:EventEmitter<Error> = new EventEmitter<Error>();
 
     /**
-     * Updated when sender has been changed.
+     * Updated when recipient has been changed.
      * @type {EventEmitter<AddressDisplayInfo>}
      */
     @Output()
-    public onSenderSelect:EventEmitter<AddressDisplayInfo> = new EventEmitter<AddressDisplayInfo>();
+    public onRecipientSelect:EventEmitter<AddressDisplayInfo> = new EventEmitter<AddressDisplayInfo>();
 
     /**
-     * Updated when shipping point has changed.
-     * @type {EventEmitter<string>}
+     * The actual selected address group.
      */
-    @Output()
-    public onShippingPointSelect:EventEmitter<string> = new EventEmitter<string>();
+    private addressGroup:AddressGroupInfo;
 
     /**
-     * The actual selected sender.
+     * Address Group suggestions.
      */
-    private sender:AddressDisplayInfo;
+    private addressGroupSuggestions:AddressGroupInfo[];
 
     /**
-     * Eventhandler if the sender changes.
-     * @type {EventEmitter}
+     * If the selection is toggled.
+     * @type {EventEmitter<any>}
      */
-    private senderChanged:EventEmitter<any> = new EventEmitter<any>();
+    private addressGroupSelect:EventEmitter<any> = new EventEmitter<any>();
 
     /**
-     * Eventhandler if the sender is selected from the input box.
-     * @type {EventEmitter}
+     * If the address group has been changed.
+     * @type {EventEmitter<any>}
      */
-    private senderSelect:EventEmitter<any> = new EventEmitter<any>();
-    private senderOffset = 0;
+    private addressGroupChanged:EventEmitter<any> = new EventEmitter<any>();
 
     /**
-     * Sender suggestions (autocomplete) to display.
+     * Address Group selection offset.
+     * @type {number}
      */
-    private senderSuggestions:AddressDisplayInfo[];
+    private addressGroupOffset = 0;
 
     /**
-     * The form for sender.
+     * The actual selected recipient.
      */
-    private sendersForm:ControlGroup;
+    private recipient:AddressDisplayInfo;
+
+    /**
+     * Recipient suggestions (autocomplete) to display.
+     */
+    private recipientSuggestions:AddressDisplayInfo[];
+
+    /**
+     * If the selection is toggled.
+     * @type {EventEmitter<any>}
+     */
+    private recipientSelect:EventEmitter<any> = new EventEmitter<any>();
+
+    /**
+     * If the reicpient has been changed.
+     * @type {EventEmitter<any>}
+     */
+    private recipientChanged:EventEmitter<any> = new EventEmitter<any>();
+
+    /**
+     * Recipient selection offset.
+     * @type {number}
+     */
+    private recipientOffset = 0;
+
+    /**
+     * The form for recipient.
+     */
+    private recipientsForm:ControlGroup;
 
     /**
      * @constructor
@@ -81,11 +108,11 @@ export default class ShippingRecipientComponent implements OnDestroy {
     constructor(private modelFormatter:ModelFormatter,
                 private addressService:AddressService,
                 private formBuilder:FormBuilder) {
-        // initialize sender
-        this.senderSuggestions = [];
-        this.sendersForm = formBuilder.group({
-            'sender': [''],
-            'shippingPoint': ['']
+        this.addressGroupSuggestions = [];
+        this.recipientSuggestions = [];
+        this.recipientsForm = formBuilder.group({
+            'addressGroup': [''],
+            'recipient': ['']
         });
 
         this.bindEvents();
@@ -95,71 +122,126 @@ export default class ShippingRecipientComponent implements OnDestroy {
      * Bind all events.
      */
     private bindEvents() {
-        // sender has been changed
-        this.senderChanged.subscribe((data) => {
-            const sender = <Control> this.sendersForm.controls['sender'];
-            const shippingPoint = <Control> this.sendersForm.controls['shippingPoint'];
-            this.sender = data.sender;
-            sender.updateValue(this.modelFormatter.addressDisplayInfo(this.sender), {emitEvent: false});
-            shippingPoint.updateValue(this.sender.ZipCode);
+        this.addressGroupChanged.subscribe((data) => {
+            const addressGroup = <Control> this.recipientsForm.controls['addressGroup'];
+            this.addressGroup = data.addressGroup;
+            addressGroup.updateValue(this.modelFormatter.addressGroupInfo(this.addressGroup), {emitEvent: false});
             if (data.clear) {
-                this.senderSuggestions = [];
+                this.addressGroupSuggestions = [];
             }
-            this.onSenderSelect.emit(this.sender);
-            this.onShippingPointSelect.emit(this.sender.ZipCode);
         });
-        // something has been typed in the senders input field
-        this.sendersForm.controls['sender'].valueChanges
+        this.recipientsForm.controls['addressGroup'].valueChanges
             .debounceTime(400)
-            .do(() => this.senderSuggestions = [])
-            .mergeMap((term) => this.addressService.searchAddressesByAddressGroupName('Sender', term))
+            .do(() => this.addressGroupSuggestions = [])
+            .mergeMap((term) => this.addressService.getFilteredAddressGroups(term))
             .subscribe(
-                (addressDisplayInfo:AddressDisplayInfo) => {
-                    this.senderSuggestions.push(addressDisplayInfo);
-                    this.senderOffset = 0;
+                (item:AddressGroupInfo) => {
+                    this.addressGroupSuggestions.push(item);
+                    this.addressGroupOffset = 0;
                 },
                 (error) => this.onError.emit(error));
-        this.sendersForm.controls['shippingPoint'].valueChanges
-            .subscribe(
-                (shippingPoint:string) => this.onShippingPointSelect.emit(shippingPoint),
-                (error) => this.onError.emit(error));
-        // the arrow keys has been used for the suggestion list
-        this.senderSelect.subscribe((keyCode) => {
-            if (this.senderSuggestions.length === 0) {
+        this.addressGroupSelect.subscribe((keyCode) => {
+            if (this.addressGroupSuggestions.length === 0) {
                 return;
             }
-            if (!this.sender || (keyCode === 40 && (this.senderOffset + 1) >= this.senderSuggestions.length)) {
-                this.senderOffset = 0;
+            if (!this.addressGroup
+                || (keyCode === 40 && (this.addressGroupOffset + 1) >= this.addressGroupSuggestions.length)) {
+                this.addressGroupOffset = 0;
             } else if (keyCode === 40) {
-                this.senderOffset++;
-            } else if (keyCode === 38 && (this.senderOffset - 1) < 0) {
-                this.senderOffset = this.senderSuggestions.length - 1;
+                this.addressGroupOffset++;
+            } else if (keyCode === 38 && (this.addressGroupOffset - 1) < 0) {
+                this.addressGroupOffset = this.addressGroupSuggestions.length - 1;
             } else if (keyCode === 38) {
-                this.senderOffset--;
+                this.addressGroupOffset--;
             }
 
-            this.senderChanged.emit({
-                sender: this.senderSuggestions[this.senderOffset],
+            this.addressGroupChanged.emit({
+                addressGroup: this.addressGroupSuggestions[this.addressGroupOffset],
+                clear: keyCode === 13
+            });
+        });
+
+        this.recipientChanged.subscribe((data) => {
+            const recipient = <Control> this.recipientsForm.controls['recipient'];
+            this.recipient = data.recipient;
+            recipient.updateValue(this.modelFormatter.addressDisplayInfo(this.recipient), {emitEvent: false});
+            if (data.clear) {
+                this.recipientSuggestions = [];
+            }
+        });
+        this.recipientsForm.controls['recipient'].valueChanges
+            .debounceTime(400)
+            .do(() => this.recipientSuggestions = [])
+            .mergeMap((term) => this.addressService.getFilteredAddressesByAddressGroupName(this.addressGroup.GroupName))
+            .subscribe(
+                (item:AddressDisplayInfo) => {
+                    this.recipientSuggestions.push(item);
+                    this.recipientOffset = 0;
+                },
+                (error) => this.onError.emit(error));
+        this.recipientSelect.subscribe((keyCode) => {
+            if (this.recipientSuggestions.length === 0) {
+                return;
+            }
+            if (!this.recipient
+                || (keyCode === 40 && (this.recipientOffset + 1) >= this.recipientSuggestions.length)) {
+                this.recipientOffset = 0;
+            } else if (keyCode === 40) {
+                this.recipientOffset++;
+            } else if (keyCode === 38 && (this.recipientOffset- 1) < 0) {
+                this.recipientOffset = this.recipientSuggestions.length - 1;
+            } else if (keyCode === 38) {
+                this.recipientOffset--;
+            }
+
+            this.recipientChanged.emit({
+                recipient: this.recipientSuggestions[this.recipientOffset],
                 clear: keyCode === 13
             });
         });
     }
 
     /**
-     * Select a sender and makes it active.
-     * @param {AddressDisplayInfo} sender the sender to set active
+     * Executed when a user clicks on a result to select it.
+     * @param {AddressGroupInfo} addressGroup the address group to be selected
      */
-    public selectSender(sender:AddressDisplayInfo) {
-        this.senderChanged.emit({
-            sender: sender,
+    public selectAddressGroup(addressGroup:AddressGroupInfo) {
+        this.addressGroupChanged.emit({
+            addressGroup: addressGroup,
             clear: true
         });
     }
 
-    public senderKeypress(keyEvent) {
+    /**
+     * Executed when the user pages through the suggestions.
+     * @param keyEvent the key event
+     */
+    public addressGroupKeypress(keyEvent) {
         if (keyEvent.keyCode === 40 || keyEvent.keyCode === 38 || keyEvent.keyCode === 13) {
             keyEvent.preventDefault();
-            this.senderSelect.emit(keyEvent.keyCode);
+            this.addressGroupSelect.emit(keyEvent.keyCode);
+        }
+    }
+
+    /**
+     * Executed when a user clicks on a result to select it.
+     * @param {AddressDisplayInfo} recipient the recipient to be selected
+     */
+    public selectRecipient(recipient:AddressDisplayInfo) {
+        this.recipientChanged.emit({
+            recipient: recipient,
+            clear: true
+        });
+    }
+
+    /**
+     * Executed when the user pages through the suggestions.
+     * @param keyEvent the key event
+     */
+    public recipientKeypress(keyEvent) {
+        if (keyEvent.keyCode === 40 || keyEvent.keyCode === 38 || keyEvent.keyCode === 13) {
+            keyEvent.preventDefault();
+            this.recipientSelect.emit(keyEvent.keyCode);
         }
     }
 
@@ -167,6 +249,7 @@ export default class ShippingRecipientComponent implements OnDestroy {
      * OnDestroy.
      */
     public ngOnDestroy() {
-        this.senderSuggestions = [];
+        this.addressGroupSuggestions = [];
+        this.recipientSuggestions = [];
     }
 }
