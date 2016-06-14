@@ -16,6 +16,9 @@ export default class ModelFormatter {
      * @returns {string}
      */
     public addressDisplayInfo(model:AddressDisplayInfo) {
+        if (!model) {
+            return '';
+        }
         return `${model.FirstName} ${model.LastName}`;
     }
 
@@ -26,6 +29,9 @@ export default class ModelFormatter {
      * @returns {string}
      */
     public addressGroupInfo(model:AddressGroupInfo) {
+        if (!model) {
+            return '';
+        }
         return `${model.GroupName}`;
     }
 }

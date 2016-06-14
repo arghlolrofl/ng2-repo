@@ -6,10 +6,14 @@ import AddressService from "../services/address.service";
 import AddressDisplayInfo from "../models/address-display-info";
 import ModelFormatter from "../services/model-formatter.service";
 import AddressGroupInfo from "../models/address-group-info";
+import {SuggestDirective, SuggestEvents} from "../directives/suggest.directive";
 
 @Component({
     selector: 'fp-shipping-recipient',
     templateUrl: 'app/templates/shipping.recipient.component.html',
+    directives: [
+        SuggestDirective
+    ],
     pipes: [
         TranslatePipe
     ],
@@ -39,6 +43,12 @@ export default class ShippingRecipientComponent implements OnDestroy {
     public onRecipientSelect:EventEmitter<AddressDisplayInfo> = new EventEmitter<AddressDisplayInfo>();
 
     /**
+     * The address group events.
+     * @type {EventEmitter<any>}
+     */
+    public addressGroupEvents:EventEmitter<any> = new EventEmitter<any>();
+
+    /**
      * The actual selected address group.
      */
     private addressGroup:AddressGroupInfo;
@@ -49,22 +59,10 @@ export default class ShippingRecipientComponent implements OnDestroy {
     private addressGroupSuggestions:AddressGroupInfo[];
 
     /**
-     * If the selection is toggled.
+     * The recipient events.
      * @type {EventEmitter<any>}
      */
-    private addressGroupSelect:EventEmitter<any> = new EventEmitter<any>();
-
-    /**
-     * If the address group has been changed.
-     * @type {EventEmitter<any>}
-     */
-    private addressGroupChanged:EventEmitter<any> = new EventEmitter<any>();
-
-    /**
-     * Address Group selection offset.
-     * @type {number}
-     */
-    private addressGroupOffset = 0;
+    public recipientEvents:EventEmitter<any> = new EventEmitter<any>();
 
     /**
      * The actual selected recipient.
@@ -75,24 +73,6 @@ export default class ShippingRecipientComponent implements OnDestroy {
      * Recipient suggestions (autocomplete) to display.
      */
     private recipientSuggestions:AddressDisplayInfo[];
-
-    /**
-     * If the selection is toggled.
-     * @type {EventEmitter<any>}
-     */
-    private recipientSelect:EventEmitter<any> = new EventEmitter<any>();
-
-    /**
-     * If the reicpient has been changed.
-     * @type {EventEmitter<any>}
-     */
-    private recipientChanged:EventEmitter<any> = new EventEmitter<any>();
-
-    /**
-     * Recipient selection offset.
-     * @type {number}
-     */
-    private recipientOffset = 0;
 
     /**
      * The form for recipient.
@@ -122,83 +102,87 @@ export default class ShippingRecipientComponent implements OnDestroy {
      * Bind all events.
      */
     private bindEvents() {
-        this.addressGroupChanged.subscribe((data) => {
-            const addressGroup = <Control> this.recipientsForm.controls['addressGroup'];
-            this.addressGroup = data.addressGroup;
-            addressGroup.updateValue(this.modelFormatter.addressGroupInfo(this.addressGroup), {emitEvent: false});
-            if (data.clear) {
-                this.addressGroupSuggestions = [];
-            }
-        });
-        this.recipientsForm.controls['addressGroup'].valueChanges
-            .debounceTime(400)
-            .do(() => this.addressGroupSuggestions = [])
-            .mergeMap((term) => this.addressService.getFilteredAddressGroups(term))
-            .subscribe(
-                (item:AddressGroupInfo) => {
-                    this.addressGroupSuggestions.push(item);
-                    this.addressGroupOffset = 0;
-                },
-                (error) => this.onError.emit(error));
-        this.addressGroupSelect.subscribe((keyCode) => {
-            if (this.addressGroupSuggestions.length === 0) {
-                return;
-            }
-            if (!this.addressGroup
-                || (keyCode === 40 && (this.addressGroupOffset + 1) >= this.addressGroupSuggestions.length)) {
-                this.addressGroupOffset = 0;
-            } else if (keyCode === 40) {
-                this.addressGroupOffset++;
-            } else if (keyCode === 38 && (this.addressGroupOffset - 1) < 0) {
-                this.addressGroupOffset = this.addressGroupSuggestions.length - 1;
-            } else if (keyCode === 38) {
-                this.addressGroupOffset--;
-            }
+        const addressGroupControl = <Control> this.recipientsForm.controls['addressGroup'];
+        const recipientControl = <Control> this.recipientsForm.controls['recipient'];
 
-            this.addressGroupChanged.emit({
-                addressGroup: this.addressGroupSuggestions[this.addressGroupOffset],
-                clear: keyCode === 13
-            });
+        this.addressGroupEvents.subscribe((event) => {
+            switch (event.type) {
+                case SuggestEvents.ERROR:
+                    this.onError.emit(event.data);
+                    break;
+
+                case SuggestEvents.CHANGED:
+                    this.addressGroupSuggestions = event.data;
+                    break;
+
+                case SuggestEvents.SELECTED:
+                    this.addressGroup = event.data;
+                    addressGroupControl.updateValue(this.modelFormatter.addressGroupInfo(this.addressGroup));
+                    this.recipientEvents.emit({
+                        type: SuggestEvents.CLEARED
+                    });
+                    break;
+
+                case SuggestEvents.CLEARED:
+                    addressGroupControl.updateValue('');
+                    break;
+
+                case SuggestEvents.SHOW:
+                    addressGroupControl.updateValue(this.modelFormatter.addressGroupInfo(event.data), {emitEvent: false});
+                    break;
+            }
         });
 
-        this.recipientChanged.subscribe((data) => {
-            const recipient = <Control> this.recipientsForm.controls['recipient'];
-            this.recipient = data.recipient;
-            recipient.updateValue(this.modelFormatter.addressDisplayInfo(this.recipient), {emitEvent: false});
-            if (data.clear) {
-                this.recipientSuggestions = [];
-            }
-        });
-        this.recipientsForm.controls['recipient'].valueChanges
-            .debounceTime(400)
-            .do(() => this.recipientSuggestions = [])
-            .mergeMap((term) => this.addressService.getFilteredAddressesByAddressGroupName(this.addressGroup.GroupName))
-            .subscribe(
-                (item:AddressDisplayInfo) => {
-                    this.recipientSuggestions.push(item);
-                    this.recipientOffset = 0;
-                },
-                (error) => this.onError.emit(error));
-        this.recipientSelect.subscribe((keyCode) => {
-            if (this.recipientSuggestions.length === 0) {
-                return;
-            }
-            if (!this.recipient
-                || (keyCode === 40 && (this.recipientOffset + 1) >= this.recipientSuggestions.length)) {
-                this.recipientOffset = 0;
-            } else if (keyCode === 40) {
-                this.recipientOffset++;
-            } else if (keyCode === 38 && (this.recipientOffset- 1) < 0) {
-                this.recipientOffset = this.recipientSuggestions.length - 1;
-            } else if (keyCode === 38) {
-                this.recipientOffset--;
-            }
+        this.recipientEvents.subscribe((event) => {
+            switch (event.type) {
+                case SuggestEvents.ERROR:
+                    this.onError.emit(event.data);
+                    break;
 
-            this.recipientChanged.emit({
-                recipient: this.recipientSuggestions[this.recipientOffset],
-                clear: keyCode === 13
-            });
+                case SuggestEvents.CHANGED:
+                    this.recipientSuggestions = event.data;
+                    break;
+
+                case SuggestEvents.SELECTED:
+                    this.recipient = event.data;
+                    recipientControl.updateValue(this.modelFormatter.addressDisplayInfo(this.recipient));
+                    break;
+
+                case SuggestEvents.CLEARED:
+                    recipientControl.updateValue('');
+                    break;
+
+                case SuggestEvents.SHOW:
+                    recipientControl.updateValue(this.modelFormatter.addressDisplayInfo(event.data), {emitEvent: false});
+                    break;
+            }
         });
+    }
+
+    /**
+     * Map Suggestions API call.
+     * @param {AddressService} service the address service to be wrapped
+     * @returns {function(string): Observable<AddressGroupInfo>}
+     */
+    public mapAddressGroupSuggest(service:AddressService) {
+        return (term:string) => {
+            return service.getFilteredAddressGroups(term);
+        }
+    }
+
+    /**
+     * Map Suggestions API call.
+     * @param {AddressService} service the address service to be wrapped
+     * @returns {function(string): Observable<AddressDisplayInfo>}
+     */
+    public mapRecipientSuggest(service:AddressService) {
+        return (term:string) => {
+            let groupName = '';
+            if (this.addressGroup) {
+                groupName = this.addressGroup.GroupName;
+            }
+            return service.getFilteredAddressesByAddressGroupName(groupName);
+        }
     }
 
     /**
@@ -206,21 +190,16 @@ export default class ShippingRecipientComponent implements OnDestroy {
      * @param {AddressGroupInfo} addressGroup the address group to be selected
      */
     public selectAddressGroup(addressGroup:AddressGroupInfo) {
-        this.addressGroupChanged.emit({
-            addressGroup: addressGroup,
-            clear: true
+        this.addressGroupEvents.emit({
+            type: SuggestEvents.SELECTED,
+            data: addressGroup
         });
     }
 
-    /**
-     * Executed when the user pages through the suggestions.
-     * @param keyEvent the key event
-     */
-    public addressGroupKeypress(keyEvent) {
-        if (keyEvent.keyCode === 40 || keyEvent.keyCode === 38 || keyEvent.keyCode === 13) {
-            keyEvent.preventDefault();
-            this.addressGroupSelect.emit(keyEvent.keyCode);
-        }
+    public clearAddressGroup() {
+        this.addressGroupEvents.emit({
+            type: SuggestEvents.CLEARED
+        });
     }
 
     /**
@@ -228,28 +207,23 @@ export default class ShippingRecipientComponent implements OnDestroy {
      * @param {AddressDisplayInfo} recipient the recipient to be selected
      */
     public selectRecipient(recipient:AddressDisplayInfo) {
-        this.recipientChanged.emit({
-            recipient: recipient,
-            clear: true
+        this.recipientEvents.emit({
+            type: SuggestEvents.SELECTED,
+            data: recipient
         });
     }
 
-    /**
-     * Executed when the user pages through the suggestions.
-     * @param keyEvent the key event
-     */
-    public recipientKeypress(keyEvent) {
-        if (keyEvent.keyCode === 40 || keyEvent.keyCode === 38 || keyEvent.keyCode === 13) {
-            keyEvent.preventDefault();
-            this.recipientSelect.emit(keyEvent.keyCode);
-        }
+    public clearRecipient() {
+        this.recipientEvents.emit({
+            type: SuggestEvents.CLEARED
+        });
     }
 
     /**
      * OnDestroy.
      */
     public ngOnDestroy() {
-        this.addressGroupSuggestions = [];
-        this.recipientSuggestions = [];
+        this.addressGroupEvents.emit({type: SuggestEvents.CLEARED});
+        this.recipientEvents.emit({type: SuggestEvents.CLEARED});
     }
 }
