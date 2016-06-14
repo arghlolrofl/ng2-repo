@@ -5,6 +5,7 @@
 
 // Statics
 import 'rxjs/add/observable/throw';
+import 'rxjs/add/observable/fromEvent';
 
 // Operators
 import 'rxjs/add/operator/catch';
@@ -16,5 +17,4 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/concatMap';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/switchMap';
-
-import 'rxjs/add/operator/concat';
+import 'rxjs/add/operator/filter';

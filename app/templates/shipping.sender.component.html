@@ -9,11 +9,12 @@
           </button>
           <input type="text"
                  placeholder="sender"
+                 tabindex="1"
                  ngControl="sender"
-                 (keydown)="senderKeypress($event)">
+                 [fpSuggest]="mapSuggest(addressService)"
+                 [fpSuggestEvents]="senderEvents">
           <button class="clear-submit"
-                  (click)="sendersForm.controls['sender'].updateValue('');
-                               sendersForm.controls['shippingPoint'].updateValue('')">
+                  (click)="clearSender()">
             <span class="icon-close"></span>
           </button>
         </div>
@@ -57,6 +58,7 @@
           <input type="text"
                  name="text-input"
                  placeholder="shipping point"
+                 tabindex="2"
                  ngControl="shippingPoint">
           <button class="clear-submit"
                   (click)="sendersForm.controls['shippingPoint'].updateValue('')">

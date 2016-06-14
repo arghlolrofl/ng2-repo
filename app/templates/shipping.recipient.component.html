@@ -9,10 +9,12 @@
           </button>
           <input type="text"
                  placeholder="filter"
+                 tabindex="3"
                  ngControl="addressGroup"
-                 (keydown)="addressGroupKeypress($event)">
+                 [fpSuggest]="mapAddressGroupSuggest(addressService)"
+                 [fpSuggestEvents]="addressGroupEvents">
           <button class="clear-submit"
-                  (click)="recipientsForm.controls['addressGroup'].updateValue('')">
+                  (click)="clearAddressGroup()">
             <span class="icon-close"></span>
           </button>
         </div>
@@ -38,10 +40,12 @@
           </button>
           <input type="text"
                  placeholder="recipient"
+                 tabindex="4"
                  ngControl="recipient"
-                 (keydown)="recipientKeypress($event)">
+                 [fpSuggest]="mapRecipientSuggest(addressService)"
+                 [fpSuggestEvents]="recipientEvents">
           <button class="clear-submit"
-                  (click)="recipientsForm.controls['recipient'].updateValue('')">
+                  (click)="clearRecipient()">
             <span class="icon-close"></span>
           </button>
         </div>
