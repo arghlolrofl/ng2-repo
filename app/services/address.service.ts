@@ -2,10 +2,9 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 
 import APIClient from './api-client.service';
-import PagedResultOfAddressGroupInfo from '../models/paged-result-of-address-group-info';
-import PagedResultOfAddressDisplayInfo from '../models/paged-result-of-address-display-info';
 import AddressGroupInfo from '../models/address-group-info';
 import AddressDisplayInfo from '../models/address-display-info';
+import PagedResultsOf from "../models/paged-results";
 
 /**
  * AddressGroup API.
@@ -47,7 +46,7 @@ export default class AddressService {
             GroupName: groupName,
             StartValue: start,
             ResultCount: num
-        }).concatMap((r:PagedResultOfAddressGroupInfo) => r.ItemList);
+        }).concatMap((r:PagedResultsOf<AddressGroupInfo>) => r.ItemList);
     }
 
     /**
@@ -67,6 +66,6 @@ export default class AddressService {
             AddressGroupId: addressGroupId,
             StartValue: start,
             ResultCount: num
-        }).concatMap((r:PagedResultOfAddressDisplayInfo) => r.ItemList);
+        }).concatMap((r:PagedResultsOf<AddressDisplayInfo>) => r.ItemList);
     }
 }

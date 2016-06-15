@@ -11,13 +11,13 @@ export const AVAILABLE_LOCALES = [
  * Environment setting.
  * @type {string}
  */
-export const ENVIRONMENT = 'dev';
+export const ENVIRONMENT = 'stg';
 
 /**
  * Base URL of the API.
  * @type {string}
  */
-export const API_BASE_URL = '/api/';
+export const API_BASE_URL = 'http://62.220.24.49/M1Consumer/api/';
 
 // TODO should be removed on live testing
 /**

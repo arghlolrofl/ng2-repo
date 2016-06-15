@@ -42,4 +42,12 @@ export default class ShippingComponent {
      * Selected shipping point.
      */
     private shippingPoint:string;
+
+    /**
+     * Handle errors.
+     * @param {Error} error the error
+     */
+    public onError(error:Error) {
+        console.warn(error);
+    }
 }

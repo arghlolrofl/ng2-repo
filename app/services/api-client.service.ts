@@ -33,6 +33,7 @@ export default class APIClient {
             }
             return this.http
                 .get(API_BASE_URL + path + API_SUFFIX, opt)
+                .timeout(5000, new Error('API timeout'))
                 .map(APIClient.extractJson)
                 .catch(APIClient.handleError);
         } catch (e) {
@@ -58,6 +59,7 @@ export default class APIClient {
             }
             return this.http
                 .post(API_BASE_URL + path + API_SUFFIX, JSON.stringify(data), opt)
+                .timeout(5000, new Error('API timeout'))
                 .map(APIClient.extractJson)
                 .catch(APIClient.handleError);
         } catch (e) {

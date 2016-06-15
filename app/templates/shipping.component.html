@@ -1,18 +1,18 @@
 <div class="row">
   <div class="col-md-6">
-    <fp-shipping-sender (onError)="error = $event"
+    <fp-shipping-sender (onError)="onError($event)"
                         (onSenderSelect)="sender = $event"
                         (onShippingPointSelect)="shippingPoint = $event"></fp-shipping-sender>
 
-    <fp-shipping-recipient (onError)="error = $event"></fp-shipping-recipient>
+    <fp-shipping-recipient (onError)="onError($event)"></fp-shipping-recipient>
 
-    <fp-shipping-cost-center (onError)="error = $event"></fp-shipping-cost-center>
+    <fp-shipping-cost-center (onError)="onError($event)"></fp-shipping-cost-center>
 
-    <fp-shipping-additional-information (onError)="error = $event"></fp-shipping-additional-information>
+    <fp-shipping-additional-information (onError)="onError($event)"></fp-shipping-additional-information>
 
   </div>
 
   <div class="col-md-6">
-    <fp-shipping-product-calculation (onError)="error = $event"></fp-shipping-product-calculation>
+    <fp-shipping-product-calculation (onError)="onError($event)"></fp-shipping-product-calculation>
   </div>
 </div>
