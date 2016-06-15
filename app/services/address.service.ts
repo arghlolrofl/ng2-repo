@@ -19,16 +19,16 @@ export default class AddressService {
     }
 
 
-    public searchAddressesByAddressGroupName(groupName:string, searchTerm:string):Observable<AddressDisplayInfo> {
-        // TODO replace with actual search logic
-        return this.getFilteredAddressesByAddressGroupName(groupName);
-    }
-
-    public getFilteredAddressesByAddressGroupName(groupName:string,
+    public getFilteredAddressesByAddressGroupNameAndAddressInfo(groupName:string,
+                                                  firstName:string,
+                                                  lastName:string,
+                                                  city:string,
+                                                  company:string,
                                                   start?:number,
                                                   num?:number):Observable<AddressDisplayInfo> {
         return this.getFilteredAddressGroups(groupName, start, num)
-            .mergeMap((i:AddressGroupInfo) => this.getFilteredAddressesByAddressGroup(i.Id, start, num));
+            .mergeMap((i:AddressGroupInfo) => this.getFilteredAddressesByAddressGroupAndAddressInfo(
+                i.Id, firstName, lastName, city, company, start, num));
     }
 
     /**
@@ -63,7 +63,28 @@ export default class AddressService {
         num = num || 0;
 
         return this.apiClient.post('Address/GetFiltered', {
-            AddressGroupId: addressGroupId,
+            AddressGroup: addressGroupId,
+            StartValue: start,
+            ResultCount: num
+        }).concatMap((r:PagedResultsOf<AddressDisplayInfo>) => r.ItemList);
+    }
+
+    public getFilteredAddressesByAddressGroupAndAddressInfo(addressGroupId:number,
+                                                            firstName:string,
+                                                            lastName:string,
+                                                            city:string,
+                                                            company:string,
+                                                            start?:number,
+                                                            num?:number):Observable<AddressDisplayInfo> {
+        start = start || 0;
+        num = num || 0;
+
+        return this.apiClient.post('Address/GetFiltered', {
+            AddressGroup: addressGroupId,
+            FirstName: firstName,
+            LastName: lastName,
+            City: city,
+            Company: company,
             StartValue: start,
             ResultCount: num
         }).concatMap((r:PagedResultsOf<AddressDisplayInfo>) => r.ItemList);

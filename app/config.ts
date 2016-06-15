@@ -25,3 +25,9 @@ export const API_BASE_URL = 'http://62.220.24.49/M1Consumer/api/';
  * @type {string}
  */
 export const API_SUFFIX = ENVIRONMENT === 'dev' ? '.json' : '';
+
+/**
+ * API request timeout.
+ * @type {number}
+ */
+export const API_TIMEOUT = 3000;

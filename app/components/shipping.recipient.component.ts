@@ -166,7 +166,7 @@ export default class ShippingRecipientComponent implements OnDestroy {
      */
     public mapAddressGroupSuggest(service:AddressService) {
         return (term:string) => {
-            return service.getFilteredAddressGroups(term);
+            return service.getFilteredAddressGroups(term, 0, 20);
         }
     }
 
@@ -177,11 +177,11 @@ export default class ShippingRecipientComponent implements OnDestroy {
      */
     public mapRecipientSuggest(service:AddressService) {
         return (term:string) => {
-            let groupName = '';
+            let groupId;
             if (this.addressGroup) {
-                groupName = this.addressGroup.GroupName;
+                groupId = this.addressGroup.Id;
             }
-            return service.getFilteredAddressesByAddressGroupName(groupName);
+            return service.getFilteredAddressesByAddressGroupAndAddressInfo(groupId, term, term, term, term, 0, 20);
         }
     }
 

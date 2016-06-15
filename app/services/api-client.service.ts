@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Http, Response, Headers, RequestOptions} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 
-import {ENVIRONMENT, API_BASE_URL, API_SUFFIX} from '../config';
+import {ENVIRONMENT, API_BASE_URL, API_SUFFIX, API_TIMEOUT} from '../config';
 import LoginService from "./login.service";
 
 /**
@@ -33,7 +33,7 @@ export default class APIClient {
             }
             return this.http
                 .get(API_BASE_URL + path + API_SUFFIX, opt)
-                .timeout(5000, new Error('API timeout'))
+                .timeout(API_TIMEOUT, new Error('API timeout'))
                 .map(APIClient.extractJson)
                 .catch(APIClient.handleError);
         } catch (e) {
@@ -59,7 +59,7 @@ export default class APIClient {
             }
             return this.http
                 .post(API_BASE_URL + path + API_SUFFIX, JSON.stringify(data), opt)
-                .timeout(5000, new Error('API timeout'))
+                .timeout(API_TIMEOUT, new Error('API timeout'))
                 .map(APIClient.extractJson)
                 .catch(APIClient.handleError);
         } catch (e) {
@@ -98,9 +98,7 @@ export default class APIClient {
      * @returns {ErrorObservable}
      */
     private static handleError(error:any) {
-        let errMsg = (error.message) ? error.message :
-            error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-        console.error(errMsg); // TODO replace with better logging
-        return Observable.throw(errMsg);
+        return Observable.throw((error.message) ? error.message :
+            error.status ? `${error.status} - ${error.statusText}` : error);
     }
 }

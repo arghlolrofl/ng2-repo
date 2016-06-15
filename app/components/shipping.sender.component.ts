@@ -135,7 +135,7 @@ export default class ShippingSenderComponent implements OnDestroy {
      */
     public mapSuggest(service:AddressService) {
         return (term:string) => {
-            return service.searchAddressesByAddressGroupName('Sender', term)
+            return service.getFilteredAddressesByAddressGroupNameAndAddressInfo('Sender', term, term, term, term, 0, 20)
         }
     }
 
