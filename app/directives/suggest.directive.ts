@@ -58,7 +58,8 @@ export class SuggestDirective implements OnInit {
             .debounceTime(400)
             .do(() => this.suggestions = [])
             .mergeMap(() => {
-                return this.mapper(el.nativeElement.value);
+                const term = el.nativeElement.value;
+                return (term.length > 1) ? this.mapper(el.nativeElement.value) : [];
             })
             .subscribe(
                 (item) => {
