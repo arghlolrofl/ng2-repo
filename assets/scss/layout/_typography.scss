@@ -79,3 +79,92 @@ i.icon-class {
   }
 }
 
+/* button
+/* ----------------------------- */
+.button {
+  border: 1px solid $icon-box-color;
+  position: relative;
+  border-radius: 2px;
+  transition: all $transitionFast $transitionTiming;
+  display: block;
+  float: left;
+  margin-left: 15px;
+  padding: 0 3px;
+  overflow: hidden;
+  text-align: center;
+  background: $icon-box-color;
+  color: $white;
+
+  span {
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 1.7rem;
+    line-height: 2.0rem;
+    width: 200px;
+    height: $input-height;
+  }
+
+  &:hover {
+    border: 1px solid $icon-box-hover-color;
+    text-decoration: none;
+    background: $icon-box-hover-color;
+  }
+
+  &.submit {
+    height: 71px;
+    width: 140px;
+    margin-left: 0;
+
+    @include desktop-large {
+      width: 180px;
+    }
+
+    @include tablet {
+      width: 200px;
+    }
+  }
+
+  &.color {
+    height: 71px;
+    width: 115px;
+
+    @include desktop-large {
+      width: 135px;
+    }
+
+    @include tablet {
+      width: 168px;
+    }
+  }
+
+  &.shortcut {
+    height: $input-height;
+    width: 60px;
+    background: $white;
+    color: $icon-box-color;
+
+    &:first-child {
+      margin-left: 40px;
+    }
+
+    span {
+      font-size: 1.2rem;
+      line-height: 1.4rem;
+    }
+
+    @include desktop-large {
+      width: 80px;
+    }
+
+    @include tablet {
+      width: 113px;
+    }
+
+    &:hover {
+      border: 1px solid $icon-box-hover-color;
+      color: $icon-box-hover-color;
+      text-decoration: none;
+      background: $white;
+    }
+  }
+}

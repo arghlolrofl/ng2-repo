@@ -2,7 +2,7 @@
   <h4><i class="icon-class icon-coins"></i>Cost Center</h4>
   <form [ngFormModel]="costCenterForm">
     <div class="row">
-      <div class="col-md-8 col-md-offset-1">
+      <div class="col-input">
         <div class="field-container text-field-search">
           <button class="search-submit">
             <span class="icon-search"></span>
@@ -22,17 +22,15 @@
 
       <div class="row autocomplete"
            [class.open]="costCenter1Suggestions.length > 0 && costCenterForm.controls['costCenter1'].value.length > 0">
-        <div class="col-md-12">
-          <ul>
-            <li *ngFor="let costCenter of costCenter1Suggestions"
-                (click)="selectCostCenter1(costCenter)">
-              {{modelFormatter.costCenterInfo(costCenter)}}
-            </li>
-          </ul>
-        </div>
+        <ul>
+          <li *ngFor="let costCenter of costCenter1Suggestions"
+              (click)="selectCostCenter1(costCenter)">
+            {{modelFormatter.costCenterInfo(costCenter)}}
+          </li>
+        </ul>
       </div>
 
-      <div class="col-md-3">
+      <div class="col-button">
         <div class="field-container box-icon">
           <button>
             <span class="icon-search"></span>
@@ -42,7 +40,7 @@
     </div>
 
     <div class="row">
-      <div class="col-md-8 col-md-offset-1">
+      <div class="col-input">
         <div class="field-container text-field-search">
           <button class="search-submit">
             <span class="icon-search"></span>
@@ -60,6 +58,7 @@
           </button>
         </div>
       </div>
+      <div class="col-button"></div>
     </div>
 
     <div class="row autocomplete"
@@ -75,7 +74,7 @@
     </div>
 
     <div class="row">
-      <div class="col-md-8 col-md-offset-1">
+      <div class="col-input">
         <div class="field-container text-field-search">
           <button class="search-submit">
             <span class="icon-search"></span>
@@ -93,6 +92,7 @@
           </button>
         </div>
       </div>
+      <div class="col-button"></div>
     </div>
 
     <div class="row autocomplete"

@@ -32,11 +32,10 @@ Sollen Bootstrap Elemente umgestylt werden, müssen die CSS Regeln in den "layou
 @import "layout/typography";
 @import "layout/template";
 @import "layout/header";
-@import "layout/footer";
-@import "layout/print";
 
 /* Components
 /* ----------------------------- */
 
 @import "components/main-menu";
 @import "components/form";
+@import "components/box";

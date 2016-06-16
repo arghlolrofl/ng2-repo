@@ -17,9 +17,8 @@ body {
 /* Grid
 /* ----------------------------- */
 
-.container-fluid {
+.container {
   max-width: $containerMaxWidth;
-  padding: 0;
   position: relative;
 }
 
@@ -38,4 +37,76 @@ main {
 
 .sectiontemplate {
   margin-bottom: 15px;
+
+  .row {
+    margin: 0;
+  }
+
+  .col-input-long,
+  .col-input {
+    float: left;
+    margin-left: 40px;
+    width: 305px;
+    height: $input-height;
+  }
+
+  .col-input-long {
+    width: 360px;
+  }
+
+  .col-button-small,
+  .col-button {
+    float: left;
+    width: 95px;
+    margin-left: 15px;
+    height: $input-height;
+  }
+
+  .col-button-small {
+    width: 40px;
+  }
+
+  @include desktop-large {
+    .col-input {
+      width: 405px;
+    }
+
+    .col-input-long {
+      width: 460px;
+    }
+  }
+
+  @include tablet {
+    .col-input {
+      width: 570px;
+    }
+
+    .col-input-long {
+      width: 625px;
+    }
+  }
+}
+
+.gray-line {
+  &:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    background: $brand-gray-1;
+  }
+
+  @include tablet {
+    border-bottom: 1px solid $brand-gray-1;
+    margin-bottom: 25px;
+
+    &:after {
+      content:'';
+      width: 0;
+      height: 0;
+      background: none;
+    }
+  }
 }

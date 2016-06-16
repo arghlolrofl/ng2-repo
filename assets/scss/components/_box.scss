@@ -1,0 +1,221 @@
+/* Box Icon
+/* ----------------------------- */
+
+.box-icon {
+  float: left;
+
+  & + .box-icon {
+    margin-left: 15px;
+  }
+
+  button {
+    border: 1px solid $icon-box-color;
+    font-size: 1.7rem;
+    line-height: $input-line-height;
+    background: $white;
+    width: $button-width;
+    height: $button-height;
+    position: relative;
+    border-radius: 2px;
+    transition: border $transitionFast $transitionTiming;
+
+    [class^="icon-"]::before,
+    [class*="icon-"]::before {
+      position: absolute;
+      top: 0;
+      left: 10px;
+      color: $icon-box-color;
+      line-height: $button-line-height;
+      font-size: 1.7rem;
+      padding: 0;
+      margin: 0;
+      transition: color $transitionFast $transitionTiming;
+    }
+
+    &:hover {
+      border: 1px solid $icon-box-hover-color;
+
+      [class^="icon-"]::before,
+      [class*="icon-"]::before {
+        color: $icon-box-hover-color;
+      }
+    }
+  }
+}
+
+.box-info {
+  background: $white;
+  margin-left: 40px;
+  padding: 10px;
+  width: 285px;
+  float: left;
+
+  span {
+    font-size: 1.7rem;
+    line-height: 2.0rem;
+  }
+
+  hr {
+    margin: 5px 0;
+  }
+
+  @include desktop-large {
+    width: 365px;
+  }
+
+  @include tablet {
+    width: 497px;
+  }
+}
+
+.box-package {
+  background: $white;
+  margin-left: 40px;
+  padding: 10px;
+  width: 412px;
+  float: left;
+  position: relative;
+
+  span {
+    font-size: 1.7rem;
+    line-height: 2.0rem;
+    display: block;
+
+    &.price {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+  }
+
+  @include desktop-large {
+    width: 515px;
+  }
+
+  @include tablet {
+    width: 497px;
+  }
+}
+
+.box-summery {
+  background: $white;
+  margin-left: 40px;
+  padding: 10px;
+  width: 260px;
+  float: left;
+  position: relative;
+
+  table {
+    font-size: 1.7rem;
+    line-height: 2.0rem;
+
+    tr {
+      td {
+        width: 140px;
+        padding: 2px 0;
+
+        &:nth-child(2) {
+          text-align: right;
+          width: 100px;
+        }
+      }
+
+      &:last-child {
+        td {
+          padding-top: 10px;
+          border-top: 1px solid $brand-gray-2;
+          font-weight: 700;
+        }
+      }
+    }
+  }
+
+  @include tablet {
+    width: 410px;
+
+    table tr td {
+      width: 310px;
+
+      &:nth-child(2) {
+        width: 100px;
+      }
+    }
+  }
+}
+
+.summery-container {
+  float: left;
+  width: 300px;
+
+  @include tablet {
+    width: 450px;
+  }
+}
+
+.submit-container {
+  float: left;
+  width: 140px;
+  margin-left: 15px;
+
+  @include desktop-large {
+    width: 180px;
+    margin-left: 75px;
+  }
+
+  @include tablet {
+    width: 200px;
+    margin-left: 70px;
+  }
+}
+
+.box-lights {
+  height: 30px;
+  margin: 33px 0 15px;
+  padding-left: 35px;
+
+  @include desktop-large {
+    margin: 33px 0 15px;
+    padding-left: 75px;
+  }
+
+  @include tablet {
+    margin: 33px 0 15px;
+    padding-left: 95px;
+  }
+
+  i.icon-class:before {
+    padding-right: 0;
+  }
+
+  .color {
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    float: left;
+    margin: 5px 10px 5px 0;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.50) inset;
+    background: $lights-disabled;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .red {
+    &.active {
+      background: $lights-red;
+    }
+  }
+
+  .yellow {
+    &.active {
+      background: $lights-yellow;
+    }
+  }
+
+  .green {
+    &.active {
+      background: $lights-green;
+    }
+  }
+}

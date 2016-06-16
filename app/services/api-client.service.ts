@@ -95,14 +95,13 @@ export default class APIClient {
 
     /**
      * Handles an error and passes it to the observable.
-     * @param error The error to get catched
+     * @param error The error to get catch
      * @returns {ErrorObservable}
      */
     private handleError(error:any) {
         if (error.status === 405) {
-            return this.loginService.loggedOut();
-        } else {
-            return Observable.throw(error);
+            this.loginService.loggedOut();
         }
+        return Observable.throw(error);
     }
 }

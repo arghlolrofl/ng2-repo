@@ -1,20 +1,22 @@
 <div class="row">
-  <div class="col-md-6">
-    <fp-shipping-sender (onError)="error($event)"
+  <div class="col-md-6 gray-line">
+    <fp-shipping-sender (onError)="handleError($event)"
                         [(sender)]="sender"
                         [(shippingPoint)]="shippingPoint"></fp-shipping-sender>
 
-    <fp-shipping-recipient (onError)="error($event)"
+    <fp-shipping-recipient (onError)="handleError($event)"
                            [(recipient)]="recipient"></fp-shipping-recipient>
 
-    <fp-shipping-cost-center (onError)="error($event)"
+    <fp-shipping-cost-center (onError)="handleError($event)"
                              [(costCenter1)]="costCenter1"></fp-shipping-cost-center>
 
-    <fp-shipping-additional-information (onError)="error($event)"></fp-shipping-additional-information>
+    <fp-shipping-additional-information (onError)="handleError($event)"></fp-shipping-additional-information>
 
   </div>
 
   <div class="col-md-6">
-    <fp-shipping-product-calculation (onError)="error($event)"></fp-shipping-product-calculation>
+    <fp-shipping-product-calculation (onError)="handleError($event)"></fp-shipping-product-calculation>
+
+    <fp-shipping-options (onError)="handleError($event)"></fp-shipping-options>
   </div>
 </div>

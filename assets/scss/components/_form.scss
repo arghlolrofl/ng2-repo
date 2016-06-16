@@ -9,84 +9,54 @@ input[type="number"],
 input[type="search"] {
   width: 100%;
   outline: none;
-  height: 40px;
+  height: $input-height;
   border: 1px solid $brand-gray-1;
   font-size: 1.7rem;
-  line-height: 4.0rem;
+  line-height: $input-line-height;
   color: $brand-gray-2;
   padding: 0 40px 0 10px;
   background: $white;
 }
 
-/* Box Icon
+/* small-input fields
 /* ----------------------------- */
+.small-input {
+  .text-field {
+    width: 30%;
+    float: left;
+    margin-right: 18px;
 
-.box-icon {
-  float: left;
-
-  & + .box-icon {
-    margin-left: 15px;
-  }
-
-  button {
-    border: 1px solid $icon-box-color;
-    font-size: 1.7rem;
-    line-height: 3.8rem;
-    background: $white;
-    height: 40px;
-    width: 40px;
-    position: relative;
-    border-radius: 2px;
-    transition: all $transitionFast $transitionTiming;
-
-    [class^="icon-"]::before,
-    [class*="icon-"]::before {
-      position: absolute;
-      top: 0;
-      left: 10px;
-      color: $icon-box-color;
-      line-height: 3.8rem;
-      font-size: 1.7rem;
-      padding: 0;
+    &:last-child {
       margin: 0;
-      transition: all $transitionFast $transitionTiming;
     }
+  }
 
-    &:hover {
-      border: 1px solid $icon-box-hover-color;
+  @include desktop-large {
+    .text-field {
+      margin-right: 20px;
+    }
+  }
 
-      [class^="icon-"]::before,
-      [class*="icon-"]::before {
-        color: $icon-box-hover-color;
-      }
+  @include tablet {
+    .text-field {
+      width: 31%;
+      margin-right: 15px;
     }
   }
 }
 
-/* Search field
-/* ----------------------------- */
-label {
-  height: 40px;
-  font-size: 1.7rem;
-  line-height: 4.0rem;
-
-  .icon-class {
-    &:before {
-      line-height: 4.0rem;
-    }
-  }
-}
-
-/* Search field
+/* field
 /* ----------------------------- */
 .text-field {
   margin: 0;
   position: relative;
+  width: 100%;
 }
 
 .text-field-search {
   margin: 0;
   position: relative;
+  width: 100%;
 
   input[type="text"],
   input[type="password"],
@@ -105,12 +75,12 @@ label {
   background: none;
   border: none;
   padding: 0;
-  height: 40px;
+  height: $input-height;
 
   [class^="icon-"]::before,
   [class*=" icon-"]::before {
     color: $brand-gray-2;
-    line-height: 4.0rem;
+    line-height: $input-line-height;
     font-size: 1.7rem;
     padding: 0;
     margin: 0;
@@ -124,39 +94,53 @@ label {
   background: none;
   border: none;
   padding: 0;
-  height: 40px;
+  height: $input-height;
 
   [class^="icon-"]::before,
   [class*=" icon-"]::before {
     color: $brand-alert;
-    line-height: 4.0rem;
+    line-height: $input-line-height;
     font-size: 1.7rem;
     padding: 0;
     margin: 0;
   }
 }
 
-@include tablet {
-  .search-field {
-    margin: 0;
 
-    input {
-      display: none;
+/* labeling
+/* ----------------------------- */
+label {
+  height: $input-height;
+  font-size: 1.7rem;
+  line-height: $input-line-height;
+  float: left;
+  width: 150px;
+
+  .icon-class {
+    &:before {
+      font-size: 1.8rem;
+      padding-right: 0;
     }
   }
 
-  .search-submit {
-    position: relative;
-    top: auto;
-    right: auto;
+  & + .text-field-search,
+  & + .text-field {
+    width: 140px;
+    margin-left: 15px;
+    float: left;
+  }
 
-    [class^="icon-"]::before,
-    [class*=" icon-"]::before {
-      color: $brand-primary;
-      line-height: 3.1rem;
-      font-size: 1.4rem;
-      padding: 0;
-      margin: 0;
+  @include desktop-large {
+    & + .text-field-search,
+    & + .text-field {
+      width: 240px;
+    }
+  }
+
+  @include tablet {
+    & + .text-field-search,
+    & + .text-field {
+      width: 405px;
     }
   }
 }
@@ -172,13 +156,13 @@ label {
 
   ul {
     background: $brand-gray-1;
-    margin: 0 15px;
     padding: 0 15px;
     width: 100%;
 
     li {
       text-align: left;
       height: 30px;
+      font-size: 1.7rem;
       line-height: 3.0rem;
       border-bottom: 1px solid $brand-gray-2;
 
