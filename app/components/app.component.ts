@@ -68,11 +68,15 @@ export default class AppComponent implements OnInit {
         this.router.navigate(['Shipping']); // TODO should be replaced with dashboard for go live
     }
 
+    public onError(error:Error) {
+        console.warn(error);
+    }
+
     /**
      * Binds all events.
      */
     private bindEvents() {
-        this.loginService.loginChanged.subscribe((data) => {
+        this.loginService.loginChange.subscribe((data) => {
             this.loggedIn = data.loggedIn;
         });
     }

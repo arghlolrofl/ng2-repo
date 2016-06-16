@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Output, EventEmitter} from '@angular/core';
 import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
 import ShippingSenderComponent from "./shipping.sender.component";
@@ -56,9 +56,10 @@ export default class ShippingComponent {
 
     /**
      * Handle errors.
-     * @param {Error} error the error
+     * @param {any} error the error
      */
-    public onError(error:Error) {
-        console.warn(error);
+    public error(error:any) {
+        console.warn((error.message) ? error.message :
+            error.status ? `${error.status} - ${error.statusText}` : error);
     }
 }

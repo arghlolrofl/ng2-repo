@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/Observable';
 
 import {ENVIRONMENT, API_BASE_URL, API_SUFFIX, API_TIMEOUT} from '../config';
 import LoginService from "./login.service";
+import {logInfo} from "typings/dist/support/cli";
 
 /**
  * API Client Wrapper.
@@ -35,7 +36,7 @@ export default class APIClient {
                 .get(API_BASE_URL + path + API_SUFFIX, opt)
                 .timeout(API_TIMEOUT, new Error('API timeout'))
                 .map(APIClient.extractJson)
-                .catch(APIClient.handleError);
+                .catch(this.handleError);
         } catch (e) {
             return Observable.throw(e);
         }
@@ -61,7 +62,7 @@ export default class APIClient {
                 .post(API_BASE_URL + path + API_SUFFIX, JSON.stringify(data), opt)
                 .timeout(API_TIMEOUT, new Error('API timeout'))
                 .map(APIClient.extractJson)
-                .catch(APIClient.handleError);
+                .catch(this.handleError);
         } catch (e) {
             return Observable.throw(e);
         }
@@ -97,8 +98,11 @@ export default class APIClient {
      * @param error The error to get catched
      * @returns {ErrorObservable}
      */
-    private static handleError(error:any) {
-        return Observable.throw((error.message) ? error.message :
-            error.status ? `${error.status} - ${error.statusText}` : error);
+    private handleError(error:any) {
+        if (error.status === 405) {
+            return this.loginService.loggedOut();
+        } else {
+            return Observable.throw(error);
+        }
     }
 }
