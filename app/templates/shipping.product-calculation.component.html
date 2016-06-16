@@ -1,8 +1,8 @@
-<section class="product-calculation">
-  <h4>Product Calculation</h4>
+<section class="sectiontemplate">
+  <h4><i class="icon-class icon-tool"></i>Product Calculation</h4>
   <form [ngFormModel]="productCalculationForm" (ngSubmit)="recalculateProduct()">
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-input-long small-input">
         <div class="field-container text-field">
           <input type="text"
                  placeholder="weight"
@@ -16,7 +16,7 @@
         </div>
       </div>
 
-      <div class="col-md-1">
+      <div class="col-button-small">
         <div class="field-container box-icon">
           <button>
             <span class="icon-weight"></span>
@@ -26,7 +26,7 @@
     </div>
 
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-input-long small-input">
         <div class="field-container text-field">
           <input type="text"
                  placeholder="length"
@@ -38,8 +38,7 @@
             <span class="icon-close"></span>
           </button>
         </div>
-      </div>
-      <div class="col-md-3">
+
         <div class="field-container text-field">
           <input type="text"
                  placeholder="width"
@@ -51,8 +50,7 @@
             <span class="icon-close"></span>
           </button>
         </div>
-      </div>
-      <div class="col-md-3">
+
         <div class="field-container text-field">
           <input type="text"
                  placeholder="height"
@@ -65,7 +63,7 @@
           </button>
         </div>
       </div>
-      <div class="col-md-1">
+      <div class="col-button-small">
         <div class="field-container box-icon">
           <button type="submit" [disabled]="!productCalculationForm.valid">
             <span class="icon-interface"></span>
@@ -73,5 +71,51 @@
         </div>
       </div>
     </div>
+
+    <div class="row">
+      <a href="#" class="button shortcut">
+        <span>shortcut 1*</span>
+      </a>
+      <a href="#" class="button shortcut">
+        <span>shortcut 2*</span>
+      </a>
+      <a href="#" class="button shortcut">
+        <span>shortcut 3*</span>
+      </a>
+      <a href="#" class="button shortcut">
+        <span>shortcut 4*</span>
+      </a>
+
+      <div class="col-button-small">
+        <div class="field-container box-icon">
+          <button>
+            <span class="icon-search"></span>
+          </button>
+        </div>
+      </div>
+      <a href="#" class="button shortcut">
+        <span>last rate*</span>
+      </a>
+    </div>
+
+    <div class="row">
+      <div class="field-container box-info">
+        <span>Parcel	Weight / Dimensions*</span>
+        <hr>
+        <span>1000G	10cm x 10 cm x 10cm*</span>
+      </div>
+
+      <button href="#" class="button color">
+        <span>calculate*</span>
+      </button>
+    </div>
+
+    <div class="row">
+      <div class="field-container box-package">
+        <span>XpresspostTM*</span><span class="price">$ 22.49*</span>
+        <span>2 bussiness days (Guaranteed)*</span>
+      </div>
+    </div>
+
   </form>
 </section>

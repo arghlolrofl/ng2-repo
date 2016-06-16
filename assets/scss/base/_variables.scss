@@ -14,6 +14,12 @@ $brand-text-hover: $brand-primary;
 $icon-box-color: $brand-secondary;
 $icon-box-hover-color: darken($brand-secondary, 15%);
 
+//lights
+$lights-red: #c50000;
+$lights-yellow: #e9dc07;
+$lights-green: #057c29;
+$lights-disabled: #f4c7cb;
+
 
 // Styleguide
 $sg-gray: #ddd;
@@ -48,7 +54,12 @@ $transitionTiming: ease-out;
 $transitionFast: .3s;
 $transitionSlow: .8s;
 
-/* Grid
+
+/* inputs
 /* ----------------------------- */
 
-$grid-gutter-width: 15px !default;
+$input-height: 40px;
+$input-line-height: 4.0rem;
+$button-height: $input-height;
+$button-width: $input-height;
+$button-line-height: ($input-line-height - 0.2rem);

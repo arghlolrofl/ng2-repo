@@ -5,13 +5,11 @@
   width: 100%;
   min-width: $bodyMinWidth;
   background: $white;
-  z-index: 99;
   transition: box-shadow $transitionFast $transitionTiming;
   box-shadow: $boxShadowDefault;
+  padding-top: 20px;
 
-  .container-fluid {
-    max-width: ($containerMaxWidth + 60);
-    padding: 30px 30px 20px;
+  .container {
     transition: padding ($transitionFast / 2) $transitionTiming;
   }
 

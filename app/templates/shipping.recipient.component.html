@@ -2,7 +2,7 @@
   <h4><i class="icon-class icon-mailbox"></i>Recipient</h4>
   <form [ngFormModel]="recipientsForm">
     <div class="row">
-      <div class="col-md-8 col-md-offset-1">
+      <div class="col-input">
         <div class="field-container text-field-search">
           <button class="search-submit">
             <span class="icon-search"></span>
@@ -19,21 +19,20 @@
           </button>
         </div>
         <div class="row autocomplete"
-             [class.open]="addressGroupSuggestions.length > 0 && recipientsForm.controls['addressGroup'].value.length > 0">
-          <div class="col-md-12">
-            <ul>
-              <li *ngFor="let addressGroup of addressGroupSuggestions"
-                  (click)="selectAddressGroup(addressGroup)">
-                {{modelFormatter.addressGroupInfo(addressGroup)}}
-              </li>
-            </ul>
-          </div>
+           [class.open]="addressGroupSuggestions.length > 0 && recipientsForm.controls['addressGroup'].value.length > 0">
+          <ul>
+            <li *ngFor="let addressGroup of addressGroupSuggestions"
+                (click)="selectAddressGroup(addressGroup)">
+              {{modelFormatter.addressGroupInfo(addressGroup)}}
+            </li>
+          </ul>
         </div>
       </div>
+      <div class="col-button"></div>
     </div>
 
     <div class="row">
-      <div class="col-md-8 col-md-offset-1">
+      <div class="col-input">
         <div class="field-container text-field-search">
           <button class="search-submit">
             <span class="icon-search"></span>
@@ -62,7 +61,7 @@
         </div>
       </div>
 
-      <div class="col-md-3">
+      <div class="col-button">
         <div class="field-container box-icon">
           <button>
             <span class="icon-search"></span>

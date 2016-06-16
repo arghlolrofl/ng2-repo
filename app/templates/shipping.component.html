@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-6 gray-line">
     <fp-shipping-sender (onError)="onError($event)"
                         [(sender)]="sender"
                         [(shippingPoint)]="shippingPoint"></fp-shipping-sender>
@@ -16,5 +16,7 @@
 
   <div class="col-md-6">
     <fp-shipping-product-calculation (onError)="onError($event)"></fp-shipping-product-calculation>
+
+    <fp-shipping-options (onError)="onError($event)"></fp-shipping-options>
   </div>
 </div>

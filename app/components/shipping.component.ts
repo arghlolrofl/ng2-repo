@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
 import ShippingSenderComponent from "./shipping.sender.component";
+import ShippingOptionsComponent from "./shipping.options.component";
 import ShippingProductCalculationComponent from "./shipping.product-calculation.component";
 import AddressDisplayInfo from "../models/address-display-info";
 import ShippingRecipientComponent from "./shipping.recipient.component";
@@ -17,7 +18,8 @@ import CostCenterInfo from "../models/cost-center-info";
         ShippingRecipientComponent,
         ShippingCostCenterComponent,
         ShippingAdditionalInformationComponent,
-        ShippingProductCalculationComponent
+        ShippingProductCalculationComponent,
+        ShippingOptionsComponent
     ],
     pipes: [
         TranslatePipe
