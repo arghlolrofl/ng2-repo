@@ -4,7 +4,6 @@ import {Observable} from 'rxjs/Observable';
 
 import {ENVIRONMENT, API_BASE_URL, API_SUFFIX, API_TIMEOUT} from '../config';
 import LoginService from "./login.service";
-import {logInfo} from "typings/dist/support/cli";
 
 /**
  * API Client Wrapper.

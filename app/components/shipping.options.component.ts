@@ -12,4 +12,6 @@ import {TranslatePipe} from 'ng2-translate/ng2-translate';
 /**
  * Shipping options component.
  */
-export default class ShippingOptionsComponent {}
+export default class ShippingOptionsComponent {
+    
+}

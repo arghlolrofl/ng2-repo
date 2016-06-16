@@ -18,16 +18,15 @@
             <span class="icon-close"></span>
           </button>
         </div>
-      </div>
-
-      <div class="row autocomplete"
-           [class.open]="costCenter1Suggestions.length > 0 && costCenterForm.controls['costCenter1'].value.length > 0">
-        <ul>
-          <li *ngFor="let costCenter of costCenter1Suggestions"
-              (click)="selectCostCenter1(costCenter)">
-            {{modelFormatter.costCenterInfo(costCenter)}}
-          </li>
-        </ul>
+        <div class="row autocomplete"
+             [class.open]="costCenter1Suggestions.length > 0 && costCenterForm.controls['costCenter1'].value.length > 0">
+          <ul>
+            <li *ngFor="let costCenter of costCenter1Suggestions"
+                (click)="selectCostCenter1(costCenter)">
+              {{modelFormatter.costCenterInfo(costCenter)}}
+            </li>
+          </ul>
+        </div>
       </div>
 
       <div class="col-button">
@@ -57,20 +56,18 @@
             <span class="icon-close"></span>
           </button>
         </div>
+
+        <div class="row autocomplete"
+             [class.open]="costCenter2Suggestions.length > 0 && costCenterForm.controls['costCenter2'].value.length > 0">
+          <ul>
+            <li *ngFor="let costCenter of costCenter2Suggestions"
+                (click)="selectCostCenter2(costCenter)">
+              {{modelFormatter.costCenterInfo(costCenter)}}
+            </li>
+          </ul>
+        </div>
       </div>
       <div class="col-button"></div>
-    </div>
-
-    <div class="row autocomplete"
-         [class.open]="costCenter2Suggestions.length > 0 && costCenterForm.controls['costCenter2'].value.length > 0">
-      <div class="col-md-12">
-        <ul>
-          <li *ngFor="let costCenter of costCenter2Suggestions"
-              (click)="selectCostCenter2(costCenter)">
-            {{modelFormatter.costCenterInfo(costCenter)}}
-          </li>
-        </ul>
-      </div>
     </div>
 
     <div class="row">
@@ -91,20 +88,17 @@
             <span class="icon-close"></span>
           </button>
         </div>
+        <div class="row autocomplete"
+             [class.open]="costCenter3Suggestions.length > 0 && costCenterForm.controls['costCenter3'].value.length > 0">
+          <ul>
+            <li *ngFor="let costCenter of costCenter3Suggestions"
+                (click)="selectCostCenter3(costCenter)">
+              {{modelFormatter.costCenterInfo(costCenter)}}
+            </li>
+          </ul>
+        </div>
       </div>
       <div class="col-button"></div>
-    </div>
-
-    <div class="row autocomplete"
-         [class.open]="costCenter3Suggestions.length > 0 && costCenterForm.controls['costCenter3'].value.length > 0">
-      <div class="col-md-12">
-        <ul>
-          <li *ngFor="let costCenter of costCenter3Suggestions"
-              (click)="selectCostCenter3(costCenter)">
-            {{modelFormatter.costCenterInfo(costCenter)}}
-          </li>
-        </ul>
-      </div>
     </div>
   </form>
 </section>
