@@ -61,6 +61,7 @@ export class SuggestDirective implements OnInit {
                 const term = el.nativeElement.value;
                 return (term.length > 1) ? this.mapper(el.nativeElement.value) : [];
             })
+            .retry()
             .subscribe(
                 (item) => {
                     this.suggestions.push(item);

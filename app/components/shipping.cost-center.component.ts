@@ -1,6 +1,7 @@
 import {Component, Output, EventEmitter} from '@angular/core';
 import {TranslatePipe} from 'ng2-translate/ng2-translate';
 import {FormBuilder, ControlGroup, Control} from "@angular/common";
+import {Observable} from "rxjs/Observable";
 
 import {SuggestDirective, SuggestEvents} from "../directives/suggest.directive";
 import ModelFormatter from "../services/model-formatter.service";
@@ -63,6 +64,28 @@ export default class ShippingCostCenterComponent {
     private costCenter1Suggestions:CostCenterInfo[];
 
     /**
+     * Cost Center 2 events.
+     * @type {EventEmitter<any>}
+     */
+    private costCenter2Events:EventEmitter<any> = new EventEmitter<any>();
+
+    /**
+     * Cost Center 2 suggestions.
+     */
+    private costCenter2Suggestions:CostCenterInfo[];
+
+    /**
+     * Cost Center 3 events.
+     * @type {EventEmitter<any>}
+     */
+    private costCenter3Events:EventEmitter<any> = new EventEmitter<any>();
+
+    /**
+     * Cost Center 2 suggestions.
+     */
+    private costCenter3Suggestions:CostCenterInfo[];
+
+    /**
      * @constructor
      * @param {ModelFormatter} modelFormatter the model formatting service
      * @param {AddressService} costCenterService the cost center information service
@@ -72,8 +95,12 @@ export default class ShippingCostCenterComponent {
                 private costCenterService:CostCenterService,
                 private formBuilder:FormBuilder) {
         this.costCenter1Suggestions = [];
+        this.costCenter2Suggestions = [];
+        this.costCenter3Suggestions = [];
         this.costCenterForm = formBuilder.group({
-            'costCenter1': ['']
+            'costCenter1': [''],
+            'costCenter2': [''],
+            'costCenter3': ['']
         });
 
         this.bindEvents();
@@ -84,6 +111,8 @@ export default class ShippingCostCenterComponent {
      */
     private bindEvents() {
         const costCenter1Control = <Control> this.costCenterForm.controls['costCenter1'];
+        const costCenter2Control = <Control> this.costCenterForm.controls['costCenter2'];
+        const costCenter3Control = <Control> this.costCenterForm.controls['costCenter3'];
 
         this.costCenter1Events.subscribe((event) => {
             switch (event.type) {
@@ -111,6 +140,58 @@ export default class ShippingCostCenterComponent {
                     break;
             }
         });
+
+        this.costCenter2Events.subscribe((event) => {
+            switch (event.type) {
+                case SuggestEvents.ERROR:
+                    this.onError.emit(event.data);
+                    break;
+
+                case SuggestEvents.CHANGED:
+                    this.costCenter2Suggestions = event.data;
+                    break;
+
+                case SuggestEvents.SELECTED:
+                    // TODO this.costCenter2Change.emit(this.costCenter2);
+                    costCenter2Control.updateValue(this.modelFormatter.costCenterInfo(event.data));
+                    break;
+
+                case SuggestEvents.CLEARED:
+                    // TODO this.costCenter2Change.emit(null);
+                    costCenter2Control.updateValue('');
+                    break;
+
+                case SuggestEvents.SHOW:
+                    costCenter2Control.updateValue(this.modelFormatter.costCenterInfo(event.data), {emitEvent: false});
+                    break;
+            }
+        });
+
+        this.costCenter3Events.subscribe((event) => {
+            switch (event.type) {
+                case SuggestEvents.ERROR:
+                    this.onError.emit(event.data);
+                    break;
+
+                case SuggestEvents.CHANGED:
+                    this.costCenter3Suggestions = event.data;
+                    break;
+
+                case SuggestEvents.SELECTED:
+                    // TODO this.costCenter3Change.emit(this.costCenter3);
+                    costCenter3Control.updateValue(this.modelFormatter.costCenterInfo(event.data));
+                    break;
+
+                case SuggestEvents.CLEARED:
+                    // TODO this.costCenter2Change.emit(null);
+                    costCenter3Control.updateValue('');
+                    break;
+
+                case SuggestEvents.SHOW:
+                    costCenter3Control.updateValue(this.modelFormatter.costCenterInfo(event.data), {emitEvent: false});
+                    break;
+            }
+        });
     }
 
     /**
@@ -133,6 +214,46 @@ export default class ShippingCostCenterComponent {
 
     public clearCostCenter1() {
         this.costCenter1Events.emit({
+            type: SuggestEvents.CLEARED
+        });
+    }
+
+    /**
+     * Map Cost Center API call.
+     * @param {CostCenterService} costCenterService the cost center to be wrapped
+     * @returns {function(string): Observable<CostCenterInfo>}
+     */
+    public mapCostCenter23(costCenterService:CostCenterService) {
+        return (term:string) => {
+            return Observable.merge(
+                costCenterService.getFilteredCostCenterByLevelAndName(2, term),
+                costCenterService.getFilteredCostCenterByLevelAndName(3, term)
+            );
+        }
+    }
+
+    public selectCostCenter2(costCenter:CostCenterInfo) {
+        this.costCenter2Events.emit({
+            type: SuggestEvents.SELECTED,
+            data: costCenter
+        });
+    }
+
+    public clearCostCenter2() {
+        this.costCenter2Events.emit({
+            type: SuggestEvents.CLEARED
+        });
+    }
+
+    public selectCostCenter3(costCenter:CostCenterInfo) {
+        this.costCenter3Events.emit({
+            type: SuggestEvents.SELECTED,
+            data: costCenter
+        });
+    }
+
+    public clearCostCenter3() {
+        this.costCenter3Events.emit({
             type: SuggestEvents.CLEARED
         });
     }

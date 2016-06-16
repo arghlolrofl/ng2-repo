@@ -49,12 +49,28 @@
           </button>
           <input type="text"
                  tabindex="6"
-                 placeholder="text-placeholder"
-                 [disabled]="!costCenter1">
-          <button class="clear-submit">
+                 placeholder="cost-center level 2 or 3"
+                 [disabled]="!costCenter1"
+                 ngControl="costCenter2"
+                 [fpSuggest]="mapCostCenter23(costCenterService)"
+                 [fpSuggestEvents]="costCenter2Events">
+          <button class="clear-submit"
+                  (click)="clearCostCenter2()">
             <span class="icon-close"></span>
           </button>
         </div>
+      </div>
+    </div>
+
+    <div class="row autocomplete"
+         [class.open]="costCenter2Suggestions.length > 0 && costCenterForm.controls['costCenter2'].value.length > 0">
+      <div class="col-md-12">
+        <ul>
+          <li *ngFor="let costCenter of costCenter2Suggestions"
+              (click)="selectCostCenter2(costCenter)">
+            {{modelFormatter.costCenterInfo(costCenter)}}
+          </li>
+        </ul>
       </div>
     </div>
 
@@ -66,12 +82,28 @@
           </button>
           <input type="text"
                  tabindex="7"
-                 placeholder="text-placeholder"
-                 [disabled]="!costCenter1">
-          <button class="clear-submit">
+                 placeholder="cost-center level 2 or 3"
+                 [disabled]="!costCenter1"
+                 ngControl="costCenter3"
+                 [fpSuggest]="mapCostCenter23(costCenterService)"
+                 [fpSuggestEvents]="costCenter3Events">
+          <button class="clear-submit"
+                  (click)="clearCostCenter3()">
             <span class="icon-close"></span>
           </button>
         </div>
+      </div>
+    </div>
+
+    <div class="row autocomplete"
+         [class.open]="costCenter3Suggestions.length > 0 && costCenterForm.controls['costCenter3'].value.length > 0">
+      <div class="col-md-12">
+        <ul>
+          <li *ngFor="let costCenter of costCenter3Suggestions"
+              (click)="selectCostCenter3(costCenter)">
+            {{modelFormatter.costCenterInfo(costCenter)}}
+          </li>
+        </ul>
       </div>
     </div>
   </form>
