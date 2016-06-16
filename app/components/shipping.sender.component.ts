@@ -39,25 +39,20 @@ export default class ShippingSenderComponent implements OnDestroy {
      * @type {EventEmitter<AddressDisplayInfo>}
      */
     @Output()
-    public onSenderSelect:EventEmitter<AddressDisplayInfo> = new EventEmitter<AddressDisplayInfo>();
+    public senderChange:EventEmitter<AddressDisplayInfo> = new EventEmitter<AddressDisplayInfo>();
 
     /**
      * Updated when shipping point has changed.
      * @type {EventEmitter<string>}
      */
     @Output()
-    public onShippingPointSelect:EventEmitter<string> = new EventEmitter<string>();
+    public shippingPointChange:EventEmitter<string> = new EventEmitter<string>();
 
     /**
      * The sender suggest events.
      * @type {EventEmitter<any>}
      */
     public senderEvents:EventEmitter<any> = new EventEmitter<any>();
-
-    /**
-     * The actual selected sender.
-     */
-    private sender:AddressDisplayInfo;
 
     /**
      * Sender suggestions (autocomplete) to display.
@@ -106,12 +101,13 @@ export default class ShippingSenderComponent implements OnDestroy {
                     break;
 
                 case SuggestEvents.SELECTED:
-                    this.sender = event.data;
-                    senderControl.updateValue(this.modelFormatter.addressDisplayInfo(this.sender));
-                    shippingPointControl.updateValue(this.sender.ZipCode);
+                    this.senderChange.emit(event.data);
+                    senderControl.updateValue(this.modelFormatter.addressDisplayInfo(event.data));
+                    shippingPointControl.updateValue(event.data.ZipCode);
                     break;
 
                 case SuggestEvents.CLEARED:
+                    this.senderChange.emit(null);
                     senderControl.updateValue('');
                     shippingPointControl.updateValue('');
                     break;
@@ -124,7 +120,7 @@ export default class ShippingSenderComponent implements OnDestroy {
 
         this.sendersForm.controls['shippingPoint'].valueChanges
             .subscribe(
-                (shippingPoint:string) => this.onShippingPointSelect.emit(shippingPoint),
+                (shippingPoint:string) => this.shippingPointChange.emit(shippingPoint),
                 (error) => this.onError.emit(error));
     }
 
@@ -135,7 +131,7 @@ export default class ShippingSenderComponent implements OnDestroy {
      */
     public mapSuggest(service:AddressService) {
         return (term:string) => {
-            return service.getFilteredAddressesByAddressGroupNameAndAddressInfo('Sender', term, term, term, term, 0, 20)
+            return service.getFilteredAddressesByAddressGroupNameAndAddressInfo('Sender', term, '', '', '', 0, 20)
         }
     }
 

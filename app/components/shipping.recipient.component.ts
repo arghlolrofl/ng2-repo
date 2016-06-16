@@ -40,7 +40,7 @@ export default class ShippingRecipientComponent implements OnDestroy {
      * @type {EventEmitter<AddressDisplayInfo>}
      */
     @Output()
-    public onRecipientSelect:EventEmitter<AddressDisplayInfo> = new EventEmitter<AddressDisplayInfo>();
+    public recipientChange:EventEmitter<AddressDisplayInfo> = new EventEmitter<AddressDisplayInfo>();
 
     /**
      * The address group events.
@@ -63,11 +63,6 @@ export default class ShippingRecipientComponent implements OnDestroy {
      * @type {EventEmitter<any>}
      */
     public recipientEvents:EventEmitter<any> = new EventEmitter<any>();
-
-    /**
-     * The actual selected recipient.
-     */
-    private recipient:AddressDisplayInfo;
 
     /**
      * Recipient suggestions (autocomplete) to display.
@@ -144,11 +139,12 @@ export default class ShippingRecipientComponent implements OnDestroy {
                     break;
 
                 case SuggestEvents.SELECTED:
-                    this.recipient = event.data;
-                    recipientControl.updateValue(this.modelFormatter.addressDisplayInfo(this.recipient));
+                    this.recipientChange.emit(event.data);
+                    recipientControl.updateValue(this.modelFormatter.addressDisplayInfo(event.data));
                     break;
 
                 case SuggestEvents.CLEARED:
+                    this.recipientChange.emit(null);
                     recipientControl.updateValue('');
                     break;
 
@@ -166,7 +162,7 @@ export default class ShippingRecipientComponent implements OnDestroy {
      */
     public mapAddressGroupSuggest(service:AddressService) {
         return (term:string) => {
-            return service.getFilteredAddressGroups(term, 0, 20);
+            return service.getFilteredAddressGroupsWithout(term, 'Sender', 0, 20);
         }
     }
 
@@ -181,7 +177,7 @@ export default class ShippingRecipientComponent implements OnDestroy {
             if (this.addressGroup) {
                 groupId = this.addressGroup.Id;
             }
-            return service.getFilteredAddressesByAddressGroupAndAddressInfo(groupId, term, term, term, term, 0, 20);
+            return service.getFilteredAddressesByAddressGroupAndAddressInfo(groupId, term, '', '', '', 0, 20);
         }
     }
 
@@ -196,6 +192,9 @@ export default class ShippingRecipientComponent implements OnDestroy {
         });
     }
 
+    /**
+     * Clear address group.
+     */
     public clearAddressGroup() {
         this.addressGroupEvents.emit({
             type: SuggestEvents.CLEARED
@@ -213,6 +212,9 @@ export default class ShippingRecipientComponent implements OnDestroy {
         });
     }
 
+    /**
+     * Clear recipient.
+     */
     public clearRecipient() {
         this.recipientEvents.emit({
             type: SuggestEvents.CLEARED

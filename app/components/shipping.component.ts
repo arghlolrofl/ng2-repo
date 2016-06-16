@@ -7,6 +7,7 @@ import AddressDisplayInfo from "../models/address-display-info";
 import ShippingRecipientComponent from "./shipping.recipient.component";
 import ShippingCostCenterComponent from "./shipping.cost-center.component";
 import ShippingAdditionalInformationComponent from "./shipping.additional-information.component";
+import CostCenterInfo from "../models/cost-center-info";
 
 @Component({
     selector: 'fp-shipping',
@@ -42,6 +43,16 @@ export default class ShippingComponent {
      * Selected shipping point.
      */
     private shippingPoint:string;
+
+    /**
+     * Selected recipient.
+     */
+    private recipient:AddressDisplayInfo;
+
+    /**
+     * Cost Center level 1.
+     */
+    private costCenter1:CostCenterInfo;
 
     /**
      * Handle errors.

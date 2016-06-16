@@ -13,7 +13,8 @@
                  ngControl="costCenter1"
                  [fpSuggest]="mapCostCenter1(costCenterService)"
                  [fpSuggestEvents]="costCenter1Events">
-          <button class="clear-submit">
+          <button class="clear-submit"
+                  (click)="clearCostCenter1()">
             <span class="icon-close"></span>
           </button>
         </div>

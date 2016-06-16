@@ -20,12 +20,12 @@ export default class AddressService {
 
 
     public getFilteredAddressesByAddressGroupNameAndAddressInfo(groupName:string,
-                                                  firstName:string,
-                                                  lastName:string,
-                                                  city:string,
-                                                  company:string,
-                                                  start?:number,
-                                                  num?:number):Observable<AddressDisplayInfo> {
+                                                                firstName:string,
+                                                                lastName:string,
+                                                                city:string,
+                                                                company:string,
+                                                                start?:number,
+                                                                num?:number):Observable<AddressDisplayInfo> {
         return this.getFilteredAddressGroups(groupName, start, num)
             .mergeMap((i:AddressGroupInfo) => this.getFilteredAddressesByAddressGroupAndAddressInfo(
                 i.Id, firstName, lastName, city, company, start, num));
@@ -47,6 +47,29 @@ export default class AddressService {
             StartValue: start,
             ResultCount: num
         }).concatMap((r:PagedResultsOf<AddressGroupInfo>) => r.ItemList);
+    }
+
+    /**
+     * Get filtered address groups by group name.
+     * @param {string} groupName the group name
+     * @param {string} excludeGroup the group name to be excluded from the list
+     * @param {number} [start] the offset to start (starts at 0, default to 0)
+     * @param {number} [num] the number of results to get (0 to get all, default to 0)
+     * @returns {Observable<AddressGroupInfo>}
+     */
+    public getFilteredAddressGroupsWithout(groupName:string,
+                                           excludeGroup:string,
+                                           start?:number,
+                                           num?:number):Observable<AddressGroupInfo> {
+        start = start || 0;
+        num = num || 0;
+
+        return this.apiClient.post('AddressGroup/GetFiltered', {
+            GroupName: groupName,
+            StartValue: start,
+            ResultCount: num
+        }).concatMap((r:PagedResultsOf<AddressGroupInfo>) => r.ItemList)
+            .filter((r:AddressGroupInfo) => r.GroupName !== excludeGroup);
     }
 
     /**

@@ -35,6 +35,13 @@ export default class ShippingCostCenterComponent {
     public onError:EventEmitter<Error> = new EventEmitter<Error>();
 
     /**
+     * Updated when cost center level 1 has been changed.
+     * @type {EventEmitter<CostCenterInfo>}
+     */
+    @Output()
+    public costCenter1Change:EventEmitter<CostCenterInfo> = new EventEmitter<CostCenterInfo>();
+
+    /**
      * The form for cost center.
      */
     private costCenterForm:ControlGroup;
@@ -90,10 +97,12 @@ export default class ShippingCostCenterComponent {
 
                 case SuggestEvents.SELECTED:
                     this.costCenter1 = event.data;
+                    this.costCenter1Change.emit(this.costCenter1);
                     costCenter1Control.updateValue(this.modelFormatter.costCenterInfo(this.costCenter1));
                     break;
 
                 case SuggestEvents.CLEARED:
+                    this.costCenter1Change.emit(null);
                     costCenter1Control.updateValue('');
                     break;
 
@@ -113,5 +122,18 @@ export default class ShippingCostCenterComponent {
         return (term:string) => {
             return costCenterService.getFilteredCostCenterByLevelAndName(1, term);
         }
+    }
+
+    public selectCostCenter1(costCenter:CostCenterInfo) {
+        this.costCenter1Events.emit({
+            type: SuggestEvents.SELECTED,
+            data: costCenter
+        });
+    }
+
+    public clearCostCenter1() {
+        this.costCenter1Events.emit({
+            type: SuggestEvents.CLEARED
+        });
     }
 }
