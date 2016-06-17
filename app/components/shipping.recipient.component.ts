@@ -7,12 +7,14 @@ import AddressDisplayInfo from "../models/address-display-info";
 import ModelFormatter from "../services/model-formatter.service";
 import AddressGroupInfo from "../models/address-group-info";
 import {SuggestDirective, SuggestEvents} from "../directives/suggest.directive";
+import ShippingRecipientAddComponent from "./shipping.recipient.add.component";
 
 @Component({
     selector: 'fp-shipping-recipient',
     templateUrl: 'app/templates/shipping.recipient.component.html',
     directives: [
-        SuggestDirective
+        SuggestDirective,
+        ShippingRecipientAddComponent
     ],
     pipes: [
         TranslatePipe
@@ -62,7 +64,7 @@ export default class ShippingRecipientComponent implements OnDestroy {
      * The recipient events.
      * @type {EventEmitter<any>}
      */
-    public recipientEvents:EventEmitter<any> = new EventEmitter<any>();
+    public recipientEvents:EventEmitter<any>;
 
     /**
      * Recipient suggestions (autocomplete) to display.
@@ -75,6 +77,11 @@ export default class ShippingRecipientComponent implements OnDestroy {
     private recipientsForm:ControlGroup;
 
     /**
+     * Show modal dialog for adding new recipient.
+     */
+    private showAddDialogChange:EventEmitter<boolean>;
+
+    /**
      * @constructor
      * @param {ModelFormatter} modelFormatter the model formatting service
      * @param {AddressService} addressService the address information service
@@ -83,6 +90,9 @@ export default class ShippingRecipientComponent implements OnDestroy {
     constructor(private modelFormatter:ModelFormatter,
                 private addressService:AddressService,
                 private formBuilder:FormBuilder) {
+        this.recipientEvents = new EventEmitter<any>();
+        this.showAddDialogChange = new EventEmitter();
+
         this.addressGroupSuggestions = [];
         this.recipientSuggestions = [];
         this.recipientsForm = formBuilder.group({

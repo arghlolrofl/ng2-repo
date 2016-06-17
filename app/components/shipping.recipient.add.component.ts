@@ -4,8 +4,8 @@ import {TranslatePipe} from 'ng2-translate/ng2-translate';
 import {MODAL_DIRECTIVES, ModalComponent} from 'ng2-bs3-modal/ng2-bs3-modal';
 
 @Component({
-    selector: 'fp-shipping-sender-add',
-    templateUrl: 'app/templates/shipping.sender.add.component.html',
+    selector: 'fp-shipping-recipient-add',
+    templateUrl: 'app/templates/shipping.recipient.add.component.html',
     directives: [
         MODAL_DIRECTIVES
     ],
@@ -17,7 +17,7 @@ import {MODAL_DIRECTIVES, ModalComponent} from 'ng2-bs3-modal/ng2-bs3-modal';
 /**
  * Shipping Sender component.
  */
-export default class ShippingSenderAddComponent implements OnInit {
+export default class ShippingRecipientAddComponent implements OnInit {
 
     @Input()
     public showChange:EventEmitter<boolean>;
@@ -25,7 +25,7 @@ export default class ShippingSenderAddComponent implements OnInit {
     /**
      * Modal dialog for sender
      */
-    @ViewChild('modalAddSender')
+    @ViewChild('modalAddRecipient')
     private modal:ModalComponent;
 
     /**
@@ -58,6 +58,6 @@ export default class ShippingSenderAddComponent implements OnInit {
      * Add sender.
      */
     public save() {
-        console.log('save sender');
+        console.log('save recipient');
     }
 }
