@@ -38,7 +38,7 @@ export default class ShippingRecipientAddComponent implements OnInit {
      * @param {FormBuilder} formBuilder the angular2 form builder
      */
     constructor(private formBuilder:FormBuilder) {
-        this.addForm = formBuilder.group();
+        this.addForm = formBuilder.group({});
     }
 
     /**

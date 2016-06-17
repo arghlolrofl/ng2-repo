@@ -48,7 +48,7 @@ export default class ShippingRecipientComponent implements OnDestroy {
      * The address group events.
      * @type {EventEmitter<any>}
      */
-    public addressGroupEvents:EventEmitter<any> = new EventEmitter<any>();
+    public addressGroupEvents:EventEmitter<any>;
 
     /**
      * The actual selected address group.
@@ -90,6 +90,7 @@ export default class ShippingRecipientComponent implements OnDestroy {
     constructor(private modelFormatter:ModelFormatter,
                 private addressService:AddressService,
                 private formBuilder:FormBuilder) {
+        this.addressGroupEvents = new EventEmitter<any>();
         this.recipientEvents = new EventEmitter<any>();
         this.showAddDialogChange = new EventEmitter();
 
