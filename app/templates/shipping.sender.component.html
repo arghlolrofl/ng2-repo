@@ -38,7 +38,8 @@
         </div>
         <div class="field-container box-icon">
           <button>
-            <span class="icon-plus"></span>
+            <span class="icon-plus"
+                  (click)="showAddDialogChange.emit(true)"></span>
           </button>
         </div>
       </div>
@@ -66,3 +67,5 @@
     </div>
   </form>
 </section>
+
+<fp-shipping-sender-add [showChange]="showAddDialogChange"></fp-shipping-sender-add>
