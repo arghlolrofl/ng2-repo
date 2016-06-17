@@ -10,7 +10,10 @@
     'angular2-in-memory-web-api': 'node_modules/angular2-in-memory-web-api',
     'rxjs':                       'node_modules/rxjs',
     'ng2-translate':              'node_modules/ng2-translate',
-    'angular2-cookie':            'node_modules/angular2-cookie'
+    'angular2-cookie':            'node_modules/angular2-cookie',
+    'ng2-bs3-modal':              'node_modules/ng2-bs3-modal',
+    'jquery':                     'node_modules/jquery/dist/jquery.min',
+    'bootstrap':                  'node_modules/bootstrap/dist/js/bootstrap.min'
   };
   // packages tells the System loader how to load when no filename and/or no extension
   var packages = {
