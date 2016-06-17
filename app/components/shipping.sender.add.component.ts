@@ -57,7 +57,7 @@ export default class ShippingSenderAddComponent implements OnInit {
     /**
      * Add sender.
      */
-    public addSender() {
-        console.log('add sender');
+    public save() {
+        console.log('save sender');
     }
 }
