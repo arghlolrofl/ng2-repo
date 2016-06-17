@@ -6,12 +6,14 @@ import AddressService from "../services/address.service";
 import AddressDisplayInfo from "../models/address-display-info";
 import ModelFormatter from "../services/model-formatter.service";
 import {SuggestDirective, SuggestEvents} from "../directives/suggest.directive";
+import ShippingSenderAddComponent from "./shipping.sender.add.component";
 
 @Component({
     selector: 'fp-shipping-sender',
     templateUrl: 'app/templates/shipping.sender.component.html',
     directives: [
-        SuggestDirective
+        SuggestDirective,
+        ShippingSenderAddComponent
     ],
     pipes: [
         TranslatePipe
@@ -52,7 +54,7 @@ export default class ShippingSenderComponent implements OnDestroy {
      * The sender suggest events.
      * @type {EventEmitter<any>}
      */
-    public senderEvents:EventEmitter<any> = new EventEmitter<any>();
+    public senderEvents:EventEmitter<any>;
 
     /**
      * Sender suggestions (autocomplete) to display.
@@ -65,6 +67,11 @@ export default class ShippingSenderComponent implements OnDestroy {
     private sendersForm:ControlGroup;
 
     /**
+     * Show modal dialog for adding new sender.
+     */
+    private showAddDialogChange:EventEmitter<boolean>;
+
+    /**
      * @constructor
      * @param {ModelFormatter} modelFormatter the model formatting service
      * @param {AddressService} addressService the address information service
@@ -73,6 +80,9 @@ export default class ShippingSenderComponent implements OnDestroy {
     constructor(private modelFormatter:ModelFormatter,
                 private addressService:AddressService,
                 private formBuilder:FormBuilder) {
+        this.senderEvents = new EventEmitter<any>();
+        this.showAddDialogChange = new EventEmitter();
+
         // initialize sender
         this.senderSuggestions = [];
         this.sendersForm = formBuilder.group({
@@ -113,7 +123,7 @@ export default class ShippingSenderComponent implements OnDestroy {
                     break;
 
                 case SuggestEvents.SHOW:
-                    senderControl.updateValue(this.modelFormatter.addressDisplayInfo(event.data), {emitEvent:false});
+                    senderControl.updateValue(this.modelFormatter.addressDisplayInfo(event.data), {emitEvent: false});
                     break;
             }
         });

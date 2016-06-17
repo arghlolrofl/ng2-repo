@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Http, Response, Headers, RequestOptions} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 
-import {ENVIRONMENT, API_BASE_URL, API_SUFFIX, API_TIMEOUT} from '../config';
+import {ENVIRONMENT, CONSUMER_API_BASE_URL, API_SUFFIX, API_TIMEOUT, AUTHORIZATION_API_URL} from '../config';
 import LoginService from "./login.service";
 
 /**
@@ -32,7 +32,7 @@ export default class APIClient {
                 opt = opt.merge(options);
             }
             return this.http
-                .get(API_BASE_URL + path + API_SUFFIX, opt)
+                .get(CONSUMER_API_BASE_URL + path + API_SUFFIX, opt)
                 .timeout(API_TIMEOUT, new Error('API timeout'))
                 .map(APIClient.extractJson)
                 .catch(this.handleError);
@@ -58,7 +58,7 @@ export default class APIClient {
                 opt = opt.merge(options);
             }
             return this.http
-                .post(API_BASE_URL + path + API_SUFFIX, JSON.stringify(data), opt)
+                .post(CONSUMER_API_BASE_URL + path + API_SUFFIX, JSON.stringify(data), opt)
                 .timeout(API_TIMEOUT, new Error('API timeout'))
                 .map(APIClient.extractJson)
                 .catch(this.handleError);

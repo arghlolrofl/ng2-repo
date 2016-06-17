@@ -23,7 +23,28 @@
 
 <main>
   <div class="container">
-    <fp-login *ngIf="!loggedIn"></fp-login>
-    <router-outlet *ngIf="loggedIn"></router-outlet>
+    <router-outlet></router-outlet>
   </div>
 </main>
+
+
+<modal #modalLogin [keyboard]="false" [backdrop]="'static'">
+  <modal-header>
+    <h4 class="modal-title">Login*</h4>
+  </modal-header>
+  <form [ngFormModel]="loginForm">
+    <modal-body>
+      <input type="text"
+             placeholder="Username*"
+             ngControl="username">
+      <input type="password"
+             placeholder="Password*"
+             ngControl="password">
+    </modal-body>
+    <modal-footer>
+      <button (click)="login()">
+        login
+      </button>
+    </modal-footer>
+  </form>
+</modal>
