@@ -68,6 +68,31 @@ export default class APIClient {
     }
 
     /**
+     * HTTP POST request to the API with no response
+     * @param {string} path the path of the API to be requested
+     * @param {any} data the request data
+     * @param {RequestOptions} options additional options to pass to the server
+     * @returns {Observable<void>}
+     */
+    public postNoRes(path:string, data:any, options?:RequestOptions):Observable<void> {
+        if (ENVIRONMENT === 'dev') {
+            return this.get(path, options);
+        }
+        try {
+            let opt = this.prepareHeaders();
+            if (options) {
+                opt = opt.merge(options);
+            }
+            return this.http
+                .post(CONSUMER_API_BASE_URL + path + API_SUFFIX, JSON.stringify(data), opt)
+                .timeout(API_TIMEOUT, new Error('API timeout'))
+                .catch(this.handleError);
+        } catch (e) {
+            return Observable.throw(e);
+        }
+    }
+
+    /**
      * Prepares the authentication header.
      * @returns {RequestOptions} all options (can be modified)
      */

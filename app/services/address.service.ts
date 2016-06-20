@@ -5,6 +5,7 @@ import APIClient from './api-client.service';
 import AddressGroupInfo from '../models/address-group-info';
 import AddressDisplayInfo from '../models/address-display-info';
 import PagedResultsOf from "../models/paged-results";
+import AddressCreationInfo from "../models/address-creation-info";
 
 /**
  * AddressGroup API.
@@ -111,5 +112,20 @@ export default class AddressService {
             StartValue: start,
             ResultCount: num
         }).concatMap((r:PagedResultsOf<AddressDisplayInfo>) => r.ItemList);
+    }
+
+    /**
+     * Add new address.
+     * @param {string} addressGroupName the name of the address group
+     * @param {AddressCreationInfo} address the address to be stored
+     * @returns {Observable<void>}
+     */
+    public addNewToAddressGroup(addressGroupName:string, address:AddressCreationInfo):Observable<void> {
+        return this.getFilteredAddressGroups(addressGroupName, 0, 1)
+            .first()
+            .mergeMap((r:AddressGroupInfo) => {
+                address.AddressGroupId = r.Id;
+                return this.apiClient.postNoRes('Address/AddNew', address);
+            });
     }
 }
