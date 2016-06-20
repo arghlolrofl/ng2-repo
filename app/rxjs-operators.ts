@@ -21,3 +21,4 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/timeout';
 import 'rxjs/add/operator/retry';
+import 'rxjs/add/operator/first';
