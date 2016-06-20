@@ -99,7 +99,7 @@ export default class APIClient {
      */
     private handleError(error:any) {
         if (error.status === 405) {
-            this.loginService.loggedOut();
+            this.loginService.logout();
         }
         return Observable.throw(error);
     }
