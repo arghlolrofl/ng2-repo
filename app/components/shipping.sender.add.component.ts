@@ -48,7 +48,7 @@ export default class ShippingSenderAddComponent implements AfterViewInit {
     /**
      * Regions.
      */
-    private regions:Array<string>;
+    private regions:Array<RegionInfo>;
 
     /**
      * Selected region.
@@ -58,7 +58,7 @@ export default class ShippingSenderAddComponent implements AfterViewInit {
     /**
      * Countries.
      */
-    private countries:Array<string>;
+    private countries:Array<CountryInfo>;
 
     /**
      * Selected country.

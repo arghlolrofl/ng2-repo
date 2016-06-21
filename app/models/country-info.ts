@@ -11,5 +11,5 @@ export default class CountryInfo {
 
     IsoM49Code:string;
 
-    Id:string;
+    Id:number;
 }

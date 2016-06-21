@@ -23,7 +23,7 @@ export default class CountryService {
      * @param {number} [num] the number of results to get (0 to get all, default to 0)
      * @returns {Observable<CountryInfo>}
      */
-    public getAll(start?:number, num?:number):Observable<PagedResultsOf<CountryInfo>> {
+    public getAll(start?:number, num?:number):Observable<CountryInfo> {
         start = start || 0;
         num = num || 0;
 
