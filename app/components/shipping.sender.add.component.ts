@@ -70,7 +70,7 @@ export default class ShippingSenderAddComponent implements AfterViewInit {
      * @param {FormBuilder} formBuilder the angular2 form builder
      * @param {RegionService} regionService the region client
      * @param {CountryService} countryService the country client
-     * @param {AddressService} addressService the address client
+     * @param {AddressService} addressService the address client
      */
     constructor(private formBuilder:FormBuilder,
                 private regionService:RegionService,
@@ -138,9 +138,20 @@ export default class ShippingSenderAddComponent implements AfterViewInit {
     }
 
     /**
+     * Close modal dialog.
+     */
+    public close() {
+        this.modal.close();
+
+        return false;
+    }
+
+    /**
      * Add sender.
      */
     public save() {
+        console.log('save called');
+
         const address = new AddressCreationInfo();
         address.CountryId = this.country.Id;
         address.Region = this.region.RegionName;
@@ -160,6 +171,7 @@ export default class ShippingSenderAddComponent implements AfterViewInit {
         this.addressService.addNewToAddressGroup('Sender', address).subscribe(
             () => {
                 console.log('address stored');
+                this.modal.close();
             },
             (error:Error) => {
                 console.warn('address could not be stored', error);

@@ -32,7 +32,8 @@
   <modal-header>
     <h4 class="modal-title">Login*</h4>
   </modal-header>
-  <form [ngFormModel]="loginForm">
+  <form [ngFormModel]="loginForm"
+        (ngSubmit)="login()">
     <modal-body>
       <input type="text"
              placeholder="Username*"
@@ -42,8 +43,10 @@
              ngControl="password">
     </modal-body>
     <modal-footer>
-      <button (click)="login()">
-        login
+      <button type="submit"
+              class="btn btn-default"
+              [disabled]="!loginForm.valid">
+        login*
       </button>
     </modal-footer>
   </form>
