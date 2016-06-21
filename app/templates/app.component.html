@@ -30,24 +30,52 @@
 
 <modal #modalLogin [keyboard]="false" [backdrop]="'static'">
   <modal-header>
-    <h4 class="modal-title">Login*</h4>
+    <div class="row">
+      <div class="col-md-12">
+        <h4>Login*</h4>
+      </div>
+    </div>
   </modal-header>
   <form [ngFormModel]="loginForm"
         (ngSubmit)="login()">
     <modal-body>
-      <input type="text"
-             placeholder="Username*"
-             ngControl="username">
-      <input type="password"
-             placeholder="Password*"
-             ngControl="password">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="field-container text-field">
+            <input type="text"
+                   placeholder="Username*"
+                   ngControl="username">
+            <button class="clear-submit"
+                    (click)="clearSender()">
+              <span class="icon-close"></span>
+            </button>
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="field-container text-field">
+            <input type="password"
+                   placeholder="Password*"
+                   ngControl="password">
+            <button class="clear-submit"
+                    (click)="clearSender()">
+              <span class="icon-close"></span>
+            </button>
+          </div>
+        </div>
+      </div>
     </modal-body>
+
     <modal-footer>
-      <button type="submit"
-              class="btn btn-default"
-              [disabled]="!loginForm.valid">
-        login*
-      </button>
+      <div class="row">
+        <div class="col-sm-12">
+          <button type="submit"
+                  class="button popup"
+                  [disabled]="!loginForm.valid">
+            login*
+          </button>
+        </div>
+      </div>
     </modal-footer>
   </form>
 </modal>

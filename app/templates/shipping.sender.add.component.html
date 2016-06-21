@@ -1,77 +1,194 @@
 <modal #modalAddSender>
   <modal-header>
-    <h4 class="modal-title">Add Sender*</h4>
+    <div class="row">
+      <div class="col-md-12">
+        <h4>Add Sender*</h4>
+      </div>
+    </div>
   </modal-header>
   <form [ngFormModel]="addForm"
         (ngSubmit)="save()">
+
     <modal-body>
-      <input type="text"
-             placeholder="Company*"
-             ngControl="company"
-             [class.error]="!addForm.controls['company'].valid && addForm.controls['company'].touched">
-      <input type="text"
-             placeholder="Title*"
-             ngControl="title"
-             [class.error]="!addForm.controls['title'].valid && addForm.controls['title'].touched">
-      <input type="text"
-             placeholder="First Name*"
-             ngControl="firstName"
-             [class.error]="!addForm.controls['firstName'].valid && addForm.controls['firstName'].touched">
-      <input type="text"
-             placeholder="Middle Name*"
-             ngControl="middleName"
-             [class.error]="!addForm.controls['middleName'].valid && addForm.controls['middleName'].touched">
-      <input type="text"
-             placeholder="Last Name*"
-             ngControl="lastName"
-             [class.error]="!addForm.controls['lastName'].valid && addForm.controls['lastName'].touched">
-      <input type="text"
-             placeholder="Postal Address*"
-             ngControl="postalAddress"
-             [class.error]="!addForm.controls['postalAddress'].valid && addForm.controls['postalAddress'].touched">
-      <input type="text"
-             placeholder="Additional postal address*"
-             ngControl="additionalPostalAddress"
-             [class.error]="!addForm.controls['additionalPostalAddress'].valid && addForm.controls['additionalPostalAddress'].touched">
-      <input type="text"
-             placeholder="City*"
-             ngControl="city"
-             [class.error]="!addForm.controls['city'].valid && addForm.controls['city'].touched">
-      <input type="text"
-             placeholder="Zip Code*"
-             ngControl="zipCode"
-             [class.error]="!addForm.controls['zipCode'].valid && addForm.controls['zipCode'].touched">
-      <input type="text"
-             placeholder="Additional zip code*"
-             ngControl="additionalZipCode"
-             [class.error]="!addForm.controls['additionalZipCode'].valid && addForm.controls['additionalZipCode'].touched">
-      <input type="text"
-             placeholder="E-Mail*"
-             ngControl="eMail"
-             [class.error]="!addForm.controls['eMail'].valid && addForm.controls['eMail'].touched">
-      <select (change)="countryChanged($event.target.value)"
-              [disabled]="countries.length === 0">
-        <option *ngFor="let country of countries">
-          {{country.CountryName}}
-        </option>
-      </select>
-      <select (change)="regionChanged($event.target.value)"
-              [disabled]="regions.length === 0">
-        <option *ngFor="let region of regions">
-          {{region.RegionName}}
-        </option>
-      </select>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="field-container text-field">
+            <input type="text"
+                   placeholder="Company*"
+                   ngControl="company"
+                   [class.error]="!addForm.controls['company'].valid && addForm.controls['company'].touched">
+            <button class="clear-submit"
+                    (click)="clearSender()">
+              <span class="icon-close"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="field-container text-field">
+            <input type="text"
+                   placeholder="Title*"
+                   ngControl="title"
+                   [class.error]="!addForm.controls['title'].valid && addForm.controls['title'].touched">
+            <button class="clear-submit"
+                    (click)="clearSender()">
+              <span class="icon-close"></span>
+            </button>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="field-container text-field">
+            <input type="text"
+                   placeholder="First Name*"
+                   ngControl="firstName"
+                   [class.error]="!addForm.controls['firstName'].valid && addForm.controls['firstName'].touched">
+            <button class="clear-submit"
+                    (click)="clearSender()">
+              <span class="icon-close"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="field-container text-field">
+            <input type="text"
+                   placeholder="Middle Name*"
+                   ngControl="middleName"
+                   [class.error]="!addForm.controls['middleName'].valid && addForm.controls['middleName'].touched">
+            <button class="clear-submit"
+                    (click)="clearSender()">
+              <span class="icon-close"></span>
+            </button>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="field-container text-field">
+            <input type="text"
+                   placeholder="Last Name*"
+                   ngControl="lastName"
+                   [class.error]="!addForm.controls['lastName'].valid && addForm.controls['lastName'].touched">
+            <button class="clear-submit"
+                    (click)="clearSender()">
+              <span class="icon-close"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="field-container text-field">
+            <select (change)="countryChanged($event.target.value)"
+                    [disabled]="countries.length === 0">
+              <option *ngFor="let country of countries">
+                {{country.CountryName}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="field-container text-field">
+            <select (change)="regionChanged($event.target.value)"
+                    [disabled]="regions.length === 0">
+              <option *ngFor="let region of regions">
+                {{region.RegionName}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="field-container text-field">
+            <input type="text"
+                   placeholder="Postal Address*"
+                   ngControl="postalAddress"
+                   [class.error]="!addForm.controls['postalAddress'].valid && addForm.controls['postalAddress'].touched">
+            <button class="clear-submit"
+                    (click)="clearSender()">
+              <span class="icon-close"></span>
+            </button>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="field-container text-field">
+            <input type="text"
+                   placeholder="City*"
+                   ngControl="city"
+                   [class.error]="!addForm.controls['city'].valid && addForm.controls['city'].touched">
+            <button class="clear-submit"
+                    (click)="clearSender()">
+              <span class="icon-close"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="field-container text-field">
+            <input type="text"
+                   placeholder="Zip Code*"
+                   ngControl="zipCode"
+                   [class.error]="!addForm.controls['zipCode'].valid && addForm.controls['zipCode'].touched">
+            <button class="clear-submit"
+                    (click)="clearSender()">
+              <span class="icon-close"></span>
+            </button>
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="field-container text-field">
+            <input type="text"
+                   placeholder="Additional zip code*"
+                   ngControl="additionalZipCode"
+                   [class.error]="!addForm.controls['additionalZipCode'].valid && addForm.controls['additionalZipCode'].touched">
+            <button class="clear-submit"
+                    (click)="clearSender()">
+              <span class="icon-close"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="field-container text-field">
+            <input type="text"
+                   placeholder="E-Mail*"
+                   ngControl="eMail"
+                   [class.error]="!addForm.controls['eMail'].valid && addForm.controls['eMail'].touched">
+            <button class="clear-submit"
+                    (click)="clearSender()">
+              <span class="icon-close"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
     </modal-body>
+
     <modal-footer>
-      <button class="btn"
-              (click)="close()">
-        close*
-      </button>
-      <button type="submit"
-              class="btn btn-default"
-              [disabled]="!addForm.valid">
-        save*
-      </button>
+      <div class="row">
+        <div class="col-sm-12">
+          <button class="button popup"
+                  (click)="close()">
+            <span>close*</span>
+          </button>
+
+           <button type="submit"
+                  class="button popup"
+                  [disabled]="!addForm.valid">
+            <span>save*</span>
+          </button>
+        </div>
+      </div>
     </modal-footer>
   </form>
 </modal>

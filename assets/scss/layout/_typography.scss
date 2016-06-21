@@ -194,4 +194,28 @@ i.icon-class {
       }
     }
   }
+
+  &.popup {
+    width: 100px;
+    height: $input-height;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:disabled {
+      background: $brand-gray-1;
+      border-color: $brand-gray-2;
+    }
+
+    @include mobile {
+      width: 100px;
+      float: left;
+      margin-left: 15px;
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+  }
 }

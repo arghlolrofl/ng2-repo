@@ -1,6 +1,7 @@
 /* Inputs
 /* ----------------------------- */
 
+select,
 input[type="text"],
 input[type="password"],
 input[type="tel"],
@@ -16,7 +17,9 @@ input[type="search"] {
   color: $brand-gray-2;
   padding: 0 40px 0 10px;
   background: $white;
+  border-radius: 0;
 }
+
 
 /* small-input fields
 /* ----------------------------- */
