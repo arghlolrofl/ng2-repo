@@ -1,11 +1,36 @@
 <modal #modalAddRecipient (onClose)="save()">
   <modal-header>
-    <h4 class="modal-title">Add Recipient*</h4>
+    <div class="row">
+      <div class="col-sm-12">
+        <h4>Add Recipient*</h4>
+      </div>
+    </div>
   </modal-header>
   <form [ngFormModel]="addForm">
+
     <modal-body>
-      texttext
+      <div class="row">
+        <div class="col-sm-12">
+          texttext
+        </div>
+      </div>
     </modal-body>
-    <modal-footer [show-default-buttons]="true"></modal-footer>
+
+    <modal-footer>
+      <div class="row">
+        <div class="col-sm-12">
+          <button class="button popup"
+                  (click)="close()">
+            <span>close*</span>
+          </button>
+
+           <button type="submit"
+                  class="button popup"
+                  [disabled]="!addForm.valid">
+            <span>save*</span>
+          </button>
+        </div>
+      </div>
+    </modal-footer>
   </form>
 </modal>

@@ -1,0 +1,28 @@
+/* modal popup
+/* ----------------------------- */
+.modal-dialog {
+  .modal-content {
+    .modal-header {
+      margin: 0 15px;
+      border: 0;
+
+      .row {
+        padding: 0;
+      }
+    }
+
+    .modal-body {
+      display: inline-block;
+      width: 100%;
+
+      .row {
+        margin: 0;
+      }
+    }
+
+    .modal-footer {
+      border: 0;
+      margin: 0 15px;
+    }
+  }
+}
