@@ -54,7 +54,8 @@
             <ul>
               <li *ngFor="let recipient of recipientSuggestions"
                   (click)="selectRecipient(recipient)">
-                {{modelFormatter.addressDisplayInfo(recipient)}}
+                <span class="company">{{recipient.FirstName}} {{recipient.LastName}} ({{recipient.Company}})</span>
+                <span class="address">{{recipient.PostalAddress}} {{recipient.ZipCode}} {{recipient.City}}</span>
               </li>
             </ul>
           </div>

@@ -25,7 +25,8 @@
           <ul>
             <li *ngFor="let sender of senderSuggestions"
                 (click)="selectSender(sender)">
-              {{modelFormatter.addressDisplayInfo(sender)}}
+              <span class="company">{{sender.FirstName}} {{sender.LastName}} ({{sender.Company}})</span>
+              <span class="address">{{sender.PostalAddress}} {{sender.ZipCode}} {{sender.City}}</span>
             </li>
           </ul>
         </div>

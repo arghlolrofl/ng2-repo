@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "start": "tsc && grunt && concurrently \"npm run tsc:w\" \"npm run lite\"",
-    "lite": "lite-server",
+    "lite": "lite-server -c .lite-server.json",
     "postinstall": "typings install",
     "tsc": "tsc",
     "tsc:w": "tsc -w",

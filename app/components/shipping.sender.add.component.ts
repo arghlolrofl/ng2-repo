@@ -106,6 +106,8 @@ export default class ShippingSenderAddComponent implements AfterViewInit {
         });
 
         this.modal.onOpen.subscribe(() => {
+            this.countries = [];
+
             const countryObservable = this.countryService.getAll();
             countryObservable.first().subscribe(
                 (r:CountryInfo) => {
@@ -116,9 +118,10 @@ export default class ShippingSenderAddComponent implements AfterViewInit {
                     this.country = null;
                     this.regions = [];
                 });
-            countryObservable.subscribe(
-                (r:CountryInfo) => this.countries.push(r),
-                () => this.countries = []);
+            countryObservable
+                .subscribe(
+                    (r:CountryInfo) => this.countries.push(r),
+                    () => this.countries = []);
         });
     }
 
@@ -132,9 +135,10 @@ export default class ShippingSenderAddComponent implements AfterViewInit {
         regionObservable.first().subscribe(
             (r:RegionInfo) => this.region = r,
             () => this.region = null);
-        regionObservable.subscribe(
-            (r:RegionInfo) => this.regions.push(r),
-            () => this.regions = []);
+        regionObservable
+            .subscribe(
+                (r:RegionInfo) => this.regions.push(r),
+                () => this.regions = []);
     }
 
     /**
