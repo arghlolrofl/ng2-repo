@@ -2,7 +2,7 @@
   <h4><i class="icon-class icon-tool"></i>Product Calculation</h4>
   <form [ngFormModel]="productCalculationForm" (ngSubmit)="recalculateProduct()">
     <div class="row">
-      <div class="col-input-long small-input">
+      <div class="col-input small-input">
         <div class="field-container text-field">
           <input type="text"
                  placeholder="weight"
@@ -16,7 +16,7 @@
         </div>
       </div>
 
-      <div class="col-button-small">
+      <div class="col-button">
         <div class="field-container box-icon">
           <button>
             <span class="icon-weight"></span>
@@ -26,7 +26,7 @@
     </div>
 
     <div class="row">
-      <div class="col-input-long small-input">
+      <div class="col-input small-input">
         <div class="field-container text-field">
           <input type="text"
                  placeholder="length"
@@ -63,7 +63,7 @@
           </button>
         </div>
       </div>
-      <div class="col-button-small">
+      <div class="col-button">
         <div class="field-container box-icon">
           <button type="submit" [disabled]="!productCalculationForm.valid">
             <span class="icon-interface"></span>
@@ -86,7 +86,7 @@
         <span>shortcut 4*</span>
       </a>
 
-      <div class="col-button-small">
+      <div class="col-button">
         <div class="field-container box-icon">
           <button>
             <span class="icon-search"></span>

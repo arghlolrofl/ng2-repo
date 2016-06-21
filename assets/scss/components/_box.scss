@@ -16,7 +16,7 @@
     width: $button-width;
     height: $button-height;
     position: relative;
-    border-radius: 2px;
+    border-radius: $boxBorderRadius;
     transition: border $transitionFast $transitionTiming;
 
     [class^="icon-"]::before,
@@ -39,6 +39,10 @@
       [class*="icon-"]::before {
         color: $icon-box-hover-color;
       }
+    }
+
+    @include mobile {
+      margin: 0 0 15px 0;
     }
   }
 }
@@ -65,6 +69,11 @@
 
   @include tablet {
     width: 497px;
+  }
+
+  @include mobile {
+    width: 100%;
+    margin: 0 0 15px 0;
   }
 }
 
@@ -94,6 +103,11 @@
 
   @include tablet {
     width: 497px;
+  }
+
+  @include mobile {
+    width: 100%;
+    margin: 0 0 15px 0;
   }
 }
 
@@ -141,6 +155,15 @@
       }
     }
   }
+
+  @include mobile {
+    width: 100%;
+    margin: 0 0 15px 0;
+
+    table tr td {
+      width: 75%;
+    }
+  }
 }
 
 .summery-container {
@@ -149,6 +172,11 @@
 
   @include tablet {
     width: 450px;
+  }
+
+  @include mobile {
+    width: 100%;
+    margin: 0 0 15px 0;
   }
 }
 
@@ -166,6 +194,12 @@
     width: 200px;
     margin-left: 70px;
   }
+
+  @include mobile {
+    float: none;
+    width: 100%;
+    margin: 0 0 15px 0;
+  }
 }
 
 .box-lights {
@@ -181,6 +215,10 @@
   @include tablet {
     margin: 33px 0 15px;
     padding-left: 95px;
+  }
+
+  @include mobile {
+   display: inline-block;
   }
 
   i.icon-class:before {
@@ -217,5 +255,57 @@
     &.active {
       background: $lights-green;
     }
+  }
+
+  @include mobile {
+    float: none;
+    width: 100%;
+    margin: 0 0 15px 0;
+    padding: 0;
+  }
+}
+
+.errorBox {
+  width: 100%;
+  border: 2px solid $brand-primary;
+  background: $white;
+  font-size: 1.7rem;
+  line-height: 2.0rem;
+  color: $brand-primary;
+
+  .content {
+    padding: 20px 40px 20px 20px;
+  }
+
+  .clear-submit {
+    right: 25px;
+  }
+}
+
+/* info popup
+/* ----------------------------- */
+.show-info {
+  position: relative;
+}
+
+.hide-info {
+  border: 1px solid $brand-gray-1;
+  background: $white;
+  padding: 10px;
+  border-radius: $boxBorderRadius;
+  width: 300px;
+  display: none;
+  z-index: 100;
+  position: absolute;
+  top: 25px;
+  left: - 270px;
+  box-shadow: $boxShadowDefault;
+
+  &.show {
+    display: block;
+  }
+
+  @include mobile {
+    left: - 76px;
   }
 }

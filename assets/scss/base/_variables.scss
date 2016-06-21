@@ -15,7 +15,7 @@ $icon-box-color: $brand-secondary;
 $icon-box-hover-color: darken($brand-secondary, 15%);
 
 //lights
-$lights-red: #c50000;
+$lights-red: $brand-primary;
 $lights-yellow: #e9dc07;
 $lights-green: #057c29;
 $lights-disabled: #f4c7cb;
@@ -38,7 +38,7 @@ $screen-xs: 480px;
 /* Typography
 /* ----------------------------- */
 
-$font-family-sans-serif: "AktivGrotesk", Helvetica, Arial, sans-serif;
+$font-family-sans-serif: 'Source Sans Pro', sans-serif;
 $font-family-base: $font-family-sans-serif;
 $font-base-size-px: 10px;
 
@@ -46,6 +46,7 @@ $font-base-size-px: 10px;
 /* ----------------------------- */
 
 $boxShadowDefault: 1px 1px 4px rgba(0, 0, 0, 0.2);
+$boxBorderRadius: 2px;
 
 /* Animations
 /* ----------------------------- */
