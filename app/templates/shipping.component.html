@@ -8,7 +8,9 @@
                            [(recipient)]="recipient"></fp-shipping-recipient>
 
     <fp-shipping-cost-center (onError)="handleError($event)"
-                             [(costCenter1)]="costCenter1"></fp-shipping-cost-center>
+                             [(costCenter1)]="costCenter1"
+                             [(costCenter2)]="costCenter2"
+                             [(costCenter3)]="costCenter3"></fp-shipping-cost-center>
 
     <fp-shipping-additional-information (onError)="handleError($event)"></fp-shipping-additional-information>
 

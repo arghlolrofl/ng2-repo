@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Http, Response, Headers, RequestOptions} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 
-import {ENVIRONMENT, CONSUMER_API_BASE_URL, API_SUFFIX, API_TIMEOUT, AUTHORIZATION_API_URL} from '../config';
+import {CONSUMER_API_BASE_URL, API_TIMEOUT, AUTHORIZATION_API_URL} from '../config';
 import LoginService from "./login.service";
 
 /**
@@ -32,7 +32,7 @@ export default class APIClient {
                 opt = opt.merge(options);
             }
             return this.http
-                .get(CONSUMER_API_BASE_URL + path + API_SUFFIX, opt)
+                .get(CONSUMER_API_BASE_URL + path, opt)
                 .timeout(API_TIMEOUT, new Error('API timeout'))
                 .map(APIClient.extractJson)
                 .catch(this.handleError);
@@ -49,16 +49,13 @@ export default class APIClient {
      * @returns {Observable<any>}
      */
     public post(path:string, data:any, options?:RequestOptions):Observable<any> {
-        if (ENVIRONMENT === 'dev') {
-            return this.get(path, options);
-        }
         try {
             let opt = this.prepareHeaders();
             if (options) {
                 opt = opt.merge(options);
             }
             return this.http
-                .post(CONSUMER_API_BASE_URL + path + API_SUFFIX, JSON.stringify(data), opt)
+                .post(CONSUMER_API_BASE_URL + path, JSON.stringify(data), opt)
                 .timeout(API_TIMEOUT, new Error('API timeout'))
                 .map(APIClient.extractJson)
                 .catch(this.handleError);
@@ -75,16 +72,13 @@ export default class APIClient {
      * @returns {Observable<void>}
      */
     public postNoRes(path:string, data:any, options?:RequestOptions):Observable<void> {
-        if (ENVIRONMENT === 'dev') {
-            return this.get(path, options);
-        }
         try {
             let opt = this.prepareHeaders();
             if (options) {
                 opt = opt.merge(options);
             }
             return this.http
-                .post(CONSUMER_API_BASE_URL + path + API_SUFFIX, JSON.stringify(data), opt)
+                .post(CONSUMER_API_BASE_URL + path, JSON.stringify(data), opt)
                 .timeout(API_TIMEOUT, new Error('API timeout'))
                 .catch(this.handleError);
         } catch (e) {

@@ -23,7 +23,7 @@
           <ul>
             <li *ngFor="let costCenter of costCenter1Suggestions"
                 (click)="selectCostCenter1(costCenter)">
-              {{modelFormatter.costCenterInfo(costCenter)}}
+              {{costCenter.Name}}
             </li>
           </ul>
         </div>
@@ -56,7 +56,7 @@
           <ul>
             <li *ngFor="let costCenter of costCenter2Suggestions"
                 (click)="selectCostCenter2(costCenter)">
-              {{modelFormatter.costCenterInfo(costCenter)}}
+              {{costCenter.Name}}
             </li>
           </ul>
         </div>
@@ -87,7 +87,7 @@
           <ul>
             <li *ngFor="let costCenter of costCenter3Suggestions"
                 (click)="selectCostCenter3(costCenter)">
-              {{modelFormatter.costCenterInfo(costCenter)}}
+              {{costCenter.Name}}
             </li>
           </ul>
         </div>

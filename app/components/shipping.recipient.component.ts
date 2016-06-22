@@ -4,7 +4,6 @@ import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
 import AddressService from "../services/address.service";
 import AddressDisplayInfo from "../models/address-display-info";
-import ModelFormatter from "../services/model-formatter.service";
 import AddressGroupInfo from "../models/address-group-info";
 import {SuggestDirective, SuggestEvents} from "../directives/suggest.directive";
 import ShippingRecipientAddComponent from "./shipping.recipient.add.component";
@@ -20,7 +19,6 @@ import ShippingRecipientAddComponent from "./shipping.recipient.add.component";
         TranslatePipe
     ],
     providers: [
-        ModelFormatter,
         AddressService
     ]
 })
@@ -83,12 +81,10 @@ export default class ShippingRecipientComponent implements OnDestroy {
 
     /**
      * @constructor
-     * @param {ModelFormatter} modelFormatter the model formatting service
      * @param {AddressService} addressService the address information service
      * @param {FormBuilder} formBuilder the form builder from angular2
      */
-    constructor(private modelFormatter:ModelFormatter,
-                private addressService:AddressService,
+    constructor(private addressService:AddressService,
                 private formBuilder:FormBuilder) {
         this.addressGroupEvents = new EventEmitter<any>();
         this.recipientEvents = new EventEmitter<any>();
@@ -123,7 +119,7 @@ export default class ShippingRecipientComponent implements OnDestroy {
 
                 case SuggestEvents.SELECTED:
                     this.addressGroup = event.data;
-                    addressGroupControl.updateValue(this.modelFormatter.addressGroupInfo(this.addressGroup));
+                    addressGroupControl.updateValue(this.addressGroup.GroupName);
                     this.recipientEvents.emit({
                         type: SuggestEvents.CLEARED
                     });
@@ -134,7 +130,7 @@ export default class ShippingRecipientComponent implements OnDestroy {
                     break;
 
                 case SuggestEvents.SHOW:
-                    addressGroupControl.updateValue(this.modelFormatter.addressGroupInfo(event.data), {emitEvent: false});
+                    addressGroupControl.updateValue(event.data.GroupName, {emitEvent: false});
                     break;
             }
         });
@@ -151,7 +147,8 @@ export default class ShippingRecipientComponent implements OnDestroy {
 
                 case SuggestEvents.SELECTED:
                     this.recipientChange.emit(event.data);
-                    recipientControl.updateValue(this.modelFormatter.addressDisplayInfo(event.data));
+                    recipientControl.updateValue(`${event.data.FirstName} ${event.data.LastName} (${event.data.Company})`
+                        + ` - ${event.data.PostalAddress} ${event.data.ZipCode} ${event.data.City}`);
                     break;
 
                 case SuggestEvents.CLEARED:
@@ -160,7 +157,9 @@ export default class ShippingRecipientComponent implements OnDestroy {
                     break;
 
                 case SuggestEvents.SHOW:
-                    recipientControl.updateValue(this.modelFormatter.addressDisplayInfo(event.data), {emitEvent: false});
+                    recipientControl.updateValue(`${event.data.FirstName} ${event.data.LastName} (${event.data.Company})`
+                        + ` - ${event.data.PostalAddress} ${event.data.ZipCode} ${event.data.City}`,
+                        {emitEvent: false});
                     break;
             }
         });
