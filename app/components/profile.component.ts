@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
 @Component({
@@ -12,6 +12,6 @@ import {TranslatePipe} from 'ng2-translate/ng2-translate';
 /**
  * Profile component.
  */
-export default class ProfileComponent implements OnInit {
+export default class ProfileComponent {
     
 }

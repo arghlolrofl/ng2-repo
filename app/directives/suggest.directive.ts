@@ -55,14 +55,19 @@ export class SuggestDirective implements OnInit {
         Observable.fromEvent(el.nativeElement, 'keyup')
             .filter((keyEvent:KeyboardEvent) => keyEvent.keyCode !== 13 && keyEvent.keyCode !== 27
                                                 && keyEvent.keyCode !== 40 && keyEvent.keyCode !== 38)
-            .debounceTime(400)
-            .do(() => this.suggestions = [])
-            .mergeMap(() => {
-                const term = el.nativeElement.value;
-                return (term.length > 1) ? this.mapper(el.nativeElement.value) : [];
+            .map(() => el.nativeElement.value)
+            .do(() => {
+                this.suggestions = [];
+                this.events.emit({
+                    type: SuggestEvents.CHANGED,
+                    data: this.suggestions
+                });
             })
-            .retry()
+            .filter((term) => !!term)
             .distinctUntilChanged()
+            .debounceTime(400)
+            .switchMap((term) => (term.length > 1) ? this.mapper(el.nativeElement.value) : [])
+            .retry()
             .subscribe(
                 (item) => {
                     this.suggestions.push(item);
