@@ -8,10 +8,14 @@ import ParcelInfo from "../models/parcel-info";
 import {ESizeUnit} from "../models/esize-info";
 import {EWeightUnit} from "../models/eweight-unit";
 import PostalProductInfo from "../models/postal-product-info";
+import ShippingProductCalculationShortcutsComponent from "./shipping.product-calculation.shortcuts.component";
 
 @Component({
     selector: 'fp-shipping-product-calculation',
     templateUrl: 'app/templates/shipping.product-calculation.component.html',
+    directives: [
+        ShippingProductCalculationShortcutsComponent
+    ]
     pipes: [
         TranslatePipe
     ],
