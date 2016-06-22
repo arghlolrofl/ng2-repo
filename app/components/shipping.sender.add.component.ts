@@ -154,8 +154,6 @@ export default class ShippingSenderAddComponent implements AfterViewInit {
      * Add sender.
      */
     public save() {
-        console.log('save called');
-
         const address = new AddressCreationInfo();
         address.CountryId = this.country.Id;
         address.Region = this.region.RegionName;
@@ -173,12 +171,9 @@ export default class ShippingSenderAddComponent implements AfterViewInit {
         address.EMailAddress = this.addForm.controls['eMail'].value;
 
         this.addressService.addNewToAddressGroup('Sender', address).subscribe(
-            () => {
-                console.log('address stored');
-                this.modal.close();
-            },
+            () => this.modal.close(),
             (error:Error) => {
-                console.warn('address could not be stored', error);
+                console.warn('address could not be stored', error); // TODO error handling
             });
     }
 
