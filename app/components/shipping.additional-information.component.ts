@@ -21,4 +21,17 @@ export default class ShippingAdditionalInformationComponent {
     @Output()
     public onError:EventEmitter<Error> = new EventEmitter<Error>();
 
+    /**
+     * Additional Information 1 changed.
+     * @type {EventEmitter<string>}
+     */
+    @Output()
+    public additionalInfo1Change:EventEmitter<string> = new EventEmitter();
+
+    /**
+     * Additional Information 2 changed.
+     * @type {EventEmitter<string>}
+     */
+    @Output()
+    public additionalInfo2Change:EventEmitter<string> = new EventEmitter();
 }

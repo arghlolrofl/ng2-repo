@@ -12,7 +12,9 @@
                              [(costCenter2)]="costCenter2"
                              [(costCenter3)]="costCenter3"></fp-shipping-cost-center>
 
-    <fp-shipping-additional-information (onError)="handleError($event)"></fp-shipping-additional-information>
+    <fp-shipping-additional-information (onError)="handleError($event)"
+                                        [(additionalInfo1)]="additionalInfo1"
+                                        [(additionalInfo2)]="additionalInfo2"></fp-shipping-additional-information>
 
   </div>
 
