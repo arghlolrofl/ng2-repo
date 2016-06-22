@@ -92,7 +92,7 @@ export default class AppComponent implements AfterViewInit {
      * @param {Error} error the error to be processed
      */
     public onError(error:Error) {
-        console.warn(error);
+        console.warn(error); // TODO error handling
     }
 
     /**

@@ -85,7 +85,7 @@ export default class ShippingProductCalculationComponent {
 
         this.shippingService.calculate(parcelInfo)
             .subscribe(
-                (postalProductInfo:PostalProductInfo) => console.log(postalProductInfo),
+                (postalProductInfo:PostalProductInfo) => console.log(postalProductInfo), // TODO do something
                 (error) => this.onError.emit(error));
     }
 }

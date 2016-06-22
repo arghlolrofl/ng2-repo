@@ -82,6 +82,6 @@ export default class ShippingComponent {
      */
     public handleError(error:any) {
         console.warn((error.message) ? error.message :
-            error.status ? `${error.status} - ${error.statusText}` : error);
+            error.status ? `${error.status} - ${error.statusText}` : error); // TODO error handling
     }
 }
