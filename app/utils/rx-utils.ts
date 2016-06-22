@@ -14,7 +14,7 @@ export default class RxUtils {
     public static errorDelay(retries, delay) {
         return (errors:Observable) =>
             Observable.range(1, retries)
-                .zip(errors, (i) => i)
-                .mergeMap((i) => Observable.timer(delay));
+                .zip(errors)
+                .mergeMap(() => Observable.timer(delay));
     }
 }
