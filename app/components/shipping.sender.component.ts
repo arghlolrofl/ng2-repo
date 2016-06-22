@@ -4,7 +4,6 @@ import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
 import AddressService from "../services/address.service";
 import AddressDisplayInfo from "../models/address-display-info";
-import ModelFormatter from "../services/model-formatter.service";
 import {SuggestDirective, SuggestEvents} from "../directives/suggest.directive";
 import ShippingSenderAddComponent from "./shipping.sender.add.component";
 
@@ -19,7 +18,6 @@ import ShippingSenderAddComponent from "./shipping.sender.add.component";
         TranslatePipe
     ],
     providers: [
-        ModelFormatter,
         AddressService
     ]
 })
@@ -73,12 +71,10 @@ export default class ShippingSenderComponent implements OnDestroy {
 
     /**
      * @constructor
-     * @param {ModelFormatter} modelFormatter the model formatting service
      * @param {AddressService} addressService the address information service
      * @param {FormBuilder} formBuilder the form builder from angular2
      */
-    constructor(private modelFormatter:ModelFormatter,
-                private addressService:AddressService,
+    constructor(private addressService:AddressService,
                 private formBuilder:FormBuilder) {
         this.senderEvents = new EventEmitter<any>();
         this.showAddDialogChange = new EventEmitter();
@@ -112,7 +108,8 @@ export default class ShippingSenderComponent implements OnDestroy {
 
                 case SuggestEvents.SELECTED:
                     this.senderChange.emit(event.data);
-                    senderControl.updateValue(this.modelFormatter.addressDisplayInfo(event.data));
+                    senderControl.updateValue(`${event.data.FirstName} ${event.data.LastName} (${event.data.Company})`
+                        + ` - ${event.data.PostalAddress} ${event.data.ZipCode} ${event.data.City}`);
                     shippingPointControl.updateValue(event.data.ZipCode);
                     break;
 
@@ -123,7 +120,9 @@ export default class ShippingSenderComponent implements OnDestroy {
                     break;
 
                 case SuggestEvents.SHOW:
-                    senderControl.updateValue(this.modelFormatter.addressDisplayInfo(event.data), {emitEvent: false});
+                    senderControl.updateValue(`${event.data.FirstName} ${event.data.LastName} (${event.data.Company})`
+                        + ` - ${event.data.PostalAddress} ${event.data.ZipCode} ${event.data.City}`,
+                        {emitEvent: false});
                     break;
             }
         });

@@ -3,7 +3,6 @@ import {ControlGroup, FormBuilder, Validators} from '@angular/common';
 import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
 import AddressService from "../services/address.service";
-import ModelFormatter from "../services/model-formatter.service";
 import ShippingService from "../services/shipping.service";
 import ParcelInfo from "../models/parcel-info";
 import {ESizeUnit} from "../models/esize-info";
@@ -17,7 +16,6 @@ import PostalProductInfo from "../models/postal-product-info";
         TranslatePipe
     ],
     providers: [
-        ModelFormatter,
         AddressService,
         ShippingService
     ]

@@ -23,7 +23,7 @@
           <ul>
             <li *ngFor="let addressGroup of addressGroupSuggestions"
                 (click)="selectAddressGroup(addressGroup)">
-              {{modelFormatter.addressGroupInfo(addressGroup)}}
+              {{addressGroup.GroupName}}
             </li>
           </ul>
         </div>

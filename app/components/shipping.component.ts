@@ -57,6 +57,16 @@ export default class ShippingComponent {
     private costCenter1:CostCenterInfo;
 
     /**
+     * Cost Center level 2.
+     */
+    private costCenter2:CostCenterInfo;
+
+    /**
+     * Cost Center level 3.
+     */
+    private costCenter3:CostCenterInfo;
+
+    /**
      * Handle errors.
      * @param {any} error the error
      */
