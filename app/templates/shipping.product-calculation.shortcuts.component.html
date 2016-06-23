@@ -1,16 +1,8 @@
 <div class="row">
-  <a href="#" class="button shortcut">
-    <span>shortcut 1*</span>
-  </a>
-  <a href="#" class="button shortcut">
-    <span>shortcut 2*</span>
-  </a>
-  <a href="#" class="button shortcut">
-    <span>shortcut 3*</span>
-  </a>
-  <a href="#" class="button shortcut">
-    <span>shortcut 4*</span>
-  </a>
+  <button *ngFor="let shortcut of shortcuts"
+          class="button shortcut">
+    <span>{{shortcut.DisplayName}}</span>
+  </button>
 
   <div class="col-button">
     <div class="field-container box-icon">
@@ -19,10 +11,13 @@
       </button>
     </div>
   </div>
-  <a href="#" class="button shortcut">
+
+  <button class="button shortcut"
+     (click)="lastRate()">
     <span>last rate*</span>
-  </a>
+  </button>
 </div>
+
 
 <modal #modalSearch [keyboard]="false">
   <modal-header>

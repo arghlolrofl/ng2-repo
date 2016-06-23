@@ -15,7 +15,7 @@ import ShippingProductCalculationShortcutsComponent from "./shipping.product-cal
     templateUrl: 'app/templates/shipping.product-calculation.component.html',
     directives: [
         ShippingProductCalculationShortcutsComponent
-    ]
+    ],
     pipes: [
         TranslatePipe
     ],
