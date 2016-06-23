@@ -8,9 +8,10 @@
                  placeholder="weight"
                  tabindex="10"
                  ngControl="weight"
-                 [class.error]="!productCalculationForm.controls['weight'].valid && productCalculationForm.controls['weight'].touched">
+                 [class.error]="!productCalculationForm.controls['weight'].valid && productCalculationForm.controls['weight'].touched"
+                 (keyup.esc)="clearWeight()">
           <button class="clear-submit"
-                  (click)="productCalculationForm.controls['weight'].updateValue('')">
+                  (click)="clearWeight()">
             <span class="icon-close"></span>
           </button>
         </div>
@@ -27,76 +28,65 @@
 
     <div class="row">
       <div class="col-input small-input">
-        <div class="field-container text-field">
+        <div class="field-container text-field"
+             [class.disabled]="isDocument">
           <input type="text"
                  placeholder="length"
                  tabindex="11"
                  ngControl="length"
-                 [class.error]="!productCalculationForm.controls['length'].valid && productCalculationForm.controls['length'].touched">
+                 [class.error]="!productCalculationForm.controls['length'].valid && productCalculationForm.controls['length'].touched"
+                 [disabled]="isDocument"
+                 (keyup.esc)="clearLength()">
           <button class="clear-submit"
-                  (click)="productCalculationForm.controls['length'].updateValue('')">
+                  (click)="clearLength()"
+                  [disabled]="isDocument">
             <span class="icon-close"></span>
           </button>
         </div>
 
-        <div class="field-container text-field">
+        <div class="field-container text-field"
+             [class.disabled]="isDocument">
           <input type="text"
                  placeholder="width"
                  tabindex="12"
                  ngControl="width"
-                 [class.error]="!productCalculationForm.controls['width'].valid && productCalculationForm.controls['width'].touched">
+                 [class.error]="!productCalculationForm.controls['width'].valid && productCalculationForm.controls['width'].touched"
+                 [disabled]="isDocument"
+                 (keyup.esc)="clearWidth()">
           <button class="clear-submit"
-                  (click)="productCalculationForm.controls['width'].updateValue('')">
+                  (click)="clearWidth()"
+                  [disabled]="isDocument">
             <span class="icon-close"></span>
           </button>
         </div>
 
-        <div class="field-container text-field">
+        <div class="field-container text-field"
+             [class.disabled]="isDocument">
           <input type="text"
                  placeholder="height"
                  tabindex="13"
                  ngControl="height"
-                 [class.error]="!productCalculationForm.controls['height'].valid && productCalculationForm.controls['height'].touched">
+                 [class.error]="!productCalculationForm.controls['height'].valid && productCalculationForm.controls['height'].touched"
+                 [disabled]="isDocument"
+                 (keyup.esc)="clearHeight()">
           <button class="clear-submit"
-                  (click)="productCalculationForm.controls['height'].updateValue('')">
+                  (click)="clearHeight()"
+                  [disabled]="isDocument">
             <span class="icon-close"></span>
           </button>
         </div>
       </div>
       <div class="col-button">
         <div class="field-container box-icon">
-          <button type="submit" [disabled]="!productCalculationForm.valid">
+          <button type="submit"
+                  (click)="changeIsDocument()">
             <span class="icon-interface"></span>
           </button>
         </div>
       </div>
     </div>
 
-    <div class="row">
-      <a href="#" class="button shortcut">
-        <span>shortcut 1*</span>
-      </a>
-      <a href="#" class="button shortcut">
-        <span>shortcut 2*</span>
-      </a>
-      <a href="#" class="button shortcut">
-        <span>shortcut 3*</span>
-      </a>
-      <a href="#" class="button shortcut">
-        <span>shortcut 4*</span>
-      </a>
-
-      <div class="col-button">
-        <div class="field-container box-icon">
-          <button>
-            <span class="icon-search"></span>
-          </button>
-        </div>
-      </div>
-      <a href="#" class="button shortcut">
-        <span>last rate*</span>
-      </a>
-    </div>
+    <fp-shipping-product-calculation-shortcuts></fp-shipping-product-calculation-shortcuts>
 
     <div class="row">
       <div class="field-container box-info">
