@@ -34,7 +34,8 @@
 
     <div class="row">
       <div class="col-input">
-        <div class="field-container text-field-search">
+        <div class="field-container text-field-search"
+             [class.disabled]="!costCenter1">
           <button class="search-submit">
             <span class="icon-search"></span>
           </button>
@@ -46,7 +47,8 @@
                  [fpSuggest]="mapCostCenter23(costCenterService)"
                  [fpSuggestEvents]="costCenter2Events">
           <button class="clear-submit"
-                  (click)="clearCostCenter2()">
+                  (click)="clearCostCenter2()"
+                  [disabled]="!costCenter1">
             <span class="icon-close"></span>
           </button>
         </div>
@@ -66,7 +68,8 @@
 
     <div class="row">
       <div class="col-input">
-        <div class="field-container text-field-search">
+        <div class="field-container text-field-search"
+             [class.disabled]="!costCenter1">
           <button class="search-submit">
             <span class="icon-search"></span>
           </button>
@@ -78,7 +81,8 @@
                  [fpSuggest]="mapCostCenter23(costCenterService)"
                  [fpSuggestEvents]="costCenter3Events">
           <button class="clear-submit"
-                  (click)="clearCostCenter3()">
+                  (click)="clearCostCenter3()"
+                  [disabled]="!costCenter1">
             <span class="icon-close"></span>
           </button>
         </div>

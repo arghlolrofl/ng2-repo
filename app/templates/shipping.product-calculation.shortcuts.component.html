@@ -13,7 +13,8 @@
   </div>
 
   <button class="button shortcut"
-     (click)="lastRate()">
+          (click)="lastRate()"
+          [disabled]="!lastShortcut">
     <span>last rate*</span>
   </button>
 </div>

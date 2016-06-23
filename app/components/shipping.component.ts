@@ -9,6 +9,8 @@ import ShippingRecipientComponent from "./shipping.recipient.component";
 import ShippingCostCenterComponent from "./shipping.cost-center.component";
 import ShippingAdditionalInformationComponent from "./shipping.additional-information.component";
 import CostCenterInfo from "../models/cost-center-info";
+import DimensionInfo from "../models/dimension-info";
+import WeightInfo from "../models/weight-info";
 
 @Component({
     selector: 'fp-shipping',
@@ -75,6 +77,21 @@ export default class ShippingComponent {
      * Additional Info 2.
      */
     private additionalInfo2:string;
+
+    /**
+     * Dimensions of the product.
+     */
+    private dimensions:DimensionInfo;
+
+    /**
+     * Weight of the product.
+     */
+    private weight:WeightInfo;
+
+    /**
+     * Is Document toggle.
+     */
+    private isDocument:boolean = false;
 
     /**
      * Handle errors.
