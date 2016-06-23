@@ -40,24 +40,28 @@ export default class ShippingProductCalculationComponent {
     public onError:EventEmitter<Error> = new EventEmitter<Error>();
 
     /**
-     * Updated when the dimensions changed.
+     * Updated when the parcel info has changed.
      * @type {EventEmitter}
      */
     @Output()
+    public parcelChange:EventEmitter<PostalProductInfo> = new EventEmitter();
+
+    /**
+     * Updated when the dimensions changed.
+     * @type {EventEmitter}
+     */
     public dimensionsChange:EventEmitter<DimensionInfo> = new EventEmitter();
 
     /**
      * Updated when the weight changed.
      * @type {EventEmitter}
      */
-    @Output()
     public weightChange:EventEmitter<WeightInfo> = new EventEmitter();
 
     /**
      * Updated when is document changed.
      * @type {EventEmitter}
      */
-    @Output()
     public isDocumentChange:EventEmitter<boolean> = new EventEmitter();
 
     /**
@@ -80,6 +84,11 @@ export default class ShippingProductCalculationComponent {
      * @type {boolean}
      */
     private isDocument:boolean = false;
+
+    /**
+     * Parcel information.
+     */
+    private parcel:PostalProductInfo;
 
     /**
      * @constructor
@@ -172,13 +181,17 @@ export default class ShippingProductCalculationComponent {
                     this.dimensionsChange.emit(this.dimensions);
                 },
                 (error:Error) => console.warn(error)); // TODO error handling
+
+        this.parcelChange.subscribe(
+            (r:PostalProductInfo) => this.parcel = r,
+            (error:Error) => console.warn(error)); // TODO error handling
     }
 
     /**
      * Recalculate the currently entered product information.
      */
     public recalculateProduct() {
-        if (!this.productCalculationForm.valid) {
+        if (!this.productCalculationForm.valid && (this.isDocument && this.weight.Value <= 0)) {
             return;
         }
         const productInfos = this.productCalculationForm.value;
@@ -190,11 +203,16 @@ export default class ShippingProductCalculationComponent {
         parcelInfo.Characteristic.Dimension.Unit = ESizeUnit.Centimeter;
         parcelInfo.Characteristic.Weight.Value = parseFloat(productInfos.weight);
         parcelInfo.Characteristic.Weight.Unit = EWeightUnit.Kg;
+        parcelInfo.PostalCode = 'K2B8J6'; // TODO make dynamic from sender address
+        parcelInfo.Destination.PostalCode = 'J0E1X0'; // TODO make dynamic from recipient address
 
         this.shippingService.calculate(parcelInfo)
             .subscribe(
-                (postalProductInfo:PostalProductInfo) => console.log(postalProductInfo), // TODO do something
-                (error) => this.onError.emit(error));
+                (r:PostalProductInfo) => this.parcelChange.emit(r),
+                (error) => {
+                    this.parcelChange.emit(null);
+                    this.onError.emit(error)
+                });
     }
 
     /**
@@ -203,6 +221,9 @@ export default class ShippingProductCalculationComponent {
     public changeIsDocument() {
         this.isDocument = !this.isDocument;
         this.isDocumentChange.emit(this.isDocument);
+        this.clearLength();
+        this.clearWidth();
+        this.clearHeight();
     }
 
     /**
@@ -239,5 +260,14 @@ export default class ShippingProductCalculationComponent {
         (<Control> this.productCalculationForm.controls['height']).updateValue('');
         this.dimensions.Height = 0;
         this.dimensionsChange.emit(this.dimensions);
+    }
+
+    /**
+     * Checks if the calculation can be done.
+     * @returns {boolean}
+     */
+    public canCalculate() {
+        return this.weight.Value > 0 &&
+            ((this.dimensions.Height > 0 && this.dimensions.Width > 0 && this.dimensions.Length > 0) || this.isDocument)
     }
 }

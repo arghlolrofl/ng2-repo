@@ -49,7 +49,7 @@ export default class AddressCreationInfo {
 
     AddressType:EAddressType = EAddressType.ApplicationAddress;
 
-    AddressGroupId:number;
+    AddressGroupIds:Array<number>;
 
     Id:number;
 }

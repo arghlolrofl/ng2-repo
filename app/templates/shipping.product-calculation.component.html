@@ -1,6 +1,6 @@
 <section class="sectiontemplate">
   <h4><i class="icon-class icon-tool"></i>Product Calculation</h4>
-  <form [ngFormModel]="productCalculationForm" (ngSubmit)="recalculateProduct()">
+  <form [ngFormModel]="productCalculationForm">
     <div class="row">
       <div class="col-input small-input">
         <div class="field-container text-field">
@@ -90,20 +90,26 @@
 
     <div class="row">
       <div class="field-container box-info">
-        <span>Parcel	Weight / Dimensions*</span>
+        <span>Parcel Weight / Dimensions*</span>
         <hr>
-        <span>1000G	10cm x 10 cm x 10cm*</span>
+        <span>{{weight.Value}}kg - {{dimensions.Height}}cm x {{dimensions.Width}}cm x {{dimensions.Length}}cm*</span>
       </div>
 
-      <button href="#" class="button color">
+      <button type="submit"
+              class="button color"
+              [class.disabled]="!canCalculate()"
+              [disabled]="!canCalculate()"
+              (click)="recalculateProduct()">
         <span>calculate*</span>
       </button>
     </div>
 
     <div class="row">
       <div class="field-container box-package">
-        <span>XpresspostTM*</span><span class="price">$ 22.49*</span>
-        <span>2 bussiness days (Guaranteed)*</span>
+        <span *ngIf="parcel">{{parcel.Name}}</span>
+        <span *ngIf="parcel" class="price">{{parcel.Price.Total | currency:'USD':true:'1.2-2'}}</span>
+        <span *ngIf="parcel">{{parcel.ExpectedTransitTime}} {{parcel.GuaranteedDelivery ? '(Guaranteed)' : ''}}*</span>
+        <span *ngIf="!parcel">N/A*</span>
       </div>
     </div>
 

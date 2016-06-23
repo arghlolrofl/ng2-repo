@@ -20,9 +20,7 @@
 
   <div class="col-md-6">
     <fp-shipping-product-calculation (onError)="handleError($event)"
-                                     [(dimensions)]="dimensions"
-                                     [(weight)]="weight"
-                                     [(isDocument)]="isDocument"></fp-shipping-product-calculation>
+                                     [(parcel)]="parcel"></fp-shipping-product-calculation>
 
     <fp-shipping-options (onError)="handleError($event)"></fp-shipping-options>
   </div>

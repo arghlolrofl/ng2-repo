@@ -14,7 +14,7 @@
                  [fpSuggest]="mapCostCenter1(costCenterService)"
                  [fpSuggestEvents]="costCenter1Events">
           <button class="clear-submit"
-                  (click)="clearCostCenter1()">
+                  (mouseup)="clearCostCenter1()">
             <span class="icon-close"></span>
           </button>
         </div>
@@ -47,7 +47,7 @@
                  [fpSuggest]="mapCostCenter23(costCenterService)"
                  [fpSuggestEvents]="costCenter2Events">
           <button class="clear-submit"
-                  (click)="clearCostCenter2()"
+                  (mouseup)="clearCostCenter2()"
                   [disabled]="!costCenter1">
             <span class="icon-close"></span>
           </button>
@@ -81,7 +81,7 @@
                  [fpSuggest]="mapCostCenter23(costCenterService)"
                  [fpSuggestEvents]="costCenter3Events">
           <button class="clear-submit"
-                  (click)="clearCostCenter3()"
+                  (mouseup)="clearCostCenter3()"
                   [disabled]="!costCenter1">
             <span class="icon-close"></span>
           </button>

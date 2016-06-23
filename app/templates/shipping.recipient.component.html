@@ -14,7 +14,7 @@
                  [fpSuggest]="mapAddressGroupSuggest(addressService)"
                  [fpSuggestEvents]="addressGroupEvents">
           <button class="clear-submit"
-                  (click)="clearAddressGroup()">
+                  (mouseup)="clearAddressGroup()">
             <span class="icon-close"></span>
           </button>
         </div>
@@ -44,7 +44,7 @@
                  [fpSuggest]="mapRecipientSuggest(addressService)"
                  [fpSuggestEvents]="recipientEvents">
           <button class="clear-submit"
-                  (click)="clearRecipient()">
+                  (mouseup)="clearRecipient()">
             <span class="icon-close"></span>
           </button>
         </div>
