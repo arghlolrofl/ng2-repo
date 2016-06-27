@@ -1,6 +1,5 @@
-/* Alignment
-/* ----------------------------- */
-
+// Alignment
+// -------------------------------------
 .float-left {
   float: left;
 }
@@ -21,13 +20,12 @@
   text-align: center;
 }
 
-/* Icons
-/* ----------------------------- */
-
+// Icons
+// -------------------------------------
 .icon-class {
   &:before {
-    font-family: "icons";
     display: inline-block;
+    font-family: $font-family-icon;
     vertical-align: middle;
     line-height: 1;
     font-weight: normal;
@@ -42,9 +40,8 @@
   }
 }
 
-/* Clear
-/* ----------------------------- */
-
+// Clear
+// -------------------------------------
 .clear {
   &::after {
     display: block;

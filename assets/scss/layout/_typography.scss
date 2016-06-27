@@ -171,6 +171,18 @@ i.icon-class {
       background: $white;
     }
 
+    &:disabled {
+      background: $brand-gray-1;
+      border-color: $brand-gray-2;
+    }
+
+    &.placeholder {
+      background: none;
+      color: $brand-gray-2;
+      border: 1px dotted $brand-gray-2;
+      border-radius: 5px;
+    }
+
     span {
       font-size: 1.2rem;
       line-height: 1.4rem;
