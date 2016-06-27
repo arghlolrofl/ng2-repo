@@ -24,3 +24,15 @@ export const AUTHORIZATION_API_URL = 'http://62.220.24.49/M1Authentication/token
  * @type {number}
  */
 export const API_TIMEOUT = 3000;
+
+/**
+ * API request retries.
+ * @type {number}
+ */
+export const API_RETRIES = 5;
+
+/**
+ * API request retry delay.
+ * @type {number}
+ */
+export const API_RETRY_DELAY = 1000;

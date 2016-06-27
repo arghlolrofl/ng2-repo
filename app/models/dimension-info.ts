@@ -6,7 +6,7 @@ export default class DimensionInfo {
 
     Height:number;
 
-    Lenght:number;
+    Length:number;
 
     Unit:ESizeUnit = ESizeUnit.Centimeter;
 

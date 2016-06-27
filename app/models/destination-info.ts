@@ -1,7 +1,11 @@
+import {DestinationTarget} from "./destination-target";
+
 /**
  * DestinationInfo model.
  */
 export default class DestinationInfo {
 
-    Code:string;
+    PostalCode:string;
+
+    Target:DestinationTarget = DestinationTarget.Domestic;
 }

@@ -12,11 +12,11 @@ export default class PostalProductInfo {
     
     ExpectedDeliveryDate:Date;
     
-    ExpectedtransitTime:string;
+    ExpectedTransitTime:string;
     
     GuaranteedDelivery:boolean;
     
     Name:string;
     
-    Price:PostalProductPriceInfo;
+    Price:PostalProductPriceInfo = new PostalProductPriceInfo();
 }

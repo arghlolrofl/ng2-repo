@@ -21,6 +21,6 @@ export default class ShippingService {
      * @returns {Observable<PostalProductInfo>}
      */
     public calculate(parcelInfo:ParcelInfo):Observable<PostalProductInfo> {
-        return this.apiClient.post('Shipping/Calculate', parcelInfo);
+        return this.apiClient.post('Shipments/Calculate', parcelInfo);
     }
 }

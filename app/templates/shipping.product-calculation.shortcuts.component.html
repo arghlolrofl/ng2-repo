@@ -1,0 +1,65 @@
+<div class="row">
+  <button *ngFor="let shortcut of shortcuts"
+          class="button shortcut">
+    <span>{{shortcut.DisplayName}}</span>
+  </button>
+
+  <div class="col-button">
+    <div class="field-container box-icon">
+      <button (click)="modalSearch.open()">
+        <span class="icon-search"></span>
+      </button>
+    </div>
+  </div>
+
+  <button class="button shortcut"
+          (click)="lastRate()"
+          [disabled]="!lastShortcut">
+    <span>last rate*</span>
+  </button>
+</div>
+
+
+<modal #modalSearch [keyboard]="false">
+  <modal-header>
+    <div class="row">
+      <div class="col-md-12">
+        <h4>Search Shortcut*</h4>
+      </div>
+    </div>
+  </modal-header>
+  <form [ngFormModel]="searchForm">
+    <modal-body>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="field-container text-field">
+            <input type="text"
+                   placeholder="Search*"
+                   ngControl="search"
+                   (keyup.esc)="searchForm.controls['search'].updateValue('')">
+            <button class="clear-submit"
+                    (click)="searchForm.controls['search'].updateValue('')">
+              <span class="icon-close"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </modal-body>
+
+    <modal-footer>
+      <div class="row">
+        <div class="col-sm-12">
+          <button class="button popup"
+                  (click)="modalSearch.close()">
+            <span>close*</span>
+          </button>
+
+          <button type="submit"
+                  class="button popup">
+            <span>save*</span>
+          </button>
+        </div>
+      </div>
+    </modal-footer>
+  </form>
+</modal>

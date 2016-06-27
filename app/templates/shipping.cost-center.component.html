@@ -4,9 +4,9 @@
     <div class="row">
       <div class="col-input">
         <div class="field-container text-field-search">
-          <button class="search-submit">
+          <div class="search-submit">
             <span class="icon-search"></span>
-          </button>
+          </div>
           <input type="text"
                  tabindex="5"
                  placeholder="cost-center level 1"
@@ -14,7 +14,7 @@
                  [fpSuggest]="mapCostCenter1(costCenterService)"
                  [fpSuggestEvents]="costCenter1Events">
           <button class="clear-submit"
-                  (click)="clearCostCenter1()">
+                  (mouseup)="clearCostCenter1()">
             <span class="icon-close"></span>
           </button>
         </div>
@@ -34,10 +34,11 @@
 
     <div class="row">
       <div class="col-input">
-        <div class="field-container text-field-search">
-          <button class="search-submit">
+        <div class="field-container text-field-search"
+             [class.disabled]="!costCenter1">
+          <div class="search-submit">
             <span class="icon-search"></span>
-          </button>
+          </div>
           <input type="text"
                  tabindex="6"
                  placeholder="cost-center level 2 or 3"
@@ -46,7 +47,8 @@
                  [fpSuggest]="mapCostCenter23(costCenterService)"
                  [fpSuggestEvents]="costCenter2Events">
           <button class="clear-submit"
-                  (click)="clearCostCenter2()">
+                  (mouseup)="clearCostCenter2()"
+                  [disabled]="!costCenter1">
             <span class="icon-close"></span>
           </button>
         </div>
@@ -66,10 +68,11 @@
 
     <div class="row">
       <div class="col-input">
-        <div class="field-container text-field-search">
-          <button class="search-submit">
+        <div class="field-container text-field-search"
+             [class.disabled]="!costCenter1">
+          <div class="search-submit">
             <span class="icon-search"></span>
-          </button>
+          </div>
           <input type="text"
                  tabindex="7"
                  placeholder="cost-center level 2 or 3"
@@ -78,7 +81,8 @@
                  [fpSuggest]="mapCostCenter23(costCenterService)"
                  [fpSuggestEvents]="costCenter3Events">
           <button class="clear-submit"
-                  (click)="clearCostCenter3()">
+                  (mouseup)="clearCostCenter3()"
+                  [disabled]="!costCenter1">
             <span class="icon-close"></span>
           </button>
         </div>

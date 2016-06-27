@@ -7,6 +7,9 @@
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/observable/merge';
+import 'rxjs/add/observable/timer';
+import 'rxjs/add/observable/range';
+import 'rxjs/add/observable/empty';
 
 // Operators
 import 'rxjs/add/operator/catch';
@@ -21,4 +24,6 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/timeout';
 import 'rxjs/add/operator/retry';
+import 'rxjs/add/operator/retryWhen';
 import 'rxjs/add/operator/first';
+import 'rxjs/add/operator/zip';

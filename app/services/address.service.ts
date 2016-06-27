@@ -124,7 +124,7 @@ export default class AddressService {
         return this.getFilteredAddressGroups(addressGroupName, 0, 1)
             .first()
             .mergeMap((r:AddressGroupInfo) => {
-                address.AddressGroupId = r.Id;
+                address.AddressGroupIds = [r.Id];
                 return this.apiClient.postNoRes('Address/AddNew', address);
             });
     }

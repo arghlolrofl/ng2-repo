@@ -2,8 +2,9 @@ import {Injectable} from '@angular/core';
 import {Http, Response, Headers, RequestOptions} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 
-import {CONSUMER_API_BASE_URL, API_TIMEOUT, AUTHORIZATION_API_URL} from '../config';
+import {CONSUMER_API_BASE_URL, API_TIMEOUT, AUTHORIZATION_API_URL, API_RETRIES, API_RETRY_DELAY} from '../config';
 import LoginService from "./login.service";
+import RxUtils from "../utils/rx-utils";
 
 /**
  * API Client Wrapper.
@@ -34,6 +35,7 @@ export default class APIClient {
             return this.http
                 .get(CONSUMER_API_BASE_URL + path, opt)
                 .timeout(API_TIMEOUT, new Error('API timeout'))
+                .retryWhen(RxUtils.errorDelay(API_RETRIES, API_RETRY_DELAY))
                 .map(APIClient.extractJson)
                 .catch(this.handleError);
         } catch (e) {
@@ -57,6 +59,7 @@ export default class APIClient {
             return this.http
                 .post(CONSUMER_API_BASE_URL + path, JSON.stringify(data), opt)
                 .timeout(API_TIMEOUT, new Error('API timeout'))
+                .retryWhen(RxUtils.errorDelay(API_RETRIES, API_RETRY_DELAY))
                 .map(APIClient.extractJson)
                 .catch(this.handleError);
         } catch (e) {
@@ -80,6 +83,7 @@ export default class APIClient {
             return this.http
                 .post(CONSUMER_API_BASE_URL + path, JSON.stringify(data), opt)
                 .timeout(API_TIMEOUT, new Error('API timeout'))
+                .retryWhen(RxUtils.errorDelay(API_RETRIES, API_RETRY_DELAY))
                 .catch(this.handleError);
         } catch (e) {
             return Observable.throw(e);
