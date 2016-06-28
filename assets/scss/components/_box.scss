@@ -1,5 +1,5 @@
-/* Box Icon
-/* ----------------------------- */
+// Box Icon
+// -------------------------------------
 
 .box-icon {
   float: left;
@@ -19,24 +19,24 @@
     border-radius: $boxBorderRadius;
     transition: border $transitionFast $transitionTiming;
 
-    [class^="icon-"]::before,
-    [class*="icon-"]::before {
+    [class^='icon-']::before,
+    [class*='icon-']::before {
+      margin: 0;
+      padding: 0;
       position: absolute;
       top: 0;
       left: 10px;
       color: $icon-box-color;
       line-height: $button-line-height;
       font-size: 1.7rem;
-      padding: 0;
-      margin: 0;
       transition: color $transitionFast $transitionTiming;
     }
 
     &:hover {
       border: 1px solid $icon-box-hover-color;
 
-      [class^="icon-"]::before,
-      [class*="icon-"]::before {
+      [class^='icon-']::before,
+      [class*='icon-']::before {
         color: $icon-box-hover-color;
       }
     }
@@ -72,9 +72,14 @@
   }
 
   @include mobile {
-    width: 100%;
     margin: 0 0 15px 0;
+    width: 100%;
   }
+}
+
+.box-option {
+  @extend .box-info;
+  background: none;
 }
 
 .box-package {
@@ -86,9 +91,9 @@
   position: relative;
 
   span {
+    display: block;
     font-size: 1.7rem;
     line-height: 2.0rem;
-    display: block;
 
     &.price {
       position: absolute;
@@ -106,8 +111,8 @@
   }
 
   @include mobile {
-    width: 100%;
     margin: 0 0 15px 0;
+    width: 100%;
   }
 }
 
@@ -157,8 +162,8 @@
   }
 
   @include mobile {
-    width: 100%;
     margin: 0 0 15px 0;
+    width: 100%;
 
     table tr td {
       width: 75%;
@@ -175,8 +180,8 @@
   }
 
   @include mobile {
-    width: 100%;
     margin: 0 0 15px 0;
+    width: 100%;
   }
 }
 
@@ -196,16 +201,16 @@
   }
 
   @include mobile {
+    margin: 0 0 15px 0;
     float: none;
     width: 100%;
-    margin: 0 0 15px 0;
   }
 }
 
 .box-lights {
-  height: 30px;
   margin: 33px 0 15px;
   padding-left: 35px;
+  height: 30px;
 
   @include desktop-large {
     margin: 33px 0 15px;
@@ -218,7 +223,7 @@
   }
 
   @include mobile {
-   display: inline-block;
+    display: inline-block;
   }
 
   i.icon-class:before {
@@ -226,12 +231,13 @@
   }
 
   .color {
+    margin: 5px 10px 5px 0;
     border-radius: 50%;
     width: 15px;
     height: 15px;
     float: left;
-    margin: 5px 10px 5px 0;
-    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.50) inset;
+
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.20) inset;
     background: $lights-disabled;
 
     &:last-child {
@@ -258,14 +264,15 @@
   }
 
   @include mobile {
-    float: none;
-    width: 100%;
     margin: 0 0 15px 0;
     padding: 0;
+    float: none;
+    width: 100%;
   }
 }
 
-.errorBox {
+.box-error {
+  position: relative;
   width: 100%;
   border: 2px solid $brand-primary;
   background: $white;
@@ -278,28 +285,32 @@
   }
 
   .clear-submit {
-    right: 25px;
+    right: 10px;
   }
 }
 
-/* info popup
-/* ----------------------------- */
+// Info Popup
+// -------------------------------------
 .show-info {
   position: relative;
 }
 
 .hide-info {
-  border: 1px solid $brand-gray-1;
-  background: $white;
-  padding: 10px;
-  border-radius: $boxBorderRadius;
-  width: 300px;
   display: none;
-  z-index: 100;
+  padding: 10px;
+  width: 300px;
   position: absolute;
-  top: 25px;
-  left: - 270px;
+  top: 30px;
+  left: -270px;
+  z-index: 100;
+  background: $white;
+  border: 1px solid $brand-gray-1;
+  border-radius: $boxBorderRadius;
   box-shadow: $boxShadowDefault;
+
+  p {
+    margin: 0;
+  }
 
   &.show {
     display: block;

@@ -46,8 +46,8 @@ module.exports = function(grunt) {
 				]
 			},
 			dist: {
-				src: 'source/css/style.min.css',
-				dest: 'source/css/style.min.css'
+				src: 'assets/css/style.min.css',
+				dest: 'assets/css/style.min.css'
 			}
 		},
 

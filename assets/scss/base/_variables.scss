@@ -1,5 +1,5 @@
-/* Colors
-/* ----------------------------- */
+// Colors
+// -------------------------------------
 
 $brand-primary: #d21f31;
 $brand-secondary: #01a8bb;
@@ -14,51 +14,48 @@ $brand-text-hover: $brand-primary;
 $icon-box-color: $brand-secondary;
 $icon-box-hover-color: darken($brand-secondary, 15%);
 
-//lights
+// Lights
+// -------------------------------------
 $lights-red: $brand-primary;
-$lights-yellow: #e9dc07;
+$lights-yellow: #eb3200;
 $lights-green: #057c29;
 $lights-disabled: #f4c7cb;
 
 
 // Styleguide
+// -------------------------------------
 $sg-gray: #ddd;
 
-/* Widths
-/* ----------------------------- */
-
+// Width
+// -------------------------------------
 $bodyMinWidth: 320px;
 $containerMaxWidth: 1170px;
-
 $screen-lg: 1200px;
 $screen-md: 992px;
 $screen-sm: 768px;
 $screen-xs: 480px;
 
-/* Typography
-/* ----------------------------- */
-
+// Typography
+// -------------------------------------
+$font-family-icon: 'icons';
 $font-family-sans-serif: 'Source Sans Pro', sans-serif;
 $font-family-base: $font-family-sans-serif;
 $font-base-size-px: 10px;
 
-/* Boxes
-/* ----------------------------- */
-
-$boxShadowDefault: 1px 1px 4px rgba(0, 0, 0, 0.2);
+// Box
+// -------------------------------------
+$boxShadowDefault: 1px 1px 10px rgba(0, 0, 0, 0.2);
 $boxBorderRadius: 2px;
 
-/* Animations
-/* ----------------------------- */
-
+// Animation
+// -------------------------------------
 $transitionTiming: ease-out;
 $transitionFast: .3s;
 $transitionSlow: .8s;
 
 
-/* inputs
-/* ----------------------------- */
-
+// Inputs
+// -------------------------------------
 $input-height: 40px;
 $input-line-height: 4.0rem;
 $button-height: $input-height;
