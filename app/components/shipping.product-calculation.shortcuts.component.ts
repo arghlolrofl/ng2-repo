@@ -1,4 +1,4 @@
-import {Component, ViewChild, AfterViewInit} from '@angular/core';
+import {Component, ViewChild, AfterViewInit, Output, EventEmitter} from '@angular/core';
 import {ControlGroup, FormBuilder} from "@angular/common";
 import {TranslatePipe} from 'ng2-translate/ng2-translate';
 import {MODAL_DIRECTIVES, ModalComponent} from 'ng2-bs3-modal/ng2-bs3-modal';
@@ -26,6 +26,13 @@ import ShortcutInfo from "../models/shortcut-info";
 export default class ShippingProductCalculationShortcutsComponent implements AfterViewInit {
 
     /**
+     * Shortcut has been selected or changed.
+     * @type {EventEmitter}
+     */
+    @Output()
+    public shortcutChange:EventEmitter<ShortcutInfo> = new EventEmitter();
+
+    /**
      * Modal dialog for sender
      */
     @ViewChild('modalSearch')
@@ -40,6 +47,11 @@ export default class ShippingProductCalculationShortcutsComponent implements Aft
      * Shortcuts to display on main page.
      */
     private shortcuts:Array<ShortcutInfo>;
+
+    /**
+     * Shortcut placeholder.
+     */
+    private shortcutPlaceholder:Array<number>;
 
     /**
      * The last used shortcut.
@@ -59,6 +71,7 @@ export default class ShippingProductCalculationShortcutsComponent implements Aft
     constructor(private formBuilder:FormBuilder,
                 private shortcutService:ShortcutService) {
         this.shortcuts = [];
+        this.shortcutPlaceholder = Array(4).fill(0);
         this.shortcutSuggestions = [];
         this.searchForm = formBuilder.group({
             'search': ['']
@@ -72,7 +85,10 @@ export default class ShippingProductCalculationShortcutsComponent implements Aft
         this.shortcutService.getAll()
             .take(4)
             .subscribe(
-                (r:ShortcutInfo) => this.shortcuts.push(r),
+                (r:ShortcutInfo) => {
+                    this.shortcuts.push(r);
+                    this.shortcutPlaceholder.splice(0, 1);
+                },
                 (error:Error) => console.warn(error)); // TODO error handling
 
         this.shortcutService.getLast()
@@ -95,7 +111,18 @@ export default class ShippingProductCalculationShortcutsComponent implements Aft
             });
     }
 
+    /**
+     * Select last rate.
+     */
     public lastRate() {
         console.log('last rate'); // TODO implement
+    }
+
+    /**
+     * Select shortcut.
+     * @param {ShortcutInfo} shortcut the shortcut to be selected
+     */
+    public selectShortcut(shortcut:ShortcutInfo) {
+        this.shortcutChange.emit(shortcut);
     }
 }

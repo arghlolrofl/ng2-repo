@@ -13,5 +13,5 @@ export default class ParcelInfo {
     
     Destination:DestinationInfo = new DestinationInfo();
     
-    Product:ParcelProductInfo = new ParcelProductInfo();
+    Product:ParcelProductInfo;
 }

@@ -86,7 +86,8 @@
       </div>
     </div>
 
-    <fp-shipping-product-calculation-shortcuts></fp-shipping-product-calculation-shortcuts>
+    <fp-shipping-product-calculation-shortcuts
+        (shortcutChange)="shortcutSelected($event)"></fp-shipping-product-calculation-shortcuts>
 
     <div class="row">
       <div class="field-container box-info">
@@ -105,13 +106,47 @@
     </div>
 
     <div class="row">
-      <div class="field-container box-package">
+      <button class="box-package"
+              [disabled]="!parcel"
+              (click)="modalProductSelect.open()">
         <span *ngIf="parcel">{{parcel.Name}}</span>
         <span *ngIf="parcel" class="price">{{parcel.Price.Total | currency:'USD':true:'1.2-2'}}</span>
-        <span *ngIf="parcel">{{parcel.ExpectedTransitTime}} {{parcel.GuaranteedDelivery ? '(Guaranteed)' : ''}}*</span>
+        <span *ngIf="parcel">{{parcel.ExpectedTransitTime}} business days {{parcel.GuaranteedDelivery ? '(Guaranteed)' : ''}}*</span>
         <span *ngIf="!parcel">N/A*</span>
-      </div>
+      </button>
     </div>
 
   </form>
 </section>
+
+<modal #modalProductSelect>
+  <modal-header>
+    <div class="row">
+      <div class="col-md-12">
+        <h4>Select Product*</h4>
+      </div>
+    </div>
+  </modal-header>
+  <modal-body>
+    <div class="row">
+      <button *ngFor="let parcel of parcelSuggestions"
+              class="box-package"
+              (click)="parcelSelected(parcel)">
+        <span>{{parcel.Name}}</span>
+        <span class="price">{{parcel.Price.Total | currency:'USD':true:'1.2-2'}}</span>
+        <span>{{parcel.ExpectedTransitTime}} business days {{parcel.GuaranteedDelivery ? '(Guaranteed)' : ''}}*</span>
+      </button>
+    </div>
+  </modal-body>
+
+  <modal-footer>
+    <div class="row">
+      <div class="col-sm-12">
+        <button class="button popup"
+                (click)="modalProductSelect.close()">
+          <span>close*</span>
+        </button>
+      </div>
+    </div>
+  </modal-footer>
+</modal>
