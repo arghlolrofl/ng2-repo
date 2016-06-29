@@ -1,6 +1,7 @@
-import {Component, Output, EventEmitter} from '@angular/core';
+import {Component, Output, EventEmitter, ViewChild} from '@angular/core';
 import {ControlGroup, FormBuilder, Validators, Control} from '@angular/common';
 import {TranslatePipe} from 'ng2-translate/ng2-translate';
+import {MODAL_DIRECTIVES, ModalComponent} from 'ng2-bs3-modal/ng2-bs3-modal';
 
 import AddressService from "../services/address.service";
 import ShippingService from "../services/shipping.service";
@@ -11,11 +12,13 @@ import PostalProductInfo from "../models/postal-product-info";
 import ShippingProductCalculationShortcutsComponent from "./shipping.product-calculation.shortcuts.component";
 import DimensionInfo from "../models/dimension-info";
 import WeightInfo from "../models/weight-info";
+import ShortcutInfo from "../models/shortcut-info";
 
 @Component({
     selector: 'fp-shipping-product-calculation',
     templateUrl: 'app/templates/shipping.product-calculation.component.html',
     directives: [
+        MODAL_DIRECTIVES,
         ShippingProductCalculationShortcutsComponent
     ],
     pipes: [
@@ -45,6 +48,12 @@ export default class ShippingProductCalculationComponent {
      */
     @Output()
     public parcelChange:EventEmitter<PostalProductInfo> = new EventEmitter();
+
+    /**
+     * Modal dialog for sender
+     */
+    @ViewChild('modalProductSelect')
+    private modalProductSelect:ModalComponent;
 
     /**
      * Updated when the dimensions changed.
@@ -91,6 +100,11 @@ export default class ShippingProductCalculationComponent {
     private parcel:PostalProductInfo;
 
     /**
+     * Parcel Suggestions.
+     */
+    private parcelSuggestions:Array<PostalProductInfo>
+
+    /**
      * @constructor
      * @param {ShippingService} shippingService the shipping information service
      * @param {FormBuilder} formBuilder the form builder from angular2
@@ -103,6 +117,7 @@ export default class ShippingProductCalculationComponent {
         this.dimensions.Length = 0;
         this.weight = new WeightInfo();
         this.weight.Value = 0;
+        this.parcelSuggestions = [];
         // initialize product calculation
         this.productCalculationForm = formBuilder.group({
             'weight': ['', Validators.compose([
@@ -133,8 +148,8 @@ export default class ShippingProductCalculationComponent {
         this.productCalculationForm.controls['weight'].valueChanges
             .filter((term:string) => !!term)
             .filter(() => this.productCalculationForm.controls['weight'].valid)
-            .map((term:string) => term.replace(',', '.'))
             .distinctUntilChanged()
+            .map((term:string) => term.replace(',', '.'))
             .debounceTime(400)
             .subscribe(
                 (text:string) => {
@@ -146,8 +161,8 @@ export default class ShippingProductCalculationComponent {
         this.productCalculationForm.controls['length'].valueChanges
             .filter((term:string) => !!term)
             .filter(() => this.productCalculationForm.controls['length'].valid)
-            .map((term:string) => term.replace(',', '.'))
             .distinctUntilChanged()
+            .map((term:string) => term.replace(',', '.'))
             .debounceTime(400)
             .subscribe(
                 (text:string) => {
@@ -182,6 +197,16 @@ export default class ShippingProductCalculationComponent {
                 },
                 (error:Error) => console.warn(error)); // TODO error handling
 
+        this.dimensionsChange.subscribe((dimension:DimensionInfo) => {
+            (<Control> this.productCalculationForm.controls['length']).updateValue(dimension.Length, {emitEvent: false});
+            (<Control> this.productCalculationForm.controls['width']).updateValue(dimension.Width, {emitEvent: false});
+            (<Control> this.productCalculationForm.controls['height']).updateValue(dimension.Height, {emitEvent: false});
+        });
+
+        this.weightChange.subscribe((weight:WeightInfo) => {
+            (<Control> this.productCalculationForm.controls['weight']).updateValue(weight.Value, {emitEvent: false});
+        });
+
         this.parcelChange.subscribe(
             (r:PostalProductInfo) => this.parcel = r,
             (error:Error) => console.warn(error)); // TODO error handling
@@ -206,13 +231,19 @@ export default class ShippingProductCalculationComponent {
         parcelInfo.PostalCode = 'K2B8J6'; // TODO make dynamic from sender address
         parcelInfo.Destination.PostalCode = 'J0E1X0'; // TODO make dynamic from recipient address
 
-        this.shippingService.calculate(parcelInfo)
+        const parcelObservable = this.shippingService.calculate(parcelInfo);
+        parcelObservable
+            .first()
             .subscribe(
                 (r:PostalProductInfo) => this.parcelChange.emit(r),
                 (error) => {
                     this.parcelChange.emit(null);
                     this.onError.emit(error)
                 });
+        parcelObservable
+            .subscribe(
+                (r:PostalProductInfo) => this.parcelSuggestions.push(r),
+                (error:Error) => this.onError.emit(error));
     }
 
     /**
@@ -269,5 +300,26 @@ export default class ShippingProductCalculationComponent {
     public canCalculate() {
         return this.weight.Value > 0 &&
             ((this.dimensions.Height > 0 && this.dimensions.Width > 0 && this.dimensions.Length > 0) || this.isDocument)
+    }
+
+    /**
+     * Shortcut has been clicked.
+     * @param {ShortcutInfo} shortcut the selected shortcut
+     */
+    public shortcutSelected(shortcut:ShortcutInfo) {
+        this.dimensions = shortcut.Dimensions;
+        this.weight = shortcut.Weight;
+
+        this.dimensionsChange.emit(this.dimensions);
+        this.weightChange.emit(this.weight);
+    }
+
+    /**
+     * Parcel has been selected from suggestions.
+     * @param {PostalProductInfo} parcel the selected parcel
+     */
+    public parcelSelected(parcel:PostalProductInfo) {
+        this.parcelChange.emit(parcel);
+        this.modalProductSelect.close();
     }
 }

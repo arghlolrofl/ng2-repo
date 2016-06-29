@@ -1,33 +1,15 @@
 <div class="row">
-  <button *ngFor="let shortcut of shortcuts"
-          class="button shortcut">
+  <button *ngFor="let shortcut of shortcuts.slice().reverse()"
+          class="button shortcut"
+          (click)="selectShortcut(shortcut)">
     <span>{{shortcut.DisplayName}}</span>
   </button>
 
-  <button class="button shortcut placeholder"
-          (click)="lastRate()"
-          [disabled]="!lastShortcut">
+  <button *ngFor="let placeholder of shortcutPlaceholder"
+          class="button shortcut placeholder"
+          [disabled]="true">
     <span>shortcut</span>
   </button>
-
-  <button class="button shortcut placeholder"
-          (click)="lastRate()"
-          [disabled]="!lastShortcut">
-    <span>shortcut</span>
-  </button>
-
-  <button class="button shortcut placeholder"
-          (click)="lastRate()"
-          [disabled]="!lastShortcut">
-    <span>shortcut</span>
-  </button>
-
-  <button class="button shortcut placeholder"
-          (click)="lastRate()"
-          [disabled]="!lastShortcut">
-    <span>shortcut</span>
-  </button>
-
 
   <div class="col-button">
     <div class="field-container box-icon">
