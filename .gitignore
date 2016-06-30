@@ -7,3 +7,5 @@ npm-debug.log
 app/**/*.js
 app/**/*.map
 assets/css
+assets/**/*.js
+assets/**/*.map

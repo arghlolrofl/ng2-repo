@@ -1,4 +1,4 @@
-import {Component, Output, EventEmitter, ViewChild} from '@angular/core';
+import {Component, Output, EventEmitter, ViewChild, Input} from '@angular/core';
 import {ControlGroup, FormBuilder, Validators, Control} from '@angular/common';
 import {TranslatePipe} from 'ng2-translate/ng2-translate';
 import {MODAL_DIRECTIVES, ModalComponent} from 'ng2-bs3-modal/ng2-bs3-modal';
@@ -13,6 +13,7 @@ import ShippingProductCalculationShortcutsComponent from "./shipping.product-cal
 import DimensionInfo from "../models/dimension-info";
 import WeightInfo from "../models/weight-info";
 import ShortcutInfo from "../models/shortcut-info";
+import AddressDisplayInfo from "../models/address-display-info";
 
 @Component({
     selector: 'fp-shipping-product-calculation',
@@ -48,6 +49,24 @@ export default class ShippingProductCalculationComponent {
      */
     @Output()
     public parcelChange:EventEmitter<PostalProductInfo> = new EventEmitter();
+
+    /**
+     * Sender.
+     */
+    @Input()
+    public sender:AddressDisplayInfo;
+
+    /**
+     * Shipping Point.
+     */
+    @Input()
+    public shippingPoint:string;
+
+    /**
+     * Recipient.
+     */
+    @Input()
+    public recipient:AddressDisplayInfo;
 
     /**
      * Modal dialog for sender
@@ -102,7 +121,7 @@ export default class ShippingProductCalculationComponent {
     /**
      * Parcel Suggestions.
      */
-    private parcelSuggestions:Array<PostalProductInfo>
+    private parcelSuggestions:Array<PostalProductInfo>;
 
     /**
      * @constructor
@@ -216,7 +235,8 @@ export default class ShippingProductCalculationComponent {
      * Recalculate the currently entered product information.
      */
     public recalculateProduct() {
-        if (!this.productCalculationForm.valid && (this.isDocument && this.weight.Value <= 0)) {
+        if (!this.productCalculationForm.valid && (this.isDocument && this.weight.Value <= 0) &&
+            !this.sender || !this.shippingPoint || !this.recipient) {
             return;
         }
         const productInfos = this.productCalculationForm.value;
@@ -228,8 +248,8 @@ export default class ShippingProductCalculationComponent {
         parcelInfo.Characteristic.Dimension.Unit = ESizeUnit.Centimeter;
         parcelInfo.Characteristic.Weight.Value = parseFloat(productInfos.weight);
         parcelInfo.Characteristic.Weight.Unit = EWeightUnit.Kg;
-        parcelInfo.PostalCode = 'K2B8J6'; // TODO make dynamic from sender address
-        parcelInfo.Destination.PostalCode = 'J0E1X0'; // TODO make dynamic from recipient address
+        parcelInfo.PostalCode = this.shippingPoint.replace(/ /g, '');
+        parcelInfo.Destination.PostalCode = this.recipient.ZipCode.replace(/ /g, '');
 
         const parcelObservable = this.shippingService.calculate(parcelInfo);
         parcelObservable

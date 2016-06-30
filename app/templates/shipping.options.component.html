@@ -2,13 +2,14 @@
   <h4><i class="icon-class icon-cogwheel"></i>Options*</h4>
   <form>
     <div class="row">
-      <div class="field-container box-info">
-        <span>list of incl / additional options:*</span>
-        <hr>
-        <span>Delivery Confirmation*</span>
+      <div class="field-container box-option">
+        <span *ngIf="selectedOptions.length <= 0">No option selected*</span>
+        <span *ngIf="selectedOptions.length > 0">{{getDisplayOptions()}}</span>
       </div>
-      <button href="#" class="button color">
-        <span>Set Option *</span>
+      <button class="button color"
+              [disabled]="!(parcel && parcel.Price.Options.length <= 0)"
+              (click)="modalOptionSelect.open()">
+        <span>Set options*</span>
       </button>
     </div>
 
@@ -48,10 +49,40 @@
           <i class="icon-class icon-info-button"></i>
         </div>
 
-        <button href="#" class="button submit">
+        <button class="button submit">
           <span>Buy Label*</span>
         </button>
       </div>
     </div>
   </form>
 </section>
+
+<modal #modalOptionSelect>
+  <modal-header>
+    <div class="row">
+      <div class="col-md-12">
+        <h4>Select options*</h4>
+      </div>
+    </div>
+  </modal-header>
+  <modal-body>
+    <ul *ngIf="parcel && parcel.Price.Options">
+      <li *ngFor="let option of parcel.Price.Options">
+        <input #cb
+               type="checkbox"
+               (click)="selectOption(option, cb.checked)"/>
+        {{option.Name}}
+      </li>
+    </ul>
+  </modal-body>
+  <modal-footer>
+    <div class="row">
+      <div class="col-sm-12">
+        <button class="button popup"
+                (click)="modalOptionSelect.close()">
+          <span>save*</span>
+        </button>
+      </div>
+    </div>
+  </modal-footer>
+</modal>
