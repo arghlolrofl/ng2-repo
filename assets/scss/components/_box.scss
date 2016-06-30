@@ -17,7 +17,7 @@
     height: $button-height;
     position: relative;
     border-radius: $boxBorderRadius;
-    transition: border $transitionFast $transitionTiming;
+    transition: all $transitionFast $transitionTiming;
 
     [class^='icon-']::before,
     [class*='icon-']::before {
@@ -34,6 +34,7 @@
 
     &:hover {
       border: 1px solid $icon-box-hover-color;
+      box-shadow: $boxShadowDefault;
 
       [class^='icon-']::before,
       [class*='icon-']::before {
@@ -87,13 +88,28 @@
   margin-left: 40px;
   padding: 10px;
   width: 412px;
-  float: left;
   position: relative;
+  border: 1px solid $brand-secondary;
+  text-align: left;
+  transition: all $transitionFast $transitionTiming;
+  border-radius: $boxBorderRadius;
+
+  &:hover {
+    box-shadow: $boxShadowDefault;
+    border-color: $icon-box-hover-color;
+  }
+
+  &:disabled {
+    box-shadow: none;
+    border-color: $brand-secondary;
+    background: $brand-gray-1;
+  }
 
   span {
     display: block;
     font-size: 1.7rem;
     line-height: 2.0rem;
+    position: relative;
 
     &.price {
       position: absolute;

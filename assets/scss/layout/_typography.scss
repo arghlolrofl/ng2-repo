@@ -98,6 +98,7 @@ i.icon-class {
     border: 1px solid $icon-box-hover-color;
     text-decoration: none;
     background: $icon-box-hover-color;
+    box-shadow: $boxShadowDefault;
   }
 
   @include mobile {
@@ -169,6 +170,7 @@ i.icon-class {
       color: $icon-box-hover-color;
       text-decoration: none;
       background: $white;
+      box-shadow: $boxShadowDefault;
     }
 
     &:disabled {
@@ -176,7 +178,7 @@ i.icon-class {
       border-color: $brand-gray-2;
     }
 
-    &.placeholder {
+    &.placerholder {
       background: none;
       color: $brand-gray-2;
       border: 1px dotted $brand-gray-2;
