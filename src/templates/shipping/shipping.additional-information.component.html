@@ -1,0 +1,40 @@
+<section class="sectiontemplate">
+  <h4><i class="icon-class icon-info"></i>Additional Information</h4>
+  <form>
+    <div class="row">
+      <div class="col-input">
+        <div class="field-container text-field">
+          <input type="text"
+                 tabindex="8"
+                 placeholder="additional info 1*"
+                 [(ngModel)]="additionalInfo1"
+                 (keyup)="additionalInfo1Change.emit(additionalInfo1)"
+                 (keyup.esc)="additionalInfo1 = ''">
+          <button class="clear-submit"
+                  (click)="additionalInfo1 = ''">
+            <span class="icon-close"></span>
+          </button>
+        </div>
+      </div>
+      <div class="col-button"></div>
+    </div>
+
+    <div class="row">
+      <div class="col-input">
+        <div class="field-container text-field">
+          <input type="text"
+                 tabindex="9"
+                 placeholder="additional info 2*"
+                 [(ngModel)]="additionalInfo2"
+                 (keyup)="additionalInfo2Change.emit(additionalInfo2)"
+                 (keyup.esc)="additionalInfo2 = ''">
+          <button class="clear-submit"
+                  (click)="additionalInfo2 = ''">
+            <span class="icon-close"></span>
+          </button>
+        </div>
+      </div>
+      <div class="col-button"></div>
+    </div>
+  </form>
+</section>

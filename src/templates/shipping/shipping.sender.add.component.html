@@ -1,0 +1,204 @@
+<modal #modalAddSender [keyboard]="false">
+  <modal-header>
+    <div class="row">
+      <div class="col-md-12">
+        <h4>Add Sender*</h4>
+      </div>
+    </div>
+  </modal-header>
+  <form [ngFormModel]="addForm"
+        (ngSubmit)="save()">
+
+    <modal-body>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="field-container text-field">
+            <input type="text"
+                   placeholder="Company*"
+                   ngControl="company"
+                   [class.error]="!addForm.controls['company'].valid && addForm.controls['company'].touched"
+                   (keyup.esc)="addForm.controls['company'].updateValue('')">
+            <button class="clear-submit"
+                    (click)="addForm.controls['company'].updateValue('')">
+              <span class="icon-close"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="field-container text-field">
+            <input type="text"
+                   placeholder="Title*"
+                   ngControl="title"
+                   [class.error]="!addForm.controls['title'].valid && addForm.controls['title'].touched"
+                   (keyup.esc)="addForm.controls['title'].updateValue('')">
+            <button class="clear-submit"
+                    (click)="addForm.controls['title'].updateValue('')">
+              <span class="icon-close"></span>
+            </button>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="field-container text-field">
+            <input type="text"
+                   placeholder="First Name*"
+                   ngControl="firstName"
+                   [class.error]="!addForm.controls['firstName'].valid && addForm.controls['firstName'].touched"
+                   (keyup.esc)="addForm.controls['firstName'].updateValue('')">
+            <button class="clear-submit"
+                    (click)="addForm.controls['firstName'].updateValue('')">
+              <span class="icon-close"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="field-container text-field">
+            <input type="text"
+                   placeholder="Middle Name*"
+                   ngControl="middleName"
+                   [class.error]="!addForm.controls['middleName'].valid && addForm.controls['middleName'].touched"
+                   (keyup.esc)="addForm.controls['middleName'].updateValue('')">
+            <button class="clear-submit"
+                    (click)="addForm.controls['middleName'].updateValue('')">
+              <span class="icon-close"></span>
+            </button>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="field-container text-field">
+            <input type="text"
+                   placeholder="Last Name*"
+                   ngControl="lastName"
+                   [class.error]="!addForm.controls['lastName'].valid && addForm.controls['lastName'].touched"
+                   (keyup.esc)="addForm.controls['lastName'].updateValue('')">
+            <button class="clear-submit"
+                    (click)="addForm.controls['lastName'].updateValue('')">
+              <span class="icon-close"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="field-container text-field">
+            <select (change)="countryChanged($event.target.value)"
+                    [disabled]="countries.length === 0">
+              <option *ngFor="let country of countries">
+                {{country.CountryName}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="field-container text-field">
+            <select (change)="regionChanged($event.target.value)"
+                    [disabled]="regions.length === 0">
+              <option *ngFor="let region of regions">
+                {{region.RegionName}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="field-container text-field">
+            <input type="text"
+                   placeholder="Postal Address*"
+                   ngControl="postalAddress"
+                   [class.error]="!addForm.controls['postalAddress'].valid && addForm.controls['postalAddress'].touched"
+                   (keyup.esc)="addForm.controls['postalAddress'].updateValue('')">
+            <button class="clear-submit"
+                    (click)="addForm.controls['postalAddress'].updateValue('')">
+              <span class="icon-close"></span>
+            </button>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="field-container text-field">
+            <input type="text"
+                   placeholder="City*"
+                   ngControl="city"
+                   [class.error]="!addForm.controls['city'].valid && addForm.controls['city'].touched"
+                   (keyup.esc)="addForm.controls['city'].updateValue('')">
+            <button class="clear-submit"
+                    (click)="addForm.controls['city'].updateValue('')">
+              <span class="icon-close"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="field-container text-field">
+            <input type="text"
+                   placeholder="Zip Code*"
+                   ngControl="zipCode"
+                   [class.error]="!addForm.controls['zipCode'].valid && addForm.controls['zipCode'].touched"
+                   (keyup.esc)="addForm.controls['zipCode'].updateValue('')">
+            <button class="clear-submit"
+                    (click)="addForm.controls['zipCode'].updateValue('')">
+              <span class="icon-close"></span>
+            </button>
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="field-container text-field">
+            <input type="text"
+                   placeholder="Additional zip code*"
+                   ngControl="additionalZipCode"
+                   [class.error]="!addForm.controls['additionalZipCode'].valid && addForm.controls['additionalZipCode'].touched"
+                   (keyup.esc)="addForm.controls['additionalZipCode'].updateValue('')">
+            <button class="clear-submit"
+                    (click)="addForm.controls['additionalZipCode'].updateValue('')">
+              <span class="icon-close"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="field-container text-field">
+            <input type="text"
+                   placeholder="E-Mail*"
+                   ngControl="eMail"
+                   [class.error]="!addForm.controls['eMail'].valid && addForm.controls['eMail'].touched"
+                   (keyup.esc)="addForm.controls['eMail'].updateValue('')">
+            <button class="clear-submit"
+                    (click)="addForm.controls['eMail'].updateValue('')">
+              <span class="icon-close"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </modal-body>
+
+    <modal-footer>
+      <div class="row">
+        <div class="col-sm-12">
+          <button class="button popup"
+                  (click)="close()">
+            <span>close*</span>
+          </button>
+
+           <button type="submit"
+                  class="button popup"
+                  [disabled]="!addForm.valid">
+            <span>save*</span>
+          </button>
+        </div>
+      </div>
+    </modal-footer>
+  </form>
+</modal>

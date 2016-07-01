@@ -1,0 +1,102 @@
+<section class="sectiontemplate">
+  <h4><i class="icon-class icon-coins"></i>Cost Center</h4>
+  <form [ngFormModel]="costCenterForm">
+    <div class="row">
+      <div class="col-input">
+        <div class="field-container text-field-search">
+          <div class="search-submit">
+            <span class="icon-search"></span>
+          </div>
+          <input type="text"
+                 tabindex="5"
+                 placeholder="cost-center level 1"
+                 ngControl="costCenter1"
+                 [fpSuggest]="mapCostCenter1(costCenterService)"
+                 [fpSuggestEvents]="costCenter1Events">
+          <button class="clear-submit"
+                  (mouseup)="clearCostCenter1()">
+            <span class="icon-close"></span>
+          </button>
+        </div>
+        <div class="row autocomplete"
+             [class.open]="costCenter1Suggestions.length > 0 && costCenterForm.controls['costCenter1'].value.length > 0">
+          <ul>
+            <li *ngFor="let costCenter of costCenter1Suggestions"
+                (click)="selectCostCenter1(costCenter)">
+              {{costCenter.Name}}
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-button"></div>
+    </div>
+
+    <div class="row">
+      <div class="col-input">
+        <div class="field-container text-field-search"
+             [class.disabled]="!costCenter1">
+          <div class="search-submit">
+            <span class="icon-search"></span>
+          </div>
+          <input type="text"
+                 tabindex="6"
+                 placeholder="cost-center level 2 or 3"
+                 [disabled]="!costCenter1"
+                 ngControl="costCenter2"
+                 [fpSuggest]="mapCostCenter23(costCenterService)"
+                 [fpSuggestEvents]="costCenter2Events">
+          <button class="clear-submit"
+                  (mouseup)="clearCostCenter2()"
+                  [disabled]="!costCenter1">
+            <span class="icon-close"></span>
+          </button>
+        </div>
+
+        <div class="row autocomplete"
+             [class.open]="costCenter2Suggestions.length > 0 && costCenterForm.controls['costCenter2'].value.length > 0">
+          <ul>
+            <li *ngFor="let costCenter of costCenter2Suggestions"
+                (click)="selectCostCenter2(costCenter)">
+              {{costCenter.Name}}
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-button"></div>
+    </div>
+
+    <div class="row">
+      <div class="col-input">
+        <div class="field-container text-field-search"
+             [class.disabled]="!costCenter1">
+          <div class="search-submit">
+            <span class="icon-search"></span>
+          </div>
+          <input type="text"
+                 tabindex="7"
+                 placeholder="cost-center level 2 or 3"
+                 [disabled]="!costCenter1"
+                 ngControl="costCenter3"
+                 [fpSuggest]="mapCostCenter23(costCenterService)"
+                 [fpSuggestEvents]="costCenter3Events">
+          <button class="clear-submit"
+                  (mouseup)="clearCostCenter3()"
+                  [disabled]="!costCenter1">
+            <span class="icon-close"></span>
+          </button>
+        </div>
+        <div class="row autocomplete"
+             [class.open]="costCenter3Suggestions.length > 0 && costCenterForm.controls['costCenter3'].value.length > 0">
+          <ul>
+            <li *ngFor="let costCenter of costCenter3Suggestions"
+                (click)="selectCostCenter3(costCenter)">
+              {{costCenter.Name}}
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-button"></div>
+    </div>
+  </form>
+</section>
