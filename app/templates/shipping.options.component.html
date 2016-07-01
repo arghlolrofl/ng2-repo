@@ -7,7 +7,7 @@
         <span *ngIf="selectedOptions.length > 0">{{getDisplayOptions()}}</span>
       </div>
       <button class="button color"
-              [disabled]="!(parcel && parcel.Price.Options.length <= 0)"
+              [disabled]="!(parcel && parcel.Price.Options.length > 0)"
               (click)="modalOptionSelect.open()">
         <span>Set options*</span>
       </button>
@@ -19,23 +19,28 @@
           <table>
             <tr>
               <td>Base Cost:*</td>
-              <td>$ 22.49*</td>
+              <td *ngIf="parcel">{{parcel.Price.Base | currency:'USD':true:'1.2-2'}}</td>
+              <td *ngIf="!parcel">$0.0*</td>
             </tr>
             <tr>
               <td>Extra Services*</td>
-              <td>$ 0.00*</td>
+              <td *ngIf="parcel">{{getExtraServiceCosts() | currency:'USD':true:'1.2-2'}}</td>
+              <td *ngIf="!parcel">$0.0*</td>
             </tr>
             <tr>
               <td>GST:*</td>
-              <td>$ 0.90*</td>
+              <td *ngIf="parcel">{{parcel.Price.Tax.Gst.Value | currency:'USD':true:'1.2-2'}}</td>
+              <td *ngIf="!parcel">$0.0*</td>
             </tr>
             <tr>
               <td>PST:*</td>
-              <td>$ 0.00*</td>
+              <td *ngIf="parcel">{{parcel.Price.Tax.Pst.Value | currency:'USD':true:'1.2-2'}}</td>
+              <td *ngIf="!parcel">$0.0*</td>
             </tr>
             <tr>
               <td>Total*</td>
-              <td>$ 23.39*</td>
+              <td *ngIf="parcel">{{parcel.Price.Total | currency:'USD':true:'1.2-2'}}</td>
+              <td *ngIf="!parcel">$0.0*</td>
             </tr>
           </table>
         </div>

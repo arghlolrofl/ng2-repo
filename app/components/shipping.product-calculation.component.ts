@@ -235,8 +235,7 @@ export default class ShippingProductCalculationComponent {
      * Recalculate the currently entered product information.
      */
     public recalculateProduct() {
-        if (!this.productCalculationForm.valid && (this.isDocument && this.weight.Value <= 0) &&
-            !this.sender || !this.shippingPoint || !this.recipient) {
+        if (!this.productCalculationForm.valid && (this.isDocument && this.weight.Value <= 0) && !this.sender || !this.shippingPoint || !this.recipient) {
             return;
         }
         const productInfos = this.productCalculationForm.value;

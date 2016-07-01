@@ -13,7 +13,7 @@ export default class PostalProductPriceInfo {
 
     Options:PostalProductOptionInfo[];
 
-    Taxes:TaxesInfo;
+    Tax:TaxesInfo;
 
     Total:number;
 }

@@ -2,7 +2,7 @@ import {Component, Input, Output, EventEmitter, ViewChild} from '@angular/core';
 import {TranslatePipe} from 'ng2-translate/ng2-translate';
 import {MODAL_DIRECTIVES, ModalComponent} from 'ng2-bs3-modal/ng2-bs3-modal';
 
-import ParcelProductInfo from "../models/parcel-product-info";
+import PostalProductInfo from "../models/postal-product-info";
 import PostalProductOptionInfo from "../models/postal-product-option-info";
 
 @Component({
@@ -32,7 +32,7 @@ export default class ShippingOptionsComponent {
      * Parcel.
      */
     @Input()
-    public parcel:ParcelProductInfo;
+    public parcel:PostalProductInfo;
 
     /**
      * Modal dialog for sender
@@ -74,5 +74,13 @@ export default class ShippingOptionsComponent {
             this.selectedOptions = this.selectedOptions.filter(
                 (r:PostalProductOptionInfo) => r.Code !== option.Code);
         }
+    }
+
+    /**
+     * Get the extra service costs based on the selected options.
+     * @returns {number}
+     */
+    private getExtraServiceCosts() {
+        return this.selectedOptions.reduce((p, r:PostalProductOptionInfo) => p + r.Price, 0);
     }
 }
