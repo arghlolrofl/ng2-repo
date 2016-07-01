@@ -176,13 +176,27 @@ i.icon-class {
     &:disabled {
       background: $brand-gray-1;
       border-color: $brand-gray-2;
+
+      &:hover {
+        text-decoration: none;
+        background: $brand-gray-1;
+        border-color: $brand-gray-2;
+        box-shadow: none;
+        color: $icon-box-color;
+      }
     }
 
-    &.placerholder {
+    &.placeholder {
       background: none;
       color: $brand-gray-2;
       border: 1px dotted $brand-gray-2;
       border-radius: 5px;
+
+      &:hover {
+        text-decoration: none;
+        background: $white;
+        box-shadow: none;
+      }
     }
 
     span {
