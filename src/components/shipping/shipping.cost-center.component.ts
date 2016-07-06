@@ -214,7 +214,7 @@ export default class ShippingCostCenterComponent {
      */
     public mapCostCenter1(costCenterService:CostCenterService) {
         return (term:string) => {
-            return costCenterService.getFilteredCostCenterByLevelAndName(1, term);
+            return costCenterService.getFilteredCostCenterByLevelAndFastQuery(1, term);
         }
     }
 
@@ -246,8 +246,8 @@ export default class ShippingCostCenterComponent {
     public mapCostCenter23(costCenterService:CostCenterService) {
         return (term:string) => {
             return Observable.merge(
-                costCenterService.getFilteredCostCenterByLevelAndName(2, term),
-                costCenterService.getFilteredCostCenterByLevelAndName(3, term)
+                costCenterService.getFilteredCostCenterByLevelAndFastQuery(2, term),
+                costCenterService.getFilteredCostCenterByLevelAndFastQuery(3, term)
             );
         }
     }

@@ -19,17 +19,21 @@ export default class AddressService {
     constructor(private apiClient:APIClient) {
     }
 
-
-    public getFilteredAddressesByAddressGroupNameAndAddressInfo(groupName:string,
-                                                                firstName:string,
-                                                                lastName:string,
-                                                                city:string,
-                                                                company:string,
+    /**
+     * Get filtered addresses by AddressGroupInfo name and query.
+     * @param {string} groupName name of the AddressGroup
+     * @param {string} query the query to search for
+     * @param {number} [start] the offset to start (starts at 0, default to 0)
+     * @param {number} [num] the number of results to get (0 to get all, default to 0)
+     * @returns {Observable<AddressDisplayInfo>}
+     */
+    public getFilteredAddressesByAddressGroupNameAndFastQuery(groupName:string,
+                                                                query:string,
                                                                 start?:number,
                                                                 num?:number):Observable<AddressDisplayInfo> {
         return this.getFilteredAddressGroups(groupName, start, num)
-            .mergeMap((i:AddressGroupInfo) => this.getFilteredAddressesByAddressGroupAndAddressInfo(
-                i.Id, firstName, lastName, city, company, start, num));
+            .mergeMap((i:AddressGroupInfo) => this.getFilteredAddressesByAddressGroupAndFastQuery(
+                i.Id, query, start, num));
     }
 
     /**
@@ -93,22 +97,24 @@ export default class AddressService {
         }).concatMap((r:PagedResultsOf<AddressDisplayInfo>) => r.ItemList);
     }
 
-    public getFilteredAddressesByAddressGroupAndAddressInfo(addressGroupId:number,
-                                                            firstName:string,
-                                                            lastName:string,
-                                                            city:string,
-                                                            company:string,
-                                                            start?:number,
-                                                            num?:number):Observable<AddressDisplayInfo> {
+    /**
+     * Get filtered addresses by AddressGroupInfo id and query.
+     * @param {number} addressGroupId AddressGroupInfo id
+     * @param {string} query the query to search for
+     * @param {number} [start] the offset to start (starts at 0, default to 0)
+     * @param {number} [num] the number of results to get (0 to get all, default to 0)
+     * @returns {Observable<AddressDisplayInfo>}
+     */
+    public getFilteredAddressesByAddressGroupAndFastQuery(addressGroupId:number,
+                                                          query:string,
+                                                          start?:number,
+                                                          num?:number):Observable<AddressDisplayInfo> {
         start = start || 0;
         num = num || 0;
 
         return this.apiClient.post('Address/GetFiltered', {
             AddressGroup: addressGroupId,
-            FirstName: firstName,
-            LastName: lastName,
-            City: city,
-            Company: company,
+            FastQuery: query,
             StartValue: start,
             ResultCount: num
         }).concatMap((r:PagedResultsOf<AddressDisplayInfo>) => r.ItemList);

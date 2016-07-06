@@ -20,20 +20,20 @@ export default class CostCenterService {
     /**
      * Get filtered cost centers by level and name.
      * @param {number} level the level of the cost center
-     * @param {string} name the name of the cost center
-     * @param {number} start the start offset
-     * @param {number} num the number of results to get
+     * @param {string} query the query to search for
+     * @param {number} [start] the start offset
+     * @param {number} [num] the number of results to get
      * @returns {Observable<CostCenterInfo>}
      */
-    public getFilteredCostCenterByLevelAndName(level:number,
-                                               name:string,
-                                               start?:number,
-                                               num?:number):Observable<CostCenterInfo> {
+    public getFilteredCostCenterByLevelAndFastQuery(level:number,
+                                                    query:string,
+                                                    start?:number,
+                                                    num?:number):Observable<CostCenterInfo> {
         start = start || 0;
         num = num || 0;
 
         return this.apiClient.post('CostCenter/GetFiltered', {
-            Name: name,
+            FastQuery: query,
             Level: level,
             StartValue: start,
             ResultCount: num

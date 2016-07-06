@@ -188,7 +188,7 @@ export default class ShippingRecipientComponent implements OnDestroy {
             if (this.addressGroup) {
                 groupId = this.addressGroup.Id;
             }
-            return service.getFilteredAddressesByAddressGroupAndAddressInfo(groupId, term, '', '', '', 0, 20);
+            return service.getFilteredAddressesByAddressGroupAndFastQuery(groupId, term, 0, 20);
         }
     }
 
