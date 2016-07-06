@@ -4,8 +4,6 @@ typings/
 
 *.iml
 npm-debug.log
-app/**/*.js
-app/**/*.map
+app/
 assets/css
-assets/**/*.js
-assets/**/*.map
+assets/js
