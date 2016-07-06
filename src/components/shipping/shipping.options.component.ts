@@ -6,6 +6,7 @@ import PostalProductInfo from "../../models/postal-product-info";
 import PostalProductOptionInfo from "../../models/postal-product-option-info";
 import CustomerService from "../../services/customer.service";
 import ConsumerInfo from "../../models/consumer-info";
+import PostalProductAdjustmentInfo from "../../models/postal-product-adjustment-info";
 
 @Component({
     selector: 'fp-shipping-options',
@@ -92,10 +93,19 @@ export default class ShippingOptionsComponent {
     }
 
     /**
+     * Get option costs for selected options.
+     * @returns {number}
+     */
+    private getOptionCosts() {
+        return this.selectedOptions.reduce((p, r:PostalProductOptionInfo) => p + r.Price, 0);
+    }
+
+    /**
      * Get the extra service costs based on the selected options.
      * @returns {number}
      */
     private getExtraServiceCosts() {
-        return this.selectedOptions.reduce((p, r:PostalProductOptionInfo) => p + r.Price, 0);
+        return this.getOptionCosts() +
+            this.parcel.Price.Adjustments.reduce((p, r:PostalProductAdjustmentInfo) => p + r.Cost, 0);
     }
 }

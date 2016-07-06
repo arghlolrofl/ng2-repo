@@ -44,7 +44,7 @@
             </tr>
             <tr>
               <td>Total*</td>
-              <td *ngIf="parcel">{{(parcel.Price.Total + getExtraServiceCosts()) | currency:'USD':true:'1.2-2'}}</td>
+              <td *ngIf="parcel">{{(parcel.Price.Total + getOptionCosts()) | currency:'USD':true:'1.2-2'}}</td>
               <td *ngIf="!parcel">$0.0*</td>
             </tr>
           </table>
