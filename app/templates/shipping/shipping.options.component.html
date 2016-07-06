@@ -38,8 +38,13 @@
               <td *ngIf="!parcel">$0.0*</td>
             </tr>
             <tr>
+              <td>HST:*</td>
+              <td *ngIf="parcel">{{parcel.Price.Tax.Hst.Value | currency:'USD':true:'1.2-2'}}</td>
+              <td *ngIf="!parcel">$0.0*</td>
+            </tr>
+            <tr>
               <td>Total*</td>
-              <td *ngIf="parcel">{{parcel.Price.Total | currency:'USD':true:'1.2-2'}}</td>
+              <td *ngIf="parcel">{{(parcel.Price.Total + getExtraServiceCosts()) | currency:'USD':true:'1.2-2'}}</td>
               <td *ngIf="!parcel">$0.0*</td>
             </tr>
           </table>
@@ -48,9 +53,12 @@
 
       <div class="submit-container">
         <div class="field-container box-lights">
-          <div class="color red"></div>
-          <div class="color yellow"></div>
-          <div class="color green active"></div>
+          <div class="color red"
+               [class.active]="consumer && consumer.CreditStatus === 0"></div>
+          <div class="color yellow"
+               [class.active]="consumer && consumer.CreditStatus === 1"></div>
+          <div class="color green"
+               [class.active]="consumer && consumer.CreditStatus === 2"></div>
           <i class="icon-class icon-info-button"></i>
         </div>
 

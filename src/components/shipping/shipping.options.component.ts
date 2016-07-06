@@ -4,6 +4,8 @@ import {MODAL_DIRECTIVES, ModalComponent} from 'ng2-bs3-modal/ng2-bs3-modal';
 
 import PostalProductInfo from "../../models/postal-product-info";
 import PostalProductOptionInfo from "../../models/postal-product-option-info";
+import CustomerService from "../../services/customer.service";
+import ConsumerInfo from "../../models/consumer-info";
 
 @Component({
     selector: 'fp-shipping-options',
@@ -13,6 +15,9 @@ import PostalProductOptionInfo from "../../models/postal-product-option-info";
     ],
     pipes: [
         TranslatePipe
+    ],
+    providers: [
+        CustomerService
     ]
 })
 
@@ -46,10 +51,20 @@ export default class ShippingOptionsComponent {
     private selectedOptions:Array<PostalProductOptionInfo>;
 
     /**
-     * @constructor
+     * Consumer information.
      */
-    constructor() {
+    private consumer:ConsumerInfo;
+
+    /**
+     * @constructor
+     * @param {CustomerService} customerService the customer client
+     */
+    constructor(private customerService:CustomerService) {
         this.selectedOptions = [];
+
+        this.customerService.getConsumerInfo().subscribe(
+            (r:ConsumerInfo) => this.consumer = r,
+            (error:Error) => this.onError.emit(error));
     }
 
     /**
