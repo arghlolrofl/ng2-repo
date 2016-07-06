@@ -19,7 +19,7 @@
   var packages = {
     'app':                        { main: 'main.js',  defaultExtension: 'js' },
     'rxjs':                       { defaultExtension: 'js' },
-    'angular2-in-memory-web-api': { defaultExtension: 'js' },
+    'angular2-in-memory-web-api': { defaultExtension: 'js' }
   };
   var ngPackageNames = [
     'common',
@@ -34,7 +34,8 @@
   ];
   // Add package entries for angular packages
   ngPackageNames.forEach(function(pkgName) {
-    packages['@angular/'+pkgName] = { main: pkgName + '.umd.js', defaultExtension: 'js' };
+    packages['@angular/'+pkgName] = { main: 'index.js', defaultExtension: 'js' };
+    // packages['@angular/'+pkgName] = { main: pkgName + '.umd.js', defaultExtension: 'js' };
   });
   var config = {
     defaultJSExtensions: true,
