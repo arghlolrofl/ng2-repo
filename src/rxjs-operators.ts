@@ -27,3 +27,4 @@ import 'rxjs/add/operator/retry';
 import 'rxjs/add/operator/retryWhen';
 import 'rxjs/add/operator/first';
 import 'rxjs/add/operator/zip';
+import 'rxjs/add/operator/share';

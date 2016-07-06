@@ -250,7 +250,8 @@ export default class ShippingProductCalculationComponent {
         parcelInfo.PostalCode = this.shippingPoint.replace(/ /g, '');
         parcelInfo.Destination.PostalCode = this.recipient.ZipCode.replace(/ /g, '');
 
-        const parcelObservable = this.shippingService.calculate(parcelInfo);
+        this.parcelSuggestions = [];
+        const parcelObservable = this.shippingService.calculate(parcelInfo).share();
         parcelObservable
             .first()
             .subscribe(

@@ -121,7 +121,7 @@ export default class ShippingRecipientAddComponent implements AfterViewInit {
             this.countries = [];
             this.addressGroups = [];
 
-            const addressGroupObservable = this.addressService.getFilteredAddressGroupsWithout('', 'Sender');
+            const addressGroupObservable = this.addressService.getFilteredAddressGroupsWithout('', 'Sender').share();
             addressGroupObservable.first().subscribe(
                 (r:AddressGroupInfo) => this.addressGroup = r,
                 () => this.addressGroup = null);
@@ -129,7 +129,7 @@ export default class ShippingRecipientAddComponent implements AfterViewInit {
                 (r:AddressGroupInfo) => this.addressGroups.push(r),
                 () => this.addressGroups = []);
 
-            const countryObservable = this.countryService.getAll();
+            const countryObservable = this.countryService.getAll().share();
             countryObservable.first().subscribe(
                 (r:CountryInfo) => {
                     this.country = r;
@@ -152,7 +152,7 @@ export default class ShippingRecipientAddComponent implements AfterViewInit {
      */
     private refreshRegions(countryId:number) {
         this.regions = [];
-        const regionObservable = this.regionService.getFilteredByCountryId(countryId);
+        const regionObservable = this.regionService.getFilteredByCountryId(countryId).share();
         regionObservable.first().subscribe(
             (r:RegionInfo) => this.region = r,
             () => this.region = null);

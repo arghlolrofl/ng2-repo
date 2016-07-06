@@ -108,7 +108,7 @@ export default class ShippingSenderAddComponent implements AfterViewInit {
         this.modal.onOpen.subscribe(() => {
             this.countries = [];
 
-            const countryObservable = this.countryService.getAll();
+            const countryObservable = this.countryService.getAll().share();
             countryObservable.first().subscribe(
                 (r:CountryInfo) => {
                     this.country = r;
@@ -131,7 +131,7 @@ export default class ShippingSenderAddComponent implements AfterViewInit {
      */
     private refreshRegions(countryId:number) {
         this.regions = [];
-        const regionObservable = this.regionService.getFilteredByCountryId(countryId);
+        const regionObservable = this.regionService.getFilteredByCountryId(countryId).share();
         regionObservable.first().subscribe(
             (r:RegionInfo) => this.region = r,
             () => this.region = null);
