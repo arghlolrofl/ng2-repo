@@ -51,6 +51,20 @@ export default class ShippingProductCalculationComponent {
     public parcelChange:EventEmitter<PostalProductInfo> = new EventEmitter();
 
     /**
+     * Updated when the dimensions changed.
+     * @type {EventEmitter}
+     */
+    @Output()
+    public dimensionsChange:EventEmitter<DimensionInfo> = new EventEmitter();
+
+    /**
+     * Updated when the weight changed.
+     * @type {EventEmitter}
+     */
+    @Output()
+    public weightChange:EventEmitter<WeightInfo> = new EventEmitter();
+
+    /**
      * Sender.
      */
     @Input()
@@ -73,18 +87,6 @@ export default class ShippingProductCalculationComponent {
      */
     @ViewChild('modalProductSelect')
     private modalProductSelect:ModalComponent;
-
-    /**
-     * Updated when the dimensions changed.
-     * @type {EventEmitter}
-     */
-    public dimensionsChange:EventEmitter<DimensionInfo> = new EventEmitter();
-
-    /**
-     * Updated when the weight changed.
-     * @type {EventEmitter}
-     */
-    public weightChange:EventEmitter<WeightInfo> = new EventEmitter();
 
     /**
      * Updated when is document changed.
@@ -223,13 +225,25 @@ export default class ShippingProductCalculationComponent {
                 (error:Error) => console.warn(error)); // TODO error handling
 
         this.dimensionsChange.subscribe((dimension:DimensionInfo) => {
-            (<Control> this.productCalculationForm.controls['length']).updateValue(dimension.Length, {emitEvent: false});
-            (<Control> this.productCalculationForm.controls['width']).updateValue(dimension.Width, {emitEvent: false});
-            (<Control> this.productCalculationForm.controls['height']).updateValue(dimension.Height, {emitEvent: false});
+            if (dimension.Length > 0) {
+                (<Control> this.productCalculationForm.controls['length'])
+                    .updateValue(dimension.Length, {emitEvent: false});
+            }
+            if (dimension.Width > 0) {
+                (<Control> this.productCalculationForm.controls['width'])
+                    .updateValue(dimension.Width, {emitEvent: false});
+            }
+            if (dimension.Height > 0) {
+                (<Control> this.productCalculationForm.controls['height'])
+                    .updateValue(dimension.Height, {emitEvent: false});
+            }
         });
 
         this.weightChange.subscribe((weight:WeightInfo) => {
-            (<Control> this.productCalculationForm.controls['weight']).updateValue(weight.Value, {emitEvent: false});
+            if (weight.Value > 0) {
+                (<Control> this.productCalculationForm.controls['weight'])
+                    .updateValue(weight.Value, {emitEvent: false});
+            }
         });
 
         this.parcelChange.subscribe(

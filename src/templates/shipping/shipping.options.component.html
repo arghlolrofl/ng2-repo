@@ -1,80 +1,83 @@
 <section class="sectiontemplate">
-  <h4><i class="icon-class icon-cogwheel"></i>Options*</h4>
-  <form>
-    <div class="row">
-      <div class="field-container box-option">
-        <span *ngIf="selectedOptions.length <= 0">No option selected*</span>
-        <span *ngIf="selectedOptions.length > 0">{{getDisplayOptions()}}</span>
+  <h4>
+    <i class="icon-class icon-cogwheel"></i>
+    {{ 'OPTIONS_HEADLINE' | translate }}
+  </h4>
+  <div class="row">
+    <div class="field-container box-option">
+      <span *ngIf="selectedOptions.length <= 0">{{ 'OPTIONS_NO_OPTIONS' | translate }}</span>
+      <span *ngIf="selectedOptions.length > 0">{{getDisplayOptions()}}</span>
+    </div>
+    <button class="button color"
+            [disabled]="!(parcel && parcel.Price.Options.length > 0)"
+            (click)="modalOptionSelect.open()">
+      <span>{{ 'OPTIONS_SET_OPTIONS_BUTTON' | translate }}</span>
+    </button>
+  </div>
+
+  <div class="row">
+    <div class="summery-container">
+      <div class="field-container box-summery">
+        <table>
+          <tr>
+            <td>{{ 'OPTIONS_BASE_COST' | translate }}:</td>
+            <td *ngIf="parcel">{{parcel.Price.Base | currency:'USD':true:'1.2-2'}}</td>
+            <td *ngIf="!parcel">{{ 'OPTIONS_PRICE_PLACEHOLDER' | translate }}</td>
+          </tr>
+          <tr>
+            <td>{{ 'OPTIONS_EXTRA_SERVICES' | translate }}:</td>
+            <td *ngIf="parcel">{{getExtraServiceCosts() | currency:'USD':true:'1.2-2'}}</td>
+            <td *ngIf="!parcel">{{ 'OPTIONS_PRICE_PLACEHOLDER' | translate }}</td>
+          </tr>
+          <tr>
+            <td>{{ 'OPTIONS_GST' | translate }}:</td>
+            <td *ngIf="parcel">{{parcel.Price.Tax.Gst.Value | currency:'USD':true:'1.2-2'}}</td>
+            <td *ngIf="!parcel">{{ 'OPTIONS_PRICE_PLACEHOLDER' | translate }}</td>
+          </tr>
+          <tr>
+            <td>{{ 'OPTIONS_PST' | translate }}:</td>
+            <td *ngIf="parcel">{{parcel.Price.Tax.Pst.Value | currency:'USD':true:'1.2-2'}}</td>
+            <td *ngIf="!parcel">{{ 'OPTIONS_PRICE_PLACEHOLDER' | translate }}</td>
+          </tr>
+          <tr>
+            <td>{{ 'OPTIONS_HST' | translate }}:</td>
+            <td *ngIf="parcel">{{parcel.Price.Tax.Hst.Value | currency:'USD':true:'1.2-2'}}</td>
+            <td *ngIf="!parcel">{{ 'OPTIONS_PRICE_PLACEHOLDER' | translate }}</td>
+          </tr>
+          <tr>
+            <td>{{ 'OPTIONS_TOTAL' | translate }}:</td>
+            <td *ngIf="parcel">{{(parcel.Price.Total + getOptionCosts()) | currency:'USD':true:'1.2-2'}}</td>
+            <td *ngIf="!parcel">{{ 'OPTIONS_PRICE_PLACEHOLDER' | translate }}</td>
+          </tr>
+        </table>
       </div>
-      <button class="button color"
-              [disabled]="!(parcel && parcel.Price.Options.length > 0)"
-              (click)="modalOptionSelect.open()">
-        <span>Set options*</span>
+    </div>
+
+    <div class="submit-container">
+      <div class="field-container box-lights">
+        <div class="color red"
+             [class.active]="consumer && consumer.CreditStatus === 0"></div>
+        <div class="color yellow"
+             [class.active]="consumer && consumer.CreditStatus === 1"></div>
+        <div class="color green"
+             [class.active]="consumer && consumer.CreditStatus === 2"></div>
+        <i class="icon-class icon-info-button"></i>
+      </div>
+
+      <button class="button submit"
+              [disabled]="!canBuy()"
+              (click)="buyLabel()">
+        <span>{{ 'OPTIONS_BUYLABEL_BUTTON' | translate }}</span>
       </button>
     </div>
-
-    <div class="row">
-      <div class="summery-container">
-        <div class="field-container box-summery">
-          <table>
-            <tr>
-              <td>Base Cost:*</td>
-              <td *ngIf="parcel">{{parcel.Price.Base | currency:'USD':true:'1.2-2'}}</td>
-              <td *ngIf="!parcel">$0.0</td>
-            </tr>
-            <tr>
-              <td>Extra Services*</td>
-              <td *ngIf="parcel">{{getExtraServiceCosts() | currency:'USD':true:'1.2-2'}}</td>
-              <td *ngIf="!parcel">$0.0</td>
-            </tr>
-            <tr>
-              <td>GST:*</td>
-              <td *ngIf="parcel">{{parcel.Price.Tax.Gst.Value | currency:'USD':true:'1.2-2'}}</td>
-              <td *ngIf="!parcel">$0.0</td>
-            </tr>
-            <tr>
-              <td>PST:*</td>
-              <td *ngIf="parcel">{{parcel.Price.Tax.Pst.Value | currency:'USD':true:'1.2-2'}}</td>
-              <td *ngIf="!parcel">$0.0</td>
-            </tr>
-            <tr>
-              <td>HST:*</td>
-              <td *ngIf="parcel">{{parcel.Price.Tax.Hst.Value | currency:'USD':true:'1.2-2'}}</td>
-              <td *ngIf="!parcel">$0.0</td>
-            </tr>
-            <tr>
-              <td>Total*</td>
-              <td *ngIf="parcel">{{(parcel.Price.Total + getOptionCosts()) | currency:'USD':true:'1.2-2'}}</td>
-              <td *ngIf="!parcel">$0.0</td>
-            </tr>
-          </table>
-        </div>
-      </div>
-
-      <div class="submit-container">
-        <div class="field-container box-lights">
-          <div class="color red"
-               [class.active]="consumer && consumer.CreditStatus === 0"></div>
-          <div class="color yellow"
-               [class.active]="consumer && consumer.CreditStatus === 1"></div>
-          <div class="color green"
-               [class.active]="consumer && consumer.CreditStatus === 2"></div>
-          <i class="icon-class icon-info-button"></i>
-        </div>
-
-        <button class="button submit">
-          <span>Buy Label*</span>
-        </button>
-      </div>
-    </div>
-  </form>
+  </div>
 </section>
 
 <modal #modalOptionSelect>
   <modal-header>
     <div class="row">
       <div class="col-md-12">
-        <h4>Select options*</h4>
+        <h4>{{ 'OPTIONS_SELECT_OPTIONS_HEADLINE' | translate }}</h4>
       </div>
     </div>
   </modal-header>
@@ -93,7 +96,7 @@
       <div class="col-sm-12">
         <button class="button popup"
                 (click)="modalOptionSelect.close()">
-          <span>save*</span>
+          <span>{{ 'MODAL_SAVE' | translate }}</span>
         </button>
       </div>
     </div>

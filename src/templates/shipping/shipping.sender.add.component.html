@@ -2,7 +2,7 @@
   <modal-header>
     <div class="row">
       <div class="col-md-12">
-        <h4>Add Sender*</h4>
+        <h4>{{ 'SENDER_ADD_HEADLINE' | translate }}</h4>
       </div>
     </div>
   </modal-header>
@@ -14,7 +14,7 @@
         <div class="col-sm-12">
           <div class="field-container text-field">
             <input type="text"
-                   placeholder="Company*"
+                   placeholder="{{ 'SENDER_ADD_COMPANY_PLACEHOLDER' | translate }}"
                    ngControl="company"
                    [class.error]="!addForm.controls['company'].valid && addForm.controls['company'].touched"
                    (keyup.esc)="addForm.controls['company'].updateValue('')">
@@ -30,7 +30,7 @@
         <div class="col-sm-6">
           <div class="field-container text-field">
             <input type="text"
-                   placeholder="Title*"
+                   placeholder="{{ 'SENDER_ADD_TITLE_PLACEHOLDER' | translate }}"
                    ngControl="title"
                    [class.error]="!addForm.controls['title'].valid && addForm.controls['title'].touched"
                    (keyup.esc)="addForm.controls['title'].updateValue('')">
@@ -43,7 +43,7 @@
         <div class="col-sm-6">
           <div class="field-container text-field">
             <input type="text"
-                   placeholder="First Name*"
+                   placeholder="{{ 'SENDER_ADD_FIRSTNAME_PLACEHOLDER' | translate }}"
                    ngControl="firstName"
                    [class.error]="!addForm.controls['firstName'].valid && addForm.controls['firstName'].touched"
                    (keyup.esc)="addForm.controls['firstName'].updateValue('')">
@@ -59,7 +59,7 @@
         <div class="col-sm-6">
           <div class="field-container text-field">
             <input type="text"
-                   placeholder="Middle Name*"
+                   placeholder="{{ 'SENDER_ADD_MIDDLENAME_PLACEHOLDER' | translate }}"
                    ngControl="middleName"
                    [class.error]="!addForm.controls['middleName'].valid && addForm.controls['middleName'].touched"
                    (keyup.esc)="addForm.controls['middleName'].updateValue('')">
@@ -72,7 +72,7 @@
         <div class="col-sm-6">
           <div class="field-container text-field">
             <input type="text"
-                   placeholder="Last Name*"
+                   placeholder="{{ 'SENDER_ADD_LASTNAME_PLACEHOLDER' | translate }}"
                    ngControl="lastName"
                    [class.error]="!addForm.controls['lastName'].valid && addForm.controls['lastName'].touched"
                    (keyup.esc)="addForm.controls['lastName'].updateValue('')">
@@ -111,7 +111,7 @@
         <div class="col-sm-6">
           <div class="field-container text-field">
             <input type="text"
-                   placeholder="Postal Address*"
+                   placeholder="{{ 'SENDER_ADD_POSTALADDRESS_PLACEHOLDER' | translate }}"
                    ngControl="postalAddress"
                    [class.error]="!addForm.controls['postalAddress'].valid && addForm.controls['postalAddress'].touched"
                    (keyup.esc)="addForm.controls['postalAddress'].updateValue('')">
@@ -124,7 +124,7 @@
         <div class="col-sm-6">
           <div class="field-container text-field">
             <input type="text"
-                   placeholder="City*"
+                   placeholder="{{ 'SENDER_ADD_CITY_PLACEHOLDER' | translate }}"
                    ngControl="city"
                    [class.error]="!addForm.controls['city'].valid && addForm.controls['city'].touched"
                    (keyup.esc)="addForm.controls['city'].updateValue('')">
@@ -140,7 +140,7 @@
         <div class="col-sm-6">
           <div class="field-container text-field">
             <input type="text"
-                   placeholder="Zip Code*"
+                   placeholder="{{ 'SENDER_ADD_ZIPCODE_PLACEHOLDER' | translate }}"
                    ngControl="zipCode"
                    [class.error]="!addForm.controls['zipCode'].valid && addForm.controls['zipCode'].touched"
                    (keyup.esc)="addForm.controls['zipCode'].updateValue('')">
@@ -154,7 +154,7 @@
         <div class="col-sm-6">
           <div class="field-container text-field">
             <input type="text"
-                   placeholder="Additional zip code*"
+                   placeholder="{{ 'SENDER_ADD_ADDITIONALZIPCODE_PLACEHOLDER' | translate }}"
                    ngControl="additionalZipCode"
                    [class.error]="!addForm.controls['additionalZipCode'].valid && addForm.controls['additionalZipCode'].touched"
                    (keyup.esc)="addForm.controls['additionalZipCode'].updateValue('')">
@@ -170,7 +170,7 @@
         <div class="col-sm-12">
           <div class="field-container text-field">
             <input type="text"
-                   placeholder="E-Mail*"
+                   placeholder="{{ 'SENDER_ADD_EMAIL_PLACEHOLDER' | translate }}"
                    ngControl="eMail"
                    [class.error]="!addForm.controls['eMail'].valid && addForm.controls['eMail'].touched"
                    (keyup.esc)="addForm.controls['eMail'].updateValue('')">
@@ -189,13 +189,13 @@
         <div class="col-sm-12">
           <button class="button popup"
                   (click)="close()">
-            <span>close*</span>
+            <span>{{ 'MODAL_CLOSE' | translate }}</span>
           </button>
 
            <button type="submit"
                   class="button popup"
                   [disabled]="!addForm.valid">
-            <span>save*</span>
+            <span>{{ 'MODAL_SAVE' | translate }}</span>
           </button>
         </div>
       </div>

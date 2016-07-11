@@ -1,5 +1,8 @@
 <section class="sectiontemplate">
-  <h4><i class="icon-class icon-mailbox"></i>Recipient</h4>
+  <h4>
+    <i class="icon-class icon-mailbox"></i>
+    {{ 'RECIPIENT_HEADLINE' | translate }}
+  </h4>
   <form [ngFormModel]="recipientsForm">
     <div class="row">
       <div class="col-input">
@@ -8,7 +11,7 @@
             <span class="icon-search"></span>
           </div>
           <input type="text"
-                 placeholder="filter"
+                 placeholder="{{ 'RECIPIENT_FILTER_PLACEHOLDER' | translate }}"
                  tabindex="3"
                  ngControl="addressGroup"
                  [fpSuggest]="mapAddressGroupSuggest(addressService)"
@@ -38,7 +41,7 @@
             <span class="icon-search"></span>
           </div>
           <input type="text"
-                 placeholder="recipient"
+                 placeholder="{{ 'RECIPIENT_PLACEHOLDER' | translate }}"
                  tabindex="4"
                  ngControl="recipient"
                  [fpSuggest]="mapRecipientSuggest(addressService)"
