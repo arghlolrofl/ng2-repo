@@ -124,6 +124,12 @@ export default class ShippingProductCalculationComponent {
     private parcelSuggestions:Array<PostalProductInfo>;
 
     /**
+     * Defines if calculation is running or not.
+     * @type {boolean}
+     */
+    private calculationRunning:boolean = false;
+
+    /**
      * @constructor
      * @param {ShippingService} shippingService the shipping information service
      * @param {FormBuilder} formBuilder the form builder from angular2
@@ -235,9 +241,10 @@ export default class ShippingProductCalculationComponent {
      * Recalculate the currently entered product information.
      */
     public recalculateProduct() {
-        if (!this.productCalculationForm.valid && (this.isDocument && this.weight.Value <= 0) && !this.sender || !this.shippingPoint || !this.recipient) {
+        if (!this.canCalculate()) {
             return;
         }
+        this.calculationRunning = true;
         const productInfos = this.productCalculationForm.value;
 
         let parcelInfo = new ParcelInfo();
@@ -255,10 +262,14 @@ export default class ShippingProductCalculationComponent {
         parcelObservable
             .first()
             .subscribe(
-                (r:PostalProductInfo) => this.parcelChange.emit(r),
+                (r:PostalProductInfo) => {
+                    this.parcelChange.emit(r);
+                    this.calculationRunning = false;
+                },
                 (error) => {
                     this.parcelChange.emit(null);
-                    this.onError.emit(error)
+                    this.onError.emit(error);
+                    this.calculationRunning = false;
                 });
         parcelObservable
             .subscribe(
@@ -318,8 +329,9 @@ export default class ShippingProductCalculationComponent {
      * @returns {boolean}
      */
     public canCalculate() {
-        return this.weight.Value > 0 &&
-            ((this.dimensions.Height > 0 && this.dimensions.Width > 0 && this.dimensions.Length > 0) || this.isDocument)
+        return !this.calculationRunning && ((this.weight.Value > 0 || this.isDocument) &&
+            (this.dimensions.Height > 0 && this.dimensions.Width > 0 && this.dimensions.Length > 0) &&
+            (this.productCalculationForm.valid && !!this.sender && !!this.shippingPoint && !!this.recipient));
     }
 
     /**
