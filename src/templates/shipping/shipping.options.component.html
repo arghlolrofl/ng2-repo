@@ -20,32 +20,32 @@
             <tr>
               <td>Base Cost:*</td>
               <td *ngIf="parcel">{{parcel.Price.Base | currency:'USD':true:'1.2-2'}}</td>
-              <td *ngIf="!parcel">$0.0*</td>
+              <td *ngIf="!parcel">$0.0</td>
             </tr>
             <tr>
               <td>Extra Services*</td>
               <td *ngIf="parcel">{{getExtraServiceCosts() | currency:'USD':true:'1.2-2'}}</td>
-              <td *ngIf="!parcel">$0.0*</td>
+              <td *ngIf="!parcel">$0.0</td>
             </tr>
             <tr>
               <td>GST:*</td>
               <td *ngIf="parcel">{{parcel.Price.Tax.Gst.Value | currency:'USD':true:'1.2-2'}}</td>
-              <td *ngIf="!parcel">$0.0*</td>
+              <td *ngIf="!parcel">$0.0</td>
             </tr>
             <tr>
               <td>PST:*</td>
               <td *ngIf="parcel">{{parcel.Price.Tax.Pst.Value | currency:'USD':true:'1.2-2'}}</td>
-              <td *ngIf="!parcel">$0.0*</td>
+              <td *ngIf="!parcel">$0.0</td>
             </tr>
             <tr>
               <td>HST:*</td>
               <td *ngIf="parcel">{{parcel.Price.Tax.Hst.Value | currency:'USD':true:'1.2-2'}}</td>
-              <td *ngIf="!parcel">$0.0*</td>
+              <td *ngIf="!parcel">$0.0</td>
             </tr>
             <tr>
               <td>Total*</td>
               <td *ngIf="parcel">{{(parcel.Price.Total + getOptionCosts()) | currency:'USD':true:'1.2-2'}}</td>
-              <td *ngIf="!parcel">$0.0*</td>
+              <td *ngIf="!parcel">$0.0</td>
             </tr>
           </table>
         </div>
