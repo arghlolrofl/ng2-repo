@@ -1,5 +1,4 @@
-import {Component, OnDestroy, EventEmitter, Output} from '@angular/core';
-import {Control, ControlGroup, FormBuilder} from '@angular/common';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
 import ShippingRecipientAddComponent from "./shipping.recipient.add.component";
@@ -27,77 +26,37 @@ import {SuggestDirective, SuggestEvents} from "../../directives/suggest.directiv
 /**
  * Shipping Recipient component.
  */
-export default class ShippingRecipientComponent implements OnDestroy {
-
-    /**
-     * Updated when error occurred.
-     * @type {EventEmitter<Error>}
-     */
-    @Output()
-    public onError:EventEmitter<Error> = new EventEmitter<Error>();
+export default class ShippingRecipientComponent {
+    
+    @Output() onError:EventEmitter<Error> = new EventEmitter();
 
     /**
      * Updated when recipient has been changed.
      * @type {EventEmitter<AddressDisplayInfo>}
      */
-    @Output()
-    public recipientChange:EventEmitter<AddressDisplayInfo> = new EventEmitter<AddressDisplayInfo>();
+    recipientInput:string = '';
+    recipientEvents:EventEmitter<any> = new EventEmitter();
+    @Output() recipientChange:EventEmitter<AddressDisplayInfo> = new EventEmitter();
+    recipientSuggestions:AddressDisplayInfo[] = [];
 
     /**
-     * The address group events.
-     * @type {EventEmitter<any>}
+     * AddressGroup.
      */
-    public addressGroupEvents:EventEmitter<any>;
-
-    /**
-     * The actual selected address group.
-     */
-    private addressGroup:AddressGroupInfo;
-
-    /**
-     * Address Group suggestions.
-     */
-    private addressGroupSuggestions:AddressGroupInfo[];
-
-    /**
-     * The recipient events.
-     * @type {EventEmitter<any>}
-     */
-    public recipientEvents:EventEmitter<any>;
-
-    /**
-     * Recipient suggestions (autocomplete) to display.
-     */
-    private recipientSuggestions:AddressDisplayInfo[];
-
-    /**
-     * The form for recipient.
-     */
-    private recipientsForm:ControlGroup;
+    addressGroupInput:string = '';
+    addressGroup:AddressGroupInfo;
+    addressGroupEvents:EventEmitter<any> = new EventEmitter();
+    addressGroupSuggestions:AddressGroupInfo[] = [];
 
     /**
      * Show modal dialog for adding new recipient.
      */
-    private showAddDialogChange:EventEmitter<boolean>;
+    showAddDialogChange:EventEmitter<boolean> = new EventEmitter();
 
     /**
      * @constructor
      * @param {AddressService} addressService the address information service
-     * @param {FormBuilder} formBuilder the form builder from angular2
      */
-    constructor(private addressService:AddressService,
-                private formBuilder:FormBuilder) {
-        this.addressGroupEvents = new EventEmitter<any>();
-        this.recipientEvents = new EventEmitter<any>();
-        this.showAddDialogChange = new EventEmitter();
-
-        this.addressGroupSuggestions = [];
-        this.recipientSuggestions = [];
-        this.recipientsForm = formBuilder.group({
-            'addressGroup': [''],
-            'recipient': ['']
-        });
-
+    constructor(private addressService:AddressService) {
         this.bindEvents();
     }
 
@@ -105,9 +64,6 @@ export default class ShippingRecipientComponent implements OnDestroy {
      * Bind all events.
      */
     private bindEvents() {
-        const addressGroupControl = <Control> this.recipientsForm.controls['addressGroup'];
-        const recipientControl = <Control> this.recipientsForm.controls['recipient'];
-
         this.addressGroupEvents.subscribe((event) => {
             switch (event.type) {
                 case SuggestEvents.ERROR:
@@ -120,18 +76,19 @@ export default class ShippingRecipientComponent implements OnDestroy {
 
                 case SuggestEvents.SELECTED:
                     this.addressGroup = event.data;
-                    addressGroupControl.updateValue(this.addressGroup.GroupName);
-                    this.recipientEvents.emit({
-                        type: SuggestEvents.CLEARED
-                    });
+                    this.addressGroupInput = event.data.GroupName;
+                    this.recipientEvents.emit({type: SuggestEvents.CLEARED});
                     break;
 
                 case SuggestEvents.CLEARED:
-                    addressGroupControl.updateValue('');
+                    this.addressGroup = null;
+                    this.addressGroupInput = '';
+                    this.recipientEvents.emit({type: SuggestEvents.CLEARED});
+                    this.addressGroupSuggestions = [];
                     break;
 
                 case SuggestEvents.SHOW:
-                    addressGroupControl.updateValue(event.data.GroupName, {emitEvent: false});
+                    this.addressGroupInput = event.data.GroupName;
                     break;
             }
         });
@@ -148,19 +105,19 @@ export default class ShippingRecipientComponent implements OnDestroy {
 
                 case SuggestEvents.SELECTED:
                     this.recipientChange.emit(event.data);
-                    recipientControl.updateValue(`${event.data.FirstName} ${event.data.LastName} (${event.data.Company})`
-                        + ` - ${event.data.PostalAddress} ${event.data.ZipCode} ${event.data.City}`);
+                    this.recipientInput = `${event.data.FirstName} ${event.data.LastName} (${event.data.Company})`
+                        + ` - ${event.data.PostalAddress} ${event.data.ZipCode} ${event.data.City}`;
                     break;
 
                 case SuggestEvents.CLEARED:
                     this.recipientChange.emit(null);
-                    recipientControl.updateValue('');
+                    this.recipientInput = '';
+                    this.recipientSuggestions = [];
                     break;
 
                 case SuggestEvents.SHOW:
-                    recipientControl.updateValue(`${event.data.FirstName} ${event.data.LastName} (${event.data.Company})`
-                        + ` - ${event.data.PostalAddress} ${event.data.ZipCode} ${event.data.City}`,
-                        {emitEvent: false});
+                    this.recipientInput = `${event.data.FirstName} ${event.data.LastName} (${event.data.Company})`
+                        + ` - ${event.data.PostalAddress} ${event.data.ZipCode} ${event.data.City}`;
                     break;
             }
         });
@@ -190,53 +147,5 @@ export default class ShippingRecipientComponent implements OnDestroy {
             }
             return service.getFilteredAddressesByAddressGroupAndFastQuery(groupId, term, 0, 20);
         }
-    }
-
-    /**
-     * Executed when a user clicks on a result to select it.
-     * @param {AddressGroupInfo} addressGroup the address group to be selected
-     */
-    public selectAddressGroup(addressGroup:AddressGroupInfo) {
-        this.addressGroupEvents.emit({
-            type: SuggestEvents.SELECTED,
-            data: addressGroup
-        });
-    }
-
-    /**
-     * Clear address group.
-     */
-    public clearAddressGroup() {
-        this.addressGroupEvents.emit({
-            type: SuggestEvents.CLEARED
-        });
-    }
-
-    /**
-     * Executed when a user clicks on a result to select it.
-     * @param {AddressDisplayInfo} recipient the recipient to be selected
-     */
-    public selectRecipient(recipient:AddressDisplayInfo) {
-        this.recipientEvents.emit({
-            type: SuggestEvents.SELECTED,
-            data: recipient
-        });
-    }
-
-    /**
-     * Clear recipient.
-     */
-    public clearRecipient() {
-        this.recipientEvents.emit({
-            type: SuggestEvents.CLEARED
-        });
-    }
-
-    /**
-     * OnDestroy.
-     */
-    public ngOnDestroy() {
-        this.addressGroupEvents.emit({type: SuggestEvents.CLEARED});
-        this.recipientEvents.emit({type: SuggestEvents.CLEARED});
     }
 }

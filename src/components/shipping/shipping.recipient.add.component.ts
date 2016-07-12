@@ -32,77 +32,45 @@ import AddressGroupInfo from "../../models/address-group-info";
  */
 export default class ShippingRecipientAddComponent implements AfterViewInit {
 
-    @Input()
-    public showChange:EventEmitter<boolean>;
+    /**
+     * Opens or closes the modal dialog.
+     */
+    @Input() showChange:EventEmitter<boolean> = new EventEmitter();
+    @ViewChild('modalAddRecipient') modal:ModalComponent;
 
     /**
-     * Modal dialog for sender
+     * Region.
      */
-    @ViewChild('modalAddRecipient')
-    private modal:ModalComponent;
+    region:RegionInfo;
+    regions:Array<RegionInfo> = [];
 
     /**
-     * Add formula.
+     * Country.
      */
-    private addForm:ControlGroup;
-
-    /**
-     * Regions.
-     */
-    private regions:Array<RegionInfo>;
-
-    /**
-     * Selected region.
-     */
-    private region:RegionInfo;
-
-    /**
-     * Countries.
-     */
-    private countries:Array<CountryInfo>;
-
-    /**
-     * Selected country.
-     */
-    private country:CountryInfo;
+    country:CountryInfo;
+    countries:Array<CountryInfo> = [];
 
     /**
      * Address Groups.
      */
-    private addressGroups:Array<AddressGroupInfo>;
+    addressGroup:AddressGroupInfo;
+    addressGroups:Array<AddressGroupInfo> = [];
 
     /**
-     * Selected address group.
+     * The address to store.
+     * @type {AddressCreationInfo}
      */
-    private addressGroup:AddressGroupInfo;
+    address:AddressCreationInfo = new AddressCreationInfo();
 
     /**
      * @constructor
-     * @param {FormBuilder} formBuilder the angular2 form builder
      * @param {RegionService} regionService the region client
      * @param {CountryService} countryService the country client
      * @param {AddressService} addressService the address client
      */
-    constructor(private formBuilder:FormBuilder,
-                private regionService:RegionService,
+    constructor(private regionService:RegionService,
                 private countryService:CountryService,
                 private addressService:AddressService) {
-        this.regions = [];
-        this.countries = [];
-        this.addressGroups = [];
-        this.addForm = formBuilder.group({
-            company: [''],
-            title: [''],
-            firstName: ['', Validators.required],
-            middleName: [''],
-            lastName: ['', Validators.required],
-            postalAddress: ['', Validators.required],
-            additionalPostalAddress: [''],
-            city: ['', Validators.required],
-            zipCode: ['', Validators.required],
-            additionalZipCode: [''],
-            eMail: ['', Validators.required]
-        });
     }
 
     /**
@@ -134,6 +102,7 @@ export default class ShippingRecipientAddComponent implements AfterViewInit {
                 (r:CountryInfo) => {
                     this.country = r;
                     this.refreshRegions(r.Id);
+                    this.address.CountryId = this.country.Id;
                 },
                 () => {
                     this.country = null;
@@ -154,7 +123,11 @@ export default class ShippingRecipientAddComponent implements AfterViewInit {
         this.regions = [];
         const regionObservable = this.regionService.getFilteredByCountryId(countryId).share();
         regionObservable.first().subscribe(
-            (r:RegionInfo) => this.region = r,
+            (r:RegionInfo) => {
+                this.region = r;
+                this.address.Region = this.region.RegionName;
+                this.address.RegionAbbreviation = this.region.RegionAbbreviation;
+            },
             () => this.region = null);
         regionObservable
             .subscribe(
@@ -175,23 +148,7 @@ export default class ShippingRecipientAddComponent implements AfterViewInit {
      * Add sender.
      */
     public save() {
-        const address = new AddressCreationInfo();
-        address.CountryId = this.country.Id;
-        address.Region = this.region.RegionName;
-        address.RegionAbbreviation = this.region.RegionAbbreviation;
-        address.FirstName = this.addForm.controls['firstName'].value;
-        address.MiddleName = this.addForm.controls['middleName'].value;
-        address.LastName = this.addForm.controls['lastName'].value;
-        address.City = this.addForm.controls['city'].value;
-        address.Company = this.addForm.controls['company'].value;
-        address.Title = this.addForm.controls['title'].value;
-        address.PostalAddress = this.addForm.controls['postalAddress'].value;
-        address.AdditionalPostalAddress = this.addForm.controls['additionalPostalAddress'].value;
-        address.ZipCode = this.addForm.controls['zipCode'].value;
-        address.AdditionalZipCode = this.addForm.controls['additionalZipCode'].value;
-        address.EMailAddress = this.addForm.controls['eMail'].value;
-
-        this.addressService.addNewToAddressGroup(this.addressGroup.GroupName, address).subscribe(
+        this.addressService.addNewToAddressGroup(this.addressGroup.GroupName, this.address).subscribe(
             () => this.modal.close(),
             (error:Error) => {
                 console.warn('address could not be stored', error); // TODO error handling
@@ -204,6 +161,8 @@ export default class ShippingRecipientAddComponent implements AfterViewInit {
      */
     public regionChanged(regionName:string) {
         this.region = this.regions.find((r:RegionInfo) => r.RegionName === regionName);
+        this.address.Region = this.region.RegionName;
+        this.address.RegionAbbreviation = this.region.RegionAbbreviation;
     }
 
     /**
@@ -213,6 +172,7 @@ export default class ShippingRecipientAddComponent implements AfterViewInit {
     public countryChanged(countryName:string) {
         this.country = this.countries.find((r:CountryInfo) => r.CountryName === countryName);
         this.refreshRegions(this.country.Id);
+        this.address.CountryId = this.country.Id;
     }
 
     /**

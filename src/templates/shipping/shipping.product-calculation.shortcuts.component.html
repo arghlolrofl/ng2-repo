@@ -1,11 +1,13 @@
 <div class="row">
-  <button *ngFor="let shortcut of shortcuts.slice().reverse()"
+  <button type="button"
+          *ngFor="let shortcut of shortcuts.slice().reverse()"
           class="button shortcut"
-          (click)="selectShortcut(shortcut)">
+          (click)="shortcutChange.emit(shortcut)">
     <span>{{shortcut.DisplayName}}</span>
   </button>
 
-  <button *ngFor="let placeholder of shortcutPlaceholder"
+  <button type="button"
+          *ngFor="let placeholder of shortcutPlaceholder"
           class="button shortcut placeholder"
           [disabled]="true">
     <span>{{ 'PRODUCT_CALCULATION_SHORTCUT_PLACEHOLDER' | translate }}</span>
@@ -13,13 +15,15 @@
 
   <div class="col-button">
     <div class="field-container box-icon">
-      <button (click)="modalSearch.open()">
+      <button type="button"
+              (click)="modalSearch.open()">
         <span class="icon-search"></span>
       </button>
     </div>
   </div>
 
-  <button class="button shortcut"
+  <button type="button"
+          class="button shortcut"
           (click)="lastRate()"
           [disabled]="!lastShortcut">
     <span>{{ 'PRODUCT_CALCULATION_LAST_RATE' | translate }}</span>
@@ -35,38 +39,41 @@
       </div>
     </div>
   </modal-header>
-  <form [ngFormModel]="searchForm">
-    <modal-body>
-      <div class="row">
-        <div class="col-sm-12">
-          <div class="field-container text-field">
-            <input type="text"
-                   placeholder="{{ 'PRODUCT_CALCULATION_SEARCH_SHORTCUT_PLACEHOLDER' | translate }}"
-                   ngControl="search"
-                   (keyup.esc)="searchForm.controls['search'].updateValue('')">
-            <button class="clear-submit"
-                    (click)="searchForm.controls['search'].updateValue('')">
-              <span class="icon-close"></span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </modal-body>
-
-    <modal-footer>
-      <div class="row">
-        <div class="col-sm-12">
-          <button class="button popup"
-                  (click)="modalSearch.close()">
-            <span>{{ 'MODAL_CLOSE' | translate }}</span>
-          </button>
-
-          <button type="submit"
-                  class="button popup">
-            <span>{{ 'MODAL_SAVE' | translate }}</span>
+  <modal-body>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="field-container text-field">
+          <input type="text"
+                 placeholder="{{ 'PRODUCT_CALCULATION_SEARCH_SHORTCUT_PLACEHOLDER' | translate }}"
+                 [(ngModel)]="searchInput"
+                 (input)="searchInputChange.emit($event.target.value)"
+                 (keyup.esc)="searchInputChange.emit('')">
+          <button type="button"
+                  class="clear-submit"
+                  (click)="searchInputChange.emit('')">
+            <span class="icon-close"></span>
           </button>
         </div>
       </div>
-    </modal-footer>
-  </form>
+    </div>
+
+    <button type="button"
+            *ngFor="let shortcut of displayedShortcutSuggestions"
+            class="button shortcut"
+            (click)="shortcutChange.emit(shortcut)">
+      <span>{{shortcut.DisplayName}}</span>
+    </button>
+  </modal-body>
+
+  <modal-footer>
+    <div class="row">
+      <div class="col-sm-12">
+        <button type="button"
+                class="button popup"
+                (click)="modalSearch.close()">
+          <span>{{ 'MODAL_CLOSE' | translate }}</span>
+        </button>
+      </div>
+    </div>
+  </modal-footer>
 </modal>

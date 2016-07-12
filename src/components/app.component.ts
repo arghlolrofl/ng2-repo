@@ -42,15 +42,20 @@ export default class AppComponent implements AfterViewInit {
     private modalLogin:ModalComponent;
 
     /**
+     * Username.
+     */
+    private username:string;
+
+    /**
+     * Password.
+     */
+    private password:string;
+
+    /**
      * Current login state.
      * @type {boolean}
      */
     private loggedIn:boolean = false;
-
-    /**
-     * Login formular.
-     */
-    private loginForm:ControlGroup;
 
     /**
      * @constructor
@@ -68,12 +73,6 @@ export default class AppComponent implements AfterViewInit {
         userLang = (new RegExp(`(${locales})`, 'gi')).test(userLang) ? userLang : AVAILABLE_LOCALES[0];
         translate.use(userLang);
         this.loggedIn = this.loginService.isLoggedIn();
-
-        this.loginForm = formBuilder.group({
-            'username': [''],
-            'password': ['']
-        });
-
         this.bindEvents();
     }
 
@@ -113,11 +112,8 @@ export default class AppComponent implements AfterViewInit {
      * Handle login.
      */
     public login() {
-        const username = this.loginForm.controls['username'].value;
-        const password = this.loginForm.controls['password'].value;
-        
-        if (username !== '' && password !== '') {
-            this.loginService.login(username, password);
+        if (this.username !== '' && this.password !== '') {
+            this.loginService.login(this.username, this.password);
         }
     }
 }

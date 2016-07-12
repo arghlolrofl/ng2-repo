@@ -27,48 +27,35 @@ import PostalProductAdjustmentInfo from "../../models/postal-product-adjustment-
  */
 export default class ShippingOptionsComponent {
 
-    /**
-     * Updated when error occurred.
-     * @type {EventEmitter<Error>}
-     */
-    @Output()
-    public onError:EventEmitter<Error> = new EventEmitter<Error>();
+    @Output() onError:EventEmitter<Error> = new EventEmitter<Error>();
 
     /**
      * Updated when label should be bought.
      * @type {EventEmitter<boolean>}
      */
-    @Output()
-    public onBuyLabel:EventEmitter<boolean> = new EventEmitter();
-
-    /**
-     * Updated when selected options changed.
-     * @type {EventEmitter<Array<PostalProductOptionInfo>>}
-     */
-    @Output()
-    public selectedOptionsChange:EventEmitter<Array<PostalProductOptionInfo>> = new EventEmitter();
-
-    /**
-     * Parcel.
-     */
-    @Input()
-    public parcel:PostalProductInfo;
+    @Output() onBuyLabel:EventEmitter<boolean> = new EventEmitter();
 
     /**
      * Modal dialog for sender
      */
-    @ViewChild('modalOptionSelect')
-    private modalOptionSelect:ModalComponent;
+    @ViewChild('modalOptionSelect') modalOptionSelect:ModalComponent;
 
     /**
-     * Selected options.
+     * Parcel.
      */
-    private selectedOptions:Array<PostalProductOptionInfo>;
+    @Input() parcel:PostalProductInfo;
+    @Input() canBuy:() => boolean = () => true;
 
     /**
      * Consumer information.
      */
-    private consumer:ConsumerInfo;
+    consumer:ConsumerInfo;
+
+    /**
+     * Options.
+     */
+    selectedOptions:Array<PostalProductOptionInfo>;
+    @Output() selectedOptionsChange:EventEmitter<Array<PostalProductOptionInfo>> = new EventEmitter();
 
     /**
      * @constructor
@@ -122,14 +109,6 @@ export default class ShippingOptionsComponent {
     private getExtraServiceCosts() {
         return this.getOptionCosts() +
             this.parcel.Price.Adjustments.reduce((p, r:PostalProductAdjustmentInfo) => p + r.Cost, 0);
-    }
-
-    /**
-     * Check if label can be bought.
-     * @returns {boolean}
-     */
-    private canBuy() {
-        return !!this.parcel;
     }
 
     /**

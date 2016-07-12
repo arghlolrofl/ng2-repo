@@ -3,77 +3,82 @@
     <i class="icon-class icon-mailbox"></i>
     {{ 'RECIPIENT_HEADLINE' | translate }}
   </h4>
-  <form [ngFormModel]="recipientsForm">
-    <div class="row">
-      <div class="col-input">
-        <div class="field-container text-field-search">
-          <div class="search-submit">
-            <span class="icon-search"></span>
-          </div>
-          <input type="text"
-                 placeholder="{{ 'RECIPIENT_FILTER_PLACEHOLDER' | translate }}"
-                 tabindex="3"
-                 ngControl="addressGroup"
-                 [fpSuggest]="mapAddressGroupSuggest(addressService)"
-                 [fpSuggestEvents]="addressGroupEvents">
-          <button class="clear-submit"
-                  (mouseup)="clearAddressGroup()">
-            <span class="icon-close"></span>
-          </button>
+  <div class="row">
+    <div class="col-input">
+      <div class="field-container text-field-search">
+        <div class="search-submit">
+          <span class="icon-search"></span>
         </div>
-        <div class="row autocomplete"
-           [class.open]="addressGroupSuggestions.length > 0 && recipientsForm.controls['addressGroup'].value.length > 0">
+        <input type="text"
+               name="filter"
+               placeholder="{{ 'RECIPIENT_FILTER_PLACEHOLDER' | translate }}"
+               tabindex="3"
+               autocomplete="off"
+               [(ngModel)]="addressGroupInput"
+               [fpSuggest]="mapAddressGroupSuggest(addressService)"
+               [fpSuggestEvents]="addressGroupEvents">
+        <button type="button"
+                class="clear-submit"
+                (click)="addressGroupEvents.emit({type: 3})">
+          <span class="icon-close"></span>
+        </button>
+      </div>
+      <div class="row autocomplete"
+           [class.open]="addressGroupSuggestions.length > 0">
+        <ul>
+          <li *ngFor="let addressGroup of addressGroupSuggestions"
+              (click)="addressGroupEvents.emit({type: 2, data: addressGroup})">
+            {{addressGroup.GroupName}}
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-button"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-input">
+      <div class="field-container text-field-search">
+        <div class="search-submit">
+          <span class="icon-search"></span>
+        </div>
+        <input type="text"
+               name="recipient"
+               placeholder="{{ 'RECIPIENT_PLACEHOLDER' | translate }}"
+               tabindex="4"
+               autocomplete="off"
+               [(ngModel)]="recipientInput"
+               [fpSuggest]="mapRecipientSuggest(addressService)"
+               [fpSuggestEvents]="recipientEvents">
+        <button type="button"
+                class="clear-submit"
+                (click)="recipientEvents.emit({type: 3})">
+          <span class="icon-close"></span>
+        </button>
+      </div>
+      <div class="row autocomplete"
+           [class.open]="recipientSuggestions.length > 0">
+        <div class="col-md-12">
           <ul>
-            <li *ngFor="let addressGroup of addressGroupSuggestions"
-                (click)="selectAddressGroup(addressGroup)">
-              {{addressGroup.GroupName}}
+            <li *ngFor="let recipient of recipientSuggestions"
+                (click)="recipientEvents.emit({type: 2, data: recipient})">
+              <span class="company">{{recipient.FirstName}} {{recipient.LastName}} ({{recipient.Company}})</span>
+              <span class="address">{{recipient.PostalAddress}} {{recipient.ZipCode}} {{recipient.City}}</span>
             </li>
           </ul>
         </div>
       </div>
-      <div class="col-button"></div>
     </div>
 
-    <div class="row">
-      <div class="col-input">
-        <div class="field-container text-field-search">
-          <div class="search-submit">
-            <span class="icon-search"></span>
-          </div>
-          <input type="text"
-                 placeholder="{{ 'RECIPIENT_PLACEHOLDER' | translate }}"
-                 tabindex="4"
-                 ngControl="recipient"
-                 [fpSuggest]="mapRecipientSuggest(addressService)"
-                 [fpSuggestEvents]="recipientEvents">
-          <button class="clear-submit"
-                  (mouseup)="clearRecipient()">
-            <span class="icon-close"></span>
-          </button>
-        </div>
-        <div class="row autocomplete"
-             [class.open]="recipientSuggestions.length > 0 && recipientsForm.controls['recipient'].value.length > 0">
-          <div class="col-md-12">
-            <ul>
-              <li *ngFor="let recipient of recipientSuggestions"
-                  (click)="selectRecipient(recipient)">
-                <span class="company">{{recipient.FirstName}} {{recipient.LastName}} ({{recipient.Company}})</span>
-                <span class="address">{{recipient.PostalAddress}} {{recipient.ZipCode}} {{recipient.City}}</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-button">
-        <div class="field-container box-icon">
-          <button (click)="showAddDialogChange.emit(true)">
-            <span class="icon-plus"></span>
-          </button>
-        </div>
+    <div class="col-button">
+      <div class="field-container box-icon">
+        <button type="button"
+                (click)="showAddDialogChange.emit(true)">
+          <span class="icon-plus"></span>
+        </button>
       </div>
     </div>
-  </form>
+  </div>
 </section>
 
 <fp-shipping-recipient-add [showChange]="showAddDialogChange"></fp-shipping-recipient-add>

@@ -3,7 +3,6 @@
     <i class="icon-class icon-coins"></i>
     {{ 'COST_CENTER_HEADLINE' | translate }}
   </h4>
-  <form [ngFormModel]="costCenterForm">
     <div class="row">
       <div class="col-input">
         <div class="field-container text-field-search">
@@ -12,28 +11,31 @@
           </div>
           <input type="text"
                  tabindex="5"
+                 name="costcenter1"
                  placeholder="{{ 'COST_CENTER_PLACEHOLDER' | translate }}"
-                 ngControl="costCenter1"
+                 autocomplete="off"
+                 [(ngModel)]="costCenter1Input"
                  [fpSuggest]="mapCostCenter1(costCenterService)"
                  [fpSuggestEvents]="costCenter1Events">
-          <button class="clear-submit"
-                  (mouseup)="clearCostCenter1()">
+          <button type="button"
+                  class="clear-submit"
+                  (click)="costCenter1Events.emit({type: 3})">
             <span class="icon-close"></span>
           </button>
         </div>
         <div class="row autocomplete"
-             [class.open]="costCenter1Suggestions.length > 0 && costCenterForm.controls['costCenter1'].value.length > 0">
+             [class.open]="costCenter1Suggestions.length > 0">
           <ul>
             <li *ngFor="let costCenter of costCenter1Suggestions"
-                (click)="selectCostCenter1(costCenter)">
+                (click)="costCenter1Events.emit({type: 2, data: costCenter})">
               {{costCenter.Name}}
             </li>
           </ul>
         </div>
       </div>
 
-      <div class="col-button"></div>
-    </div>
+    <div class="col-button"></div>
+  </div>
 
     <div class="row">
       <div class="col-input">
@@ -44,30 +46,33 @@
           </div>
           <input type="text"
                  tabindex="6"
+                 name="costcenter2"
                  placeholder="{{ 'COST_CENTER_PLACEHOLDER' | translate }}"
+                 autocomplete="off"
                  [disabled]="!costCenter1"
-                 ngControl="costCenter2"
+                 [(ngModel)]="costCenter2Input"
                  [fpSuggest]="mapCostCenter23(costCenterService)"
                  [fpSuggestEvents]="costCenter2Events">
-          <button class="clear-submit"
-                  (mouseup)="clearCostCenter2()"
+          <button type="button"
+                  class="clear-submit"
+                  (click)="costCenter2Events.emit({type: 3})"
                   [disabled]="!costCenter1">
             <span class="icon-close"></span>
           </button>
         </div>
 
-        <div class="row autocomplete"
-             [class.open]="costCenter2Suggestions.length > 0 && costCenterForm.controls['costCenter2'].value.length > 0">
-          <ul>
-            <li *ngFor="let costCenter of costCenter2Suggestions"
-                (click)="selectCostCenter2(costCenter)">
-              {{costCenter.Name}}
-            </li>
-          </ul>
-        </div>
+      <div class="row autocomplete"
+           [class.open]="costCenter2Suggestions.length > 0">
+        <ul>
+          <li *ngFor="let costCenter of costCenter2Suggestions"
+              (click)="costCenter2Events.emit({type: 2, data: costCenter})">
+            {{costCenter.Name}}
+          </li>
+        </ul>
       </div>
-      <div class="col-button"></div>
     </div>
+    <div class="col-button"></div>
+  </div>
 
     <div class="row">
       <div class="col-input">
@@ -78,22 +83,25 @@
           </div>
           <input type="text"
                  tabindex="7"
+                 name="costcenter3"
                  placeholder="{{ 'COST_CENTER_PLACEHOLDER' | translate }}"
+                 autocomplete="off"
                  [disabled]="!costCenter1"
-                 ngControl="costCenter3"
+                 [(ngModel)]="costCenter3Input"
                  [fpSuggest]="mapCostCenter23(costCenterService)"
                  [fpSuggestEvents]="costCenter3Events">
-          <button class="clear-submit"
-                  (mouseup)="clearCostCenter3()"
+          <button type="button"
+                  class="clear-submit"
+                  (click)="costCenter3Events.emit({type: 3})"
                   [disabled]="!costCenter1">
             <span class="icon-close"></span>
           </button>
         </div>
         <div class="row autocomplete"
-             [class.open]="costCenter3Suggestions.length > 0 && costCenterForm.controls['costCenter3'].value.length > 0">
+             [class.open]="costCenter3Suggestions.length > 0">
           <ul>
             <li *ngFor="let costCenter of costCenter3Suggestions"
-                (click)="selectCostCenter3(costCenter)">
+                (click)="costCenter3Events.emit({type: 2, data: costCenter})">
               {{costCenter.Name}}
             </li>
           </ul>
@@ -101,5 +109,4 @@
       </div>
       <div class="col-button"></div>
     </div>
-  </form>
 </section>

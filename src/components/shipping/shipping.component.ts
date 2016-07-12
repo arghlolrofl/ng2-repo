@@ -48,70 +48,36 @@ export default class ShippingComponent {
     private error:Error;
 
     /**
-     * Selected sender.
+     * Sending information.
      */
-    private sender:AddressDisplayInfo;
-
-    /**
-     * Selected shipping point.
-     */
-    private shippingPoint:string;
-
-    /**
-     * Selected recipient.
-     */
-    private recipient:AddressDisplayInfo;
-
-    /**
-     * Cost Center level 1.
-     */
-    private costCenter1:CostCenterInfo;
-
-    /**
-     * Cost Center level 2.
-     */
-    private costCenter2:CostCenterInfo;
-
-    /**
-     * Cost Center level 3.
-     */
-    private costCenter3:CostCenterInfo;
-
-    /**
-     * Additional Info 1.
-     */
-    private additionalInfo1:string;
-
-    /**
-     * Additional Info 2.
-     */
-    private additionalInfo2:string;
-
-    /**
-     * Parcel info.
-     */
-    private parcel:ParcelProductInfo;
-
-    /**
-     * Dimensions.
-     */
-    private dimensions:DimensionInfo;
-
-    /**
-     * Weight.
-     */
-    private weight:WeightInfo;
-
-    /**
-     * Shipping options.
-     */
-    private options:Array<PostalProductOptionInfo>;
+    sender:AddressDisplayInfo;
+    shippingPoint:string;
+    recipient:AddressDisplayInfo;
+    costCenter1:CostCenterInfo;
+    costCenter2:CostCenterInfo;
+    costCenter3:CostCenterInfo;
+    additionalInfo1:string;
+    additionalInfo2:string;
+    parcel:ParcelProductInfo;
+    dimensions:DimensionInfo;
+    weight:WeightInfo;
+    options:Array<PostalProductOptionInfo>;
 
     /**
      * @constructor
      * @param {ShippingService} shippingService the shipping service client
      */
     constructor(private shippingService:ShippingService) {
+    }
+
+    /**
+     * Checks if buy request could work.
+     * @returns {boolean}
+     */
+    public canBuy(parcel, shippingPoint, sender, recipient, weight, costCenter1):() => boolean {
+        return () => {
+            return !!parcel && !!shippingPoint && !!sender && !!recipient && !!weight && !!costCenter1;
+        }
     }
 
     /**

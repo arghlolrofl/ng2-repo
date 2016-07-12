@@ -6,7 +6,7 @@
       </div>
     </div>
   </modal-header>
-  <form [ngFormModel]="addForm"
+  <form #addForm="ngForm"
         (ngSubmit)="save()">
 
     <modal-body>
@@ -14,12 +14,14 @@
         <div class="col-sm-12">
           <div class="field-container text-field">
             <input type="text"
+                   name="company"
                    placeholder="{{ 'SENDER_ADD_COMPANY_PLACEHOLDER' | translate }}"
-                   ngControl="company"
-                   [class.error]="!addForm.controls['company'].valid && addForm.controls['company'].touched"
-                   (keyup.esc)="addForm.controls['company'].updateValue('')">
-            <button class="clear-submit"
-                    (click)="addForm.controls['company'].updateValue('')">
+                   [(ngModel)]="address.Company"
+                   (keyup.esc)="address.Company = ''"
+                   required>
+            <button type="button"
+                    class="clear-submit"
+                    (click)="address.Company = ''">
               <span class="icon-close"></span>
             </button>
           </div>
@@ -30,12 +32,14 @@
         <div class="col-sm-6">
           <div class="field-container text-field">
             <input type="text"
+                   name="title"
                    placeholder="{{ 'SENDER_ADD_TITLE_PLACEHOLDER' | translate }}"
-                   ngControl="title"
-                   [class.error]="!addForm.controls['title'].valid && addForm.controls['title'].touched"
-                   (keyup.esc)="addForm.controls['title'].updateValue('')">
-            <button class="clear-submit"
-                    (click)="addForm.controls['title'].updateValue('')">
+                   [(ngModel)]="address.Title"
+                   (keyup.esc)="address.Title = ''"
+                   required>
+            <button type="button"
+                    class="clear-submit"
+                    (click)="address.Title = ''">
               <span class="icon-close"></span>
             </button>
           </div>
@@ -43,12 +47,14 @@
         <div class="col-sm-6">
           <div class="field-container text-field">
             <input type="text"
+                   name="firstname"
                    placeholder="{{ 'SENDER_ADD_FIRSTNAME_PLACEHOLDER' | translate }}"
-                   ngControl="firstName"
-                   [class.error]="!addForm.controls['firstName'].valid && addForm.controls['firstName'].touched"
-                   (keyup.esc)="addForm.controls['firstName'].updateValue('')">
-            <button class="clear-submit"
-                    (click)="addForm.controls['firstName'].updateValue('')">
+                   [(ngModel)]="address.FirstName"
+                   (keyup.esc)="address.FirstName = ''"
+                   required>
+            <button type="button"
+                    class="clear-submit"
+                    (click)="address.FirstName = ''">
               <span class="icon-close"></span>
             </button>
           </div>
@@ -59,12 +65,13 @@
         <div class="col-sm-6">
           <div class="field-container text-field">
             <input type="text"
+                   name="middlename"
                    placeholder="{{ 'SENDER_ADD_MIDDLENAME_PLACEHOLDER' | translate }}"
-                   ngControl="middleName"
-                   [class.error]="!addForm.controls['middleName'].valid && addForm.controls['middleName'].touched"
-                   (keyup.esc)="addForm.controls['middleName'].updateValue('')">
-            <button class="clear-submit"
-                    (click)="addForm.controls['middleName'].updateValue('')">
+                   [(ngModel)]="address.MiddleName"
+                   (keyup.esc)="address.MiddleName = ''">
+            <button type="button"
+                    class="clear-submit"
+                    (click)="address.MiddleName = ''">
               <span class="icon-close"></span>
             </button>
           </div>
@@ -72,12 +79,14 @@
         <div class="col-sm-6">
           <div class="field-container text-field">
             <input type="text"
+                   name="lastname"
                    placeholder="{{ 'SENDER_ADD_LASTNAME_PLACEHOLDER' | translate }}"
-                   ngControl="lastName"
-                   [class.error]="!addForm.controls['lastName'].valid && addForm.controls['lastName'].touched"
-                   (keyup.esc)="addForm.controls['lastName'].updateValue('')">
-            <button class="clear-submit"
-                    (click)="addForm.controls['lastName'].updateValue('')">
+                   [(ngModel)]="address.LastName"
+                   (keyup.esc)="address.LastName = ''"
+                   required>
+            <button type="button"
+                    class="clear-submit"
+                    (click)="address.LastName = ''">
               <span class="icon-close"></span>
             </button>
           </div>
@@ -111,12 +120,14 @@
         <div class="col-sm-6">
           <div class="field-container text-field">
             <input type="text"
+                   name="postaladdress"
                    placeholder="{{ 'SENDER_ADD_POSTALADDRESS_PLACEHOLDER' | translate }}"
-                   ngControl="postalAddress"
-                   [class.error]="!addForm.controls['postalAddress'].valid && addForm.controls['postalAddress'].touched"
-                   (keyup.esc)="addForm.controls['postalAddress'].updateValue('')">
-            <button class="clear-submit"
-                    (click)="addForm.controls['postalAddress'].updateValue('')">
+                   [(ngModel)]="address.PostalAddress"
+                   (keyup.esc)="address.PostalAddress = ''"
+                   required>
+            <button type="button"
+                    class="clear-submit"
+                    (click)="address.PostalAddress = ''">
               <span class="icon-close"></span>
             </button>
           </div>
@@ -124,12 +135,14 @@
         <div class="col-sm-6">
           <div class="field-container text-field">
             <input type="text"
+                   name="city"
                    placeholder="{{ 'SENDER_ADD_CITY_PLACEHOLDER' | translate }}"
-                   ngControl="city"
-                   [class.error]="!addForm.controls['city'].valid && addForm.controls['city'].touched"
-                   (keyup.esc)="addForm.controls['city'].updateValue('')">
-            <button class="clear-submit"
-                    (click)="addForm.controls['city'].updateValue('')">
+                   [(ngModel)]="address.City"
+                   (keyup.esc)="address.City = ''"
+                   required>
+            <button type="button"
+                    class="clear-submit"
+                    (click)="address.City = ''">
               <span class="icon-close"></span>
             </button>
           </div>
@@ -140,12 +153,14 @@
         <div class="col-sm-6">
           <div class="field-container text-field">
             <input type="text"
+                   name="zipcode"
                    placeholder="{{ 'SENDER_ADD_ZIPCODE_PLACEHOLDER' | translate }}"
-                   ngControl="zipCode"
-                   [class.error]="!addForm.controls['zipCode'].valid && addForm.controls['zipCode'].touched"
-                   (keyup.esc)="addForm.controls['zipCode'].updateValue('')">
-            <button class="clear-submit"
-                    (click)="addForm.controls['zipCode'].updateValue('')">
+                   [(ngModel)]="address.ZipCode"
+                   (keyup.esc)="address.ZipCode = ''"
+                   required>
+            <button type="button"
+                    class="clear-submit"
+                    (click)="address.ZipCode = ''">
               <span class="icon-close"></span>
             </button>
           </div>
@@ -154,12 +169,13 @@
         <div class="col-sm-6">
           <div class="field-container text-field">
             <input type="text"
+                   name="additionalzipcode"
                    placeholder="{{ 'SENDER_ADD_ADDITIONALZIPCODE_PLACEHOLDER' | translate }}"
-                   ngControl="additionalZipCode"
-                   [class.error]="!addForm.controls['additionalZipCode'].valid && addForm.controls['additionalZipCode'].touched"
-                   (keyup.esc)="addForm.controls['additionalZipCode'].updateValue('')">
-            <button class="clear-submit"
-                    (click)="addForm.controls['additionalZipCode'].updateValue('')">
+                   [(ngModel)]="address.AdditionalZipCode"
+                   (keyup.esc)="address.AdditionalZipCode = ''">
+            <button type="button"
+                    class="clear-submit"
+                    (click)="address.AdditionalZipCode = ''">
               <span class="icon-close"></span>
             </button>
           </div>
@@ -170,12 +186,14 @@
         <div class="col-sm-12">
           <div class="field-container text-field">
             <input type="text"
+                   name="email"
                    placeholder="{{ 'SENDER_ADD_EMAIL_PLACEHOLDER' | translate }}"
-                   ngControl="eMail"
-                   [class.error]="!addForm.controls['eMail'].valid && addForm.controls['eMail'].touched"
-                   (keyup.esc)="addForm.controls['eMail'].updateValue('')">
-            <button class="clear-submit"
-                    (click)="addForm.controls['eMail'].updateValue('')">
+                   [(ngModel)]="address.EMailAddress"
+                   (keyup.esc)="address.EMailAddress = ''"
+                   required>
+            <button type="button"
+                    class="clear-submit"
+                    (click)="address.EMailAddress = ''">
               <span class="icon-close"></span>
             </button>
           </div>
@@ -187,14 +205,15 @@
     <modal-footer>
       <div class="row">
         <div class="col-sm-12">
-          <button class="button popup"
+          <button type="button"
+                  class="button popup"
                   (click)="close()">
             <span>{{ 'MODAL_CLOSE' | translate }}</span>
           </button>
 
-           <button type="submit"
+          <button type="submit"
                   class="button popup"
-                  [disabled]="!addForm.valid">
+                  [disabled]="!addForm.form.valid">
             <span>{{ 'MODAL_SAVE' | translate }}</span>
           </button>
         </div>

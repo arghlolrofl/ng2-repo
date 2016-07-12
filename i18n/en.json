@@ -54,6 +54,7 @@
   "PRODUCT_CALCULATION_PARCEL_WEIGHT_DIMENSION_INFO": "Parcel weight / dimension",
   "PRODUCT_CALCULATION_CALCULATE_BUTTON": "calculate",
   "PRODUCT_CALCULATION_PARCEL_NOT_AVAILABLE": "No parcel selected",
+  "PRODUCT_CALCULATION_BUSINESS_DAYS": "business days",
   "OPTIONS_HEADLINE": "Options",
   "OPTIONS_NO_OPTIONS": "No options selected",
   "OPTIONS_SET_OPTIONS_BUTTON": "set options",

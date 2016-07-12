@@ -37,18 +37,6 @@ export default class ShortcutService {
     }
 
     /**
-     * Get all shortcuts matching a name (or partial match).
-     * @param {string} name the name to be matched
-     * @param {number} [start] the offset to start (starts at 0, default to 0)
-     * @param {number} [num] the number of results to get (0 to get all, default to 0)
-     * @returns {Observable<ShortcutInfo>}
-     */
-    public getFilteredByName(name:string, start?:number, num?:number):Observable<ShortcutInfo> {
-        return this.getAll(start, num)
-            .filter((r:ShortcutInfo) => r.DisplayName.toLowerCase().indexOf(name.toLowerCase()) === 0);
-    }
-
-    /**
      * Get last used shortcut.
      * @returns {Observable<ShortcutInfo>}
      */

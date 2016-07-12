@@ -1,5 +1,4 @@
 import {Component, Output, EventEmitter, ViewChild, Input} from '@angular/core';
-import {ControlGroup, FormBuilder, Validators, Control} from '@angular/common';
 import {TranslatePipe} from 'ng2-translate/ng2-translate';
 import {MODAL_DIRECTIVES, ModalComponent} from 'ng2-bs3-modal/ng2-bs3-modal';
 
@@ -7,8 +6,6 @@ import ShippingProductCalculationShortcutsComponent from "./shipping.product-cal
 import AddressService from "../../services/address.service";
 import ShippingService from "../../services/shipping.service";
 import ParcelInfo from "../../models/parcel-info";
-import {ESizeUnit} from "../../models/esize-info";
-import {EWeightUnit} from "../../models/eweight-unit";
 import PostalProductInfo from "../../models/postal-product-info";
 import DimensionInfo from "../../models/dimension-info";
 import WeightInfo from "../../models/weight-info";
@@ -36,135 +33,58 @@ import AddressDisplayInfo from "../../models/address-display-info";
  */
 export default class ShippingProductCalculationComponent {
 
-    /**
-     * Updated when error occurred.
-     * @type {EventEmitter<Error>}
-     */
-    @Output()
-    public onError:EventEmitter<Error> = new EventEmitter<Error>();
-
-    /**
-     * Updated when the parcel info has changed.
-     * @type {EventEmitter}
-     */
-    @Output()
-    public parcelChange:EventEmitter<PostalProductInfo> = new EventEmitter();
-
-    /**
-     * Updated when the dimensions changed.
-     * @type {EventEmitter}
-     */
-    @Output()
-    public dimensionsChange:EventEmitter<DimensionInfo> = new EventEmitter();
-
-    /**
-     * Updated when the weight changed.
-     * @type {EventEmitter}
-     */
-    @Output()
-    public weightChange:EventEmitter<WeightInfo> = new EventEmitter();
+    @Output() onError:EventEmitter<Error> = new EventEmitter();
 
     /**
      * Sender.
      */
-    @Input()
-    public sender:AddressDisplayInfo;
+    @Input() sender:AddressDisplayInfo;
 
     /**
      * Shipping Point.
      */
-    @Input()
-    public shippingPoint:string;
+    @Input() shippingPoint:string;
 
     /**
      * Recipient.
      */
-    @Input()
-    public recipient:AddressDisplayInfo;
+    @Input() recipient:AddressDisplayInfo;
 
     /**
      * Modal dialog for sender
      */
-    @ViewChild('modalProductSelect')
-    private modalProductSelect:ModalComponent;
+    @ViewChild('modalProductSelect') modalProductSelect:ModalComponent;
 
     /**
-     * Updated when is document changed.
-     * @type {EventEmitter}
+     * Parcel.
      */
-    public isDocumentChange:EventEmitter<boolean> = new EventEmitter();
+    parcelInfo:ParcelInfo = new ParcelInfo();
+    parcel:PostalProductInfo;
+    parcelSuggestions:Array<PostalProductInfo> = [];
+    @Output() parcelChange:EventEmitter<PostalProductInfo> = new EventEmitter();
 
     /**
-     * The form for product calculation.
+     * Parcel Information.
      */
-    private productCalculationForm:ControlGroup;
-
-    /**
-     * The dimensions.
-     */
-    private dimensions:DimensionInfo;
-
-    /**
-     * The weight.
-     */
-    private weight:WeightInfo;
-
-    /**
-     * Defines if the package is a document and has no dimensions.
-     * @type {boolean}
-     */
-    private isDocument:boolean = false;
-
-    /**
-     * Parcel information.
-     */
-    private parcel:PostalProductInfo;
-
-    /**
-     * Parcel Suggestions.
-     */
-    private parcelSuggestions:Array<PostalProductInfo>;
+    weightInputChange:EventEmitter<number> = new EventEmitter();
+    lengthInputChange:EventEmitter<number> = new EventEmitter();
+    widthInputChange:EventEmitter<number> = new EventEmitter();
+    heightInputChange:EventEmitter<number> = new EventEmitter();
+    @Output() dimensionsChange:EventEmitter<DimensionInfo> = new EventEmitter();
+    @Output() weightChange:EventEmitter<WeightInfo> = new EventEmitter();
+    isDocumentChange:EventEmitter<boolean> = new EventEmitter();
 
     /**
      * Defines if calculation is running or not.
      * @type {boolean}
      */
-    private calculationRunning:boolean = false;
+    calculationRunning:boolean = false;
 
     /**
      * @constructor
      * @param {ShippingService} shippingService the shipping information service
-     * @param {FormBuilder} formBuilder the form builder from angular2
      */
-    constructor(private shippingService:ShippingService,
-                private formBuilder:FormBuilder) {
-        this.dimensions = new DimensionInfo();
-        this.dimensions.Height = 0;
-        this.dimensions.Width = 0;
-        this.dimensions.Length = 0;
-        this.weight = new WeightInfo();
-        this.weight.Value = 0;
-        this.parcelSuggestions = [];
-        // initialize product calculation
-        this.productCalculationForm = formBuilder.group({
-            'weight': ['', Validators.compose([
-                Validators.required,
-                Validators.pattern('[0-9]+(\.[0-9]{1,}?)?')
-            ])],
-            'length': ['', Validators.compose([
-                Validators.required,
-                Validators.pattern('[0-9]+(\.[0-9]{1,}?)?')
-            ])],
-            'width': ['', Validators.compose([
-                Validators.required,
-                Validators.pattern('[0-9]+(\.[0-9]{1,}?)?')
-            ])],
-            'height': ['', Validators.compose([
-                Validators.required,
-                Validators.pattern('[0-9]+(\.[0-9]{1,}?)?')
-            ])]
-        });
-
+    constructor(private shippingService:ShippingService) {
         this.bindEvents();
     }
 
@@ -172,83 +92,36 @@ export default class ShippingProductCalculationComponent {
      * Bind all events.
      */
     private bindEvents() {
-        this.productCalculationForm.controls['weight'].valueChanges
-            .filter((term:string) => !!term)
-            .filter(() => this.productCalculationForm.controls['weight'].valid)
-            .distinctUntilChanged()
-            .map((term:string) => term.replace(',', '.'))
-            .debounceTime(400)
-            .subscribe(
-                (text:string) => {
-                    this.weight.Value = parseFloat(text);
-                    this.weightChange.emit(this.weight);
-                },
-                (error:Error) => console.warn(error)); // TODO error handling
-
-        this.productCalculationForm.controls['length'].valueChanges
-            .filter((term:string) => !!term)
-            .filter(() => this.productCalculationForm.controls['length'].valid)
-            .distinctUntilChanged()
-            .map((term:string) => term.replace(',', '.'))
-            .debounceTime(400)
-            .subscribe(
-                (text:string) => {
-                    this.dimensions.Length = parseFloat(text);
-                    this.dimensionsChange.emit(this.dimensions);
-                },
-                (error:Error) => console.warn(error)); // TODO error handling
-
-        this.productCalculationForm.controls['width'].valueChanges
-            .filter((term:string) => !!term)
-            .filter(() => this.productCalculationForm.controls['width'].valid)
-            .map((term:string) => term.replace(',', '.'))
-            .distinctUntilChanged()
-            .debounceTime(400)
-            .subscribe(
-                (text:string) => {
-                    this.dimensions.Width = parseFloat(text);
-                    this.dimensionsChange.emit(this.dimensions);
-                },
-                (error:Error) => console.warn(error)); // TODO error handling
-
-        this.productCalculationForm.controls['height'].valueChanges
-            .filter((term:string) => !!term)
-            .filter(() => this.productCalculationForm.controls['height'].valid)
-            .map((term:string) => term.replace(',', '.'))
-            .distinctUntilChanged()
-            .debounceTime(400)
-            .subscribe(
-                (text:string) => {
-                    this.dimensions.Height = parseFloat(text);
-                    this.dimensionsChange.emit(this.dimensions);
-                },
-                (error:Error) => console.warn(error)); // TODO error handling
-
-        this.dimensionsChange.subscribe((dimension:DimensionInfo) => {
-            if (dimension.Length > 0) {
-                (<Control> this.productCalculationForm.controls['length'])
-                    .updateValue(dimension.Length, {emitEvent: false});
-            }
-            if (dimension.Width > 0) {
-                (<Control> this.productCalculationForm.controls['width'])
-                    .updateValue(dimension.Width, {emitEvent: false});
-            }
-            if (dimension.Height > 0) {
-                (<Control> this.productCalculationForm.controls['height'])
-                    .updateValue(dimension.Height, {emitEvent: false});
-            }
+        this.weightInputChange.subscribe((value:number) => {
+            this.parcelInfo.Characteristic.Weight.Value = value;
+            this.weightChange.emit(this.parcelInfo.Characteristic.Weight);
         });
 
-        this.weightChange.subscribe((weight:WeightInfo) => {
-            if (weight.Value > 0) {
-                (<Control> this.productCalculationForm.controls['weight'])
-                    .updateValue(weight.Value, {emitEvent: false});
-            }
+        this.lengthInputChange.subscribe((value:number) => {
+            this.parcelInfo.Characteristic.Dimension.Length = value;
+            this.dimensionsChange.emit(this.parcelInfo.Characteristic.Dimension);
+        });
+
+        this.widthInputChange.subscribe((value:number) => {
+            this.parcelInfo.Characteristic.Dimension.Width = value;
+            this.dimensionsChange.emit(this.parcelInfo.Characteristic.Dimension);
+        });
+
+        this.heightInputChange.subscribe((value:number) => {
+            this.parcelInfo.Characteristic.Dimension.Height = value;
+            this.dimensionsChange.emit(this.parcelInfo.Characteristic.Dimension);
+        });
+
+        this.isDocumentChange.subscribe((value:boolean) => {
+            this.parcelInfo.Characteristic.IsDocument = value;
+            this.lengthInputChange.emit(null);
+            this.widthInputChange.emit(null);
+            this.heightInputChange.emit(null);
         });
 
         this.parcelChange.subscribe(
             (r:PostalProductInfo) => this.parcel = r,
-            (error:Error) => console.warn(error)); // TODO error handling
+            (error:Error) => this.onError.emit(error));
     }
 
     /**
@@ -259,20 +132,12 @@ export default class ShippingProductCalculationComponent {
             return;
         }
         this.calculationRunning = true;
-        const productInfos = this.productCalculationForm.value;
 
-        let parcelInfo = new ParcelInfo();
-        parcelInfo.Characteristic.Dimension.Height = parseFloat(productInfos.height);
-        parcelInfo.Characteristic.Dimension.Length = parseFloat(productInfos.length);
-        parcelInfo.Characteristic.Dimension.Width = parseFloat(productInfos.width);
-        parcelInfo.Characteristic.Dimension.Unit = ESizeUnit.Centimeter;
-        parcelInfo.Characteristic.Weight.Value = parseFloat(productInfos.weight);
-        parcelInfo.Characteristic.Weight.Unit = EWeightUnit.Kg;
-        parcelInfo.PostalCode = this.shippingPoint.replace(/ /g, '');
-        parcelInfo.Destination.PostalCode = this.recipient.ZipCode.replace(/ /g, '');
+        this.parcelInfo.PostalCode = this.shippingPoint.replace(/ /g, '');
+        this.parcelInfo.Destination.PostalCode = this.recipient.ZipCode.replace(/ /g, '');
 
         this.parcelSuggestions = [];
-        const parcelObservable = this.shippingService.calculate(parcelInfo).share();
+        const parcelObservable = this.shippingService.calculate(this.parcelInfo).share();
         parcelObservable
             .first()
             .subscribe(
@@ -292,60 +157,16 @@ export default class ShippingProductCalculationComponent {
     }
 
     /**
-     * Document status changed.
-     */
-    public changeIsDocument() {
-        this.isDocument = !this.isDocument;
-        this.isDocumentChange.emit(this.isDocument);
-        this.clearLength();
-        this.clearWidth();
-        this.clearHeight();
-    }
-
-    /**
-     * Clear weight.
-     */
-    public clearWeight() {
-        (<Control> this.productCalculationForm.controls['weight']).updateValue('');
-        this.weight.Value = 0;
-        this.weightChange.emit(this.weight);
-    }
-
-    /**
-     * Clear length.
-     */
-    public clearLength() {
-        (<Control> this.productCalculationForm.controls['length']).updateValue('');
-        this.dimensions.Length = 0;
-        this.dimensionsChange.emit(this.dimensions);
-    }
-
-    /**
-     * Clear width.
-     */
-    public clearWidth() {
-        (<Control> this.productCalculationForm.controls['width']).updateValue('');
-        this.dimensions.Width = 0;
-        this.dimensionsChange.emit(this.dimensions);
-    }
-
-    /**
-     * Clear height.
-     */
-    public clearHeight() {
-        (<Control> this.productCalculationForm.controls['height']).updateValue('');
-        this.dimensions.Height = 0;
-        this.dimensionsChange.emit(this.dimensions);
-    }
-
-    /**
      * Checks if the calculation can be done.
      * @returns {boolean}
      */
     public canCalculate() {
-        return !this.calculationRunning && ((this.weight.Value > 0 || this.isDocument) &&
-            (this.dimensions.Height > 0 && this.dimensions.Width > 0 && this.dimensions.Length > 0) &&
-            (this.productCalculationForm.valid && !!this.sender && !!this.shippingPoint && !!this.recipient));
+        return !this.calculationRunning &&
+            ((this.parcelInfo.Characteristic.Dimension.Height > 0 &&
+            this.parcelInfo.Characteristic.Dimension.Width > 0 &&
+            this.parcelInfo.Characteristic.Dimension.Length > 0) || this.parcelInfo.Characteristic.IsDocument) &&
+            this.parcelInfo.Characteristic.Weight.Value > 0 &&
+            (!!this.sender && !!this.shippingPoint && !!this.recipient);
     }
 
     /**
@@ -353,11 +174,10 @@ export default class ShippingProductCalculationComponent {
      * @param {ShortcutInfo} shortcut the selected shortcut
      */
     public shortcutSelected(shortcut:ShortcutInfo) {
-        this.dimensions = shortcut.Dimensions;
-        this.weight = shortcut.Weight;
-
-        this.dimensionsChange.emit(this.dimensions);
-        this.weightChange.emit(this.weight);
+        this.parcelInfo.Characteristic.Dimension = shortcut.Dimensions;
+        this.parcelInfo.Characteristic.Weight = shortcut.Weight;
+        this.dimensionsChange.emit(this.parcelInfo.Characteristic.Dimension);
+        this.weightChange.emit(this.parcelInfo.Characteristic.Weight);
     }
 
     /**

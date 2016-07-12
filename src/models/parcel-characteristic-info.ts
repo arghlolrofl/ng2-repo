@@ -9,4 +9,6 @@ export default class ParcelCharacteristikInfo {
     Dimension:DimensionInfo = new DimensionInfo();
 
     Weight:WeightInfo = new WeightInfo();
+
+    IsDocument:boolean = false;
 }

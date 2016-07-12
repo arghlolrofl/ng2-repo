@@ -1,5 +1,4 @@
 import {Component, ViewChild, AfterViewInit, Output, EventEmitter} from '@angular/core';
-import {ControlGroup, FormBuilder} from "@angular/common";
 import {TranslatePipe} from 'ng2-translate/ng2-translate';
 import {MODAL_DIRECTIVES, ModalComponent} from 'ng2-bs3-modal/ng2-bs3-modal';
 
@@ -29,52 +28,33 @@ export default class ShippingProductCalculationShortcutsComponent implements Aft
      * Shortcut has been selected or changed.
      * @type {EventEmitter}
      */
-    @Output()
-    public shortcutChange:EventEmitter<ShortcutInfo> = new EventEmitter();
+    @Output() shortcutChange:EventEmitter<ShortcutInfo> = new EventEmitter();
 
     /**
      * Modal dialog for sender
      */
-    @ViewChild('modalSearch')
-    private modalSearch:ModalComponent;
+    @ViewChild('modalSearch') modalSearch:ModalComponent;
 
     /**
-     * Search form.
+     * Shortcuts.
      */
-    private searchForm:ControlGroup;
-
-    /**
-     * Shortcuts to display on main page.
-     */
-    private shortcuts:Array<ShortcutInfo>;
-
-    /**
-     * Shortcut placeholder.
-     */
-    private shortcutPlaceholder:Array<number>;
-
-    /**
-     * The last used shortcut.
-     */
-    private lastShortcut:ShortcutInfo;
-
-    /**
-     * Shortcut suggestions.
-     */
-    private shortcutSuggestions:Array<ShortcutInfo>;
+    shortcuts:Array<ShortcutInfo> = [];
+    shortcutPlaceholder:Array<number> = Array(4).fill(0);
+    lastShortcut:ShortcutInfo;
+    shortcutSuggestions:Array<ShortcutInfo> = [];
+    displayedShortcutSuggestions:Array<ShortcutInfo> = [];
+    searchInput:string = '';
+    searchInputChange:EventEmitter<string> = new EventEmitter();
 
     /**
      * @constructor
-     * @param {FormBuilder} formBuilder the form builder
      * @param {ShortcutService} shortcutService the shortcut client
      */
-    constructor(private formBuilder:FormBuilder,
-                private shortcutService:ShortcutService) {
-        this.shortcuts = [];
-        this.shortcutPlaceholder = Array(4).fill(0);
-        this.shortcutSuggestions = [];
-        this.searchForm = formBuilder.group({
-            'search': ['']
+    constructor(private shortcutService:ShortcutService) {
+        this.shortcutChange.subscribe(() => {
+            if (this.modalSearch.visible) {
+                this.modalSearch.close();
+            }
         });
     }
 
@@ -82,7 +62,8 @@ export default class ShippingProductCalculationShortcutsComponent implements Aft
      * Initialize the change events.
      */
     public ngAfterViewInit() {
-        this.shortcutService.getAll()
+        const shortcutObservable = this.shortcutService.getAll().share();
+        shortcutObservable
             .take(4)
             .subscribe(
                 (r:ShortcutInfo) => {
@@ -91,23 +72,27 @@ export default class ShippingProductCalculationShortcutsComponent implements Aft
                 },
                 (error:Error) => console.warn(error)); // TODO error handling
 
+        shortcutObservable
+            .subscribe(
+                (r:ShortcutInfo) => {
+                    this.shortcutSuggestions.push(r);
+                    this.displayedShortcutSuggestions.push(r);
+                },
+                (error:Error) => console.warn(error)); // TODO error handling
+
         this.shortcutService.getLast()
             .subscribe(
                 (r:ShortcutInfo) => this.lastShortcut = r,
                 (error:Error) => console.warn(error)); // TODO error handling
 
+        this.searchInputChange.subscribe((term:string) => this.searchInput = term);
 
-        this.searchForm.controls['search'].valueChanges
-            .filter((term:string) => !!term)
+        this.searchInputChange
             .distinctUntilChanged()
             .debounceTime(400)
             .subscribe((term:string) => {
-                this.shortcutSuggestions = [];
-                this.shortcutService.getFilteredByName(term)
-                    .take(9)
-                    .subscribe(
-                        (r:ShortcutInfo) => this.shortcutSuggestions.push(r),
-                        (error:Error) => console.warn(error)); // TODO error handling
+                this.displayedShortcutSuggestions = this.shortcutSuggestions.filter(
+                    (r:ShortcutInfo) => r.DisplayName.toLowerCase().indexOf(term.toLowerCase()) === 0);
             });
     }
 
@@ -116,13 +101,5 @@ export default class ShippingProductCalculationShortcutsComponent implements Aft
      */
     public lastRate() {
         console.log('last rate'); // TODO implement
-    }
-
-    /**
-     * Select shortcut.
-     * @param {ShortcutInfo} shortcut the shortcut to be selected
-     */
-    public selectShortcut(shortcut:ShortcutInfo) {
-        this.shortcutChange.emit(shortcut);
     }
 }

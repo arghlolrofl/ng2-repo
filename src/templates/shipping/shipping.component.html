@@ -29,6 +29,7 @@
     <fp-shipping-options (onError)="handleError($event)"
                          (onBuyLabel)="buyLabel()"
                          [(selectedOptions)]="options"
+                         [canBuy]="canBuy(parcel, shippingPoint, sender, recipient, weight, costCenter1)"
                          [parcel]="parcel"></fp-shipping-options>
   </div>
 </div>

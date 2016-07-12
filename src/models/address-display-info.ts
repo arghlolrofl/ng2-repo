@@ -49,5 +49,4 @@ export default class AddressDisplayInfo {
     AddressType:number;
 
     Id:number;
-    
 }
