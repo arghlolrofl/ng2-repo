@@ -70,8 +70,8 @@ export default class ShippingProductCalculationComponent {
     lengthInputChange:EventEmitter<number> = new EventEmitter();
     widthInputChange:EventEmitter<number> = new EventEmitter();
     heightInputChange:EventEmitter<number> = new EventEmitter();
-    dimensionsChange:EventEmitter<DimensionInfo> = new EventEmitter();
-    weightChange:EventEmitter<WeightInfo> = new EventEmitter();
+    @Output() dimensionsChange:EventEmitter<DimensionInfo> = new EventEmitter();
+    @Output() weightChange:EventEmitter<WeightInfo> = new EventEmitter();
     isDocumentChange:EventEmitter<boolean> = new EventEmitter();
 
     /**

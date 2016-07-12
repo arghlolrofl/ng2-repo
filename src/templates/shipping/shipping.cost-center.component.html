@@ -1,62 +1,65 @@
 <section class="sectiontemplate">
-  <h4><i class="icon-class icon-coins"></i>Cost Center</h4>
-  <div class="row">
-    <div class="col-input">
-      <div class="field-container text-field-search">
-        <div class="search-submit">
-          <span class="icon-search"></span>
+  <h4>
+    <i class="icon-class icon-coins"></i>
+    {{ 'COST_CENTER_HEADLINE' | translate }}
+  </h4>
+    <div class="row">
+      <div class="col-input">
+        <div class="field-container text-field-search">
+          <div class="search-submit">
+            <span class="icon-search"></span>
+          </div>
+          <input type="text"
+                 tabindex="5"
+                 name="costcenter1"
+                 placeholder="{{ 'COST_CENTER_PLACEHOLDER' | translate }}"
+                 autocomplete="off"
+                 [(ngModel)]="costCenter1Input"
+                 [fpSuggest]="mapCostCenter1(costCenterService)"
+                 [fpSuggestEvents]="costCenter1Events">
+          <button type="button"
+                  class="clear-submit"
+                  (click)="costCenter1Events.emit({type: 3})">
+            <span class="icon-close"></span>
+          </button>
         </div>
-        <input type="text"
-               tabindex="5"
-               name="costcenter1"
-               placeholder="cost-center level 1"
-               autocomplete="off"
-               [(ngModel)]="costCenter1Input"
-               [fpSuggest]="mapCostCenter1(costCenterService)"
-               [fpSuggestEvents]="costCenter1Events">
-        <button type="button"
-                class="clear-submit"
-                (click)="costCenter1Events.emit({type: 3})">
-          <span class="icon-close"></span>
-        </button>
+        <div class="row autocomplete"
+             [class.open]="costCenter1Suggestions.length > 0">
+          <ul>
+            <li *ngFor="let costCenter of costCenter1Suggestions"
+                (click)="costCenter1Events.emit({type: 2, data: costCenter})">
+              {{costCenter.Name}}
+            </li>
+          </ul>
+        </div>
       </div>
-      <div class="row autocomplete"
-           [class.open]="costCenter1Suggestions.length > 0">
-        <ul>
-          <li *ngFor="let costCenter of costCenter1Suggestions"
-              (click)="costCenter1Events.emit({type: 2, data: costCenter})">
-            {{costCenter.Name}}
-          </li>
-        </ul>
-      </div>
-    </div>
 
     <div class="col-button"></div>
   </div>
 
-  <div class="row">
-    <div class="col-input">
-      <div class="field-container text-field-search"
-           [class.disabled]="!costCenter1">
-        <div class="search-submit">
-          <span class="icon-search"></span>
+    <div class="row">
+      <div class="col-input">
+        <div class="field-container text-field-search"
+             [class.disabled]="!costCenter1">
+          <div class="search-submit">
+            <span class="icon-search"></span>
+          </div>
+          <input type="text"
+                 tabindex="6"
+                 name="costcenter2"
+                 placeholder="{{ 'COST_CENTER_PLACEHOLDER' | translate }}"
+                 autocomplete="off"
+                 [disabled]="!costCenter1"
+                 [(ngModel)]="costCenter2Input"
+                 [fpSuggest]="mapCostCenter23(costCenterService)"
+                 [fpSuggestEvents]="costCenter2Events">
+          <button type="button"
+                  class="clear-submit"
+                  (click)="costCenter2Events.emit({type: 3})"
+                  [disabled]="!costCenter1">
+            <span class="icon-close"></span>
+          </button>
         </div>
-        <input type="text"
-               tabindex="6"
-               name="costcenter2"
-               placeholder="cost-center level 2 or 3"
-               autocomplete="off"
-               [disabled]="!costCenter1"
-               [(ngModel)]="costCenter2Input"
-               [fpSuggest]="mapCostCenter23(costCenterService)"
-               [fpSuggestEvents]="costCenter2Events">
-        <button type="button"
-                class="clear-submit"
-                (click)="costCenter2Events.emit({type: 3})"
-                [disabled]="!costCenter1">
-          <span class="icon-close"></span>
-        </button>
-      </div>
 
       <div class="row autocomplete"
            [class.open]="costCenter2Suggestions.length > 0">
@@ -71,39 +74,39 @@
     <div class="col-button"></div>
   </div>
 
-  <div class="row">
-    <div class="col-input">
-      <div class="field-container text-field-search"
-           [class.disabled]="!costCenter1">
-        <div class="search-submit">
-          <span class="icon-search"></span>
+    <div class="row">
+      <div class="col-input">
+        <div class="field-container text-field-search"
+             [class.disabled]="!costCenter1">
+          <div class="search-submit">
+            <span class="icon-search"></span>
+          </div>
+          <input type="text"
+                 tabindex="7"
+                 name="costcenter3"
+                 placeholder="{{ 'COST_CENTER_PLACEHOLDER' | translate }}"
+                 autocomplete="off"
+                 [disabled]="!costCenter1"
+                 [(ngModel)]="costCenter3Input"
+                 [fpSuggest]="mapCostCenter23(costCenterService)"
+                 [fpSuggestEvents]="costCenter3Events">
+          <button type="button"
+                  class="clear-submit"
+                  (click)="costCenter3Events.emit({type: 3})"
+                  [disabled]="!costCenter1">
+            <span class="icon-close"></span>
+          </button>
         </div>
-        <input type="text"
-               tabindex="7"
-               name="costcenter3"
-               placeholder="cost-center level 2 or 3"
-               autocomplete="off"
-               [disabled]="!costCenter1"
-               [(ngModel)]="costCenter3Input"
-               [fpSuggest]="mapCostCenter23(costCenterService)"
-               [fpSuggestEvents]="costCenter3Events">
-        <button type="button"
-                class="clear-submit"
-                (click)="costCenter3Events.emit({type: 3})"
-                [disabled]="!costCenter1">
-          <span class="icon-close"></span>
-        </button>
+        <div class="row autocomplete"
+             [class.open]="costCenter3Suggestions.length > 0">
+          <ul>
+            <li *ngFor="let costCenter of costCenter3Suggestions"
+                (click)="costCenter3Events.emit({type: 2, data: costCenter})">
+              {{costCenter.Name}}
+            </li>
+          </ul>
+        </div>
       </div>
-      <div class="row autocomplete"
-           [class.open]="costCenter3Suggestions.length > 0">
-        <ul>
-          <li *ngFor="let costCenter of costCenter3Suggestions"
-              (click)="costCenter3Events.emit({type: 2, data: costCenter})">
-            {{costCenter.Name}}
-          </li>
-        </ul>
-      </div>
+      <div class="col-button"></div>
     </div>
-    <div class="col-button"></div>
-  </div>
 </section>

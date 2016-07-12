@@ -10,7 +10,7 @@
           *ngFor="let placeholder of shortcutPlaceholder"
           class="button shortcut placeholder"
           [disabled]="true">
-    <span>shortcut</span>
+    <span>{{ 'PRODUCT_CALCULATION_SHORTCUT_PLACEHOLDER' | translate }}</span>
   </button>
 
   <div class="col-button">
@@ -26,7 +26,7 @@
           class="button shortcut"
           (click)="lastRate()"
           [disabled]="!lastShortcut">
-    <span>last rate*</span>
+    <span>{{ 'PRODUCT_CALCULATION_LAST_RATE' | translate }}</span>
   </button>
 </div>
 
@@ -35,7 +35,7 @@
   <modal-header>
     <div class="row">
       <div class="col-md-12">
-        <h4>Search Shortcut*</h4>
+        <h4>{{ 'PRODUCT_CALCULATION_SEARCH_SHORTCUT_HEADLINE' | translate }}</h4>
       </div>
     </div>
   </modal-header>
@@ -44,7 +44,7 @@
       <div class="col-sm-12">
         <div class="field-container text-field">
           <input type="text"
-                 placeholder="Search*"
+                 placeholder="{{ 'PRODUCT_CALCULATION_SEARCH_SHORTCUT_PLACEHOLDER' | translate }}"
                  [(ngModel)]="searchInput"
                  (input)="searchInputChange.emit($event.target.value)"
                  (keyup.esc)="searchInputChange.emit('')">
@@ -71,7 +71,7 @@
         <button type="button"
                 class="button popup"
                 (click)="modalSearch.close()">
-          <span>close*</span>
+          <span>{{ 'MODAL_CLOSE' | translate }}</span>
         </button>
       </div>
     </div>

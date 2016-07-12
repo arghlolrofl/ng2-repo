@@ -1,5 +1,8 @@
 <section class="sectiontemplate">
-  <h4><i class="icon-class icon-mailbox"></i>Recipient</h4>
+  <h4>
+    <i class="icon-class icon-mailbox"></i>
+    {{ 'RECIPIENT_HEADLINE' | translate }}
+  </h4>
   <div class="row">
     <div class="col-input">
       <div class="field-container text-field-search">
@@ -8,7 +11,7 @@
         </div>
         <input type="text"
                name="filter"
-               placeholder="filter"
+               placeholder="{{ 'RECIPIENT_FILTER_PLACEHOLDER' | translate }}"
                tabindex="3"
                autocomplete="off"
                [(ngModel)]="addressGroupInput"
@@ -41,7 +44,7 @@
         </div>
         <input type="text"
                name="recipient"
-               placeholder="recipient"
+               placeholder="{{ 'RECIPIENT_PLACEHOLDER' | translate }}"
                tabindex="4"
                autocomplete="off"
                [(ngModel)]="recipientInput"

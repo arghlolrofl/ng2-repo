@@ -2,7 +2,7 @@
   <modal-header>
     <div class="row">
       <div class="col-md-12">
-        <h4>Add Recipient*</h4>
+        <h4>{{ 'RECIPIENT_ADD_HEADLINE' | translate }}</h4>
       </div>
     </div>
   </modal-header>
@@ -14,7 +14,7 @@
         <div class="col-sm-12">
           <div class="field-container text-field">
             <input type="text"
-                   placeholder="Company*"
+                   placeholder="{{ 'RECIPIENT_ADD_COMPANY_PLACEHOLDER' | translate }}"
                    name="company"
                    [(ngModel)]="address.Company"
                    (keyup.esc)="address.Company = ''"
@@ -32,7 +32,7 @@
         <div class="col-sm-6">
           <div class="field-container text-field">
             <input type="text"
-                   placeholder="Title*"
+                   placeholder="{{ 'RECIPIENT_ADD_TITLE_PLACEHOLDER' | translate }}"
                    name="title"
                    [(ngModel)]="address.Title"
                    (keyup.esc)="address.Title = ''"
@@ -48,7 +48,7 @@
           <div class="field-container text-field">
             <input type="text"
                    name="firstname"
-                   placeholder="First Name*"
+                   placeholder="{{ 'RECIPIENT_ADD_FIRSTNAME_PLACEHOLDER' | translate }}"
                    [(ngModel)]="address.FirstName"
                    (keyup.esc)="address.FirstName = ''"
                    required>
@@ -66,7 +66,7 @@
           <div class="field-container text-field">
             <input type="text"
                    name="middlename"
-                   placeholder="Middle Name*"
+                   placeholder="{{ 'RECIPIENT_ADD_MIDDLENAME_PLACEHOLDER' | translate }}"
                    [(ngModel)]="address.MiddleName"
                    (keyup.esc)="address.MiddleName = ''">
             <button type="button"
@@ -80,7 +80,7 @@
           <div class="field-container text-field">
             <input type="text"
                    name="lastname"
-                   placeholder="Last Name*"
+                   placeholder="{{ 'RECIPIENT_ADD_LASTNAME_PLACEHOLDER' | translate }}"
                    [(ngModel)]="address.LastName"
                    (keyup.esc)="address.LastName = ''"
                    required>
@@ -121,7 +121,7 @@
           <div class="field-container text-field">
             <input type="text"
                    name="postaladdress"
-                   placeholder="Postal Address*"
+                   placeholder="{{ 'RECIPIENT_ADD_POSTALADDRESS_PLACEHOLDER' | translate }}"
                    [(ngModel)]="address.PostalAddress"
                    (keyup.esc)="address.PostalAddress = ''"
                    required>
@@ -136,7 +136,7 @@
           <div class="field-container text-field">
             <input type="text"
                    name="city"
-                   placeholder="City*"
+                   placeholder="{{ 'RECIPIENT_ADD_CITY_PLACEHOLDER' | translate }}"
                    [(ngModel)]="address.City"
                    (keyup.esc)="address.City = ''"
                    required>
@@ -154,7 +154,7 @@
           <div class="field-container text-field">
             <input type="text"
                    name="zipcode"
-                   placeholder="Zip Code*"
+                   placeholder="{{ 'RECIPIENT_ADD_ZIPCODE_PLACEHOLDER' | translate }}"
                    [(ngModel)]="address.ZipCode"
                    (keyup.esc)="address.ZipCode = ''"
                    required>
@@ -170,7 +170,7 @@
           <div class="field-container text-field">
             <input type="text"
                    name="additionalzipcode"
-                   placeholder="Additional zip code*"
+                   placeholder="{{ 'RECIPIENT_ADD_ADDITIONALZIPCODE_PLACEHOLDER' | translate }}"
                    [(ngModel)]="address.AdditionalZipCode"
                    (keyup.esc)="address.AdditionalZipCode = ''">
             <button type="button"
@@ -187,7 +187,7 @@
           <div class="field-container text-field">
             <input type="text"
                    name="email"
-                   placeholder="E-Mail*"
+                   placeholder="{{ 'RECIPIENT_ADD_EMAIL_PLACEHOLDER' | translate }}"
                    [(ngModel)]="address.EMailAddress"
                    (keyup.esc)="address.EMailAddress = ''"
                    required>
@@ -214,13 +214,13 @@
           <button type="button"
                   class="button popup"
                   (click)="close()">
-            <span>close*</span>
+            <span>{{ 'MODAL_CLOSE' | translate }}</span>
           </button>
 
           <button type="submit"
                   class="button popup"
                   [disabled]="!addForm.form.valid || !addressGroup">
-            <span>save*</span>
+            <span>{{ 'MODAL_SAVE' | translate }}</span>
           </button>
         </div>
       </div>
