@@ -10,6 +10,7 @@
                name="sender"
                placeholder="sender"
                tabindex="1"
+               autocomplete="off"
                [(ngModel)]="senderInput"
                [fpSuggest]="mapSuggest(addressService)"
                [fpSuggestEvents]="senderEvents">
@@ -33,7 +34,8 @@
     </div>
     <div class="col-button">
       <div class="field-container box-icon">
-        <button (click)="showAddDialogChange.emit(true)">
+        <button type="button"
+                (click)="showAddDialogChange.emit(true)">
           <span class="icon-plus"></span>
         </button>
       </div>
@@ -51,10 +53,12 @@
                name="shipping-point"
                placeholder="shipping point"
                tabindex="2"
+               autocomplete="off"
                (input)="shippingPointChange.emit($event.target.value)"
                [(ngModel)]="shippingPoint"
                (keyup.esc)="shippingPointChange.emit('')">
-        <button class="clear-submit"
+        <button type="button"
+                class="clear-submit"
                 (click)="shippingPointChange.emit('')">
           <span class="icon-close"></span>
         </button>

@@ -19,7 +19,7 @@ import WeightInfo from "../../models/weight-info";
     templateUrl: 'app/templates/shipping/shipping.component.html',
     directives: [
         ShippingSenderComponent,
-        // ShippingRecipientComponent,
+        ShippingRecipientComponent,
         // ShippingCostCenterComponent,
         // ShippingAdditionalInformationComponent,
         // ShippingProductCalculationComponent,
