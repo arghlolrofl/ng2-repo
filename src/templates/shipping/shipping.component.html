@@ -15,7 +15,6 @@
     <fp-shipping-additional-information (onError)="handleError($event)"
                                         [(additionalInfo1)]="additionalInfo1"
                                         [(additionalInfo2)]="additionalInfo2"></fp-shipping-additional-information>
-
   </div>
 
   <div class="col-md-6">
@@ -23,9 +22,13 @@
                                      [sender]="sender"
                                      [shippingPoint]="shippingPoint"
                                      [recipient]="recipient"
+                                     [(dimensions)]="dimensions"
+                                     [(weight)]="weight"
                                      [(parcel)]="parcel"></fp-shipping-product-calculation>
 
     <fp-shipping-options (onError)="handleError($event)"
+                         (onBuyLabel)="buyLabel()"
+                         [(selectedOptions)]="options"
                          [parcel]="parcel"></fp-shipping-options>
   </div>
 </div>

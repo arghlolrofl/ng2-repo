@@ -35,6 +35,20 @@ export default class ShippingOptionsComponent {
     public onError:EventEmitter<Error> = new EventEmitter<Error>();
 
     /**
+     * Updated when label should be bought.
+     * @type {EventEmitter<boolean>}
+     */
+    @Output()
+    public onBuyLabel:EventEmitter<boolean> = new EventEmitter();
+
+    /**
+     * Updated when selected options changed.
+     * @type {EventEmitter<Array<PostalProductOptionInfo>>}
+     */
+    @Output()
+    public selectedOptionsChange:EventEmitter<Array<PostalProductOptionInfo>> = new EventEmitter();
+
+    /**
      * Parcel.
      */
     @Input()
@@ -90,6 +104,7 @@ export default class ShippingOptionsComponent {
             this.selectedOptions = this.selectedOptions.filter(
                 (r:PostalProductOptionInfo) => r.Code !== option.Code);
         }
+        this.selectedOptionsChange.emit(this.selectedOptions);
     }
 
     /**
@@ -107,5 +122,20 @@ export default class ShippingOptionsComponent {
     private getExtraServiceCosts() {
         return this.getOptionCosts() +
             this.parcel.Price.Adjustments.reduce((p, r:PostalProductAdjustmentInfo) => p + r.Cost, 0);
+    }
+
+    /**
+     * Check if label can be bought.
+     * @returns {boolean}
+     */
+    private canBuy() {
+        return !!this.parcel;
+    }
+
+    /**
+     * Emits the buy event.
+     */
+    private buyLabel() {
+        this.onBuyLabel.emit(true);
     }
 }

@@ -11,12 +11,19 @@ import ShippingAdditionalInformationComponent from "./shipping.additional-inform
 import CostCenterInfo from "../../models/cost-center-info";
 import ParcelProductInfo from "../../models/parcel-product-info";
 import AddressDisplayInfo from "../../models/address-display-info";
-import DimensionInfo from "../../models/dimension-info";
+import PostalProductOptionInfo from "../../models/postal-product-option-info";
+import ShippingService from "../../services/shipping.service";
+import ShipmentRequest from "../../models/shipment-request";
+import {LabelOutputFormat} from "../../models/label-output-format";
 import WeightInfo from "../../models/weight-info";
+import DimensionInfo from "../../models/dimension-info";
 
 @Component({
     selector: 'fp-shipping',
     templateUrl: 'app/templates/shipping/shipping.component.html',
+    providers: [
+        ShippingService
+    ],
     directives: [
         ShippingSenderComponent,
         ShippingRecipientComponent,
@@ -86,11 +93,72 @@ export default class ShippingComponent {
     private parcel:ParcelProductInfo;
 
     /**
+     * Dimensions.
+     */
+    private dimensions:DimensionInfo;
+
+    /**
+     * Weight.
+     */
+    private weight:WeightInfo;
+
+    /**
+     * Shipping options.
+     */
+    private options:Array<PostalProductOptionInfo>;
+
+    /**
+     * @constructor
+     * @param {ShippingService} shippingService the shipping service client
+     */
+    constructor(private shippingService:ShippingService) {
+    }
+
+    /**
+     * Executed when label should be bought.
+     */
+    public buyLabel() {
+        const request = this.generateShipmentRequest();
+        this.shippingService.create(request).subscribe(
+            () => {
+                console.log('success');
+            },
+            this.handleError.bind(this));
+    }
+
+    /**
      * Handle errors.
      * @param {any} error the error
      */
     public handleError(error:any) {
         console.warn((error.message) ? error.message :
             error.status ? `${error.status} - ${error.statusText}` : error); // TODO error handling
+    }
+
+    /**
+     * Generate shipment request.
+     * @returns {ShipmentRequest}
+     */
+    private generateShipmentRequest():ShipmentRequest {
+        const request = new ShipmentRequest();
+        request.ShippingPoint = this.shippingPoint.replace(/ /g, '');
+        request.AdditionalInfo1 = this.additionalInfo1;
+        request.AdditionalInfo2 = this.additionalInfo2;
+        request.IsPickup = false;
+        request.Product.Code = this.parcel.Code;
+        request.Product.Options = this.options;
+        request.SenderContactID = this.sender.Id;
+        request.DestinationContactID = this.recipient.Id;
+        request.Characteristic.Dimension = this.dimensions;
+        request.Characteristic.Weight = this.weight;
+        request.LabelFormat = LabelOutputFormat.Label;
+        request.CostCentre.Level1 = this.costCenter1.Id;
+        if (this.costCenter2) {
+            request.CostCentre.Level2 = this.costCenter2.Id;
+        }
+        if (this.costCenter3) {
+            request.CostCentre.Level3 = this.costCenter3.Id;
+        }
+        return request;
     }
 }

@@ -1,11 +1,14 @@
 <section class="sectiontemplate">
-  <h4><i class="icon-class icon-tool"></i>Product Calculation</h4>
+  <h4>
+    <i class="icon-class icon-tool"></i>
+    {{ 'PRODUCT_CALCULATION_HEADLINE' | translate }}
+  </h4>
   <form [ngFormModel]="productCalculationForm">
     <div class="row">
       <div class="col-input small-input">
         <div class="field-container text-field">
           <input type="text"
-                 placeholder="weight"
+                 placeholder="{{ 'PRODUCT_CALCULATION_WEIGHT_PLACEHOLDER' | translate }}"
                  tabindex="10"
                  ngControl="weight"
                  [class.error]="!productCalculationForm.controls['weight'].valid && productCalculationForm.controls['weight'].touched"
@@ -31,7 +34,7 @@
         <div class="field-container text-field"
              [class.disabled]="isDocument">
           <input type="text"
-                 placeholder="length"
+                 placeholder="{{ 'PRODUCT_CALCULATION_LENGTH_PLACEHOLDER' | translate }}"
                  tabindex="11"
                  ngControl="length"
                  [class.error]="!productCalculationForm.controls['length'].valid && productCalculationForm.controls['length'].touched"
@@ -47,7 +50,7 @@
         <div class="field-container text-field"
              [class.disabled]="isDocument">
           <input type="text"
-                 placeholder="width"
+                 placeholder="{{ 'PRODUCT_CALCULATION_WIDTH_PLACEHOLDER' | translate }}"
                  tabindex="12"
                  ngControl="width"
                  [class.error]="!productCalculationForm.controls['width'].valid && productCalculationForm.controls['width'].touched"
@@ -63,7 +66,7 @@
         <div class="field-container text-field"
              [class.disabled]="isDocument">
           <input type="text"
-                 placeholder="height"
+                 placeholder="{{ 'PRODUCT_CALCULATION_HEIGHT_PLACEHOLDER' | translate }}"
                  tabindex="13"
                  ngControl="height"
                  [class.error]="!productCalculationForm.controls['height'].valid && productCalculationForm.controls['height'].touched"
@@ -91,16 +94,16 @@
 
     <div class="row">
       <div class="field-container box-info">
-        <span>Parcel Weight / Dimensions*</span>
+        <span>{{ 'PRODUCT_CALCULATION_PARCEL_WEIGHT_DIMENSION_INFO' | translate }}</span>
         <hr>
-        <span>{{weight.Value}}kg - {{dimensions.Height}}cm x {{dimensions.Width}}cm x {{dimensions.Length}}cm*</span>
+        <span>{{weight.Value}}{{ 'KG' | translate }} - {{dimensions.Height}}{{ 'CM' | translate }} x {{dimensions.Width}}{{ 'CM' | translate }} x {{dimensions.Length}}{{ 'CM' | translate }}</span>
       </div>
 
       <button type="submit"
               class="button color"
               [disabled]="!canCalculate()"
               (click)="recalculateProduct()">
-        <span>calculate*</span>
+        <span>{{ 'PRODUCT_CALCULATION_CALCULATE_BUTTON' | translate }}</span>
       </button>
     </div>
 
@@ -111,7 +114,7 @@
         <span *ngIf="parcel">{{parcel.Name}}</span>
         <span *ngIf="parcel" class="price">{{parcel.Price.Total | currency:'USD':true:'1.2-2'}}</span>
         <span *ngIf="parcel">{{parcel.ExpectedTransitTime}} business days {{parcel.GuaranteedDelivery ? '(Guaranteed)' : ''}}*</span>
-        <span *ngIf="!parcel">N/A*</span>
+        <span *ngIf="!parcel">{{ 'PRODUCT_CALCULATION_PARCEL_NOT_AVAILABLE' | translate }}</span>
       </button>
     </div>
 
@@ -122,7 +125,7 @@
   <modal-header>
     <div class="row">
       <div class="col-md-12">
-        <h4>Select Product*</h4>
+        <h4>{{ 'PRODUCT_CALCULATION_SELECT_PRODUCT' | translate }}</h4>
       </div>
     </div>
   </modal-header>
@@ -133,7 +136,7 @@
               (click)="parcelSelected(parcel)">
         <span>{{parcel.Name}}</span>
         <span class="price">{{parcel.Price.Total | currency:'USD':true:'1.2-2'}}</span>
-        <span>{{parcel.ExpectedTransitTime}} business days {{parcel.GuaranteedDelivery ? '(Guaranteed)' : ''}}*</span>
+        <span>{{parcel.ExpectedTransitTime}} {{ 'PRODUCT_CALCULATION_BUSINESS_DAYS' | translate }} {{parcel.GuaranteedDelivery ? '(Guaranteed)' : ''}}*</span>
       </button>
     </div>
   </modal-body>
@@ -143,7 +146,7 @@
       <div class="col-sm-12">
         <button class="button popup"
                 (click)="modalProductSelect.close()">
-          <span>close*</span>
+          <span>{{ 'MODAL_CLOSE' | translate }}</span>
         </button>
       </div>
     </div>

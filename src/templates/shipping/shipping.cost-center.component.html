@@ -1,5 +1,8 @@
 <section class="sectiontemplate">
-  <h4><i class="icon-class icon-coins"></i>Cost Center</h4>
+  <h4>
+    <i class="icon-class icon-coins"></i>
+    {{ 'COST_CENTER_HEADLINE' | translate }}
+  </h4>
   <form [ngFormModel]="costCenterForm">
     <div class="row">
       <div class="col-input">
@@ -9,7 +12,7 @@
           </div>
           <input type="text"
                  tabindex="5"
-                 placeholder="cost-center level 1"
+                 placeholder="{{ 'COST_CENTER_PLACEHOLDER' | translate }}"
                  ngControl="costCenter1"
                  [fpSuggest]="mapCostCenter1(costCenterService)"
                  [fpSuggestEvents]="costCenter1Events">
@@ -41,7 +44,7 @@
           </div>
           <input type="text"
                  tabindex="6"
-                 placeholder="cost-center level 2 or 3"
+                 placeholder="{{ 'COST_CENTER_PLACEHOLDER' | translate }}"
                  [disabled]="!costCenter1"
                  ngControl="costCenter2"
                  [fpSuggest]="mapCostCenter23(costCenterService)"
@@ -75,7 +78,7 @@
           </div>
           <input type="text"
                  tabindex="7"
-                 placeholder="cost-center level 2 or 3"
+                 placeholder="{{ 'COST_CENTER_PLACEHOLDER' | translate }}"
                  [disabled]="!costCenter1"
                  ngControl="costCenter3"
                  [fpSuggest]="mapCostCenter23(costCenterService)"
