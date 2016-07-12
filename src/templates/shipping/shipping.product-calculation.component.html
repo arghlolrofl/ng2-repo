@@ -1,121 +1,126 @@
 <section class="sectiontemplate">
   <h4><i class="icon-class icon-tool"></i>Product Calculation</h4>
-  <form [ngFormModel]="productCalculationForm">
-    <div class="row">
-      <div class="col-input small-input">
-        <div class="field-container text-field">
-          <input type="text"
-                 placeholder="weight"
-                 tabindex="10"
-                 ngControl="weight"
-                 [class.error]="!productCalculationForm.controls['weight'].valid && productCalculationForm.controls['weight'].touched"
-                 (keyup.esc)="clearWeight()">
-          <button class="clear-submit"
-                  (click)="clearWeight()">
-            <span class="icon-close"></span>
-          </button>
-        </div>
-      </div>
-
-      <div class="col-button">
-        <div class="field-container box-icon">
-          <button>
-            <span class="icon-weight"></span>
-          </button>
-        </div>
+  <div class="row">
+    <div class="col-input small-input">
+      <div class="field-container text-field">
+        <input type="text"
+               name="weight"
+               placeholder="weight"
+               tabindex="10"
+               [(ngModel)]="parcelInfo.Characteristic.Weight.Value"
+               (keyup.esc)="weightInputChange.emit(null)">
+        <button type="button"
+                class="clear-submit"
+                (click)="weightInputChange.emit(null)">
+          <span class="icon-close"></span>
+        </button>
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-input small-input">
-        <div class="field-container text-field"
-             [class.disabled]="isDocument">
-          <input type="text"
-                 placeholder="length"
-                 tabindex="11"
-                 ngControl="length"
-                 [class.error]="!productCalculationForm.controls['length'].valid && productCalculationForm.controls['length'].touched"
-                 [disabled]="isDocument"
-                 (keyup.esc)="clearLength()">
-          <button class="clear-submit"
-                  (click)="clearLength()"
-                  [disabled]="isDocument">
-            <span class="icon-close"></span>
-          </button>
-        </div>
-
-        <div class="field-container text-field"
-             [class.disabled]="isDocument">
-          <input type="text"
-                 placeholder="width"
-                 tabindex="12"
-                 ngControl="width"
-                 [class.error]="!productCalculationForm.controls['width'].valid && productCalculationForm.controls['width'].touched"
-                 [disabled]="isDocument"
-                 (keyup.esc)="clearWidth()">
-          <button class="clear-submit"
-                  (click)="clearWidth()"
-                  [disabled]="isDocument">
-            <span class="icon-close"></span>
-          </button>
-        </div>
-
-        <div class="field-container text-field"
-             [class.disabled]="isDocument">
-          <input type="text"
-                 placeholder="height"
-                 tabindex="13"
-                 ngControl="height"
-                 [class.error]="!productCalculationForm.controls['height'].valid && productCalculationForm.controls['height'].touched"
-                 [disabled]="isDocument"
-                 (keyup.esc)="clearHeight()">
-          <button class="clear-submit"
-                  (click)="clearHeight()"
-                  [disabled]="isDocument">
-            <span class="icon-close"></span>
-          </button>
-        </div>
-      </div>
-      <div class="col-button">
-        <div class="field-container box-icon">
-          <button type="submit"
-                  (click)="changeIsDocument()">
-            <span class="icon-interface"></span>
-          </button>
-        </div>
+    <div class="col-button">
+      <div class="field-container box-icon">
+        <button>
+          <span class="icon-weight"></span>
+        </button>
       </div>
     </div>
+  </div>
 
-    <fp-shipping-product-calculation-shortcuts
-        (shortcutChange)="shortcutSelected($event)"></fp-shipping-product-calculation-shortcuts>
-
-    <div class="row">
-      <div class="field-container box-info">
-        <span>Parcel Weight / Dimensions*</span>
-        <hr>
-        <span>{{weight.Value}}kg - {{dimensions.Height}}cm x {{dimensions.Width}}cm x {{dimensions.Length}}cm*</span>
+  <div class="row">
+    <div class="col-input small-input">
+      <div class="field-container text-field"
+           [class.disabled]="parcelInfo.Characteristic.IsDocument">
+        <input type="text"
+               name="length"
+               placeholder="length"
+               tabindex="11"
+               [(ngModel)]="parcelInfo.Characteristic.Dimension.Length"
+               [disabled]="parcelInfo.Characteristic.IsDocument"
+               (keyup.esc)="lengthInputChange.emit(null)">
+        <button type="button"
+                class="clear-submit"
+                (click)="lengthInputChange.emit(null)"
+                [disabled]="parcelInfo.Characteristic.IsDocument">
+          <span class="icon-close"></span>
+        </button>
       </div>
 
-      <button type="submit"
-              class="button color"
-              [disabled]="!canCalculate()"
-              (click)="recalculateProduct()">
-        <span>calculate*</span>
-      </button>
+      <div class="field-container text-field"
+           [class.disabled]="parcelInfo.Characteristic.IsDocument">
+        <input type="text"
+               name="width"
+               placeholder="width"
+               tabindex="12"
+               [(ngModel)]="parcelInfo.Characteristic.Dimension.Width"
+               [disabled]="parcelInfo.Characteristic.IsDocument"
+               (keyup.esc)="widthInputChange.emit(null)">
+        <button type="button"
+                class="clear-submit"
+                (click)="widthInputChange.emit(null)"
+                [disabled]="parcelInfo.Characteristic.IsDocument">
+          <span class="icon-close"></span>
+        </button>
+      </div>
+
+      <div class="field-container text-field"
+           [class.disabled]="parcelInfo.Characteristic.IsDocument">
+        <input type="text"
+               name="height"
+               placeholder="height"
+               tabindex="13"
+               [(ngModel)]="parcelInfo.Characteristic.Dimension.Height"
+               [disabled]="parcelInfo.Characteristic.IsDocument"
+               (keyup.esc)="heightInputChange.emit(null)">
+        <button type="button"
+                class="clear-submit"
+                (click)="heightInputChange.emit(null)"
+                [disabled]="parcelInfo.Characteristic.IsDocument">
+          <span class="icon-close"></span>
+        </button>
+      </div>
+    </div>
+    <div class="col-button">
+      <div class="field-container box-icon">
+        <button type="submit"
+                (click)="isDocumentChange.emit(!parcelInfo.Characteristic.IsDocument)">
+          <span class="icon-interface"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <fp-shipping-product-calculation-shortcuts
+      (shortcutChange)="shortcutSelected($event)"></fp-shipping-product-calculation-shortcuts>
+
+  <div class="row">
+    <div class="field-container box-info">
+      <span>Parcel Weight / Dimensions*</span>
+      <hr>
+      <span *ngIf="parcelInfo.Characteristic.Weight.Value">{{parcelInfo.Characteristic.Weight.Value}}kg -
+        {{parcelInfo.Characteristic.Dimension.Height}}cm x
+        {{parcelInfo.Characteristic.Dimension.Width}}cm x
+        {{parcelInfo.Characteristic.Dimension.Length}}cm*</span>
+      <span *ngIf="!parcelInfo.Characteristic.Weight.Value">-</span>
     </div>
 
-    <div class="row">
-      <button class="box-package"
-              [disabled]="!parcel"
-              (click)="modalProductSelect.open()">
-        <span *ngIf="parcel">{{parcel.Name}}</span>
-        <span *ngIf="parcel" class="price">{{parcel.Price.Total | currency:'USD':true:'1.2-2'}}</span>
-        <span *ngIf="parcel">{{parcel.ExpectedTransitTime}} business days {{parcel.GuaranteedDelivery ? '(Guaranteed)' : ''}}*</span>
-        <span *ngIf="!parcel">N/A*</span>
-      </button>
-    </div>
+    <button type="submit"
+            class="button color"
+            [disabled]="!canCalculate()"
+            (click)="recalculateProduct()">
+      <span>calculate*</span>
+    </button>
+  </div>
 
-  </form>
+  <div class="row">
+    <button class="box-package"
+            [disabled]="!parcel"
+            (click)="modalProductSelect.open()">
+      <span *ngIf="parcel">{{parcel.Name}}</span>
+      <span *ngIf="parcel" class="price">{{parcel.Price.Total | currency:'USD':true:'1.2-2'}}</span>
+      <span *ngIf="parcel">{{parcel.ExpectedTransitTime}} business days {{parcel.GuaranteedDelivery ? '(Guaranteed)' : ''}}*</span>
+      <span *ngIf="!parcel">N/A*</span>
+    </button>
+  </div>
 </section>
 
 <modal #modalProductSelect>
