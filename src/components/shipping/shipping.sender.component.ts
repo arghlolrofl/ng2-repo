@@ -1,5 +1,4 @@
-import {Component, OnDestroy, EventEmitter, Output} from '@angular/core';
-import {Control, ControlGroup, FormBuilder} from '@angular/common';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
 import ShippingSenderAddComponent from "./shipping.sender.add.component";
@@ -26,67 +25,35 @@ import {SuggestDirective, SuggestEvents} from "../../directives/suggest.directiv
 /**
  * Shipping Sender component.
  */
-export default class ShippingSenderComponent implements OnDestroy {
+export default class ShippingSenderComponent {
 
-    /**
-     * Updated when error occurred.
-     * @type {EventEmitter<Error>}
-     */
     @Output()
-    public onError:EventEmitter<Error> = new EventEmitter<Error>();
+    onError:EventEmitter<Error> = new EventEmitter();
 
     /**
-     * Updated when sender has been changed.
-     * @type {EventEmitter<AddressDisplayInfo>}
+     * Sender.
      */
-    @Output()
-    public senderChange:EventEmitter<AddressDisplayInfo> = new EventEmitter<AddressDisplayInfo>();
+    senderInput:string = '';
+    @Output() senderChange:EventEmitter<AddressDisplayInfo> = new EventEmitter();
+    senderEvents:EventEmitter<any> = new EventEmitter();
+    senderSuggestions:AddressDisplayInfo[] = [];
 
     /**
-     * Updated when shipping point has changed.
-     * @type {EventEmitter<string>}
+     * Shipping Point.
      */
-    @Output()
-    public shippingPointChange:EventEmitter<string> = new EventEmitter<string>();
-
-    /**
-     * The sender suggest events.
-     * @type {EventEmitter<any>}
-     */
-    public senderEvents:EventEmitter<any>;
-
-    /**
-     * Sender suggestions (autocomplete) to display.
-     */
-    private senderSuggestions:AddressDisplayInfo[];
-
-    /**
-     * The form for sender.
-     */
-    private sendersForm:ControlGroup;
+    shippingPoint:string = '';
+    @Output() shippingPointChange:EventEmitter<string> = new EventEmitter();
 
     /**
      * Show modal dialog for adding new sender.
      */
-    private showAddDialogChange:EventEmitter<boolean>;
+    showAddDialogChange:EventEmitter<boolean> = new EventEmitter();
 
     /**
      * @constructor
      * @param {AddressService} addressService the address information service
-     * @param {FormBuilder} formBuilder the form builder from angular2
      */
-    constructor(private addressService:AddressService,
-                private formBuilder:FormBuilder) {
-        this.senderEvents = new EventEmitter<any>();
-        this.showAddDialogChange = new EventEmitter();
-
-        // initialize sender
-        this.senderSuggestions = [];
-        this.sendersForm = formBuilder.group({
-            'sender': [''],
-            'shippingPoint': ['']
-        });
-
+    constructor(private addressService:AddressService) {
         this.bindEvents();
     }
 
@@ -94,9 +61,6 @@ export default class ShippingSenderComponent implements OnDestroy {
      * Bind all events.
      */
     private bindEvents() {
-        const senderControl = <Control> this.sendersForm.controls['sender'];
-        const shippingPointControl = <Control> this.sendersForm.controls['shippingPoint'];
-
         this.senderEvents.subscribe((event) => {
             switch (event.type) {
                 case SuggestEvents.ERROR:
@@ -109,29 +73,28 @@ export default class ShippingSenderComponent implements OnDestroy {
 
                 case SuggestEvents.SELECTED:
                     this.senderChange.emit(event.data);
-                    senderControl.updateValue(`${event.data.FirstName} ${event.data.LastName} (${event.data.Company})`
-                        + ` - ${event.data.PostalAddress} ${event.data.ZipCode} ${event.data.City}`);
-                    shippingPointControl.updateValue(event.data.ZipCode);
+                    this.shippingPointChange.emit(event.data.ZipCode);
+                    this.senderInput = `${event.data.FirstName} ${event.data.LastName} (${event.data.Company}) - ` +
+                        `${event.data.PostalAddress} ${event.data.ZipCode} ${event.data.City}`;
+                    this.shippingPoint = event.data.ZipCode;
                     break;
 
                 case SuggestEvents.CLEARED:
                     this.senderChange.emit(null);
-                    senderControl.updateValue('');
-                    shippingPointControl.updateValue('');
+                    this.shippingPointChange.emit(null);
+                    this.senderInput = '';
+                    this.shippingPoint = '';
                     break;
 
                 case SuggestEvents.SHOW:
-                    senderControl.updateValue(`${event.data.FirstName} ${event.data.LastName} (${event.data.Company})`
-                        + ` - ${event.data.PostalAddress} ${event.data.ZipCode} ${event.data.City}`,
-                        {emitEvent: false});
+                    this.senderInput = `${event.data.FirstName} ${event.data.LastName} (${event.data.Company}) - ` +
+                        `${event.data.PostalAddress} ${event.data.ZipCode} ${event.data.City}`;
+                    this.shippingPoint = event.data.ZipCode;
                     break;
             }
         });
 
-        this.sendersForm.controls['shippingPoint'].valueChanges
-            .subscribe(
-                (shippingPoint:string) => this.shippingPointChange.emit(shippingPoint),
-                (error) => this.onError.emit(error));
+        this.shippingPointChange.subscribe((value:string) => this.shippingPoint = value);
     }
 
     /**
@@ -143,34 +106,5 @@ export default class ShippingSenderComponent implements OnDestroy {
         return (term:string) => {
             return service.getFilteredAddressesByAddressGroupNameAndFastQuery('Sender', term, 0, 20)
         }
-    }
-
-    /**
-     * Select a sender and makes it active.
-     * @param {AddressDisplayInfo} sender the sender to set active
-     */
-    public selectSender(sender:AddressDisplayInfo) {
-        this.senderEvents.emit({
-            type: SuggestEvents.SELECTED,
-            data: sender
-        });
-    }
-
-    /**
-     * Clear the sender information.
-     */
-    public clearSender() {
-        this.senderEvents.emit({
-            type: SuggestEvents.CLEARED
-        });
-    }
-
-    /**
-     * OnDestroy.
-     */
-    public ngOnDestroy() {
-        this.senderEvents.emit({
-            type: SuggestEvents.CLEARED
-        });
     }
 }

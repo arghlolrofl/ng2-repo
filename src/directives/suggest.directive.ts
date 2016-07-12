@@ -156,9 +156,9 @@ export class SuggestDirective implements OnInit {
  * Suggest message queue events.
  */
 export enum SuggestEvents {
-    ERROR,
-    CHANGED,
-    SELECTED,
-    CLEARED,
-    SHOW
+    ERROR = 0,
+    CHANGED = 1,
+    SELECTED = 2,
+    CLEARED = 3,
+    SHOW = 4
 }
