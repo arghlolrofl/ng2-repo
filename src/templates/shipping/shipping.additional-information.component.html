@@ -7,6 +7,7 @@
           <input type="text"
                  tabindex="8"
                  placeholder="additional info 1*"
+                 name="additional-info-1"
                  [(ngModel)]="additionalInfo1"
                  (keyup)="additionalInfo1Change.emit(additionalInfo1)"
                  (keyup.esc)="additionalInfo1 = ''">
@@ -25,6 +26,7 @@
           <input type="text"
                  tabindex="9"
                  placeholder="additional info 2*"
+                 name="additional-info-2"
                  [(ngModel)]="additionalInfo2"
                  (keyup)="additionalInfo2Change.emit(additionalInfo2)"
                  (keyup.esc)="additionalInfo2 = ''">

@@ -36,16 +36,21 @@
       </div>
     </div>
   </modal-header>
-  <form [ngFormModel]="loginForm"
+  <form #loginForm="ngForm"
         (ngSubmit)="login()">
     <modal-body>
       <div class="row">
         <div class="col-sm-6">
           <div class="field-container text-field">
             <input type="text"
+                   name="username"
                    placeholder="Username*"
-                   ngControl="username">
-            <button class="clear-submit">
+                   [(ngModel)]="username"
+                   (keyup.esc)="username = ''"
+                   required>
+            <button type="button"
+                    class="clear-submit"
+                    (click)="username = ''">
               <span class="icon-close"></span>
             </button>
           </div>
@@ -54,9 +59,14 @@
         <div class="col-sm-6">
           <div class="field-container text-field">
             <input type="password"
+                   name="password"
                    placeholder="Password*"
-                   ngControl="password">
-            <button class="clear-submit">
+                   [(ngModel)]="password"
+                   (keyup.esc)="password = ''"
+                   required>
+            <button type="button"
+                    class="clear-submit"
+                    (click)="password = ''">
               <span class="icon-close"></span>
             </button>
           </div>
@@ -69,7 +79,7 @@
         <div class="col-sm-12">
           <button type="submit"
                   class="button popup"
-                  [disabled]="!loginForm.valid">
+                  [disabled]="!loginForm.form.valid">
             login*
           </button>
         </div>
