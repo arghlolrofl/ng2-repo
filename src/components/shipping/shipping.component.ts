@@ -20,7 +20,7 @@ import WeightInfo from "../../models/weight-info";
     directives: [
         ShippingSenderComponent,
         ShippingRecipientComponent,
-        // ShippingCostCenterComponent,
+        ShippingCostCenterComponent,
         // ShippingAdditionalInformationComponent,
         // ShippingProductCalculationComponent,
         // ShippingOptionsComponent
