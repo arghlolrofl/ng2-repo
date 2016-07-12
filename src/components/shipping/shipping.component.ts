@@ -23,7 +23,7 @@ import WeightInfo from "../../models/weight-info";
         ShippingCostCenterComponent,
         ShippingAdditionalInformationComponent,
         ShippingProductCalculationComponent,
-        // ShippingOptionsComponent
+        ShippingOptionsComponent
     ],
     pipes: [
         TranslatePipe
