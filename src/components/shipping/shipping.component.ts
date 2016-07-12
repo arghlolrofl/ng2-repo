@@ -21,7 +21,7 @@ import WeightInfo from "../../models/weight-info";
         ShippingSenderComponent,
         ShippingRecipientComponent,
         ShippingCostCenterComponent,
-        // ShippingAdditionalInformationComponent,
+        ShippingAdditionalInformationComponent,
         // ShippingProductCalculationComponent,
         // ShippingOptionsComponent
     ],
