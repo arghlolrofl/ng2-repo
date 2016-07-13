@@ -21,7 +21,7 @@ import Option from "../../models/option";
 
 @Component({
     selector: 'fp-shipping',
-    templateUrl: 'app/templates/shipping/shipping.component.html',
+    templateUrl: 'assets/templates/shipping/shipping.component.html',
     providers: [
         ShippingService
     ],

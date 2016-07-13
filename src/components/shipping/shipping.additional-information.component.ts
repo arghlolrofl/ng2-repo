@@ -3,7 +3,7 @@ import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
 @Component({
     selector: 'fp-shipping-additional-information',
-    templateUrl: 'app/templates/shipping/shipping.additional-information.component.html',
+    templateUrl: 'assets/templates/shipping/shipping.additional-information.component.html',
     pipes: [
         TranslatePipe
     ]

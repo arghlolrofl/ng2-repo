@@ -3,7 +3,7 @@ import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
 @Component({
     selector: 'fp-administration',
-    templateUrl: 'app/templates/administration/administration.dashboard.html',
+    templateUrl: 'assets/templates/administration/administration.dashboard.html',
     pipes: [
         TranslatePipe
     ]

@@ -1,4 +1,4 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 
@@ -131,12 +131,48 @@ module.exports = function(grunt) {
 			}
 		},
 
-		copy: {
-			templates: {
-				cwd: 'src/templates',
-				expand: true,
-				src: '**/*.html',
-				dest: 'app/templates'
+		systemjs: {
+			options: {
+				sfx: true,
+				baseURL: './',
+				transpiler: 'typescript',
+				configFile: './systemjs.config.js',
+				minify: true,
+				build: {
+					mangle: true
+				}
+			},
+			app: {
+				files: [{
+					src: 'app/main.js',
+					dest: 'app/app.min.js'
+				}]
+			}
+		},
+
+		concat: {
+			files: {
+				src: [
+					'node_modules/core-js/client/shim.min.js',
+					'node_modules/zone.js/dist/zone.js',
+					'node_modules/reflect-metadata/Reflect.js',
+					'node_modules/systemjs/dist/system.js',
+					'app/app.min.js'
+				],
+				dest: 'app/app.min.js'
+			}
+		},
+
+		compress: {
+			app: {
+				options: {
+					archive: 'app.zip'
+				},
+				files: [
+					{src: ['index.prod.html'], dest: '.'},
+					{src: ['app/app.min.js'], dest: '.'},
+					{src: ['assets/**'], dest: '.'}
+				]
 			}
 		}
 	});
@@ -151,14 +187,16 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-imagemin');
 	grunt.loadNpmTasks('grunt-postcss');
 	grunt.loadNpmTasks('grunt-webfont');
-	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-systemjs-builder');
+	grunt.loadNpmTasks('grunt-contrib-compress');
 
 	/* Tasks
 	 /* ----------------------------- */
-	grunt.registerTask('default', ['sass', 'cmq', 'postcss', 'cssmin', 'imagemin', 'copy']);
-	grunt.registerTask('templates', ['copy:templates']);
+	grunt.registerTask('default', ['sass', 'cmq', 'postcss', 'cssmin', 'imagemin']);
 	grunt.registerTask('css', ['sass', 'cmq', 'postcss', 'cssmin']);
 	grunt.registerTask('iconfont', ['webfont']);
 	grunt.registerTask('images', ['imagemin']);
-	grunt.registerTask('dev', ['sass', 'cmq', 'postcss', 'imagemin', 'copy']);
+	grunt.registerTask('dev', ['sass', 'cmq', 'postcss', 'imagemin']);
+	grunt.registerTask('package', ['systemjs', 'concat', 'compress']);
 };

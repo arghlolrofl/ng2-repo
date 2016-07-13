@@ -1,7 +1,7 @@
 import {Component, ViewChild, AfterViewInit} from '@angular/core';
 import {Router, RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
-import {HTTP_PROVIDERS} from '@angular/http';
-import {TranslateService, TranslatePipe, TRANSLATE_PROVIDERS} from 'ng2-translate/ng2-translate';
+import {HTTP_PROVIDERS, Http} from '@angular/http';
+import {TranslateService, TranslatePipe, TRANSLATE_PROVIDERS, TranslateLoader, TranslateStaticLoader} from 'ng2-translate/ng2-translate';
 import {CookieService} from 'angular2-cookie/core';
 import {MODAL_DIRECTIVES, ModalComponent} from 'ng2-bs3-modal/ng2-bs3-modal';
 
@@ -15,7 +15,7 @@ import {FormBuilder, ControlGroup} from "@angular/common";
 
 @Component({
     selector: 'fp-app',
-    templateUrl: 'app/templates/app.component.html',
+    templateUrl: 'assets/templates/app.component.html',
     directives: [
         ROUTER_DIRECTIVES,
         MODAL_DIRECTIVES
@@ -24,6 +24,11 @@ import {FormBuilder, ControlGroup} from "@angular/common";
         ROUTER_PROVIDERS,
         HTTP_PROVIDERS,
         TRANSLATE_PROVIDERS,
+        {
+            provide: TranslateLoader,
+            useFactory: (http: Http) => new TranslateStaticLoader(http, 'assets/i18n', '.json'),
+            deps: [Http]
+        },
         CookieService,
         LoginService,
         APIClient

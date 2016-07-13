@@ -3,7 +3,7 @@ import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
 @Component({
     selector: 'fp-profile',
-    templateUrl: 'app/templates/profile/profile.component.html',
+    templateUrl: 'assets/templates/profile/profile.component.html',
     pipes: [
         TranslatePipe
     ]

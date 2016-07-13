@@ -13,7 +13,7 @@ import AddressGroupInfo from "../../models/address-group-info";
 
 @Component({
     selector: 'fp-shipping-recipient-add',
-    templateUrl: 'app/templates/shipping/shipping.recipient.add.component.html',
+    templateUrl: 'assets/templates/shipping/shipping.recipient.add.component.html',
     directives: [
         MODAL_DIRECTIVES
     ],

@@ -10,7 +10,7 @@ import {MAX_AC_RESULTS} from "../../config";
 
 @Component({
     selector: 'fp-shipping-sender',
-    templateUrl: 'app/templates/shipping/shipping.sender.component.html',
+    templateUrl: 'assets/templates/shipping/shipping.sender.component.html',
     directives: [
         SuggestDirective,
         ShippingSenderAddComponent

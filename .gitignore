@@ -1,9 +1,9 @@
 node_modules/
 .idea/
 typings/
-
 *.iml
 npm-debug.log
 app/
 assets/css
 assets/js
+app.zip

@@ -7,7 +7,7 @@ import ShortcutInfo from "../../models/shortcut-info";
 
 @Component({
     selector: 'fp-shipping-product-calculation-shortcuts',
-    templateUrl: 'app/templates/shipping/shipping.product-calculation.shortcuts.component.html',
+    templateUrl: 'assets/templates/shipping/shipping.product-calculation.shortcuts.component.html',
     directives: [
         MODAL_DIRECTIVES
     ],
