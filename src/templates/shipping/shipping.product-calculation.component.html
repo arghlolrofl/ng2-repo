@@ -129,20 +129,22 @@
 <modal #modalProductSelect>
   <modal-header>
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-sm-12">
         <h4>{{ 'PRODUCT_CALCULATION_SELECT_PRODUCT' | translate }}</h4>
       </div>
     </div>
   </modal-header>
   <modal-body>
     <div class="row">
-      <button *ngFor="let parcel of parcelSuggestions"
-              class="box-package"
-              (click)="parcelSelected(parcel)">
-        <span>{{parcel.Name}}</span>
-        <span class="price">{{parcel.Price.Total | currency:'USD':true:'1.2-2'}}</span>
-        <span>{{parcel.ExpectedTransitTime}} {{ 'PRODUCT_CALCULATION_BUSINESS_DAYS' | translate }} {{parcel.GuaranteedDelivery ? '(Guaranteed)' : ''}}*</span>
-      </button>
+      <div class="col-sm-12">
+        <button *ngFor="let parcel of parcelSuggestions"
+                class="box-package"
+                (click)="parcelSelected(parcel)">
+          <span>{{parcel.Name}}</span>
+          <span class="price">{{parcel.Price.Total | currency:'USD':true:'1.2-2'}}</span>
+          <span>{{parcel.ExpectedTransitTime}} {{ 'PRODUCT_CALCULATION_BUSINESS_DAYS' | translate }} {{parcel.GuaranteedDelivery ? '(Guaranteed)' : ''}}*</span>
+        </button>
+      </div>
     </div>
   </modal-body>
 

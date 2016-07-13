@@ -58,15 +58,13 @@
       </div>
       <div class="row autocomplete"
            [class.open]="recipientSuggestions.length > 0">
-        <div class="col-md-12">
-          <ul>
-            <li *ngFor="let recipient of recipientSuggestions"
-                (click)="recipientEvents.emit({type: 2, data: recipient})">
-              <span class="company">{{recipient.FirstName}} {{recipient.LastName}} ({{recipient.Company}})</span>
-              <span class="address">{{recipient.PostalAddress}} {{recipient.ZipCode}} {{recipient.City}}</span>
-            </li>
-          </ul>
-        </div>
+        <ul>
+          <li *ngFor="let recipient of recipientSuggestions"
+              (click)="recipientEvents.emit({type: 2, data: recipient})">
+            <span class="company">{{recipient.FirstName}} {{recipient.LastName}} ({{recipient.Company}})</span>
+            <span class="address">{{recipient.PostalAddress}} {{recipient.ZipCode}} {{recipient.City}}</span>
+          </li>
+        </ul>
       </div>
     </div>
 

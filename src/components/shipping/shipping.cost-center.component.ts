@@ -5,6 +5,7 @@ import {Observable} from "rxjs/Observable";
 import {SuggestDirective, SuggestEvents} from "../../directives/suggest.directive";
 import CostCenterService from "../../services/cost-center.service";
 import CostCenterInfo from "../../models/cost-center-info";
+import {MAX_AC_RESULTS} from "../../config";
 
 @Component({
     selector: 'fp-shipping-cost-center',
@@ -154,7 +155,7 @@ export default class ShippingCostCenterComponent {
      */
     public mapCostCenter1(costCenterService:CostCenterService) {
         return (term:string) => {
-            return costCenterService.getFilteredCostCenterByLevelAndFastQuery(1, term);
+            return costCenterService.getFilteredCostCenterByLevelAndFastQuery(1, term, 0, MAX_AC_RESULTS);
         }
     }
 
@@ -166,9 +167,9 @@ export default class ShippingCostCenterComponent {
     public mapCostCenter23(costCenterService:CostCenterService) {
         return (term:string) => {
             return Observable.merge(
-                costCenterService.getFilteredCostCenterByLevelAndFastQuery(2, term),
-                costCenterService.getFilteredCostCenterByLevelAndFastQuery(3, term)
-            );
+                costCenterService.getFilteredCostCenterByLevelAndFastQuery(2, term, 0, MAX_AC_RESULTS),
+                costCenterService.getFilteredCostCenterByLevelAndFastQuery(3, term, 0, MAX_AC_RESULTS)
+            ).take(MAX_AC_RESULTS);
         }
     }
 }

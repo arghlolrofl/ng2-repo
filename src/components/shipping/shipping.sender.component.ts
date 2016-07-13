@@ -5,6 +5,7 @@ import ShippingSenderAddComponent from "./shipping.sender.add.component";
 import AddressService from "../../services/address.service";
 import AddressDisplayInfo from "../../models/address-display-info";
 import {SuggestDirective, SuggestEvents} from "../../directives/suggest.directive";
+import {MAX_AC_RESULTS} from "../../config";
 
 
 @Component({
@@ -104,7 +105,7 @@ export default class ShippingSenderComponent {
      */
     public mapSuggest(service:AddressService) {
         return (term:string) => {
-            return service.getFilteredAddressesByAddressGroupNameAndFastQuery('Sender', term, 0, 20)
+            return service.getFilteredAddressesByAddressGroupNameAndFastQuery('Sender', term, 0, MAX_AC_RESULTS)
         }
     }
 }
