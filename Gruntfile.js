@@ -1,4 +1,4 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 
@@ -138,6 +138,38 @@ module.exports = function(grunt) {
 				src: '**/*.html',
 				dest: 'app/templates'
 			}
+		},
+
+		systemjs: {
+			options: {
+				sfx: true,
+				baseURL: './',
+				transpiler: 'typescript',
+				configFile: './systemjs.config.js',
+				minify: true,
+				build: {
+					mangle: true
+				}
+			},
+			dist: {
+				files: [{
+					src: 'app/main.js',
+					dest: 'app/app.min.js'
+				}]
+			}
+		},
+
+		concat: {
+			files: {
+				src: [
+					'node_modules/core-js/client/shim.min.js',
+					'node_modules/zone.js/dist/zone.js',
+					'node_modules/reflect-metadata/Reflect.js',
+					'node_modules/systemjs/dist/system.js',
+					'app/app.min.js'
+				],
+				dest: 'app/app.min.js'
+			}
 		}
 	});
 
@@ -152,6 +184,8 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-postcss');
 	grunt.loadNpmTasks('grunt-webfont');
 	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-systemjs-builder');
 
 	/* Tasks
 	 /* ----------------------------- */
@@ -161,4 +195,5 @@ module.exports = function(grunt) {
 	grunt.registerTask('iconfont', ['webfont']);
 	grunt.registerTask('images', ['imagemin']);
 	grunt.registerTask('dev', ['sass', 'cmq', 'postcss', 'imagemin', 'copy']);
+	grunt.registerTask('package', ['systemjs', 'concat']);
 };
