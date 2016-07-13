@@ -1,6 +1,7 @@
 import {Component, Output, EventEmitter, ViewChild, Input} from '@angular/core';
 import {TranslatePipe} from 'ng2-translate/ng2-translate';
 import {MODAL_DIRECTIVES, ModalComponent} from 'ng2-bs3-modal/ng2-bs3-modal';
+import * as _ from 'lodash';
 
 import ShippingProductCalculationShortcutsComponent from "./shipping.product-calculation.shortcuts.component";
 import AddressService from "../../services/address.service";
@@ -182,8 +183,8 @@ export default class ShippingProductCalculationComponent {
      * @param {ShortcutInfo} shortcut the selected shortcut
      */
     public shortcutSelected(shortcut:ShortcutInfo) {
-        this.parcelInfo.Characteristic.Dimension = shortcut.Dimensions;
-        this.parcelInfo.Characteristic.Weight = shortcut.Weight;
+        this.parcelInfo.Characteristic.Dimension = _.cloneDeep(shortcut.Dimensions);
+        this.parcelInfo.Characteristic.Weight = _.cloneDeep(shortcut.Weight);
         this.dimensionsChange.emit(this.parcelInfo.Characteristic.Dimension);
         this.weightChange.emit(this.parcelInfo.Characteristic.Weight);
     }

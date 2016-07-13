@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {TranslatePipe} from 'ng2-translate/ng2-translate';
+import * as _ from 'lodash';
 
 import ShippingSenderComponent from "./shipping.sender.component";
 import ShippingOptionsComponent from "./shipping.options.component";
@@ -130,6 +131,6 @@ export default class ShippingComponent {
         if (this.costCenter3) {
             request.CostCentre.Level3 = this.costCenter3.Id;
         }
-        return request;
+        return _.cloneDeep(request);
     }
 }
