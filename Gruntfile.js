@@ -142,7 +142,7 @@ module.exports = function (grunt) {
 					mangle: true
 				}
 			},
-			dist: {
+			app: {
 				files: [{
 					src: 'app/main.js',
 					dest: 'app/app.min.js'
@@ -161,6 +161,19 @@ module.exports = function (grunt) {
 				],
 				dest: 'app/app.min.js'
 			}
+		},
+
+		compress: {
+			app: {
+				options: {
+					archive: 'app.zip'
+				},
+				files: [
+					{src: ['index.prod.html'], dest: '.'},
+					{src: ['app/app.min.js'], dest: '.'},
+					{src: ['assets/**'], dest: '.'}
+				]
+			}
 		}
 	});
 
@@ -176,6 +189,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-webfont');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-systemjs-builder');
+	grunt.loadNpmTasks('grunt-contrib-compress');
 
 	/* Tasks
 	 /* ----------------------------- */
@@ -184,5 +198,5 @@ module.exports = function (grunt) {
 	grunt.registerTask('iconfont', ['webfont']);
 	grunt.registerTask('images', ['imagemin']);
 	grunt.registerTask('dev', ['sass', 'cmq', 'postcss', 'imagemin']);
-	grunt.registerTask('package', ['systemjs', 'concat']);
+	grunt.registerTask('package', ['systemjs', 'concat', 'compress']);
 };
