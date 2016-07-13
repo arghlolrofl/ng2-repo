@@ -27,3 +27,12 @@ npm start
 ```
 npm run scss
 ```
+
+## Production use
+To build the package in a final version for production system use the command
+```
+npm run package
+```
+
+After you've runned the command you will find a app.zip in the root directory.
+This file contains everything you need for production use.
