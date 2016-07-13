@@ -11,7 +11,7 @@ import {MAX_AC_RESULTS} from "../../config";
 
 @Component({
     selector: 'fp-shipping-recipient',
-    templateUrl: 'app/templates/shipping/shipping.recipient.component.html',
+    templateUrl: 'assets/templates/shipping/shipping.recipient.component.html',
     directives: [
         SuggestDirective,
         ShippingRecipientAddComponent

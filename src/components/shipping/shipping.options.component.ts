@@ -10,7 +10,7 @@ import PostalProductAdjustmentInfo from "../../models/postal-product-adjustment-
 
 @Component({
     selector: 'fp-shipping-options',
-    templateUrl: 'app/templates/shipping/shipping.options.component.html',
+    templateUrl: 'assets/templates/shipping/shipping.options.component.html',
     directives: [
         MODAL_DIRECTIVES
     ],

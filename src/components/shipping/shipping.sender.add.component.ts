@@ -12,7 +12,7 @@ import AddressCreationInfo from "../../models/address-creation-info";
 
 @Component({
     selector: 'fp-shipping-sender-add',
-    templateUrl: 'app/templates/shipping/shipping.sender.add.component.html',
+    templateUrl: 'assets/templates/shipping/shipping.sender.add.component.html',
     directives: [
         MODAL_DIRECTIVES
     ],

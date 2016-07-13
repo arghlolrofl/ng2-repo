@@ -14,7 +14,7 @@ import AddressDisplayInfo from "../../models/address-display-info";
 
 @Component({
     selector: 'fp-shipping-product-calculation',
-    templateUrl: 'app/templates/shipping/shipping.product-calculation.component.html',
+    templateUrl: 'assets/templates/shipping/shipping.product-calculation.component.html',
     directives: [
         MODAL_DIRECTIVES,
         ShippingProductCalculationShortcutsComponent

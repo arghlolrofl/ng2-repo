@@ -9,7 +9,7 @@ import {MAX_AC_RESULTS} from "../../config";
 
 @Component({
     selector: 'fp-shipping-cost-center',
-    templateUrl: 'app/templates/shipping/shipping.cost-center.component.html',
+    templateUrl: 'assets/templates/shipping/shipping.cost-center.component.html',
     directives: [
         SuggestDirective
     ],

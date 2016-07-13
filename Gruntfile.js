@@ -131,15 +131,6 @@ module.exports = function (grunt) {
 			}
 		},
 
-		copy: {
-			templates: {
-				cwd: 'src/templates',
-				expand: true,
-				src: '**/*.html',
-				dest: 'app/templates'
-			}
-		},
-
 		systemjs: {
 			options: {
 				sfx: true,
@@ -183,17 +174,15 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-imagemin');
 	grunt.loadNpmTasks('grunt-postcss');
 	grunt.loadNpmTasks('grunt-webfont');
-	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-systemjs-builder');
 
 	/* Tasks
 	 /* ----------------------------- */
-	grunt.registerTask('default', ['sass', 'cmq', 'postcss', 'cssmin', 'imagemin', 'copy']);
-	grunt.registerTask('templates', ['copy:templates']);
+	grunt.registerTask('default', ['sass', 'cmq', 'postcss', 'cssmin', 'imagemin']);
 	grunt.registerTask('css', ['sass', 'cmq', 'postcss', 'cssmin']);
 	grunt.registerTask('iconfont', ['webfont']);
 	grunt.registerTask('images', ['imagemin']);
-	grunt.registerTask('dev', ['sass', 'cmq', 'postcss', 'imagemin', 'copy']);
+	grunt.registerTask('dev', ['sass', 'cmq', 'postcss', 'imagemin']);
 	grunt.registerTask('package', ['systemjs', 'concat']);
 };
