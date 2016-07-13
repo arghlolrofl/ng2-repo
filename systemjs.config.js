@@ -13,7 +13,8 @@
     'angular2-cookie':            'node_modules/angular2-cookie',
     'ng2-bs3-modal':              'node_modules/ng2-bs3-modal',
     'jquery':                     'node_modules/jquery/dist/jquery.min',
-    'bootstrap':                  'node_modules/bootstrap/dist/js/bootstrap.min'
+    'bootstrap':                  'node_modules/bootstrap/dist/js/bootstrap.min',
+    'lodash':                     'node_modules/lodash/lodash'
   };
   // packages tells the System loader how to load when no filename and/or no extension
   var packages = {
