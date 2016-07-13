@@ -2,6 +2,7 @@
   "name": "francotyp-postalia-online-franking",
   "version": "0.0.1",
   "scripts": {
+    "test": "echo \"no tests\"",
     "start": "tsc && grunt && concurrently \"npm run tsc:w\" \"npm run lite\" \"grunt watch\"",
     "lite": "lite-server -c .lite-server.json",
     "postinstall": "typings install",
@@ -9,7 +10,8 @@
     "tsc:w": "tsc -w",
     "typings": "typings",
     "scss": "grunt",
-    "package": "tsc && grunt && grunt package"
+    "package": "tsc && grunt && grunt package",
+    "default": "npm run package"
   },
   "license": "ISC",
   "dependencies": {
