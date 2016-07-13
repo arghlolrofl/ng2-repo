@@ -17,6 +17,7 @@ import ShipmentRequest from "../../models/shipment-request";
 import {LabelOutputFormat} from "../../models/label-output-format";
 import WeightInfo from "../../models/weight-info";
 import DimensionInfo from "../../models/dimension-info";
+import Option from "../../models/option";
 
 @Component({
     selector: 'fp-shipping',
@@ -112,7 +113,11 @@ export default class ShippingComponent {
         request.AdditionalInfo2 = this.additionalInfo2;
         request.IsPickup = false;
         request.Product.Code = this.parcel.Code;
-        request.Product.Options = this.options;
+        request.Product.Options = this.options.map((r:PostalProductOptionInfo) => {
+            const option:Option = new Option();
+            option.Code = r.Code;
+            return option;
+        });
         request.SenderContactID = this.sender.Id;
         request.DestinationContactID = this.recipient.Id;
         request.Characteristic.Dimension = this.dimensions;
