@@ -1,4 +1,4 @@
 {
   "ghostMode": false,
-  "files": ["./app/**/**", "./assets/**/**", "./i18n/**/**"]
+  "files": ["./app/**/**", "./assets/**/**"]
 }

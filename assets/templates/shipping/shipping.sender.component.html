@@ -16,7 +16,8 @@
                autocomplete="off"
                [(ngModel)]="senderInput"
                [fpSuggest]="mapSuggest(addressService)"
-               [fpSuggestEvents]="senderEvents">
+               [fpSuggestEvents]="senderEvents"
+               [fpSuggestView]="autocomplete">
         <button type="button"
                 class="clear-submit"
                 (click)="senderEvents.emit({type: 3})">
@@ -24,7 +25,8 @@
         </button>
       </div>
 
-      <div class="row autocomplete"
+      <div #autocomplete 
+           class="row autocomplete"
            [class.open]="senderSuggestions.length > 0">
         <ul>
           <li *ngFor="let sender of senderSuggestions"
