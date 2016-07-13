@@ -95,21 +95,29 @@ export default class ShippingProductCalculationComponent {
         this.weightInputChange.subscribe((value:number) => {
             this.parcelInfo.Characteristic.Weight.Value = value;
             this.weightChange.emit(this.parcelInfo.Characteristic.Weight);
+            this.parcelSuggestions = [];
+            this.parcelChange.emit(null);
         });
 
         this.lengthInputChange.subscribe((value:number) => {
             this.parcelInfo.Characteristic.Dimension.Length = value;
             this.dimensionsChange.emit(this.parcelInfo.Characteristic.Dimension);
+            this.parcelSuggestions = [];
+            this.parcelChange.emit(null);
         });
 
         this.widthInputChange.subscribe((value:number) => {
             this.parcelInfo.Characteristic.Dimension.Width = value;
             this.dimensionsChange.emit(this.parcelInfo.Characteristic.Dimension);
+            this.parcelSuggestions = [];
+            this.parcelChange.emit(null);
         });
 
         this.heightInputChange.subscribe((value:number) => {
             this.parcelInfo.Characteristic.Dimension.Height = value;
             this.dimensionsChange.emit(this.parcelInfo.Characteristic.Dimension);
+            this.parcelSuggestions = [];
+            this.parcelChange.emit(null);
         });
 
         this.isDocumentChange.subscribe((value:boolean) => {

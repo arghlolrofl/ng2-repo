@@ -36,3 +36,9 @@ export const API_RETRIES = 5;
  * @type {number}
  */
 export const API_RETRY_DELAY = 1000;
+
+/**
+ * Max. autocomplete result.
+ * @type {number}
+ */
+export const MAX_AC_RESULTS = 5;

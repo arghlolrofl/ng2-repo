@@ -6,6 +6,7 @@ import AddressService from "../../services/address.service";
 import AddressDisplayInfo from "../../models/address-display-info";
 import AddressGroupInfo from "../../models/address-group-info";
 import {SuggestDirective, SuggestEvents} from "../../directives/suggest.directive";
+import {MAX_AC_RESULTS} from "../../config";
 
 
 @Component({
@@ -130,7 +131,7 @@ export default class ShippingRecipientComponent {
      */
     public mapAddressGroupSuggest(service:AddressService) {
         return (term:string) => {
-            return service.getFilteredAddressGroupsWithout(term, 'Sender', 0, 20);
+            return service.getFilteredAddressGroupsWithout(term, 'Sender', 0, MAX_AC_RESULTS);
         }
     }
 
@@ -145,7 +146,7 @@ export default class ShippingRecipientComponent {
             if (this.addressGroup) {
                 groupId = this.addressGroup.Id;
             }
-            return service.getFilteredAddressesByAddressGroupAndFastQuery(groupId, term, 0, 20);
+            return service.getFilteredAddressesByAddressGroupAndFastQuery(groupId, term, 0, MAX_AC_RESULTS);
         }
     }
 }

@@ -134,6 +134,19 @@ i.icon-class {
       float: none;
       margin: 0 0 15px 0;
     }
+
+    &:disabled {
+      background: $brand-gray-1;
+      border-color: $brand-gray-2;
+      color: $brand-gray-2;
+
+      &:hover {
+        text-decoration: none;
+        background: $brand-gray-1;
+        border-color: $brand-gray-2;
+        box-shadow: none;
+      }
+    }
   }
 
   &.color {
@@ -152,6 +165,19 @@ i.icon-class {
       width: 100%;
       float: none;
       margin: 0 0 15px 0;
+    }
+
+    &:disabled {
+      background: $brand-gray-1;
+      border-color: $brand-gray-2;
+      color: $brand-gray-2;
+
+      &:hover {
+        text-decoration: none;
+        background: $brand-gray-1;
+        border-color: $brand-gray-2;
+        box-shadow: none;
+      }
     }
   }
 
@@ -186,7 +212,8 @@ i.icon-class {
       }
     }
 
-    &.placeholder {
+    &.placeholder,
+    &.placeholder:disabled {
       background: none;
       color: $brand-gray-2;
       border: 1px dotted $brand-gray-2;
@@ -194,7 +221,6 @@ i.icon-class {
 
       &:hover {
         text-decoration: none;
-        background: $white;
         box-shadow: none;
       }
     }

@@ -76,20 +76,22 @@
 <modal #modalOptionSelect>
   <modal-header>
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-sm-12">
         <h4>{{ 'OPTIONS_SELECT_OPTIONS_HEADLINE' | translate }}</h4>
       </div>
     </div>
   </modal-header>
   <modal-body>
-    <ul *ngIf="parcel && parcel.Price.Options">
-      <li *ngFor="let option of parcel.Price.Options">
-        <input #cb
-               type="checkbox"
-               (click)="selectOption(option, cb.checked)"/>
-        {{option.Name}}
-      </li>
-    </ul>
+    <div class="col-sm-12">
+      <ul *ngIf="parcel && parcel.Price.Options">
+        <li *ngFor="let option of parcel.Price.Options">
+          <input #cb
+                 type="checkbox"
+                 (click)="selectOption(option, cb.checked)"/>
+          {{option.Name}}
+        </li>
+      </ul>
+    </div>
   </modal-body>
   <modal-footer>
     <div class="row">
