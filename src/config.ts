@@ -1,4 +1,9 @@
 /**
+ * Debug mode.
+ */
+export const DEBUG_MODE = true;
+
+/**
  * Available locales for translation (defaults to en).
  * @type {string[]}
  */
@@ -42,3 +47,9 @@ export const API_RETRY_DELAY = 1000;
  * @type {number}
  */
 export const MAX_AC_RESULTS = 5;
+
+/**
+ * HTTP Status Codes that should fail early. 
+ * If the error code is not in this list N retries will be executed.
+ */
+export const EARLY_FAIL_HTTP_STATUS_CODES = [400];

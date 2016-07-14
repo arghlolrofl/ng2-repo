@@ -19,6 +19,7 @@ import {LabelOutputFormat} from "../../models/label-output-format";
 import WeightInfo from "../../models/weight-info";
 import DimensionInfo from "../../models/dimension-info";
 import Option from "../../models/option";
+import ErrorUtils from "../../utils/error-utils";
 
 @Component({
     selector: 'fp-shipping',
@@ -105,9 +106,8 @@ export default class ShippingComponent {
      * @param {any} error the error
      */
     public handleError(error: any) {
-        console.log(error);
-        console.warn((error.message) ? error.message :
-            error.status ? `${error.status} - ${error.statusText}` : error); // TODO error handling
+        console && console.warn && console.warn(error);
+        this.error = ErrorUtils.toError(error);
     }
 
     /**

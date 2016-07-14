@@ -12,11 +12,14 @@
     <modal-body>
       <div class="row">
         <div class="col-md-12">
-          <section class="sectiontemplate box-error">
+          <section *ngIf="error" 
+                   class="sectiontemplate box-error">
             <div class="content">
-              This Api is down at the moment
+              {{ error.message }}
             </div>
-            <button class="clear-submit">
+            <button type="button"
+                    class="clear-submit"
+                    (click)="error = null">
               <span class="icon-close"></span>
             </button>
           </section>

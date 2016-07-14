@@ -22,7 +22,7 @@
 
     <div class="col-button">
       <div class="field-container box-icon">
-        <button>
+        <button type="button" disabled>
           <span class="icon-weight"></span>
         </button>
       </div>
@@ -93,6 +93,7 @@
   </div>
 
   <fp-shipping-product-calculation-shortcuts
+      (onError)="onError.emit($event)"
       (shortcutChange)="shortcutSelected($event)"></fp-shipping-product-calculation-shortcuts>
 
   <div class="row">

@@ -24,6 +24,8 @@ import ShortcutInfo from "../../models/shortcut-info";
  */
 export default class ShippingProductCalculationShortcutsComponent implements AfterViewInit {
 
+    @Output() onError: EventEmitter<Error> = new EventEmitter();
+
     /**
      * Shortcut has been selected or changed.
      * @type {EventEmitter}
@@ -70,7 +72,7 @@ export default class ShippingProductCalculationShortcutsComponent implements Aft
                 this.shortcuts.push(r);
                 this.shortcutPlaceholder.splice(0, 1);
             },
-            (error: Error) => console.warn(error)); // TODO error handling
+            (error: Error) => this.onError.emit(error));
 
         shortcutObservable
             .subscribe(
@@ -78,12 +80,12 @@ export default class ShippingProductCalculationShortcutsComponent implements Aft
                 this.shortcutSuggestions.push(r);
                 this.displayedShortcutSuggestions.push(r);
             },
-            (error: Error) => console.warn(error)); // TODO error handling
+            (error: Error) => this.onError.emit(error));
 
         this.shortcutService.getLast()
             .subscribe(
             (r: ShortcutInfo) => this.lastShortcut = r,
-            (error: Error) => console.warn(error)); // TODO error handling
+            (error: Error) => this.onError.emit(error));
 
         this.searchInputChange.subscribe((term: string) => this.searchInput = term);
 
@@ -94,12 +96,5 @@ export default class ShippingProductCalculationShortcutsComponent implements Aft
                 this.displayedShortcutSuggestions = this.shortcutSuggestions.filter(
                     (r: ShortcutInfo) => r.DisplayName.toLowerCase().indexOf(term.toLowerCase()) === 0);
             });
-    }
-
-    /**
-     * Select last rate.
-     */
-    public lastRate() {
-        console.log('last rate'); // TODO implement
     }
 }
