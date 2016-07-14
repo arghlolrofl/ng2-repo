@@ -15,6 +15,11 @@ export default class RxUtils {
         return (errors:Observable<any>) =>
             Observable.range(1, retries)
                 .zip(errors)
+                .map((data:any) => {
+                    if (data[0] >= retries) {
+                        throw data[1];
+                    }
+                })
                 .mergeMap(() => Observable.timer(delay));
     }
 }

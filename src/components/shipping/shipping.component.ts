@@ -47,38 +47,39 @@ export default class ShippingComponent {
     /**
      * Error if there is one.
      */
-    private error:Error;
+    private error: Error;
 
     /**
      * Sending information.
      */
-    sender:AddressDisplayInfo;
-    shippingPoint:string;
-    recipient:AddressDisplayInfo;
-    costCenter1:CostCenterInfo;
-    costCenter2:CostCenterInfo;
-    costCenter3:CostCenterInfo;
-    additionalInfo1:string;
-    additionalInfo2:string;
-    parcel:ParcelProductInfo;
-    dimensions:DimensionInfo;
-    weight:WeightInfo;
-    options:Array<PostalProductOptionInfo>;
+    sender: AddressDisplayInfo;
+    shippingPoint: string;
+    recipient: AddressDisplayInfo;
+    costCenter1: CostCenterInfo;
+    costCenter2: CostCenterInfo;
+    costCenter3: CostCenterInfo;
+    additionalInfo1: string;
+    additionalInfo2: string;
+    parcel: ParcelProductInfo;
+    dimensions: DimensionInfo;
+    weight: WeightInfo;
+    options: Array<PostalProductOptionInfo>;
+    buyRunning: boolean = false;
 
     /**
      * @constructor
      * @param {ShippingService} shippingService the shipping service client
      */
-    constructor(private shippingService:ShippingService) {
+    constructor(private shippingService: ShippingService) {
     }
 
     /**
      * Checks if buy request could work.
      * @returns {boolean}
      */
-    public canBuy(parcel, shippingPoint, sender, recipient, weight, costCenter1):() => boolean {
+    public canBuy(buyRunning, parcel, shippingPoint, sender, recipient, weight, costCenter1): () => boolean {
         return () => {
-            return !!parcel && !!shippingPoint && !!sender && !!recipient && !!weight && !!costCenter1;
+            return !buyRunning && !!parcel && !!shippingPoint && !!sender && !!recipient && !!weight && !!costCenter1;
         }
     }
 
@@ -86,19 +87,25 @@ export default class ShippingComponent {
      * Executed when label should be bought.
      */
     public buyLabel() {
+        this.buyRunning = true;
         const request = this.generateShipmentRequest();
         this.shippingService.create(request).subscribe(
             () => {
                 console.log('success');
+                this.buyRunning = false;
             },
-            this.handleError.bind(this));
+            (error: Error) => {
+                this.handleError(error);
+                this.buyRunning = false;
+            });
     }
 
     /**
      * Handle errors.
      * @param {any} error the error
      */
-    public handleError(error:any) {
+    public handleError(error: any) {
+        console.log(error);
         console.warn((error.message) ? error.message :
             error.status ? `${error.status} - ${error.statusText}` : error); // TODO error handling
     }
@@ -107,18 +114,20 @@ export default class ShippingComponent {
      * Generate shipment request.
      * @returns {ShipmentRequest}
      */
-    private generateShipmentRequest():ShipmentRequest {
+    private generateShipmentRequest(): ShipmentRequest {
         const request = new ShipmentRequest();
         request.ShippingPoint = this.shippingPoint.replace(/ /g, '');
         request.AdditionalInfo1 = this.additionalInfo1;
         request.AdditionalInfo2 = this.additionalInfo2;
         request.IsPickup = false;
         request.Product.Code = this.parcel.Code;
-        request.Product.Options = this.options.map((r:PostalProductOptionInfo) => {
-            const option:Option = new Option();
-            option.Code = r.Code;
-            return option;
-        });
+        if (this.options) {
+            request.Product.Options = this.options.map((r: PostalProductOptionInfo) => {
+                const option: Option = new Option();
+                option.Code = r.Code;
+                return option;
+            });
+        }
         request.SenderContactID = this.sender.Id;
         request.DestinationContactID = this.recipient.Id;
         request.Characteristic.Dimension = this.dimensions;

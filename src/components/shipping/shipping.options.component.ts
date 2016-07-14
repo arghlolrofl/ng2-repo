@@ -27,46 +27,46 @@ import PostalProductAdjustmentInfo from "../../models/postal-product-adjustment-
  */
 export default class ShippingOptionsComponent {
 
-    @Output() onError:EventEmitter<Error> = new EventEmitter<Error>();
+    @Output() onError: EventEmitter<Error> = new EventEmitter<Error>();
 
     /**
      * Updated when label should be bought.
      * @type {EventEmitter<boolean>}
      */
-    @Output() onBuyLabel:EventEmitter<boolean> = new EventEmitter();
+    @Output() onBuyLabel: EventEmitter<boolean> = new EventEmitter();
 
     /**
      * Modal dialog for sender
      */
-    @ViewChild('modalOptionSelect') modalOptionSelect:ModalComponent;
+    @ViewChild('modalOptionSelect') modalOptionSelect: ModalComponent;
 
     /**
      * Parcel.
      */
-    @Input() parcel:PostalProductInfo;
-    @Input() canBuy:() => boolean = () => true;
+    @Input() parcel: PostalProductInfo;
+    @Input() canBuy: () => boolean = () => true;
 
     /**
      * Consumer information.
      */
-    consumer:ConsumerInfo;
+    consumer: ConsumerInfo;
 
     /**
      * Options.
      */
-    selectedOptions:Array<PostalProductOptionInfo>;
-    @Output() selectedOptionsChange:EventEmitter<Array<PostalProductOptionInfo>> = new EventEmitter();
+    selectedOptions: Array<PostalProductOptionInfo>;
+    @Output() selectedOptionsChange: EventEmitter<Array<PostalProductOptionInfo>> = new EventEmitter();
 
     /**
      * @constructor
      * @param {CustomerService} customerService the customer client
      */
-    constructor(private customerService:CustomerService) {
+    constructor(private customerService: CustomerService) {
         this.selectedOptions = [];
 
         this.customerService.getConsumerInfo().subscribe(
-            (r:ConsumerInfo) => this.consumer = r,
-            (error:Error) => this.onError.emit(error));
+            (r: ConsumerInfo) => this.consumer = r,
+            (error: Error) => this.onError.emit(error));
     }
 
     /**
@@ -75,7 +75,7 @@ export default class ShippingOptionsComponent {
      */
     private getDisplayOptions() {
         return this.selectedOptions /*.slice().slice(0, Math.min(5, this.options.length))*/
-            .map((option:PostalProductOptionInfo) => option.Name)
+            .map((option: PostalProductOptionInfo) => option.Name)
             .join(', ');
     }
 
@@ -84,12 +84,12 @@ export default class ShippingOptionsComponent {
      * @param {PostalProductOptionInfo} option the option to be selected
      * @param {boolean} checked true if it is check, false if not
      */
-    private selectOption(option:PostalProductOptionInfo, checked) {
+    private selectOption(option: PostalProductOptionInfo, checked) {
         if (checked) {
             this.selectedOptions.push(option);
         } else {
             this.selectedOptions = this.selectedOptions.filter(
-                (r:PostalProductOptionInfo) => r.Code !== option.Code);
+                (r: PostalProductOptionInfo) => r.Code !== option.Code);
         }
         this.selectedOptionsChange.emit(this.selectedOptions);
     }
@@ -99,7 +99,7 @@ export default class ShippingOptionsComponent {
      * @returns {number}
      */
     private getOptionCosts() {
-        return this.selectedOptions.reduce((p, r:PostalProductOptionInfo) => p + r.Price, 0);
+        return this.selectedOptions.reduce((p, r: PostalProductOptionInfo) => p + r.Price, 0);
     }
 
     /**
@@ -108,7 +108,7 @@ export default class ShippingOptionsComponent {
      */
     private getExtraServiceCosts() {
         return this.getOptionCosts() +
-            this.parcel.Price.Adjustments.reduce((p, r:PostalProductAdjustmentInfo) => p + r.Cost, 0);
+            this.parcel.Price.Adjustments.reduce((p, r: PostalProductAdjustmentInfo) => p + r.Cost, 0);
     }
 
     /**
