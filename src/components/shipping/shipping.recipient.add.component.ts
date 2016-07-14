@@ -10,6 +10,7 @@ import AddressService from "../../services/address.service";
 import CountryService from "../../services/country.service";
 import RegionService from "../../services/region.service";
 import AddressGroupInfo from "../../models/address-group-info";
+import ErrorUtils from "../../utils/error-utils";
 
 @Component({
     selector: 'fp-shipping-recipient-add',
@@ -31,6 +32,11 @@ import AddressGroupInfo from "../../models/address-group-info";
  * Shipping Sender component.
  */
 export default class ShippingRecipientAddComponent implements AfterViewInit {
+
+    /**
+     * Errors.
+     */
+    error: Error;
 
     /**
      * Opens or closes the modal dialog.
@@ -92,7 +98,7 @@ export default class ShippingRecipientAddComponent implements AfterViewInit {
             const addressGroupObservable = this.addressService.getFilteredAddressGroupsWithout('', 'Sender').share();
             addressGroupObservable.first().subscribe(
                 (r: AddressGroupInfo) => this.addressGroup = r,
-                () => this.addressGroup = null);
+                (error: Error) => this.error = ErrorUtils.toError(error));
             addressGroupObservable.subscribe(
                 (r: AddressGroupInfo) => this.addressGroups.push(r),
                 () => this.addressGroups = []);
@@ -104,8 +110,8 @@ export default class ShippingRecipientAddComponent implements AfterViewInit {
                     this.refreshRegions(r.Id);
                     this.address.CountryId = this.country.Id;
                 },
-                () => {
-                    this.country = null;
+                (error: Error) => {
+                    this.error = ErrorUtils.toError(error);
                     this.regions = [];
                 });
             countryObservable
@@ -128,7 +134,7 @@ export default class ShippingRecipientAddComponent implements AfterViewInit {
                 this.address.Region = this.region.RegionName;
                 this.address.RegionAbbreviation = this.region.RegionAbbreviation;
             },
-            () => this.region = null);
+            (error: Error) => this.error = ErrorUtils.toError(error));
         regionObservable
             .subscribe(
             (r: RegionInfo) => this.regions.push(r),
@@ -150,9 +156,7 @@ export default class ShippingRecipientAddComponent implements AfterViewInit {
     public save() {
         this.addressService.addNewToAddressGroup(this.addressGroup.GroupName, this.address).subscribe(
             () => this.modal.close(),
-            (error: Error) => {
-                console.warn('address could not be stored', error); // TODO error handling
-            });
+            (error: Error) => this.error = ErrorUtils.toError(error));
     }
 
     /**

@@ -9,6 +9,7 @@ import RegionService from "../../services/region.service";
 import RegionInfo from "../../models/region-info";
 import AddressService from "../../services/address.service";
 import AddressCreationInfo from "../../models/address-creation-info";
+import ErrorUtils from "../../utils/error-utils";
 
 @Component({
     selector: 'fp-shipping-sender-add',
@@ -30,6 +31,11 @@ import AddressCreationInfo from "../../models/address-creation-info";
  * Shipping Sender component.
  */
 export default class ShippingSenderAddComponent implements AfterViewInit {
+
+    /**
+     * Errors.
+     */
+    error: Error;
 
     /**
      * Opens or closes the modal dialog.
@@ -88,8 +94,8 @@ export default class ShippingSenderAddComponent implements AfterViewInit {
                     this.refreshRegions(r.Id);
                     this.address.CountryId = this.country.Id;
                 },
-                () => {
-                    this.country = null;
+                (error: Error) => {
+                    this.error = ErrorUtils.toError(error);
                     this.regions = [];
                 });
             countryObservable
@@ -112,7 +118,7 @@ export default class ShippingSenderAddComponent implements AfterViewInit {
                 this.address.Region = this.region.RegionName;
                 this.address.RegionAbbreviation = this.region.RegionAbbreviation;
             },
-            () => this.region = null);
+            (error: Error) => this.error = ErrorUtils.toError(error));
         regionObservable
             .subscribe(
             (r: RegionInfo) => this.regions.push(r),
@@ -133,9 +139,7 @@ export default class ShippingSenderAddComponent implements AfterViewInit {
     public save() {
         this.addressService.addNewToAddressGroup('Sender', this.address).subscribe(
             () => this.modal.close(),
-            (error: Error) => {
-                console.warn('address could not be stored', error); // TODO error handling
-            });
+            (error: Error) => this.error = ErrorUtils.toError(error));
     }
 
     /**

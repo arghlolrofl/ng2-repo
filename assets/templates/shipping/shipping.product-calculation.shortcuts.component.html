@@ -24,7 +24,7 @@
 
   <button type="button"
           class="button shortcut"
-          (click)="lastRate()"
+          (click)="shortcutChange.emit(lastShortcut)"
           [disabled]="!lastShortcut">
     <span>{{ 'PRODUCT_CALCULATION_LAST_RATE' | translate }}</span>
   </button>
