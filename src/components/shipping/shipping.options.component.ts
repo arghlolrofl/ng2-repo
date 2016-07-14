@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter, ViewChild} from '@angular/core';
+import {Component, Input, Output, EventEmitter, ViewChild, AfterViewInit} from '@angular/core';
 import {TranslatePipe} from 'ng2-translate/ng2-translate';
 import {MODAL_DIRECTIVES, ModalComponent} from 'ng2-bs3-modal/ng2-bs3-modal';
 
@@ -7,6 +7,7 @@ import PostalProductOptionInfo from "../../models/postal-product-option-info";
 import CustomerService from "../../services/customer.service";
 import ConsumerInfo from "../../models/consumer-info";
 import PostalProductAdjustmentInfo from "../../models/postal-product-adjustment-info";
+import {initOptionsUI} from "../../ui/ui";
 
 @Component({
     selector: 'fp-shipping-options',
@@ -25,7 +26,7 @@ import PostalProductAdjustmentInfo from "../../models/postal-product-adjustment-
 /**
  * Shipping options component.
  */
-export default class ShippingOptionsComponent {
+export default class ShippingOptionsComponent implements AfterViewInit {
 
     @Output() onError: EventEmitter<Error> = new EventEmitter<Error>();
 
@@ -69,6 +70,13 @@ export default class ShippingOptionsComponent {
             (error: Error) => this.onError.emit(error));
     }
 
+    /**
+     * Initialize UI.
+     */
+    ngAfterViewInit() {
+        initOptionsUI();
+    }
+    
     /**
      * Get the options that should be displayed (reduced list).
      * @returns {string}

@@ -61,7 +61,11 @@
              [class.active]="consumer && consumer.CreditStatus === 1"></div>
         <div class="color green"
              [class.active]="consumer && consumer.CreditStatus === 2"></div>
-        <i class="icon-class icon-info-button"></i>
+        <i href="#lights-info" class="show-info icon-class icon-info-button">
+          <div id="lights-info" class="hide-info">
+            <p>lightsInfo.text</p>
+          </div>
+        </i>
       </div>
 
       <button class="button submit"
