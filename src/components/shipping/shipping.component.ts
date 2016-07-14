@@ -108,6 +108,7 @@ export default class ShippingComponent {
     public handleError(error: any) {
         console && console.warn && console.warn(error);
         this.error = ErrorUtils.toError(error);
+        document.getElementsByTagName('body')[0].scrollIntoView();
     }
 
     /**
