@@ -44,23 +44,23 @@ import {FormBuilder, ControlGroup} from "@angular/common";
 export default class AppComponent implements AfterViewInit {
 
     @ViewChild('modalLogin')
-    private modalLogin:ModalComponent;
+    private modalLogin: ModalComponent;
 
     /**
      * Username.
      */
-    private username:string;
+    private username: string;
 
     /**
      * Password.
      */
-    private password:string;
+    private password: string;
 
     /**
      * Current login state.
      * @type {boolean}
      */
-    private loggedIn:boolean = false;
+    private loggedIn: boolean = false;
 
     /**
      * @constructor
@@ -69,10 +69,10 @@ export default class AppComponent implements AfterViewInit {
      * @param {FormBuilder} formBuilder the form builder
      * @param translate The translation service
      */
-    constructor(private router:Router,
-                private loginService:LoginService,
-                private formBuilder:FormBuilder,
-                public translate:TranslateService) {
+    constructor(private router: Router,
+        private loginService: LoginService,
+        private formBuilder: FormBuilder,
+        public translate: TranslateService) {
         const locales = AVAILABLE_LOCALES.join('|');
         let userLang = navigator.language.split('-')[0];
         userLang = (new RegExp(`(${locales})`, 'gi')).test(userLang) ? userLang : AVAILABLE_LOCALES[0];
@@ -97,7 +97,7 @@ export default class AppComponent implements AfterViewInit {
      * Upper error handler.
      * @param {Error} error the error to be processed
      */
-    public onError(error:Error) {
+    public onError(error: Error) {
         console.warn(error); // TODO error handling
     }
 

@@ -3,13 +3,13 @@
  */
 export default class CountryInfo {
 
-    CountryName:string;
+    CountryName: string;
 
-    FrenchCountryName:string;
+    FrenchCountryName: string;
 
-    Alpha3Code:string;
+    Alpha3Code: string;
 
-    IsoM49Code:string;
+    IsoM49Code: string;
 
-    Id:number;
+    Id: number;
 }

@@ -17,7 +17,7 @@ export default class APIClient {
      * @param {Http} http the HTTP client
      * @param {LoginService} loginService the login service
      */
-    constructor(private http:Http, private loginService:LoginService) {
+    constructor(private http: Http, private loginService: LoginService) {
     }
 
     /**
@@ -26,7 +26,7 @@ export default class APIClient {
      * @param {RequestOptions} options additional options to pass to the server
      * @returns {Observable<any>}
      */
-    public get(path:string, options?:RequestOptions):Observable<any> {
+    public get(path: string, options?: RequestOptions): Observable<any> {
         try {
             let opt = this.prepareHeaders();
             if (options) {
@@ -50,7 +50,7 @@ export default class APIClient {
      * @param {RequestOptions} options additional options to pass to the server
      * @returns {Observable<any>}
      */
-    public post(path:string, data:any, options?:RequestOptions):Observable<any> {
+    public post(path: string, data: any, options?: RequestOptions): Observable<any> {
         try {
             let opt = this.prepareHeaders();
             if (options) {
@@ -74,7 +74,7 @@ export default class APIClient {
      * @param {RequestOptions} options additional options to pass to the server
      * @returns {Observable<void>}
      */
-    public postNoRes(path:string, data:any, options?:RequestOptions):Observable<void> {
+    public postNoRes(path: string, data: any, options?: RequestOptions): Observable<void> {
         try {
             let opt = this.prepareHeaders();
             if (options) {
@@ -94,7 +94,7 @@ export default class APIClient {
      * Prepares the authentication header.
      * @returns {RequestOptions} all options (can be modified)
      */
-    private prepareHeaders():RequestOptions {
+    private prepareHeaders(): RequestOptions {
         if (!this.loginService.isLoggedIn()) {
             throw new Error('User is not logged in');
         }
@@ -103,7 +103,7 @@ export default class APIClient {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + this.loginService.getToken()
         });
-        return new RequestOptions({headers: headers});
+        return new RequestOptions({ headers: headers });
     }
 
     /**
@@ -111,7 +111,7 @@ export default class APIClient {
      * @param {Response} res Response to be converted / extracted
      * @returns {Object} response as JS object
      */
-    private static extractJson(res:Response) {
+    private static extractJson(res: Response) {
         return res.json();
     }
 
@@ -120,7 +120,7 @@ export default class APIClient {
      * @param error The error to get catch
      * @returns {ErrorObservable}
      */
-    private handleError(error:any) {
+    private handleError(error: any) {
         if (error.status === 405) {
             this.loginService.logout();
         }

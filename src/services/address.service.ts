@@ -16,7 +16,7 @@ export default class AddressService {
      * @constructor
      * @param {APIClient} apiClient the APIClient
      */
-    constructor(private apiClient:APIClient) {
+    constructor(private apiClient: APIClient) {
     }
 
     /**
@@ -27,12 +27,12 @@ export default class AddressService {
      * @param {number} [num] the number of results to get (0 to get all, default to 0)
      * @returns {Observable<AddressDisplayInfo>}
      */
-    public getFilteredAddressesByAddressGroupNameAndFastQuery(groupName:string,
-                                                                query:string,
-                                                                start?:number,
-                                                                num?:number):Observable<AddressDisplayInfo> {
+    public getFilteredAddressesByAddressGroupNameAndFastQuery(groupName: string,
+        query: string,
+        start?: number,
+        num?: number): Observable<AddressDisplayInfo> {
         return this.getFilteredAddressGroups(groupName, start, num)
-            .mergeMap((i:AddressGroupInfo) => this.getFilteredAddressesByAddressGroupAndFastQuery(
+            .mergeMap((i: AddressGroupInfo) => this.getFilteredAddressesByAddressGroupAndFastQuery(
                 i.Id, query, start, num));
     }
 
@@ -43,7 +43,7 @@ export default class AddressService {
      * @param {number} [num] the number of results to get (0 to get all, default to 0)
      * @returns {Observable<AddressGroupInfo>}
      */
-    public getFilteredAddressGroups(groupName:string, start?:number, num?:number):Observable<AddressGroupInfo> {
+    public getFilteredAddressGroups(groupName: string, start?: number, num?: number): Observable<AddressGroupInfo> {
         start = start || 0;
         num = num || 0;
 
@@ -51,7 +51,7 @@ export default class AddressService {
             GroupName: groupName,
             StartValue: start,
             ResultCount: num
-        }).concatMap((r:PagedResultsOf<AddressGroupInfo>) => r.ItemList);
+        }).concatMap((r: PagedResultsOf<AddressGroupInfo>) => r.ItemList);
     }
 
     /**
@@ -62,10 +62,10 @@ export default class AddressService {
      * @param {number} [num] the number of results to get (0 to get all, default to 0)
      * @returns {Observable<AddressGroupInfo>}
      */
-    public getFilteredAddressGroupsWithout(groupName:string,
-                                           excludeGroup:string,
-                                           start?:number,
-                                           num?:number):Observable<AddressGroupInfo> {
+    public getFilteredAddressGroupsWithout(groupName: string,
+        excludeGroup: string,
+        start?: number,
+        num?: number): Observable<AddressGroupInfo> {
         start = start || 0;
         num = num || 0;
 
@@ -73,8 +73,8 @@ export default class AddressService {
             GroupName: groupName,
             StartValue: start,
             ResultCount: num
-        }).concatMap((r:PagedResultsOf<AddressGroupInfo>) => r.ItemList)
-            .filter((r:AddressGroupInfo) => r.GroupName !== excludeGroup);
+        }).concatMap((r: PagedResultsOf<AddressGroupInfo>) => r.ItemList)
+            .filter((r: AddressGroupInfo) => r.GroupName !== excludeGroup);
     }
 
     /**
@@ -84,9 +84,9 @@ export default class AddressService {
      * @param {number} [num] the number of results to get (0 to get all, default to 0)
      * @returns {Observable<AddressDisplayInfo>}
      */
-    public getFilteredAddressesByAddressGroup(addressGroupId:number,
-                                              start?:number,
-                                              num?:number):Observable<AddressDisplayInfo> {
+    public getFilteredAddressesByAddressGroup(addressGroupId: number,
+        start?: number,
+        num?: number): Observable<AddressDisplayInfo> {
         start = start || 0;
         num = num || 0;
 
@@ -94,7 +94,7 @@ export default class AddressService {
             AddressGroup: addressGroupId,
             StartValue: start,
             ResultCount: num
-        }).concatMap((r:PagedResultsOf<AddressDisplayInfo>) => r.ItemList);
+        }).concatMap((r: PagedResultsOf<AddressDisplayInfo>) => r.ItemList);
     }
 
     /**
@@ -105,10 +105,10 @@ export default class AddressService {
      * @param {number} [num] the number of results to get (0 to get all, default to 0)
      * @returns {Observable<AddressDisplayInfo>}
      */
-    public getFilteredAddressesByAddressGroupAndFastQuery(addressGroupId:number,
-                                                          query:string,
-                                                          start?:number,
-                                                          num?:number):Observable<AddressDisplayInfo> {
+    public getFilteredAddressesByAddressGroupAndFastQuery(addressGroupId: number,
+        query: string,
+        start?: number,
+        num?: number): Observable<AddressDisplayInfo> {
         start = start || 0;
         num = num || 0;
 
@@ -117,7 +117,7 @@ export default class AddressService {
             FastQuery: query,
             StartValue: start,
             ResultCount: num
-        }).concatMap((r:PagedResultsOf<AddressDisplayInfo>) => r.ItemList);
+        }).concatMap((r: PagedResultsOf<AddressDisplayInfo>) => r.ItemList);
     }
 
     /**
@@ -126,10 +126,10 @@ export default class AddressService {
      * @param {AddressCreationInfo} address the address to be stored
      * @returns {Observable<void>}
      */
-    public addNewToAddressGroup(addressGroupName:string, address:AddressCreationInfo):Observable<void> {
+    public addNewToAddressGroup(addressGroupName: string, address: AddressCreationInfo): Observable<void> {
         return this.getFilteredAddressGroups(addressGroupName, 0, 1)
             .first()
-            .mergeMap((r:AddressGroupInfo) => {
+            .mergeMap((r: AddressGroupInfo) => {
                 address.AddressGroupIds = [r.Id];
                 return this.apiClient.postNoRes('Address/AddNew', address);
             });

@@ -12,4 +12,4 @@ import {TranslatePipe} from 'ng2-translate/ng2-translate';
 /**
  * Dashboard component.
  */
-export default class DashboardComponent {}
+export default class DashboardComponent { }

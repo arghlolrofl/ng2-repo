@@ -5,19 +5,19 @@ import {ESurchargeType} from './esurcharge-type';
  */
 export default class CostCenterInfo {
 
-    Name:string;
+    Name: string;
 
-    Number:string;
+    Number: string;
 
-    Level:number;
+    Level: number;
 
-    Surcharge:number;
+    Surcharge: number;
 
-    SurchargeType:ESurchargeType;
+    SurchargeType: ESurchargeType;
 
-    IsActive:boolean;
+    IsActive: boolean;
 
-    IsDefault:boolean;
+    IsDefault: boolean;
 
-    Id:number;
+    Id: number;
 }

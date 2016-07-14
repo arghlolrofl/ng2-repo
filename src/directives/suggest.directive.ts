@@ -46,11 +46,11 @@ export class SuggestDirective implements OnInit {
     /**
      * Element actions.
      */
-    el:ElementRef;
-    initIntervalCount:number = 0;
-    initInterval:any;
-    lastAction:number;
-    lastActionInterval:any;
+    el: ElementRef;
+    initIntervalCount: number = 0;
+    initInterval: any;
+    lastAction: number;
+    lastActionInterval: any;
 
     /**
      * @constructor
@@ -61,7 +61,7 @@ export class SuggestDirective implements OnInit {
         //noinspection TypeScriptUnresolvedFunction
         Observable.fromEvent(el.nativeElement, 'keyup')
             .do(() => this.updateLastAction())
-            .filter((keyEvent: KeyboardEvent) => keyEvent.keyCode === 13 ||  keyEvent.keyCode === 27
+            .filter((keyEvent: KeyboardEvent) => keyEvent.keyCode === 13 || keyEvent.keyCode === 27
                 || keyEvent.keyCode === 40 || keyEvent.keyCode === 38)
             .subscribe((keyEvent: KeyboardEvent) => this.navigate(keyEvent));
 
@@ -142,7 +142,7 @@ export class SuggestDirective implements OnInit {
             return;
         }
         clearInterval(this.initInterval);
-        
+
         this.view.addEventListener('mouseover', () => {
             this.updateLastAction();
         })
@@ -197,7 +197,7 @@ export class SuggestDirective implements OnInit {
             return;
         }
 
-        if (!this.selected ||  keyCode === 40 && (this.offset + 1) >= this.suggestions.length) {
+        if (!this.selected || keyCode === 40 && (this.offset + 1) >= this.suggestions.length) {
             this.offset = 0;
             this.selected = true;
         } else if (keyCode === 40) {

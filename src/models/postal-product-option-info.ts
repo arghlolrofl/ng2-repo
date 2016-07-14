@@ -3,9 +3,9 @@
  */
 export default class PostalProductOptionInfo {
 
-    Code:string;
+    Code: string;
 
-    Name:string;
+    Name: string;
 
-    Price:number;
+    Price: number;
 }

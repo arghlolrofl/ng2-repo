@@ -29,32 +29,32 @@ import {MAX_AC_RESULTS} from "../../config";
 export default class ShippingSenderComponent {
 
     @Output()
-    onError:EventEmitter<Error> = new EventEmitter();
+    onError: EventEmitter<Error> = new EventEmitter();
 
     /**
      * Sender.
      */
-    senderInput:string = '';
-    @Output() senderChange:EventEmitter<AddressDisplayInfo> = new EventEmitter();
-    senderEvents:EventEmitter<any> = new EventEmitter();
-    senderSuggestions:AddressDisplayInfo[] = [];
+    senderInput: string = '';
+    @Output() senderChange: EventEmitter<AddressDisplayInfo> = new EventEmitter();
+    senderEvents: EventEmitter<any> = new EventEmitter();
+    senderSuggestions: AddressDisplayInfo[] = [];
 
     /**
      * Shipping Point.
      */
-    shippingPoint:string = '';
-    @Output() shippingPointChange:EventEmitter<string> = new EventEmitter();
+    shippingPoint: string = '';
+    @Output() shippingPointChange: EventEmitter<string> = new EventEmitter();
 
     /**
      * Show modal dialog for adding new sender.
      */
-    showAddDialogChange:EventEmitter<boolean> = new EventEmitter();
+    showAddDialogChange: EventEmitter<boolean> = new EventEmitter();
 
     /**
      * @constructor
      * @param {AddressService} addressService the address information service
      */
-    constructor(private addressService:AddressService) {
+    constructor(private addressService: AddressService) {
         this.bindEvents();
     }
 
@@ -95,7 +95,7 @@ export default class ShippingSenderComponent {
             }
         });
 
-        this.shippingPointChange.subscribe((value:string) => this.shippingPoint = value);
+        this.shippingPointChange.subscribe((value: string) => this.shippingPoint = value);
     }
 
     /**
@@ -103,8 +103,8 @@ export default class ShippingSenderComponent {
      * @param {AddressService} service the address service to be wrapped
      * @returns {function(string): Observable<AddressDisplayInfo>}
      */
-    public mapSuggest(service:AddressService) {
-        return (term:string) => {
+    public mapSuggest(service: AddressService) {
+        return (term: string) => {
             return service.getFilteredAddressesByAddressGroupNameAndFastQuery('Sender', term, 0, MAX_AC_RESULTS)
         }
     }

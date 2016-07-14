@@ -13,7 +13,7 @@ export default class ShippingService {
      * @constructor
      * @param {APIClient} apiClient the api client
      */
-    constructor(private apiClient:APIClient) {
+    constructor(private apiClient: APIClient) {
     }
 
     /**
@@ -21,9 +21,9 @@ export default class ShippingService {
      * @param {ParcelInfo} parcelInfo the information about the parcel to be calculated
      * @returns {Observable<PostalProductInfo>}
      */
-    public calculate(parcelInfo:ParcelInfo):Observable<PostalProductInfo> {
+    public calculate(parcelInfo: ParcelInfo): Observable<PostalProductInfo> {
         return this.apiClient.post('Shipments/Calculate', parcelInfo)
-            .concatMap((r:Array<PostalProductInfo>) => r);
+            .concatMap((r: Array<PostalProductInfo>) => r);
     }
 
     /**
@@ -31,7 +31,7 @@ export default class ShippingService {
      * @param {ShipmentRequest} shipmentRequest the acutal shipping information
      * @returns {Observable<void>}
      */
-    public create(shipmentRequest:ShipmentRequest):Observable<void> {
+    public create(shipmentRequest: ShipmentRequest): Observable<void> {
         return this.apiClient.post('Shipments', shipmentRequest);
     }
 }

@@ -4,49 +4,49 @@ import CountryInfo from "./country-info";
  */
 export default class AddressDisplayInfo {
 
-    Country:CountryInfo;
+    Country: CountryInfo;
 
-    FirstName:string;
+    FirstName: string;
 
-    LastName:string;
+    LastName: string;
 
-    City:string;
+    City: string;
 
-    Company:string;
+    Company: string;
 
     IsValidated: boolean;
 
-    Title:string;
+    Title: string;
 
-    MiddleName:string;
+    MiddleName: string;
 
-    Region:string;
+    Region: string;
 
-    RegionAbbreviation:string;
+    RegionAbbreviation: string;
 
-    PostalAddress:string;
+    PostalAddress: string;
 
-    AdditionalPostalAddress:string;
+    AdditionalPostalAddress: string;
 
-    ZipCode:string;
+    ZipCode: string;
 
-    AdditionalZipCode:string;
+    AdditionalZipCode: string;
 
-    ValidationHash:string;
+    ValidationHash: string;
 
-    EMailAddress:string;
+    EMailAddress: string;
 
-    PhoneNumber:string;
+    PhoneNumber: string;
 
-    MobilePhoneNumber:string;
+    MobilePhoneNumber: string;
 
-    FaxNumber:string;
+    FaxNumber: string;
 
-    AdditionalInformation:string;
+    AdditionalInformation: string;
 
-    IsPostOfficeBox:boolean;
+    IsPostOfficeBox: boolean;
 
-    AddressType:number;
+    AddressType: number;
 
-    Id:number;
+    Id: number;
 }

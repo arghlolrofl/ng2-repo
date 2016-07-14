@@ -3,11 +3,11 @@
  */
 export default class PostalProductAdjustmentInfo {
 
-    Code:string;
+    Code: string;
 
-    Cost:number;
+    Cost: number;
 
-    Name:string;
+    Name: string;
 
-    Percent:number;
+    Percent: number;
 }

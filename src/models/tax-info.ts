@@ -3,7 +3,7 @@
  */
 export default class TaxInfo {
 
-    Percent:number;
+    Percent: number;
 
-    Value:number;
+    Value: number;
 }

@@ -1,15 +1,15 @@
 /**
  * OptionDetails model.
  */
-export default class OptionDetails {
+export default class OptionDetails  {
 
-    DisplayName:string;
+    DisplayName: string;
 
-    Amount:number;
+    Amount: number;
 
-    Code:string;
+    Code: string;
 
-    Qualifier1:boolean;
+    Qualifier1: boolean;
 
-    Qualifier2:string;
+    Qualifier2: string;
 }

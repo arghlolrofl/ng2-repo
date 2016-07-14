@@ -5,7 +5,7 @@ import {DestinationTarget} from "./destination-target";
  */
 export default class DestinationInfo {
 
-    PostalCode:string;
+    PostalCode: string;
 
-    Target:DestinationTarget = DestinationTarget.Domestic;
+    Target: DestinationTarget = DestinationTarget.Domestic;
 }

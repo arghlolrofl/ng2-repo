@@ -35,32 +35,32 @@ export default class ShippingRecipientAddComponent implements AfterViewInit {
     /**
      * Opens or closes the modal dialog.
      */
-    @Input() showChange:EventEmitter<boolean> = new EventEmitter();
-    @ViewChild('modalAddRecipient') modal:ModalComponent;
+    @Input() showChange: EventEmitter<boolean> = new EventEmitter();
+    @ViewChild('modalAddRecipient') modal: ModalComponent;
 
     /**
      * Region.
      */
-    region:RegionInfo;
-    regions:Array<RegionInfo> = [];
+    region: RegionInfo;
+    regions: Array<RegionInfo> = [];
 
     /**
      * Country.
      */
-    country:CountryInfo;
-    countries:Array<CountryInfo> = [];
+    country: CountryInfo;
+    countries: Array<CountryInfo> = [];
 
     /**
      * Address Groups.
      */
-    addressGroup:AddressGroupInfo;
-    addressGroups:Array<AddressGroupInfo> = [];
+    addressGroup: AddressGroupInfo;
+    addressGroups: Array<AddressGroupInfo> = [];
 
     /**
      * The address to store.
      * @type {AddressCreationInfo}
      */
-    address:AddressCreationInfo = new AddressCreationInfo();
+    address: AddressCreationInfo = new AddressCreationInfo();
 
     /**
      * @constructor
@@ -68,9 +68,9 @@ export default class ShippingRecipientAddComponent implements AfterViewInit {
      * @param {CountryService} countryService the country client
      * @param {AddressService} addressService the address client
      */
-    constructor(private regionService:RegionService,
-                private countryService:CountryService,
-                private addressService:AddressService) {
+    constructor(private regionService: RegionService,
+        private countryService: CountryService,
+        private addressService: AddressService) {
     }
 
     /**
@@ -91,15 +91,15 @@ export default class ShippingRecipientAddComponent implements AfterViewInit {
 
             const addressGroupObservable = this.addressService.getFilteredAddressGroupsWithout('', 'Sender').share();
             addressGroupObservable.first().subscribe(
-                (r:AddressGroupInfo) => this.addressGroup = r,
+                (r: AddressGroupInfo) => this.addressGroup = r,
                 () => this.addressGroup = null);
             addressGroupObservable.subscribe(
-                (r:AddressGroupInfo) => this.addressGroups.push(r),
+                (r: AddressGroupInfo) => this.addressGroups.push(r),
                 () => this.addressGroups = []);
 
             const countryObservable = this.countryService.getAll().share();
             countryObservable.first().subscribe(
-                (r:CountryInfo) => {
+                (r: CountryInfo) => {
                     this.country = r;
                     this.refreshRegions(r.Id);
                     this.address.CountryId = this.country.Id;
@@ -110,8 +110,8 @@ export default class ShippingRecipientAddComponent implements AfterViewInit {
                 });
             countryObservable
                 .subscribe(
-                    (r:CountryInfo) => this.countries.push(r),
-                    () => this.countries = []);
+                (r: CountryInfo) => this.countries.push(r),
+                () => this.countries = []);
         });
     }
 
@@ -119,11 +119,11 @@ export default class ShippingRecipientAddComponent implements AfterViewInit {
      * Refresh the regions by country id.
      * @param {number} countryId the country id
      */
-    private refreshRegions(countryId:number) {
+    private refreshRegions(countryId: number) {
         this.regions = [];
         const regionObservable = this.regionService.getFilteredByCountryId(countryId).share();
         regionObservable.first().subscribe(
-            (r:RegionInfo) => {
+            (r: RegionInfo) => {
                 this.region = r;
                 this.address.Region = this.region.RegionName;
                 this.address.RegionAbbreviation = this.region.RegionAbbreviation;
@@ -131,8 +131,8 @@ export default class ShippingRecipientAddComponent implements AfterViewInit {
             () => this.region = null);
         regionObservable
             .subscribe(
-                (r:RegionInfo) => this.regions.push(r),
-                () => this.regions = []);
+            (r: RegionInfo) => this.regions.push(r),
+            () => this.regions = []);
     }
 
     /**
@@ -150,7 +150,7 @@ export default class ShippingRecipientAddComponent implements AfterViewInit {
     public save() {
         this.addressService.addNewToAddressGroup(this.addressGroup.GroupName, this.address).subscribe(
             () => this.modal.close(),
-            (error:Error) => {
+            (error: Error) => {
                 console.warn('address could not be stored', error); // TODO error handling
             });
     }
@@ -159,8 +159,8 @@ export default class ShippingRecipientAddComponent implements AfterViewInit {
      * Exectued when region changes.
      * @param {string} regionName the name of the region
      */
-    public regionChanged(regionName:string) {
-        this.region = this.regions.find((r:RegionInfo) => r.RegionName === regionName);
+    public regionChanged(regionName: string) {
+        this.region = this.regions.find((r: RegionInfo) => r.RegionName === regionName);
         this.address.Region = this.region.RegionName;
         this.address.RegionAbbreviation = this.region.RegionAbbreviation;
     }
@@ -169,8 +169,8 @@ export default class ShippingRecipientAddComponent implements AfterViewInit {
      * Executed when the country changes.
      * @param {string} countryName the name of the country
      */
-    public countryChanged(countryName:string) {
-        this.country = this.countries.find((r:CountryInfo) => r.CountryName === countryName);
+    public countryChanged(countryName: string) {
+        this.country = this.countries.find((r: CountryInfo) => r.CountryName === countryName);
         this.refreshRegions(this.country.Id);
         this.address.CountryId = this.country.Id;
     }
@@ -179,7 +179,7 @@ export default class ShippingRecipientAddComponent implements AfterViewInit {
      * Executed when the address group changes.
      * @param {string} addressGroupName the name of the address group
      */
-    public addressGroupChanged(addressGroupName:string) {
-        this.addressGroup = this.addressGroups.find((r:AddressGroupInfo) => r.GroupName === addressGroupName);
+    public addressGroupChanged(addressGroupName: string) {
+        this.addressGroup = this.addressGroups.find((r: AddressGroupInfo) => r.GroupName === addressGroupName);
     }
 }

@@ -26,38 +26,38 @@ import {MAX_AC_RESULTS} from "../../config";
  */
 export default class ShippingCostCenterComponent {
 
-    @Output() onError:EventEmitter<Error> = new EventEmitter();
+    @Output() onError: EventEmitter<Error> = new EventEmitter();
 
     /**
      * Cost Center 1.
      */
-    costCenter1Input:string;
-    costCenter1:CostCenterInfo;
-    @Output() costCenter1Change:EventEmitter<CostCenterInfo> = new EventEmitter();
-    costCenter1Events:EventEmitter<any> = new EventEmitter();
-    costCenter1Suggestions:CostCenterInfo[] = [];
+    costCenter1Input: string;
+    costCenter1: CostCenterInfo;
+    @Output() costCenter1Change: EventEmitter<CostCenterInfo> = new EventEmitter();
+    costCenter1Events: EventEmitter<any> = new EventEmitter();
+    costCenter1Suggestions: CostCenterInfo[] = [];
 
     /**
      * Cost Center 2
      */
-    costCenter2Input:string;
-    @Output() costCenter2Change:EventEmitter<CostCenterInfo> = new EventEmitter();
-    costCenter2Events:EventEmitter<any> = new EventEmitter();
-    costCenter2Suggestions:CostCenterInfo[] = [];
+    costCenter2Input: string;
+    @Output() costCenter2Change: EventEmitter<CostCenterInfo> = new EventEmitter();
+    costCenter2Events: EventEmitter<any> = new EventEmitter();
+    costCenter2Suggestions: CostCenterInfo[] = [];
 
     /**
      * Cost Center 3.
      */
-    costCenter3Input:string;
-    @Output() costCenter3Change:EventEmitter<CostCenterInfo> = new EventEmitter();
-    costCenter3Events:EventEmitter<any> = new EventEmitter();
-    costCenter3Suggestions:CostCenterInfo[] = [];
+    costCenter3Input: string;
+    @Output() costCenter3Change: EventEmitter<CostCenterInfo> = new EventEmitter();
+    costCenter3Events: EventEmitter<any> = new EventEmitter();
+    costCenter3Suggestions: CostCenterInfo[] = [];
 
     /**
      * @constructor
      * @param {AddressService} costCenterService the cost center information service
      */
-    constructor(private costCenterService:CostCenterService) {
+    constructor(private costCenterService: CostCenterService) {
         this.bindEvents();
     }
 
@@ -84,8 +84,8 @@ export default class ShippingCostCenterComponent {
                 case SuggestEvents.CLEARED:
                     this.costCenter1 = null;
                     this.costCenter1Change.emit(null);
-                    this.costCenter2Events.emit({type: SuggestEvents.CLEARED});
-                    this.costCenter3Events.emit({type: SuggestEvents.CLEARED});
+                    this.costCenter2Events.emit({ type: SuggestEvents.CLEARED });
+                    this.costCenter3Events.emit({ type: SuggestEvents.CLEARED });
                     this.costCenter1Input = '';
                     break;
 
@@ -153,8 +153,8 @@ export default class ShippingCostCenterComponent {
      * @param {CostCenterService} costCenterService the cost center to be wrapped
      * @returns {function(string): Observable<CostCenterInfo>}
      */
-    public mapCostCenter1(costCenterService:CostCenterService) {
-        return (term:string) => {
+    public mapCostCenter1(costCenterService: CostCenterService) {
+        return (term: string) => {
             return costCenterService.getFilteredCostCenterByLevelAndFastQuery(1, term, 0, MAX_AC_RESULTS);
         }
     }
@@ -164,8 +164,8 @@ export default class ShippingCostCenterComponent {
      * @param {CostCenterService} costCenterService the cost center to be wrapped
      * @returns {function(string): Observable<CostCenterInfo>}
      */
-    public mapCostCenter23(costCenterService:CostCenterService) {
-        return (term:string) => {
+    public mapCostCenter23(costCenterService: CostCenterService) {
+        return (term: string) => {
             return Observable.merge(
                 costCenterService.getFilteredCostCenterByLevelAndFastQuery(2, term, 0, MAX_AC_RESULTS),
                 costCenterService.getFilteredCostCenterByLevelAndFastQuery(3, term, 0, MAX_AC_RESULTS)

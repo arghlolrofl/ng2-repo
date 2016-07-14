@@ -34,58 +34,58 @@ import AddressDisplayInfo from "../../models/address-display-info";
  */
 export default class ShippingProductCalculationComponent {
 
-    @Output() onError:EventEmitter<Error> = new EventEmitter();
+    @Output() onError: EventEmitter<Error> = new EventEmitter();
 
     /**
      * Sender.
      */
-    @Input() sender:AddressDisplayInfo;
+    @Input() sender: AddressDisplayInfo;
 
     /**
      * Shipping Point.
      */
-    @Input() shippingPoint:string;
+    @Input() shippingPoint: string;
 
     /**
      * Recipient.
      */
-    @Input() recipient:AddressDisplayInfo;
+    @Input() recipient: AddressDisplayInfo;
 
     /**
      * Modal dialog for sender
      */
-    @ViewChild('modalProductSelect') modalProductSelect:ModalComponent;
+    @ViewChild('modalProductSelect') modalProductSelect: ModalComponent;
 
     /**
      * Parcel.
      */
-    parcelInfo:ParcelInfo = new ParcelInfo();
-    parcel:PostalProductInfo;
-    parcelSuggestions:Array<PostalProductInfo> = [];
-    @Output() parcelChange:EventEmitter<PostalProductInfo> = new EventEmitter();
+    parcelInfo: ParcelInfo = new ParcelInfo();
+    parcel: PostalProductInfo;
+    parcelSuggestions: Array<PostalProductInfo> = [];
+    @Output() parcelChange: EventEmitter<PostalProductInfo> = new EventEmitter();
 
     /**
      * Parcel Information.
      */
-    weightInputChange:EventEmitter<number> = new EventEmitter();
-    lengthInputChange:EventEmitter<number> = new EventEmitter();
-    widthInputChange:EventEmitter<number> = new EventEmitter();
-    heightInputChange:EventEmitter<number> = new EventEmitter();
-    @Output() dimensionsChange:EventEmitter<DimensionInfo> = new EventEmitter();
-    @Output() weightChange:EventEmitter<WeightInfo> = new EventEmitter();
-    isDocumentChange:EventEmitter<boolean> = new EventEmitter();
+    weightInputChange: EventEmitter<number> = new EventEmitter();
+    lengthInputChange: EventEmitter<number> = new EventEmitter();
+    widthInputChange: EventEmitter<number> = new EventEmitter();
+    heightInputChange: EventEmitter<number> = new EventEmitter();
+    @Output() dimensionsChange: EventEmitter<DimensionInfo> = new EventEmitter();
+    @Output() weightChange: EventEmitter<WeightInfo> = new EventEmitter();
+    isDocumentChange: EventEmitter<boolean> = new EventEmitter();
 
     /**
      * Defines if calculation is running or not.
      * @type {boolean}
      */
-    calculationRunning:boolean = false;
+    calculationRunning: boolean = false;
 
     /**
      * @constructor
      * @param {ShippingService} shippingService the shipping information service
      */
-    constructor(private shippingService:ShippingService) {
+    constructor(private shippingService: ShippingService) {
         this.bindEvents();
     }
 
@@ -93,35 +93,35 @@ export default class ShippingProductCalculationComponent {
      * Bind all events.
      */
     private bindEvents() {
-        this.weightInputChange.subscribe((value:number) => {
+        this.weightInputChange.subscribe((value: number) => {
             this.parcelInfo.Characteristic.Weight.Value = value;
             this.weightChange.emit(this.parcelInfo.Characteristic.Weight);
             this.parcelSuggestions = [];
             this.parcelChange.emit(null);
         });
 
-        this.lengthInputChange.subscribe((value:number) => {
+        this.lengthInputChange.subscribe((value: number) => {
             this.parcelInfo.Characteristic.Dimension.Length = value;
             this.dimensionsChange.emit(this.parcelInfo.Characteristic.Dimension);
             this.parcelSuggestions = [];
             this.parcelChange.emit(null);
         });
 
-        this.widthInputChange.subscribe((value:number) => {
+        this.widthInputChange.subscribe((value: number) => {
             this.parcelInfo.Characteristic.Dimension.Width = value;
             this.dimensionsChange.emit(this.parcelInfo.Characteristic.Dimension);
             this.parcelSuggestions = [];
             this.parcelChange.emit(null);
         });
 
-        this.heightInputChange.subscribe((value:number) => {
+        this.heightInputChange.subscribe((value: number) => {
             this.parcelInfo.Characteristic.Dimension.Height = value;
             this.dimensionsChange.emit(this.parcelInfo.Characteristic.Dimension);
             this.parcelSuggestions = [];
             this.parcelChange.emit(null);
         });
 
-        this.isDocumentChange.subscribe((value:boolean) => {
+        this.isDocumentChange.subscribe((value: boolean) => {
             this.parcelInfo.Characteristic.IsDocument = value;
             this.lengthInputChange.emit(null);
             this.widthInputChange.emit(null);
@@ -129,8 +129,8 @@ export default class ShippingProductCalculationComponent {
         });
 
         this.parcelChange.subscribe(
-            (r:PostalProductInfo) => this.parcel = r,
-            (error:Error) => this.onError.emit(error));
+            (r: PostalProductInfo) => this.parcel = r,
+            (error: Error) => this.onError.emit(error));
     }
 
     /**
@@ -150,20 +150,20 @@ export default class ShippingProductCalculationComponent {
         parcelObservable
             .first()
             .subscribe(
-                (r:PostalProductInfo) => {
-                    this.parcelChange.emit(r);
-                    this.calculationRunning = false;
-                    this.modalProductSelect.open();
-                },
-                (error) => {
-                    this.parcelChange.emit(null);
-                    this.onError.emit(error);
-                    this.calculationRunning = false;
-                });
+            (r: PostalProductInfo) => {
+                this.parcelChange.emit(r);
+                this.calculationRunning = false;
+                this.modalProductSelect.open();
+            },
+            (error) => {
+                this.parcelChange.emit(null);
+                this.onError.emit(error);
+                this.calculationRunning = false;
+            });
         parcelObservable
             .subscribe(
-                (r:PostalProductInfo) => this.parcelSuggestions.push(r),
-                (error:Error) => this.onError.emit(error));
+            (r: PostalProductInfo) => this.parcelSuggestions.push(r),
+            (error: Error) => this.onError.emit(error));
     }
 
     /**
@@ -173,8 +173,8 @@ export default class ShippingProductCalculationComponent {
     public canCalculate() {
         return !this.calculationRunning &&
             ((this.parcelInfo.Characteristic.Dimension.Height > 0 &&
-            this.parcelInfo.Characteristic.Dimension.Width > 0 &&
-            this.parcelInfo.Characteristic.Dimension.Length > 0) || this.parcelInfo.Characteristic.IsDocument) &&
+                this.parcelInfo.Characteristic.Dimension.Width > 0 &&
+                this.parcelInfo.Characteristic.Dimension.Length > 0) || this.parcelInfo.Characteristic.IsDocument) &&
             this.parcelInfo.Characteristic.Weight.Value > 0 &&
             (!!this.sender && !!this.shippingPoint && !!this.recipient);
     }
@@ -183,7 +183,7 @@ export default class ShippingProductCalculationComponent {
      * Shortcut has been clicked.
      * @param {ShortcutInfo} shortcut the selected shortcut
      */
-    public shortcutSelected(shortcut:ShortcutInfo) {
+    public shortcutSelected(shortcut: ShortcutInfo) {
         this.parcelInfo.Characteristic.Dimension = _.cloneDeep(shortcut.Dimensions);
         this.parcelInfo.Characteristic.Weight = _.cloneDeep(shortcut.Weight);
         this.dimensionsChange.emit(this.parcelInfo.Characteristic.Dimension);
@@ -194,7 +194,7 @@ export default class ShippingProductCalculationComponent {
      * Parcel has been selected from suggestions.
      * @param {PostalProductInfo} parcel the selected parcel
      */
-    public parcelSelected(parcel:PostalProductInfo) {
+    public parcelSelected(parcel: PostalProductInfo) {
         this.parcelChange.emit(parcel);
         this.modalProductSelect.close();
     }

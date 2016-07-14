@@ -28,36 +28,36 @@ import {MAX_AC_RESULTS} from "../../config";
  * Shipping Recipient component.
  */
 export default class ShippingRecipientComponent {
-    
-    @Output() onError:EventEmitter<Error> = new EventEmitter();
+
+    @Output() onError: EventEmitter<Error> = new EventEmitter();
 
     /**
      * Updated when recipient has been changed.
      * @type {EventEmitter<AddressDisplayInfo>}
      */
-    recipientInput:string = '';
-    recipientEvents:EventEmitter<any> = new EventEmitter();
-    @Output() recipientChange:EventEmitter<AddressDisplayInfo> = new EventEmitter();
-    recipientSuggestions:AddressDisplayInfo[] = [];
+    recipientInput: string = '';
+    recipientEvents: EventEmitter<any> = new EventEmitter();
+    @Output() recipientChange: EventEmitter<AddressDisplayInfo> = new EventEmitter();
+    recipientSuggestions: AddressDisplayInfo[] = [];
 
     /**
      * AddressGroup.
      */
-    addressGroupInput:string = '';
-    addressGroup:AddressGroupInfo;
-    addressGroupEvents:EventEmitter<any> = new EventEmitter();
-    addressGroupSuggestions:AddressGroupInfo[] = [];
+    addressGroupInput: string = '';
+    addressGroup: AddressGroupInfo;
+    addressGroupEvents: EventEmitter<any> = new EventEmitter();
+    addressGroupSuggestions: AddressGroupInfo[] = [];
 
     /**
      * Show modal dialog for adding new recipient.
      */
-    showAddDialogChange:EventEmitter<boolean> = new EventEmitter();
+    showAddDialogChange: EventEmitter<boolean> = new EventEmitter();
 
     /**
      * @constructor
      * @param {AddressService} addressService the address information service
      */
-    constructor(private addressService:AddressService) {
+    constructor(private addressService: AddressService) {
         this.bindEvents();
     }
 
@@ -78,13 +78,13 @@ export default class ShippingRecipientComponent {
                 case SuggestEvents.SELECTED:
                     this.addressGroup = event.data;
                     this.addressGroupInput = event.data.GroupName;
-                    this.recipientEvents.emit({type: SuggestEvents.CLEARED});
+                    this.recipientEvents.emit({ type: SuggestEvents.CLEARED });
                     break;
 
                 case SuggestEvents.CLEARED:
                     this.addressGroup = null;
                     this.addressGroupInput = '';
-                    this.recipientEvents.emit({type: SuggestEvents.CLEARED});
+                    this.recipientEvents.emit({ type: SuggestEvents.CLEARED });
                     this.addressGroupSuggestions = [];
                     break;
 
@@ -129,8 +129,8 @@ export default class ShippingRecipientComponent {
      * @param {AddressService} service the address service to be wrapped
      * @returns {function(string): Observable<AddressGroupInfo>}
      */
-    public mapAddressGroupSuggest(service:AddressService) {
-        return (term:string) => {
+    public mapAddressGroupSuggest(service: AddressService) {
+        return (term: string) => {
             return service.getFilteredAddressGroupsWithout(term, 'Sender', 0, MAX_AC_RESULTS);
         }
     }
@@ -140,8 +140,8 @@ export default class ShippingRecipientComponent {
      * @param {AddressService} service the address service to be wrapped
      * @returns {function(string): Observable<AddressDisplayInfo>}
      */
-    public mapRecipientSuggest(service:AddressService) {
-        return (term:string) => {
+    public mapRecipientSuggest(service: AddressService) {
+        return (term: string) => {
             let groupId;
             if (this.addressGroup) {
                 groupId = this.addressGroup.Id;

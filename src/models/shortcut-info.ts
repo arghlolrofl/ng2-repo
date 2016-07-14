@@ -7,17 +7,17 @@ import OptionDetails from "./option-details";
  */
 export default class ShortcutInfo {
 
-    DisplayName:string;
+    DisplayName: string;
 
-    TotalFee:number;
+    TotalFee: number;
 
-    Weight:WeightInfo;
+    Weight: WeightInfo;
 
-    DisplayPosition:number;
+    DisplayPosition: number;
 
-    Dimensions:DimensionInfo;
+    Dimensions: DimensionInfo;
 
-    Options:Array<OptionDetails>;
+    Options: Array<OptionDetails>;
 
-    Id:number;
+    Id: number;
 }

@@ -3,7 +3,7 @@
  */
 export default class PagedResultsOf<T> {
 
-    TotalItemCount:number;
+    TotalItemCount: number;
 
-    ItemList:T[];
+    ItemList: T[];
 }

@@ -14,11 +14,11 @@ import {TranslatePipe} from 'ng2-translate/ng2-translate';
  */
 export default class ShippingAdditionalInformationComponent {
 
-    @Output() onError:EventEmitter<Error> = new EventEmitter<Error>();
+    @Output() onError: EventEmitter<Error> = new EventEmitter<Error>();
 
     /**
      * Additional Information.
      */
-    @Output() additionalInfo1Change:EventEmitter<string> = new EventEmitter();
-    @Output() additionalInfo2Change:EventEmitter<string> = new EventEmitter();
+    @Output() additionalInfo1Change: EventEmitter<string> = new EventEmitter();
+    @Output() additionalInfo2Change: EventEmitter<string> = new EventEmitter();
 }

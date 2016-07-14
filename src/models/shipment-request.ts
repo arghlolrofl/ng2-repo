@@ -7,35 +7,35 @@ import CostCentreInfo from "./cost-centre-info";
 /**
  * ShipmentRequest model.
  */
-export default class ShipmentRequest {
+export default class ShipmentRequest  {
 
-    ShippingPoint:string;
+    ShippingPoint: string;
 
-    IsPickup:boolean;
+    IsPickup: boolean;
 
-    ShippingPointID:string;
+    ShippingPointID: string;
 
-    Product:Product = new Product();
+    Product: Product = new Product();
 
-    SenderContactID:number;
+    SenderContactID: number;
 
-    DestinationContactID:number;
+    DestinationContactID: number;
 
-    Characteristic:ParcelCharacteristikInfo = new ParcelCharacteristikInfo();
+    Characteristic: ParcelCharacteristikInfo = new ParcelCharacteristikInfo();
 
-    Notification:ShippingNotificationInfo;
+    Notification: ShippingNotificationInfo;
 
-    LabelFormat:LabelOutputFormat;
+    LabelFormat: LabelOutputFormat;
 
-    HidePostageRate:boolean;
+    HidePostageRate: boolean;
 
-    HideInsuredValue:boolean;
+    HideInsuredValue: boolean;
 
-    AdditionalInfo1:string;
+    AdditionalInfo1: string;
 
-    AdditionalInfo2:string;
+    AdditionalInfo2: string;
 
-    CostCentre:CostCentreInfo = new CostCentreInfo();
+    CostCentre: CostCentreInfo = new CostCentreInfo();
 
-    IncludeReturnLabel:boolean;
+    IncludeReturnLabel: boolean;
 }

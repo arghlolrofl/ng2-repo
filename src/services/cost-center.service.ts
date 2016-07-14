@@ -14,7 +14,7 @@ export default class CostCenterService {
      * @constructor
      * @param {APIClient} apiClient the APIClient
      */
-    constructor(private apiClient:APIClient) {
+    constructor(private apiClient: APIClient) {
     }
 
     /**
@@ -25,10 +25,10 @@ export default class CostCenterService {
      * @param {number} [num] the number of results to get
      * @returns {Observable<CostCenterInfo>}
      */
-    public getFilteredCostCenterByLevelAndFastQuery(level:number,
-                                                    query:string,
-                                                    start?:number,
-                                                    num?:number):Observable<CostCenterInfo> {
+    public getFilteredCostCenterByLevelAndFastQuery(level: number,
+        query: string,
+        start?: number,
+        num?: number): Observable<CostCenterInfo> {
         start = start || 0;
         num = num || 0;
 
@@ -37,6 +37,6 @@ export default class CostCenterService {
             Level: level,
             StartValue: start,
             ResultCount: num
-        }).concatMap((r:PagedResultsOf<CostCenterInfo>) => r.ItemList);
+        }).concatMap((r: PagedResultsOf<CostCenterInfo>) => r.ItemList);
     }
 }
