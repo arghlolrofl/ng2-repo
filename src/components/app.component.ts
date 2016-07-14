@@ -9,7 +9,6 @@ import {AVAILABLE_LOCALES} from '../config';
 import {ROUTER_CONFIG} from '../router/app.routes';
 import LoginService from '../services/login.service';
 import APIClient from "../services/api-client.service";
-import {FormBuilder, ControlGroup} from "@angular/common";
 
 @RouteConfig(ROUTER_CONFIG)
 
@@ -43,35 +42,23 @@ import {FormBuilder, ControlGroup} from "@angular/common";
  */
 export default class AppComponent implements AfterViewInit {
 
-    @ViewChild('modalLogin')
-    private modalLogin: ModalComponent;
+    @ViewChild('modalLogin') modalLogin: ModalComponent;
 
     /**
-     * Username.
+     * Login data.
      */
-    private username: string;
-
-    /**
-     * Password.
-     */
-    private password: string;
-
-    /**
-     * Current login state.
-     * @type {boolean}
-     */
-    private loggedIn: boolean = false;
+    username: string;
+    password: string;
+    loggedIn: boolean = false;
 
     /**
      * @constructor
      * @param router Router to directly navigate to the shipping area
      * @param loginService Login service to check user status
-     * @param {FormBuilder} formBuilder the form builder
      * @param translate The translation service
      */
     constructor(private router: Router,
         private loginService: LoginService,
-        private formBuilder: FormBuilder,
         public translate: TranslateService) {
         const locales = AVAILABLE_LOCALES.join('|');
         let userLang = navigator.language.split('-')[0];

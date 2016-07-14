@@ -47,7 +47,7 @@ export default class ShippingComponent {
     /**
      * Error if there is one.
      */
-    private error: Error;
+    error: Error;
 
     /**
      * Sending information.
