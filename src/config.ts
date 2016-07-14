@@ -1,7 +1,12 @@
 /**
+ * Window object.
+ */
+const w:any = window;
+
+/**
  * Debug mode.
  */
-export const DEBUG_MODE = true;
+export const DEBUG_MODE = w.debug;
 
 /**
  * Available locales for translation (defaults to en).
