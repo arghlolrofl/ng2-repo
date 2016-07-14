@@ -13,5 +13,5 @@ import {TranslatePipe} from 'ng2-translate/ng2-translate';
  * Profile component.
  */
 export default class ProfileComponent {
-    
+
 }

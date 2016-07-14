@@ -5,9 +5,9 @@ import TaxInfo from "./tax-info";
  */
 export default class TaxesInfo {
 
-    Gst:TaxInfo;
+    Gst: TaxInfo;
 
-    Hst:TaxInfo;
+    Hst: TaxInfo;
 
-    Pst:TaxInfo;
+    Pst: TaxInfo;
 }

@@ -3,9 +3,9 @@
  */
 export default class CustomerInfo {
 
-    CustomerNumber:string;
+    CustomerNumber: string;
 
-    Name:string;
+    Name: string;
 
-    Id:number;
+    Id: number;
 }

@@ -12,4 +12,4 @@ import {TranslatePipe} from 'ng2-translate/ng2-translate';
 /**
  * Administration component.
  */
-export default class AdministrationComponent {}
+export default class AdministrationComponent { }

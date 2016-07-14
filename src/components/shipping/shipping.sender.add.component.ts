@@ -34,26 +34,26 @@ export default class ShippingSenderAddComponent implements AfterViewInit {
     /**
      * Opens or closes the modal dialog.
      */
-    @Input() showChange:EventEmitter<boolean>;
-    @ViewChild('modalAddSender') modal:ModalComponent;
+    @Input() showChange: EventEmitter<boolean>;
+    @ViewChild('modalAddSender') modal: ModalComponent;
 
     /**
      * Region.
      */
-    region:RegionInfo;
-    regions:Array<RegionInfo> = [];
+    region: RegionInfo;
+    regions: Array<RegionInfo> = [];
 
     /**
      * Country.
      */
-    country:CountryInfo;
-    countries:Array<CountryInfo> = [];
+    country: CountryInfo;
+    countries: Array<CountryInfo> = [];
 
     /**
      * The address to store.
      * @type {AddressCreationInfo}
      */
-    address:AddressCreationInfo = new AddressCreationInfo();
+    address: AddressCreationInfo = new AddressCreationInfo();
 
     /**
      * @constructor
@@ -61,9 +61,9 @@ export default class ShippingSenderAddComponent implements AfterViewInit {
      * @param {CountryService} countryService the country client
      * @param {AddressService} addressService the address client
      */
-    constructor(private regionService:RegionService,
-                private countryService:CountryService,
-                private addressService:AddressService) {
+    constructor(private regionService: RegionService,
+        private countryService: CountryService,
+        private addressService: AddressService) {
     }
 
     /**
@@ -83,7 +83,7 @@ export default class ShippingSenderAddComponent implements AfterViewInit {
 
             const countryObservable = this.countryService.getAll().share();
             countryObservable.first().subscribe(
-                (r:CountryInfo) => {
+                (r: CountryInfo) => {
                     this.country = r;
                     this.refreshRegions(r.Id);
                     this.address.CountryId = this.country.Id;
@@ -94,8 +94,8 @@ export default class ShippingSenderAddComponent implements AfterViewInit {
                 });
             countryObservable
                 .subscribe(
-                    (r:CountryInfo) => this.countries.push(r),
-                    () => this.countries = []);
+                (r: CountryInfo) => this.countries.push(r),
+                () => this.countries = []);
         });
     }
 
@@ -103,11 +103,11 @@ export default class ShippingSenderAddComponent implements AfterViewInit {
      * Refresh the regions by country id.
      * @param {number} countryId the country id
      */
-    private refreshRegions(countryId:number) {
+    private refreshRegions(countryId: number) {
         this.regions = [];
         const regionObservable = this.regionService.getFilteredByCountryId(countryId).share();
         regionObservable.first().subscribe(
-            (r:RegionInfo) => {
+            (r: RegionInfo) => {
                 this.region = r;
                 this.address.Region = this.region.RegionName;
                 this.address.RegionAbbreviation = this.region.RegionAbbreviation;
@@ -115,8 +115,8 @@ export default class ShippingSenderAddComponent implements AfterViewInit {
             () => this.region = null);
         regionObservable
             .subscribe(
-                (r:RegionInfo) => this.regions.push(r),
-                () => this.regions = []);
+            (r: RegionInfo) => this.regions.push(r),
+            () => this.regions = []);
     }
 
     /**
@@ -133,7 +133,7 @@ export default class ShippingSenderAddComponent implements AfterViewInit {
     public save() {
         this.addressService.addNewToAddressGroup('Sender', this.address).subscribe(
             () => this.modal.close(),
-            (error:Error) => {
+            (error: Error) => {
                 console.warn('address could not be stored', error); // TODO error handling
             });
     }
@@ -142,8 +142,8 @@ export default class ShippingSenderAddComponent implements AfterViewInit {
      * Executed when region changes.
      * @param {string} regionName the name of the region
      */
-    public regionChanged(regionName:string) {
-        this.region = this.regions.find((r:RegionInfo) => r.RegionName === regionName);
+    public regionChanged(regionName: string) {
+        this.region = this.regions.find((r: RegionInfo) => r.RegionName === regionName);
         this.address.Region = this.region.RegionName;
         this.address.RegionAbbreviation = this.region.RegionAbbreviation;
     }
@@ -152,8 +152,8 @@ export default class ShippingSenderAddComponent implements AfterViewInit {
      * Executed when the country changes.
      * @param {string} countryName the name of the country
      */
-    public countryChanged(countryName:string) {
-        this.country = this.countries.find((r:CountryInfo) => r.CountryName === countryName);
+    public countryChanged(countryName: string) {
+        this.country = this.countries.find((r: CountryInfo) => r.CountryName === countryName);
         this.refreshRegions(this.country.Id);
         this.address.CountryId = this.country.Id;
     }

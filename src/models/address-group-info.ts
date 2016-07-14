@@ -3,11 +3,11 @@
  */
 export default class AddressGroupInfo {
 
-    GroupName:string;
+    GroupName: string;
 
-    AddressCount:number;
+    AddressCount: number;
 
-    IsDefault:boolean;
+    IsDefault: boolean;
 
-    Id:number;
+    Id: number;
 }

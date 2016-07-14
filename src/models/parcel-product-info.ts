@@ -5,7 +5,7 @@ import ParcelOptionInfo from "./parcel-option-info";
  */
 export default class ParcelProductInfo {
 
-    Code:string;
+    Code: string;
 
-    Options:ParcelOptionInfo[] = [];
+    Options: ParcelOptionInfo[] = [];
 }

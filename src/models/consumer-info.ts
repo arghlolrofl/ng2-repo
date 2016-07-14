@@ -6,9 +6,9 @@ import {ECreditStatus} from "./ecredit-status";
  */
 export default class ConsumerInfo {
 
-    Customer:CustomerInfo;
+    Customer: CustomerInfo;
 
-    Login:string;
+    Login: string;
 
-    CreditStatus:ECreditStatus;
+    CreditStatus: ECreditStatus;
 }

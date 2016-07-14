@@ -7,13 +7,13 @@ import TaxesInfo from "./taxes-info";
  */
 export default class PostalProductPriceInfo {
 
-    Adjustments:PostalProductAdjustmentInfo[];
+    Adjustments: PostalProductAdjustmentInfo[];
 
-    Base:number;
+    Base: number;
 
-    Options:PostalProductOptionInfo[];
+    Options: PostalProductOptionInfo[];
 
-    Tax:TaxesInfo;
+    Tax: TaxesInfo;
 
-    Total:number;
+    Total: number;
 }

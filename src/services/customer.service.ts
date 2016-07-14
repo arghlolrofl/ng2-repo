@@ -12,14 +12,14 @@ export default class CustomerService {
      * @constructor
      * @param {APIClient} apiClient the api client
      */
-    constructor(private apiClient:APIClient) {
+    constructor(private apiClient: APIClient) {
     }
 
     /**
      * Get consumer info.
      * @returns {Observable<ConsumerInfo>}
      */
-    public getConsumerInfo():Observable<ConsumerInfo> {
+    public getConsumerInfo(): Observable<ConsumerInfo> {
         return this.apiClient.get('Customer/GetConsumerInfo');
     }
 }

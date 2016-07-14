@@ -4,11 +4,11 @@ import {ESizeUnit} from "./esize-info";
  */
 export default class DimensionInfo {
 
-    Height:number;
+    Height: number;
 
-    Length:number;
+    Length: number;
 
-    Unit:ESizeUnit = ESizeUnit.Centimeter;
+    Unit: ESizeUnit = ESizeUnit.Centimeter;
 
-    Width:number;
+    Width: number;
 }

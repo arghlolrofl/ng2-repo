@@ -12,7 +12,7 @@ export default class ShortcutService {
      * @constructor
      * @param {APIClient} apiClient the api client
      */
-    constructor(private apiClient:APIClient) {
+    constructor(private apiClient: APIClient) {
     }
 
     /**
@@ -21,16 +21,16 @@ export default class ShortcutService {
      * @param {number} [num] the number of results to get (0 to get all, default to 0)
      * @returns {Observable<ShortcutInfo>}
      */
-    public getAll(start?:number, num?:number):Observable<ShortcutInfo> {
+    public getAll(start?: number, num?: number): Observable<ShortcutInfo> {
         start = start || 0;
         num = num || 0;
 
         return this.apiClient.post('Shortcut/GetAll', {
             StartValue: start,
             ResultCount: num
-        }).concatMap((r:PagedResultsOf<ShortcutInfo>) => {
+        }).concatMap((r: PagedResultsOf<ShortcutInfo>) => {
             const items = r.ItemList;
-            items.sort((a:ShortcutInfo, b:ShortcutInfo) =>
+            items.sort((a: ShortcutInfo, b: ShortcutInfo) =>
                 a.DisplayPosition < b.DisplayPosition ? -1 : a.DisplayPosition > b.DisplayPosition ? 1 : 0);
             return items;
         });
@@ -40,7 +40,7 @@ export default class ShortcutService {
      * Get last used shortcut.
      * @returns {Observable<ShortcutInfo>}
      */
-    public getLast():Observable<ShortcutInfo> {
+    public getLast(): Observable<ShortcutInfo> {
         return this.apiClient.get('Shortcut/GetLast');
     }
 }

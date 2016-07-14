@@ -14,27 +14,27 @@ export default class LoginService {
      * Events for login status change.
      * @type {EventEmitter}
      */
-    public loginChange:EventEmitter<any> = new EventEmitter();
+    public loginChange: EventEmitter<any> = new EventEmitter();
 
     /**
      * Events for login errors.
      * @type {EventEmitter}
      */
-    public loginError:EventEmitter<Error> = new EventEmitter();
+    public loginError: EventEmitter<Error> = new EventEmitter();
 
     /**
      * Bearer token to be send in requests.
      * @type {string}
      */
-    private token:string = null;
+    private token: string = null;
 
     /**
      * @constructor
      * @param {Http} http the http client from angular
      * @param {CookieService} cookieService Cookie service to store token information long time
      */
-    constructor(private http:Http,
-                private cookieService:CookieService) {
+    constructor(private http: Http,
+        private cookieService: CookieService) {
         this.token = this.cookieService.get('token');
 
         this.loginChange.subscribe((event) => {
@@ -52,7 +52,7 @@ export default class LoginService {
      * Returns true if user is logged in and API requests can be done.
      * @returns {boolean}
      */
-    public isLoggedIn():boolean {
+    public isLoggedIn(): boolean {
         return !!this.token;
     }
 
@@ -60,14 +60,14 @@ export default class LoginService {
      * The API said the user have been logged out.
      */
     public logout() {
-        this.loginChange.emit({loggedIn: false});
+        this.loginChange.emit({ loggedIn: false });
     }
 
     /**
      * Get the bearer token back.
      * @returns {string}
      */
-    public getToken():string {
+    public getToken(): string {
         return this.token;
     }
 
@@ -76,7 +76,7 @@ export default class LoginService {
      * @param {string} username the username
      * @param {string} password the password
      */
-    public login(username:string, password:string) {
+    public login(username: string, password: string) {
         username = encodeURIComponent(username);
         password = encodeURIComponent(password);
 
@@ -85,20 +85,20 @@ export default class LoginService {
         let body = `grant_type=password&username=${username}&password=${password}`;
 
         return this.http
-            .post(AUTHORIZATION_API_URL, body, {headers: headers})
+            .post(AUTHORIZATION_API_URL, body, { headers: headers })
             .timeout(API_TIMEOUT, new Error('API timeout'))
             .map((res) => res.json())
             .subscribe(
-                (response:any) => {
-                    if (response.hasOwnProperty('access_token')) {
-                        this.loginChange.emit({
-                            loggedIn: true,
-                            token: response.access_token
-                        });
-                    } else {
-                        this.loginChange.emit({loggedIn: false});
-                    }
-                },
-                (error:Error) => this.loginError.emit(error));
+            (response: any) => {
+                if (response.hasOwnProperty('access_token')) {
+                    this.loginChange.emit({
+                        loggedIn: true,
+                        token: response.access_token
+                    });
+                } else {
+                    this.loginChange.emit({ loggedIn: false });
+                }
+            },
+            (error: Error) => this.loginError.emit(error));
     }
 }

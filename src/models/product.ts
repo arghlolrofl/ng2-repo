@@ -5,7 +5,7 @@ import Option from "./option";
  */
 export default class Product {
 
-    Code:string;
+    Code: string;
 
-    Options:Array<Option>;
+    Options: Array<Option>;
 }

@@ -5,13 +5,13 @@ import CountryInfo from "./country-info";
  */
 export default class RegionInfo {
 
-    Country:CountryInfo;
+    Country: CountryInfo;
 
-    RegionName:string;
+    RegionName: string;
 
-    FrenchRegionName:string;
+    FrenchRegionName: string;
 
-    RegionAbbreviation:string;
+    RegionAbbreviation: string;
 
-    Id:number;
+    Id: number;
 }

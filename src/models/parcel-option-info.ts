@@ -3,7 +3,7 @@
  */
 export default class ParcelOptionInfo {
 
-    Amount:number;
+    Amount: number;
 
-    Code:string;
+    Code: string;
 }

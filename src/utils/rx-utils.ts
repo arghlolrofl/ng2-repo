@@ -12,10 +12,10 @@ export default class RxUtils {
      * @returns {function(Observable): Observable<any>}
      */
     public static errorDelay(retries, delay) {
-        return (errors:Observable<any>) =>
+        return (errors: Observable<any>) =>
             Observable.range(1, retries)
                 .zip(errors)
-                .map((data:any) => {
+                .map((data: any) => {
                     if (data[0] >= retries) {
                         throw data[1];
                     }
