@@ -11,6 +11,19 @@
 
     <modal-body>
       <div class="row">
+        <div class="col-md-12">
+          <section class="sectiontemplate box-error">
+            <div class="content">
+              This Api is down at the moment
+            </div>
+            <button class="clear-submit">
+              <span class="icon-close"></span>
+            </button>
+          </section>
+        </div>
+      </div>
+
+      <div class="row">
         <div class="col-sm-12">
           <div class="field-container text-field">
             <input type="text"
@@ -200,12 +213,18 @@
         </div>
       </div>
 
-      <select (change)="addressGroupChanged($event.target.value)"
-              [disabled]="addressGroups.length === 0">
-        <option *ngFor="let addressGroup of addressGroups">
-          {{addressGroup.GroupName}}
-        </option>
-      </select>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="field-container text-field">
+            <select (change)="addressGroupChanged($event.target.value)"
+                    [disabled]="addressGroups.length === 0">
+              <option *ngFor="let addressGroup of addressGroups">
+                {{addressGroup.GroupName}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
     </modal-body>
 
     <modal-footer>

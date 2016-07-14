@@ -1,4 +1,15 @@
 <div class="row">
+  <div class="col-md-12">
+    <section class="sectiontemplate box-error">
+      <div class="content">
+        This Api is down at the moment
+      </div>
+      <button class="clear-submit">
+        <span class="icon-close"></span>
+      </button>
+    </section>
+  </div>
+
   <div class="col-md-6 gray-line">
     <fp-shipping-sender (onError)="handleError($event)"
                         [(sender)]="sender"
