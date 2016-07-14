@@ -42,6 +42,29 @@
       }
     }
 
+    &:disabled {
+      background: $brand-gray-1;
+      border-color: $brand-gray-2;
+      color: $brand-gray-2;
+
+      [class^='icon-']::before,
+      [class*='icon-']::before {
+        color: $brand-gray-2;
+      }
+
+      &:hover {
+        background: $brand-gray-1;
+        border-color: $brand-gray-2;
+        color: $brand-gray-2;
+        box-shadow: none;
+
+        [class^='icon-']::before,
+        [class*='icon-']::before {
+          color: $brand-gray-2;
+        }
+      }
+    }
+
     @include mobile {
       margin: 0 0 15px 0;
     }
