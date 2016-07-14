@@ -29,6 +29,7 @@
     "bootstrap": "^3.3.6",
     "core-js": "^2.4.0",
     "grunt-cli": "^1.2.0",
+    "intl": "^1.2.4",
     "jquery": "^2.2.4",
     "lodash": "^4.13.1",
     "ng2-bs3-modal": "^0.6.1",

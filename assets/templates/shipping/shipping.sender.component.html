@@ -13,7 +13,7 @@
                name="sender"
                placeholder="{{ 'SENDER_PLACEHOLDER' | translate }}"
                tabindex="1"
-               autocomplete="off"
+               autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
                [(ngModel)]="senderInput"
                [fpSuggest]="mapSuggest(addressService)"
                [fpSuggestEvents]="senderEvents"
@@ -58,7 +58,7 @@
                name="shipping-point"
                placeholder="{{ 'SHIPPING_POINT_PLACEHOLDER' | translate }}"
                tabindex="2"
-               autocomplete="off"
+               autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
                (input)="shippingPointChange.emit($event.target.value)"
                [(ngModel)]="shippingPoint"
                (keyup.esc)="shippingPointChange.emit('')">
