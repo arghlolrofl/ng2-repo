@@ -153,6 +153,8 @@ module.exports = function (grunt) {
 		concat: {
 			files: {
 				src: [
+					'node_modules/intl/dist/Intl.min.js',
+					'node_modules/intl/locale-data/jsonp/en.js',
 					'node_modules/core-js/client/shim.min.js',
 					'node_modules/zone.js/dist/zone.js',
 					'node_modules/reflect-metadata/Reflect.js',
