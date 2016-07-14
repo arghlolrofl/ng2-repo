@@ -153,6 +153,7 @@ export default class ShippingProductCalculationComponent {
                 (r:PostalProductInfo) => {
                     this.parcelChange.emit(r);
                     this.calculationRunning = false;
+                    this.modalProductSelect.open();
                 },
                 (error) => {
                     this.parcelChange.emit(null);
