@@ -170,7 +170,7 @@ module.exports = function (grunt) {
 				},
 				files: [
 					{src: ['index.prod.html'], dest: '.'},
-					{src: ['app/app.min.js'], dest: '.'},
+					{src: ['app/app.min.*'], dest: '.'},
 					{src: ['assets/**'], dest: '.'}
 				]
 			}
