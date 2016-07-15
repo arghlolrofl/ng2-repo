@@ -78,6 +78,79 @@ i.icon-class {
   }
 }
 
+// Box Icon
+// -------------------------------------
+
+.box-icon {
+  float: left;
+
+  & + .box-icon {
+    margin-left: 15px;
+  }
+
+  button {
+    border: 1px solid $icon-box-color;
+    font-size: 1.7rem;
+    line-height: $input-line-height;
+    background: $white;
+    width: $button-width;
+    height: $button-height;
+    position: relative;
+    border-radius: $boxBorderRadius;
+    transition: all $transitionFast $transitionTiming;
+
+    [class^='icon-']::before,
+    [class*='icon-']::before {
+      margin: 0;
+      padding: 0;
+      position: absolute;
+      top: 11px;
+      left: 10px;
+      color: $icon-box-color;
+      font-size: 1.7rem;
+      transition: color $transitionFast $transitionTiming;
+    }
+
+    &:hover {
+      border: 1px solid $icon-box-hover-color;
+      box-shadow: $boxShadowDefault;
+
+      [class^='icon-']::before,
+      [class*='icon-']::before {
+        color: $icon-box-hover-color;
+      }
+    }
+
+    &:disabled {
+      background: $brand-gray-1;
+      border-color: $brand-gray-2;
+      color: $brand-gray-2;
+
+      [class^='icon-']::before,
+      [class*='icon-']::before {
+        color: $brand-gray-2;
+      }
+
+      &:hover {
+        background: $brand-gray-1;
+        border-color: $brand-gray-2;
+        color: $brand-gray-2;
+        box-shadow: none;
+
+        [class^='icon-']::before,
+        [class*='icon-']::before {
+          color: $brand-gray-2;
+        }
+      }
+    }
+
+    @include mobile {
+      margin: 0 0 15px 0;
+    }
+  }
+}
+
+
 /* button
 /* ----------------------------- */
 .button {
