@@ -62,7 +62,7 @@ export default class AppComponent implements AfterViewInit {
         public translate: TranslateService) {
         const locales = AVAILABLE_LOCALES.join('|');
         let userLang = 'en';
-        if (navigator.language) {
+        if (navigator.language || navigator.userLanguage) {
             userLang = navigator.language.split('-')[0];
         }
         userLang = (new RegExp(`(${locales})`, 'gi')).test(userLang) ? userLang : AVAILABLE_LOCALES[0];
