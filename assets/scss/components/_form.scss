@@ -147,10 +147,11 @@ ul {
   [class^="icon-"]::before,
   [class*=" icon-"]::before {
     color: $brand-gray-2;
-    line-height: $input-line-height;
     font-size: 1.7rem;
     padding: 0;
     margin: 0;
+    top: 13px;
+    position: absolute;
   }
 }
 
