@@ -5,16 +5,18 @@
   </h4>
   <div class="row">
     <div class="col-input small-input">
-      <div class="field-container text-field">
+      <div class="field-container text-field"
+           [class.error]="!validWeightInput">
         <input type="text"
                name="weight"
                placeholder="{{ 'PRODUCT_CALCULATION_WEIGHT_PLACEHOLDER' | translate }}"
                tabindex="10"
-               [(ngModel)]="parcelInfo.Characteristic.Weight.Value"
-               (keyup.esc)="weightInputChange.emit(null)">
+               [ngModel]="parcelInfo.Characteristic.Weight.Value"
+               (keyup.esc)="weightInputChange.emit('')"
+               (input)="weightInputChange.emit($event.target.value)">
         <button type="button"
                 class="clear-submit"
-                (click)="weightInputChange.emit(null)">
+                (click)="weightInputChange.emit('')">
           <span class="icon-close"></span>
         </button>
       </div>
@@ -32,51 +34,57 @@
   <div class="row">
     <div class="col-input small-input">
       <div class="field-container text-field"
+           [class.error]="!validLengthInput"
            [class.disabled]="parcelInfo.Characteristic.IsDocument">
         <input type="text"
                name="length"
                placeholder="{{ 'PRODUCT_CALCULATION_LENGTH_PLACEHOLDER' | translate }}"
                tabindex="11"
-               [(ngModel)]="parcelInfo.Characteristic.Dimension.Length"
+               [ngModel]="parcelInfo.Characteristic.Dimension.Length"
                [disabled]="parcelInfo.Characteristic.IsDocument"
-               (keyup.esc)="lengthInputChange.emit(null)">
+               (keyup.esc)="lengthInputChange.emit('')"
+               (input)="lengthInputChange.emit($event.target.value)">
         <button type="button"
                 class="clear-submit"
-                (click)="lengthInputChange.emit(null)"
+                (click)="lengthInputChange.emit('')"
                 [disabled]="parcelInfo.Characteristic.IsDocument">
           <span class="icon-close"></span>
         </button>
       </div>
 
       <div class="field-container text-field"
+           [class.error]="!validWidthInput"
            [class.disabled]="parcelInfo.Characteristic.IsDocument">
         <input type="text"
                name="width"
                placeholder="{{ 'PRODUCT_CALCULATION_WIDTH_PLACEHOLDER' | translate }}"
                tabindex="12"
-               [(ngModel)]="parcelInfo.Characteristic.Dimension.Width"
+               [ngModel]="parcelInfo.Characteristic.Dimension.Width"
                [disabled]="parcelInfo.Characteristic.IsDocument"
-               (keyup.esc)="widthInputChange.emit(null)">
+               (keyup.esc)="widthInputChange.emit('')"
+               (input)="widthInputChange.emit($event.target.value)">
         <button type="button"
                 class="clear-submit"
-                (click)="widthInputChange.emit(null)"
+                (click)="widthInputChange.emit('')"
                 [disabled]="parcelInfo.Characteristic.IsDocument">
           <span class="icon-close"></span>
         </button>
       </div>
 
       <div class="field-container text-field"
+           [class.error]="!validHeightInput"
            [class.disabled]="parcelInfo.Characteristic.IsDocument">
         <input type="text"
                name="height"
                placeholder="{{ 'PRODUCT_CALCULATION_HEIGHT_PLACEHOLDER' | translate }}"
                tabindex="13"
-               [(ngModel)]="parcelInfo.Characteristic.Dimension.Height"
+               [ngModel]="parcelInfo.Characteristic.Dimension.Height"
                [disabled]="parcelInfo.Characteristic.IsDocument"
-               (keyup.esc)="heightInputChange.emit(null)">
+               (keyup.esc)="heightInputChange.emit('')"
+               (input)="heightInputChange.emit($event.target.value)">
         <button type="button"
                 class="clear-submit"
-                (click)="heightInputChange.emit(null)"
+                (click)="heightInputChange.emit('')"
                 [disabled]="parcelInfo.Characteristic.IsDocument">
           <span class="icon-close"></span>
         </button>
