@@ -101,6 +101,7 @@ export default class APIClient {
 
         let headers = new Headers({
             'Content-Type': 'application/json',
+            'Accept': 'application/json',
             'Authorization': 'Bearer ' + this.loginService.getToken()
         });
         return new RequestOptions({ headers: headers });
