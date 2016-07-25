@@ -1,6 +1,6 @@
 {
   "name": "francotyp-postalia-online-franking",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "scripts": {
     "test": "echo \"no tests\"",
     "start": "tsc && grunt && concurrently \"npm run tsc:w\" \"npm run lite\" \"grunt watch\"",
