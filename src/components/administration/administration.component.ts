@@ -3,7 +3,7 @@ import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
 @Component({
     selector: 'fp-administration',
-    templateUrl: 'assets/templates/administration/administration.dashboard.html',
+    templateUrl: 'assets/templates/administration/administration.component.html',
     pipes: [
         TranslatePipe
     ]
@@ -12,4 +12,10 @@ import {TranslatePipe} from 'ng2-translate/ng2-translate';
 /**
  * Administration component.
  */
-export default class AdministrationComponent { }
+export default class AdministrationComponent {
+    /**
+     * Error if there is one.
+     */
+    error: Error;
+
+}
