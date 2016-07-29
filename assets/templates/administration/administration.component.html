@@ -1,1 +1,20 @@
-<h2>{{ 'ADMINISTRATION_HEADLINE' | translate }}</h2>
+<div class="row">
+    <div class="col-md-12">
+        <section *ngIf="error"
+                 class="sectiontemplate box-error">
+            <div class="content">
+                {{ error.message }}
+            </div>
+            <button type="button"
+                    class="clear-submit"
+                    (click)="error = null">
+                <span class="icon-close"></span>
+            </button>
+        </section>
+    </div>
+</div>
+<div class="col-md-12">
+    <fp-administration-addressgroup (onError)="handleError($event)"
+                        [(addressgroup)]="addressgroup">
+    </fp-administration-addressgroup>
+</div>
