@@ -61,10 +61,7 @@ export default class AppComponent implements AfterViewInit {
         private loginService: LoginService,
         public translate: TranslateService) {
         const locales = AVAILABLE_LOCALES.join('|');
-        let userLang = 'en';
-        if (navigator.language || navigator.userLanguage) {
-            userLang = navigator.language.split('-')[0];
-        }
+        let userLang = (navigator.language || navigator.userLanguage).split('-')[0];
         userLang = (new RegExp(`(${locales})`, 'gi')).test(userLang) ? userLang : AVAILABLE_LOCALES[0];
         translate.use(userLang);
         this.loggedIn = this.loginService.isLoggedIn();
