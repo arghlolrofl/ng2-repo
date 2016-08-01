@@ -3,6 +3,7 @@ import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
 import AdministrationAddressGroupAddComponent from "./administration.addressgroup.add.component";
 import AddressService from "../../services/address.service";
+import AddressGroupInfo from "../../models/address-group-info";
 import {SuggestDirective, SuggestEvents} from "../../directives/suggest.directive";
 import {MAX_AC_RESULTS} from "../../config";
 
@@ -35,6 +36,7 @@ export default class AdministrationAddressgroupComponent {
      */
     addressgroupInput: string = '';
     addressgroupEvents: EventEmitter<any> = new EventEmitter();
+    addressgroupSuggestions: AddressGroupInfo[] = [];
 
     /**
      * Show modal dialog for adding new addressgroup.
@@ -57,6 +59,10 @@ export default class AdministrationAddressgroupComponent {
             switch (event.type) {
                 case SuggestEvents.ERROR:
                     this.onError.emit(event.data);
+                    break;
+
+                case SuggestEvents.CHANGED:
+                    this.addressgroupSuggestions = event.data;
                     break;
 
                 case SuggestEvents.SELECTED:
@@ -82,7 +88,7 @@ export default class AdministrationAddressgroupComponent {
      */
     public mapSuggest(service: AddressService) {
         return (term: string) => {
-            return service.getFilteredAddressesByAddressGroupNameAndFastQuery('Addressgroup', term, 0, MAX_AC_RESULTS)
+            return service.getFilteredAddressesByAddressGroupNameAndFastQuery('AddressGroup', term, 0, MAX_AC_RESULTS)
         }
     }
 }
