@@ -61,15 +61,15 @@ export class SuggestDirective implements OnInit {
         //noinspection TypeScriptUnresolvedFunction
         Observable.fromEvent(el.nativeElement, 'keyup')
             .do(() => this.updateLastAction())
-            .filter((keyEvent: KeyboardEvent) => keyEvent.keyCode === 13 || keyEvent.keyCode === 27
-                || keyEvent.keyCode === 40 || keyEvent.keyCode === 38)
+            .filter((keyEvent: KeyboardEvent) => keyEvent.keyCode === KeyCodes.CR || keyEvent.keyCode === KeyCodes.ESC
+                || keyEvent.keyCode === KeyCodes.UP || keyEvent.keyCode === KeyCodes.DOWN)
             .subscribe((keyEvent: KeyboardEvent) => this.navigate(keyEvent));
 
         //noinspection TypeScriptUnresolvedFunction
         Observable.fromEvent(el.nativeElement, 'keyup')
             .do(() => this.updateLastAction())
-            .filter((keyEvent: KeyboardEvent) => keyEvent.keyCode !== 13 && keyEvent.keyCode !== 27
-                && keyEvent.keyCode !== 40 && keyEvent.keyCode !== 38)
+            .filter((keyEvent: KeyboardEvent) => keyEvent.keyCode !== KeyCodes.CR && keyEvent.keyCode !== KeyCodes.ESC
+                && keyEvent.keyCode !== KeyCodes.DOWN && keyEvent.keyCode !== KeyCodes.DOWN)
             .map(() => el.nativeElement.value)
             .do(() => {
                 this.suggestions = [];
@@ -187,7 +187,7 @@ export class SuggestDirective implements OnInit {
         keyEvent.preventDefault();
         const keyCode = keyEvent.keyCode;
 
-        if (keyCode === 27) {
+        if (keyCode === KeyCodes.ESC) {
             this.events.emit({
                 type: SuggestEvents.CLEARED
             });
@@ -197,23 +197,23 @@ export class SuggestDirective implements OnInit {
             return;
         }
 
-        if (!this.selected || keyCode === 40 && (this.offset + 1) >= this.suggestions.length) {
+        if (!this.selected || keyCode === KeyCodes.DOWN && (this.offset + 1) >= this.suggestions.length) {
             this.offset = 0;
             this.selected = true;
-        } else if (keyCode === 40) {
+        } else if (keyCode === KeyCodes.DOWN) {
             this.offset++;
-        } else if (keyCode === 38 && (this.offset - 1) < 0) {
+        } else if (keyCode === KeyCodes.UP && (this.offset - 1) < 0) {
             this.offset = this.suggestions.length - 1;
-        } else if (keyCode === 38) {
+        } else if (keyCode === KeyCodes.UP) {
             this.offset--;
-        } else if (keyCode === 13) {
+        } else if (keyCode === KeyCodes.CR) {
             this.events.emit({
                 type: SuggestEvents.SELECTED,
                 data: this.suggestions[this.offset]
             });
         }
 
-        if (keyCode !== 27 && keyCode !== 13) {
+        if (keyCode !== KeyCodes.ESC && keyCode !== KeyCodes.CR) {
             this.events.emit({
                 type: SuggestEvents.SHOW,
                 data: this.suggestions[this.offset]
@@ -232,3 +232,14 @@ export enum SuggestEvents {
     CLEARED = 3,
     SHOW = 4
 }
+
+/**
+ * Keycodes with special meanings.
+ */
+enum KeyCodes {
+    CR   = 13,
+    ESC  = 27,
+    UP   = 38,
+    DOWN = 40
+}
+
