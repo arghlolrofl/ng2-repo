@@ -87,8 +87,8 @@ export default class AdministrationAddressgroupComponent {
      * @returns {function(string): Observable<AddressGroup>}
      */
     public mapSuggest(service: AddressService) {
-        return (term: string) => {
-            return service.getFilteredAddressesByAddressGroupNameAndFastQuery('AddressGroup', term, 0, MAX_AC_RESULTS)
+        return () => {
+            return service.getAllAddressGroups(0, MAX_AC_RESULTS);
         }
     }
 }
