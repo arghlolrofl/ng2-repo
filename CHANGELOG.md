@@ -9,3 +9,6 @@
 
 ## 1.0.1
 - Bugfix for missing marks on inut fields - FTP-31 Neuen Empfänger hinzufügen - Pflichtfelder unklar
+
+## wip
+- Bugfix for language selection - FTP-40 Sprachauswahl fehlerhaft
