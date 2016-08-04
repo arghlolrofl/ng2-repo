@@ -134,7 +134,10 @@ export default class ShippingRecipientAddComponent implements AfterViewInit {
                 this.address.Region = this.region.RegionName;
                 this.address.RegionAbbreviation = this.region.RegionAbbreviation;
             },
-            (error: Error) => this.error = ErrorUtils.toError(error));
+            (error: Error) => {
+                this.error = ErrorUtils.toError(error);
+                this.address.RegionAbbreviation = null;
+            });
         regionObservable
             .subscribe(
             (r: RegionInfo) => this.regions.push(r),
