@@ -9,3 +9,6 @@
 
 ## 1.0.1
 - Bugfix for missing marks on inut fields - FTP-31 Neuen Empfänger hinzufügen - Pflichtfelder unklar
+
+## wip
+- Changed auto closing function of autocomplete function - FTP-43 Live-Suche schließt sich automatisch nach ca. 3 Sek.

@@ -16,16 +16,14 @@
                autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
                [(ngModel)]="addressGroupInput"
                [fpSuggest]="mapAddressGroupSuggest(addressService)"
-               [fpSuggestEvents]="addressGroupEvents"
-               [fpSuggestView]="addressGroupAutocomplete">
+               [fpSuggestEvents]="addressGroupEvents">
         <button type="button"
                 class="clear-submit"
                 (click)="addressGroupEvents.emit({type: 3})">
           <span class="icon-close"></span>
         </button>
       </div>
-      <div #addressGroupAutocomplete
-           class="row autocomplete"
+      <div class="row autocomplete"
            [class.open]="addressGroupSuggestions.length > 0">
         <ul>
           <li *ngFor="let addressGroup of addressGroupSuggestions"
@@ -51,16 +49,14 @@
                autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
                [(ngModel)]="recipientInput"
                [fpSuggest]="mapRecipientSuggest(addressService)"
-               [fpSuggestEvents]="recipientEvents"
-               [fpSuggestView]="recipientAutocomplete">
+               [fpSuggestEvents]="recipientEvents">
         <button type="button"
                 class="clear-submit"
                 (click)="recipientEvents.emit({type: 3})">
           <span class="icon-close"></span>
         </button>
       </div>
-      <div #recipientAutocomplete
-           class="row autocomplete"
+      <div class="row autocomplete"
            [class.open]="recipientSuggestions.length > 0">
         <ul>
           <li *ngFor="let recipient of recipientSuggestions"
