@@ -43,6 +43,9 @@
         </button>
       </div>
     </div>
+
+    <p *ngIf="!sender">{{ 'SENDER_NO_ADDRESS_SELECTED' | translate }}</p>
+    <p *ngIf="sender">{{sender.PostalAddress}} {{sender.ZipCode}} {{sender.City}}</p>
   </div>
 
   <div class="row">
