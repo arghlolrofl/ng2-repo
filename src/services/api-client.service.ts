@@ -37,7 +37,9 @@ export default class APIClient {
                 .timeout(API_TIMEOUT, new Error('API timeout'))
                 .retryWhen(RxUtils.errorDelay(API_RETRIES, API_RETRY_DELAY))
                 .map(APIClient.extractJson)
-                .catch(this.handleError);
+                .catch((error) => {
+                    return this.handleError(error);
+                });
         } catch (e) {
             return Observable.throw(e);
         }
@@ -61,7 +63,9 @@ export default class APIClient {
                 .timeout(API_TIMEOUT, new Error('API timeout'))
                 .retryWhen(RxUtils.errorDelay(API_RETRIES, API_RETRY_DELAY))
                 .map(APIClient.extractJson)
-                .catch(this.handleError);
+                .catch((error) => {
+                    return this.handleError(error);
+                });
         } catch (e) {
             return Observable.throw(e);
         }
@@ -84,7 +88,9 @@ export default class APIClient {
                 .post(CONSUMER_API_BASE_URL + path, JSON.stringify(data), opt)
                 .timeout(API_TIMEOUT, new Error('API timeout'))
                 .retryWhen(RxUtils.errorDelay(API_RETRIES, API_RETRY_DELAY))
-                .catch(this.handleError);
+                .catch((error) => {
+                    return this.handleError(error);
+                });
         } catch (e) {
             return Observable.throw(e);
         }
@@ -122,7 +128,7 @@ export default class APIClient {
      * @returns {ErrorObservable}
      */
     private handleError(error: any) {
-        if (error.status === 405) {
+        if (error.status === 405 || error.status === 401) {
             this.loginService.logout();
         }
         return Observable.throw(error);
