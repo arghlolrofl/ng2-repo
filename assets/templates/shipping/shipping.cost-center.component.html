@@ -16,16 +16,14 @@
                  autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
                  [(ngModel)]="costCenter1Input"
                  [fpSuggest]="mapCostCenter1(costCenterService)"
-                 [fpSuggestEvents]="costCenter1Events"
-                 [fpSuggestView]="costCenter1Autocomplete">
+                 [fpSuggestEvents]="costCenter1Events">
           <button type="button"
                   class="clear-submit"
                   (click)="costCenter1Events.emit({type: 3})">
             <span class="icon-close"></span>
           </button>
         </div>
-        <div #costCenter1Autocomplete
-             class="row autocomplete"
+        <div class="row autocomplete"
              [class.open]="costCenter1Suggestions.length > 0">
           <ul>
             <li *ngFor="let costCenter of costCenter1Suggestions"
@@ -54,8 +52,7 @@
                  [disabled]="!costCenter1"
                  [(ngModel)]="costCenter2Input"
                  [fpSuggest]="mapCostCenter23(costCenterService)"
-                 [fpSuggestEvents]="costCenter2Events"
-                 [fpSuggestView]="costCenter2Autocomplete">
+                 [fpSuggestEvents]="costCenter2Events">
           <button type="button"
                   class="clear-submit"
                   (click)="costCenter2Events.emit({type: 3})"
@@ -64,8 +61,7 @@
           </button>
         </div>
 
-      <div #costCenter2Autocomplete
-           class="row autocomplete"
+      <div class="row autocomplete"
            [class.open]="costCenter2Suggestions.length > 0">
         <ul>
           <li *ngFor="let costCenter of costCenter2Suggestions"
@@ -93,8 +89,7 @@
                  [disabled]="!costCenter1"
                  [(ngModel)]="costCenter3Input"
                  [fpSuggest]="mapCostCenter23(costCenterService)"
-                 [fpSuggestEvents]="costCenter3Events"
-                 [fpSuggestView]="costCenter3Autocomplete">
+                 [fpSuggestEvents]="costCenter3Events">
           <button type="button"
                   class="clear-submit"
                   (click)="costCenter3Events.emit({type: 3})"
@@ -102,8 +97,7 @@
             <span class="icon-close"></span>
           </button>
         </div>
-        <div #costCenter3Autocomplete
-             class="row autocomplete"
+        <div class="row autocomplete"
              [class.open]="costCenter3Suggestions.length > 0">
           <ul>
             <li *ngFor="let costCenter of costCenter3Suggestions"

@@ -12,3 +12,4 @@
 
 ## wip
 - Bugfix for language selection - FTP-40 Sprachauswahl fehlerhaft
+- Changed auto closing function of autocomplete function - FTP-43 Live-Suche schließt sich automatisch nach ca. 3 Sek.

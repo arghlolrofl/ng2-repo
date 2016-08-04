@@ -21,11 +21,6 @@ export class SuggestDirective implements OnInit {
     @Input('fpSuggestEvents') events: EventEmitter<any>;
 
     /**
-     * Element for viewport check.
-     */
-    @Input('fpSuggestView') view: Element;
-
-    /**
      * Suggestion list to be stored.
      * @type {Array}
      */
@@ -47,10 +42,6 @@ export class SuggestDirective implements OnInit {
      * Element actions.
      */
     el: ElementRef;
-    initIntervalCount: number = 0;
-    initInterval: any;
-    lastAction: number;
-    lastActionInterval: any;
 
     /**
      * @constructor
@@ -60,16 +51,14 @@ export class SuggestDirective implements OnInit {
         this.el = el;
         //noinspection TypeScriptUnresolvedFunction
         Observable.fromEvent(el.nativeElement, 'keyup')
-            .do(() => this.updateLastAction())
             .filter((keyEvent: KeyboardEvent) => keyEvent.keyCode === KeyCodes.CR || keyEvent.keyCode === KeyCodes.ESC
                 || keyEvent.keyCode === KeyCodes.UP || keyEvent.keyCode === KeyCodes.DOWN)
             .subscribe((keyEvent: KeyboardEvent) => this.navigate(keyEvent));
 
         //noinspection TypeScriptUnresolvedFunction
         Observable.fromEvent(el.nativeElement, 'keyup')
-            .do(() => this.updateLastAction())
             .filter((keyEvent: KeyboardEvent) => keyEvent.keyCode !== KeyCodes.CR && keyEvent.keyCode !== KeyCodes.ESC
-                && keyEvent.keyCode !== KeyCodes.DOWN && keyEvent.keyCode !== KeyCodes.DOWN)
+                && keyEvent.keyCode !== KeyCodes.UP && keyEvent.keyCode !== KeyCodes.DOWN)
             .map(() => el.nativeElement.value)
             .do(() => {
                 this.suggestions = [];
@@ -103,7 +92,6 @@ export class SuggestDirective implements OnInit {
      */
     ngOnInit() {
         this.events.subscribe((event) => {
-            this.updateLastAction();
             switch (event.type) {
                 case SuggestEvents.SELECTED:
                     this.suggestions = [];
@@ -125,58 +113,22 @@ export class SuggestDirective implements OnInit {
             }
         });
 
-        this.initInterval = setInterval(this.mouseListener.bind(this), 1000);
-        this.lastActionInterval = setInterval(this.checkLastAction.bind(this), 1000);
+        this.initAutoclose();
     }
 
     /**
      * Check if mouse entered the component or leaves it.
      */
-    mouseListener() {
-        if (!this.view) {
-            console && console.warn && console.warn('View not found. Retry ' + this.initIntervalCount, this.el);
-            if (this.initIntervalCount === 5) {
-                clearInterval(this.initInterval);
-            }
-            this.initIntervalCount++;
-            return;
-        }
-        clearInterval(this.initInterval);
-
-        this.view.addEventListener('mouseover', () => {
-            this.updateLastAction();
-        })
-
-        this.view.addEventListener('mouseleave', () => {
-            this.suggestions = [];
-            this.events.emit({
-                type: SuggestEvents.CHANGED,
-                data: this.suggestions
-            });
+    initAutoclose() {
+        this.el.nativeElement.addEventListener('blur', () => {
+            setTimeout(() => {
+                this.suggestions = [];
+                this.events.emit({
+                    type: SuggestEvents.CHANGED,
+                    data: this.suggestions
+                });
+            }, 300);
         });
-    }
-
-    /**
-     * Updates the last action time.
-     */
-    updateLastAction() {
-        this.lastAction = new Date().getTime();
-    }
-
-    /**
-     * Checks if user is inactive for the last x seconds.
-     */
-    checkLastAction() {
-        const time = new Date().getTime();
-        const difference = time - this.lastAction;
-
-        if (difference > 5000) {
-            this.suggestions = [];
-            this.events.emit({
-                type: SuggestEvents.CHANGED,
-                data: this.suggestions
-            });
-        }
     }
 
     /**
