@@ -9,7 +9,7 @@
   "ADMINISTRATION_NAV": "Administration",
   "PROFILE_NAV": "Profile",
   "PROFILE_MSG": "Your username is: {{username}}",
-  "ADMINISTRATION_ADDRESSGROUP_HEADLINE": "Group",
+  "ADM_MANAGE_ADDR_GROUPS_HEADLINE": "Manage Address Groups",
   "ADM_ADRR_GROUPS_BTN": "Manage Address Groups",
   "ADM_ADDRESSES_BTN": "Manage Addresses",
   "ADM_COST_ACC_BTN": "Manage Cost Accounts",
