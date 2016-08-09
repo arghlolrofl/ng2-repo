@@ -1,6 +1,10 @@
 import {Component} from '@angular/core';
 import {TranslatePipe} from 'ng2-translate/ng2-translate';
-import AdministrationAddressgroupComponent from './administration.addressgroup.component';
+import AdministrationAddressGroupsComponent from './administration.address-groups.component';
+import AdministrationAddressesComponent from './administration.addresses.component';
+import AdministrationCostAccountsComponent from './administration.cost-accounts.component';
+import AdministrationSettingsComponent from './administration.settings.component';
+import AdministrationUsersComponent from './administration.users.component';
 import ErrorUtils from "../../utils/error-utils";
 
 
@@ -8,7 +12,11 @@ import ErrorUtils from "../../utils/error-utils";
     selector: 'fp-administration',
     templateUrl: 'assets/templates/administration/administration.component.html',
     directives: [
-        AdministrationAddressgroupComponent
+        AdministrationAddressGroupsComponent,
+        AdministrationAddressesComponent,
+        AdministrationCostAccountsComponent,
+        AdministrationSettingsComponent,
+        AdministrationUsersComponent
     ],
     pipes: [
         TranslatePipe

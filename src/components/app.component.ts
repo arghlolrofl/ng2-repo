@@ -74,9 +74,9 @@ export default class AppComponent implements AfterViewInit {
     public ngAfterViewInit() {
         if (!this.loggedIn) {
             this.modalLogin.open();
-            this.modalLogin.onClose.subscribe(() => this.router.navigate(['Shipping'])); // TODO should be replaced with dashboard for go live
+            this.modalLogin.onClose.subscribe(() => this.router.navigate(['Administration'])); // TODO should be replaced with dashboard for go live
         } else {
-            this.router.navigate(['Shipping']); // TODO should be replaced with dashboard for go live
+            this.router.navigate(['Administration']); // TODO should be replaced with dashboard for go live
         }
     }
 
