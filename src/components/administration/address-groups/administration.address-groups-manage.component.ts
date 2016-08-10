@@ -3,8 +3,8 @@ import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
 
 @Component({
-    selector: 'fp-administration-addressgroups',
-    templateUrl: 'assets/templates/administration/administration.address-groups.component.html',
+    selector: 'fp-administration-addressgroups-manage',
+    templateUrl: 'assets/templates/administration/address-groups/administration.address-groups-manage.component.html',
     pipes: [
         TranslatePipe
     ]
@@ -13,9 +13,9 @@ import {TranslatePipe} from 'ng2-translate/ng2-translate';
 /**
  * Administration Address Groups component.
  */
-export default class AdministrationAddressGroupsComponent {
+export default class AdministrationAddressGroupsManageComponent {
 
     @Output()
     onError: EventEmitter<Error> = new EventEmitter();
-    
+
 }
