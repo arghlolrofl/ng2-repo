@@ -1,4 +1,22 @@
 ﻿<section class="sectiontemplate">
     <div class="row">
+        <div class="col-md-7">
+            <div class="field-container text-field-search">
+                <div class="search-submit">
+                    <span class="icon-search"></span>
+                </div>
+                <input type="text" name="name" value="" placeholder="{{'ADM_ADDR_GROUP_NAME_FILTER_PLACEHOLDER' | translate}}">
+            </div>
+        </div>
+        <div class="col-md-3">
+            <select>
+                <option value="0">{{'ADM_ADDR_GROUPS_MANAGE_FILTER_NONE' | translate}}</option>
+                <option value="1">{{'ADM_ADDR_GROUPS_MANAGE_FILTER_ASSIGNED' | translate}}</option>
+                <option value="2">{{'ADM_ADDR_GROUPS_MANAGE_FILTER_UNASSIGNED' | translate}}</option>
+            </select> 
+        </div>
+        <div class="col-md-2">
+            <button class="button color">{{'ADM_ADDR_GROUPS_MANAGE_FILTER_APPLY_BTN' | translate}}</button>
+        </div>
     </div>
 </section>

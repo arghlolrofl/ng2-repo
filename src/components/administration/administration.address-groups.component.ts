@@ -1,4 +1,5 @@
 ﻿import {Component, EventEmitter, Output} from '@angular/core';
+import {Router} from '@angular/router-deprecated';
 import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
 
@@ -15,7 +16,12 @@ import {TranslatePipe} from 'ng2-translate/ng2-translate';
  */
 export default class AdministrationAddressGroupsComponent {
 
-    @Output()
-    onError: EventEmitter<Error> = new EventEmitter();
-    
+    @Output() onError: EventEmitter<Error> = new EventEmitter();
+
+    constructor(private router: Router) {
+    }
+
+    onClick() {
+        this.router.navigate(['AdministrationAddressGroupsManage']);
+    }
 }

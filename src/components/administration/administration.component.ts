@@ -1,10 +1,13 @@
 import {Component} from '@angular/core';
+//import {RouteConfig, RouterOutlet} from '@angular/router-deprecated';
 import {TranslatePipe} from 'ng2-translate/ng2-translate';
+
 import AdministrationAddressGroupsComponent from './administration.address-groups.component';
 import AdministrationAddressesComponent from './administration.addresses.component';
 import AdministrationCostAccountsComponent from './administration.cost-accounts.component';
 import AdministrationSettingsComponent from './administration.settings.component';
 import AdministrationUsersComponent from './administration.users.component';
+import AdministrationAddressGroupsManageComponent from './address-groups/administration.address-groups-manage.component';
 import ErrorUtils from "../../utils/error-utils";
 
 
@@ -12,6 +15,7 @@ import ErrorUtils from "../../utils/error-utils";
     selector: 'fp-administration',
     templateUrl: 'assets/templates/administration/administration.component.html',
     directives: [
+//        RouterOutlet,
         AdministrationAddressGroupsComponent,
         AdministrationAddressesComponent,
         AdministrationCostAccountsComponent,
@@ -23,6 +27,11 @@ import ErrorUtils from "../../utils/error-utils";
     ]
 })
 
+/*
+@RouteConfig([
+        { path: 'address-groups', name: 'AdministrationAddressGroupsManage', component: AdministrationAddressGroupsManageComponent, useAsDefault: true }
+])
+*/
 /**
  * Administration component.
  */

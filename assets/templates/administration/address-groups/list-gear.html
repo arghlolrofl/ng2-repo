@@ -1,0 +1,32 @@
+﻿<section class="sectiontemplate">
+    <div class="row">
+        <div class="col-button">
+            <div class="field-container box-icon">
+                <button type="button"
+                        (click)="previousPage()">
+                    <span class="glyphicon glyphicon-arrow-left"></span>
+                </button>
+            </div>
+        </div>
+        <div>
+            <label>n of m entries</label>   <!-- TODO: generate label dynamically -->
+        </div>
+        <div class="col-button">
+            <div class="field-container box-icon">
+                <button type="button"
+                        (click)="nextPage()">
+                    <span class="glyphicon glyphicon-arrow-right"></span>
+                </button>
+            </div>
+        </div>
+        <div class="col">
+            <label for="rpp">{{'G_RESULTS_PER_PAGE' | translate}}</label>
+            <select name="rpp">
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select> 
+        </div>
+    </div>
+</section>

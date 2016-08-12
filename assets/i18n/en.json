@@ -1,4 +1,5 @@
 {
+  "G_RESULTS_PER_PAGE": "Results per page:",
   "TITLE": "Franking App",
   "DASHBOARD_HEADLINE": "Dashboard",
   "SHIPPING_HEADLINE": "Shipping",
@@ -11,6 +12,11 @@
   "PROFILE_MSG": "Your username is: {{username}}",
   "ADM_ADDR_GROUPS_MANAGE_HEADLINE": "Manage Address Groups",
   "ADM_ADDR_GROUPS_MANAGE_CREATE_NEW_BTN": "create new",
+  "ADM_ADDR_GROUPS_MANAGE_FILTER_NONE": "all",
+  "ADM_ADDR_GROUPS_MANAGE_FILTER_ASSIGNED": "only assigned",
+  "ADM_ADDR_GROUPS_MANAGE_FILTER_UNASSIGNED": "only unassigned",
+  "ADM_ADDR_GROUPS_MANAGE_FILTER_APPLY_BTN": "Apply Filter",
+  "ADM_ADDR_GROUP_NAME_FILTER_PLACEHOLDER": "Address Group Filter",
   "ADM_ADDR_GROUPS_BTN": "Manage Address Groups",
   "ADM_ADDRESSES_BTN": "Manage Addresses",
   "ADM_COST_ACC_BTN": "Manage Cost Accounts",

@@ -4,9 +4,23 @@
         {{ 'ADM_ADDR_GROUPS_MANAGE_HEADLINE' | translate }}
     </h4>
     <div class="row">
-        <button class="button color"
-                (click)="createNew()">
-            <span>{{ 'ADM_ADDR_GROUPS_MANAGE_CREATE_NEW_BTN' | translate }}</span>
+        <div class="col-sm-12">
+            <button class="button color"
+                    (click)="createNew()">
+                <span>{{ 'ADM_ADDR_GROUPS_MANAGE_CREATE_NEW_BTN' | translate }}</span>
+            </button>
+        </div>
+    </div>
+    <hr />
+    <fp-administration-address-groups-manage-filter></fp-administration-address-groups-manage-filter>
+    <hr />
+    <fp-administration-address-groups-manage-controllable-list></fp-administration-address-groups-manage-controllable-list>
+    <hr />
+    <div class="col-sm-12">
+        <button type="button"
+                class="button color"
+                (click)="close()">
+            <span>{{ 'MODAL_CLOSE' | translate }}</span>
         </button>
     </div>
 </section>
