@@ -218,7 +218,6 @@ label {
   @include mobile {
     height: auto;
     font-size: 1.4rem;
-    line-height: 1.7rem;
     float: none;
     width: 100%;
     margin: 0 0 15px 0;
@@ -226,7 +225,7 @@ label {
     & + .text-field-search,
     & + .text-field {
       width: 100%;
-      margin-left: 0px;
+      margin-left: 0;
       float: none;
     }
   }

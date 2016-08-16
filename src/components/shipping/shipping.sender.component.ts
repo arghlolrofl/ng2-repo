@@ -34,6 +34,7 @@ export default class ShippingSenderComponent {
     /**
      * Sender.
      */
+    sender: AddressDisplayInfo;
     senderInput: string = '';
     @Output() senderChange: EventEmitter<AddressDisplayInfo> = new EventEmitter();
     senderEvents: EventEmitter<any> = new EventEmitter();
@@ -73,14 +74,15 @@ export default class ShippingSenderComponent {
                     break;
 
                 case SuggestEvents.SELECTED:
+                    this.sender = event.data;
                     this.senderChange.emit(event.data);
                     this.shippingPointChange.emit(event.data.ZipCode);
-                    this.senderInput = `${event.data.FirstName} ${event.data.LastName} (${event.data.Company}) - ` +
-                        `${event.data.PostalAddress} ${event.data.ZipCode} ${event.data.City}`;
+                    this.senderInput = `${event.data.FirstName} ${event.data.LastName} (${event.data.Company})`;
                     this.shippingPoint = event.data.ZipCode;
                     break;
 
                 case SuggestEvents.CLEARED:
+                    this.sender = null;
                     this.senderChange.emit(null);
                     this.shippingPointChange.emit(null);
                     this.senderInput = '';
@@ -88,8 +90,8 @@ export default class ShippingSenderComponent {
                     break;
 
                 case SuggestEvents.SHOW:
-                    this.senderInput = `${event.data.FirstName} ${event.data.LastName} (${event.data.Company}) - ` +
-                        `${event.data.PostalAddress} ${event.data.ZipCode} ${event.data.City}`;
+                    this.sender = event.data;
+                    this.senderInput = `${event.data.FirstName} ${event.data.LastName} (${event.data.Company})`;
                     this.shippingPoint = event.data.ZipCode;
                     break;
             }

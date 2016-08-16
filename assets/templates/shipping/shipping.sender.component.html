@@ -24,6 +24,11 @@
         </button>
       </div>
 
+      <div class="row addressInfo">
+        <p *ngIf="!sender">{{ 'SENDER_NO_ADDRESS_SELECTED' | translate }}</p>
+        <p *ngIf="sender">{{sender.PostalAddress}} {{sender.ZipCode}} {{sender.City}}</p>
+      </div>
+
       <div class="row autocomplete"
            [class.open]="senderSuggestions.length > 0">
         <ul>
