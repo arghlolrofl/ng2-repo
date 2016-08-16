@@ -33,8 +33,7 @@
                    name="company"
                    placeholder="{{ 'SENDER_ADD_COMPANY_PLACEHOLDER' | translate }}"
                    [(ngModel)]="address.Company"
-                   (keyup.esc)="address.Company = ''"
-                   required>
+                   (keyup.esc)="address.Company = ''">
             <button type="button"
                     class="clear-submit"
                     (click)="address.Company = ''">
@@ -122,12 +121,27 @@
         </div>
         <div class="col-sm-6">
           <div class="field-container text-field">
-            <select (change)="regionChanged($event.target.value)"
+            <select *ngIf="regions.length !== 0"
+                    (change)="regionChanged($event.target.value)"
                     [disabled]="regions.length === 0">
               <option *ngFor="let region of regions">
                 {{region.RegionName}}
               </option>
             </select>
+
+            <input *ngIf="regions.length === 0"
+                   type="text"
+                   name="region"
+                   placeholder="{{ 'SENDER_ADD_REGION_PLACEHOLDER' | translate }}"
+                   [(ngModel)]="address.Region"
+                   (keyup.esc)="address.Region = ''"
+                   required>
+            <button *ngIf="regions.length === 0"
+                    type="button"
+                    class="clear-submit"
+                    (click)="address.Region = ''">
+              <span class="icon-close"></span>
+            </button>
           </div>
         </div>
       </div>
