@@ -26,6 +26,7 @@
   "SENDER_NO_ADDRESS_SELECTED": "No selected address",
   "SHIPPING_POINT_HEADLINE": "Shipping Point",
   "SHIPPING_POINT_PLACEHOLDER": "Shipping Point",
+  "RECIPIENT_GROUPFILTER_HEADLINE": "Groupfilter",
   "RECIPIENT_HEADLINE": "Recipient",
   "RECIPIENT_FILTER_PLACEHOLDER": "Filter recipient categories",
   "RECIPIENT_PLACEHOLDER": "Recipient",
