@@ -26,6 +26,7 @@
   "SENDER_NO_ADDRESS_SELECTED": "Keine Adresse ausgewählt",
   "SHIPPING_POINT_HEADLINE": "Abholungs-PLZ",
   "SHIPPING_POINT_PLACEHOLDER": "PLZ",
+  "RECIPIENT_GROUPFILTER_HEADLINE": "Gruppenfilter",
   "RECIPIENT_HEADLINE": "Empfänger",
   "RECIPIENT_FILTER_PLACEHOLDER": "Empfänger einschränken",
   "RECIPIENT_PLACEHOLDER": "Empfänger",

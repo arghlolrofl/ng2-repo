@@ -178,59 +178,6 @@ ul {
   }
 }
 
-/* labeling
-/* ----------------------------- */
-label {
-  height: $input-height;
-  font-size: 1.7rem;
-  line-height: $input-line-height;
-  float: left;
-  width: 150px;
-
-  .icon-class {
-    &:before {
-      font-size: 1.8rem;
-      padding-right: 0;
-    }
-  }
-
-  & + .text-field-search,
-  & + .text-field {
-    width: 195px;
-    margin-left: 15px;
-    float: left;
-  }
-
-  @include desktop-large {
-    & + .text-field-search,
-    & + .text-field {
-      width: 295px;
-    }
-  }
-
-  @include tablet {
-    & + .text-field-search,
-    & + .text-field {
-      width: 460px;
-    }
-  }
-
-  @include mobile {
-    height: auto;
-    font-size: 1.4rem;
-    float: none;
-    width: 100%;
-    margin: 0 0 15px 0;
-
-    & + .text-field-search,
-    & + .text-field {
-      width: 100%;
-      margin-left: 0;
-      float: none;
-    }
-  }
-}
-
 /* autocomplete
 /* ----------------------------- */
 .autocomplete {
@@ -285,4 +232,58 @@ label {
   @include mobile {
 
   }
+}
+
+/* labeling
+/* ----------------------------- */
+label {
+  height: $input-height;
+  font-size: 1.7rem;
+  line-height: $input-line-height;
+  float: left;
+  width: 150px;
+
+  .icon-class {
+    &:before {
+      font-size: 1.8rem;
+      padding-right: 0;
+    }
+  }
+
+  & + .small-autocomplete {
+    width: 195px;
+    margin-left: 15px;
+    float: left;
+  }
+
+  @include desktop-large {
+    & + .small-autocomplete  {
+      width: 295px;
+    }
+  }
+
+  @include tablet {
+    & + .small-autocomplete  {
+      width: 460px;
+    }
+  }
+
+  @include mobile {
+    height: auto;
+    font-size: 1.4rem;
+    float: none;
+    width: 100%;
+    margin: 0 0 15px 0;
+
+    & + .text-field-search,
+    & + .text-field {
+      width: 100%;
+      margin-left: 0;
+      float: none;
+    }
+  }
+}
+
+.small-autocomplete {
+  position: relative;
 }
