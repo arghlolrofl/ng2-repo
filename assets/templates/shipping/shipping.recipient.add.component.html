@@ -33,8 +33,7 @@
                    placeholder="{{ 'RECIPIENT_ADD_COMPANY_PLACEHOLDER' | translate }}"
                    name="company"
                    [(ngModel)]="address.Company"
-                   (keyup.esc)="address.Company = ''"
-                   required>
+                   (keyup.esc)="address.Company = ''">
             <button type="button"
                     class="clear-submit"
                     (click)="address.Company = ''">
