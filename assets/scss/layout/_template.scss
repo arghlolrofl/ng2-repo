@@ -58,7 +58,7 @@ main {
     float: left;
     margin-left: 40px;
     width: 360px;
-    height: $input-height;
+    min-height: $input-height;
   }
 
   .col-button {
