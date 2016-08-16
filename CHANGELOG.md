@@ -15,6 +15,6 @@
 - Added address info to the inputfield - FTP-36 Darstellung Adressen in Shipping – Screen
 - Changed layout - FTP-34 - UI Empfängergruppe bzw. Empfänger nicht intuitiv ausgeprägt.
 
-## wip
+## 1.1.0
 - Bugfix for language selection - FTP-40 Sprachauswahl fehlerhaft
 - Changed auto closing function of autocomplete function - FTP-43 Live-Suche schließt sich automatisch nach ca. 3 Sek.
