@@ -41,7 +41,7 @@ export default class ShippingRecipientAddComponent implements AfterViewInit {
     /**
      * Opens or closes the modal dialog.
      */
-    @Input() showChange: EventEmitter<boolean> = new EventEmitter();
+    @Input() showChange: EventEmitter<boolean> = new EventEmitter<boolean>();
     @ViewChild('modalAddRecipient') modal: ModalComponent;
 
     /**

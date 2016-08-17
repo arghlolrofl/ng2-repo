@@ -19,6 +19,6 @@ export default class ShippingAdditionalInformationComponent {
     /**
      * Additional Information.
      */
-    @Output() additionalInfo1Change: EventEmitter<string> = new EventEmitter();
-    @Output() additionalInfo2Change: EventEmitter<string> = new EventEmitter();
+    @Output() additionalInfo1Change: EventEmitter<string> = new EventEmitter<string>();
+    @Output() additionalInfo2Change: EventEmitter<string> = new EventEmitter<string>();
 }

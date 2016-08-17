@@ -34,7 +34,7 @@ export default class ShippingOptionsComponent implements AfterViewInit {
      * Updated when label should be bought.
      * @type {EventEmitter<boolean>}
      */
-    @Output() onBuyLabel: EventEmitter<boolean> = new EventEmitter();
+    @Output() onBuyLabel: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /**
      * Modal dialog for sender
@@ -56,7 +56,8 @@ export default class ShippingOptionsComponent implements AfterViewInit {
      * Options.
      */
     selectedOptions: Array<PostalProductOptionInfo>;
-    @Output() selectedOptionsChange: EventEmitter<Array<PostalProductOptionInfo>> = new EventEmitter();
+    @Output() selectedOptionsChange: EventEmitter<Array<PostalProductOptionInfo>> = 
+        new EventEmitter<Array<PostalProductOptionInfo>>();
 
     /**
      * @constructor

@@ -29,15 +29,15 @@ import {MAX_AC_RESULTS} from "../../config";
  */
 export default class ShippingRecipientComponent {
 
-    @Output() onError: EventEmitter<Error> = new EventEmitter();
+    @Output() onError: EventEmitter<Error> = new EventEmitter<Error>();
 
     /**
      * Updated when recipient has been changed.
      * @type {EventEmitter<AddressDisplayInfo>}
      */
     recipientInput: string = '';
-    recipientEvents: EventEmitter<any> = new EventEmitter();
-    @Output() recipientChange: EventEmitter<AddressDisplayInfo> = new EventEmitter();
+    recipientEvents: EventEmitter<any> = new EventEmitter<any>();
+    @Output() recipientChange: EventEmitter<AddressDisplayInfo> = new EventEmitter<AddressDisplayInfo>();
     recipientSuggestions: AddressDisplayInfo[] = [];
 
     /**
@@ -45,13 +45,13 @@ export default class ShippingRecipientComponent {
      */
     addressGroupInput: string = '';
     addressGroup: AddressGroupInfo;
-    addressGroupEvents: EventEmitter<any> = new EventEmitter();
+    addressGroupEvents: EventEmitter<any> = new EventEmitter<any>();
     addressGroupSuggestions: AddressGroupInfo[] = [];
 
     /**
      * Show modal dialog for adding new recipient.
      */
-    showAddDialogChange: EventEmitter<boolean> = new EventEmitter();
+    showAddDialogChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /**
      * @constructor

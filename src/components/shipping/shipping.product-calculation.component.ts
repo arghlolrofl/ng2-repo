@@ -34,7 +34,7 @@ import AddressDisplayInfo from "../../models/address-display-info";
  */
 export default class ShippingProductCalculationComponent {
 
-    @Output() onError: EventEmitter<Error> = new EventEmitter();
+    @Output() onError: EventEmitter<Error> = new EventEmitter<Error>();
 
     /**
      * Sender.
@@ -62,22 +62,22 @@ export default class ShippingProductCalculationComponent {
     parcelInfo: ParcelInfo = new ParcelInfo();
     parcel: PostalProductInfo;
     parcelSuggestions: Array<PostalProductInfo> = [];
-    @Output() parcelChange: EventEmitter<PostalProductInfo> = new EventEmitter();
+    @Output() parcelChange: EventEmitter<PostalProductInfo> = new EventEmitter<PostalProductInfo>();
 
     /**
      * Parcel Information.
      */
     validWeightInput: boolean = true;
-    weightInputChange: EventEmitter<number> = new EventEmitter();
+    weightInputChange: EventEmitter<number> = new EventEmitter<number>();
     validLengthInput: boolean = true;
-    lengthInputChange: EventEmitter<number> = new EventEmitter();
+    lengthInputChange: EventEmitter<number> = new EventEmitter<number>();
     validWidthInput: boolean = true;
-    widthInputChange: EventEmitter<number> = new EventEmitter();
+    widthInputChange: EventEmitter<number> = new EventEmitter<number>();
     validHeightInput: boolean = true;
-    heightInputChange: EventEmitter<number> = new EventEmitter();
-    @Output() dimensionsChange: EventEmitter<DimensionInfo> = new EventEmitter();
-    @Output() weightChange: EventEmitter<WeightInfo> = new EventEmitter();
-    isDocumentChange: EventEmitter<boolean> = new EventEmitter();
+    heightInputChange: EventEmitter<number> = new EventEmitter<number>();
+    @Output() dimensionsChange: EventEmitter<DimensionInfo> = new EventEmitter<DimensionInfo>();
+    @Output() weightChange: EventEmitter<WeightInfo> = new EventEmitter<WeightInfo>();
+    isDocumentChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /**
      * Defines if calculation is running or not.

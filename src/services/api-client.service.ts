@@ -32,6 +32,11 @@ export default class APIClient {
             if (options) {
                 opt = opt.merge(options);
             }
+            // workaround, because there is a bug in rc5 of angulars http client.
+            // Angular RC5 does not allow sending empty bodies.
+            // The bug will soon be fixed as it is already in the master branch of angular
+            // https://github.com/angular/angular/pull/10668
+            opt.body = '';
             return this.http
                 .get(CONSUMER_API_BASE_URL + path, opt)
                 .timeout(API_TIMEOUT, new Error('API timeout'))

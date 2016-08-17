@@ -1,18 +1,14 @@
-import {enableProdMode} from '@angular/core';
-import {bootstrap} from '@angular/platform-browser-dynamic';
-import {disableDeprecatedForms, provideForms} from '@angular/forms';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import {enableProdMode, NgModule} from '@angular/core';
 import './rxjs-operators';
 import 'jquery';
 import 'bootstrap';
 
 import {DEBUG_MODE} from './config';
-import AppComponent from './components/app.component';
+import {AppModule} from './AppModule';
 
 if (!DEBUG_MODE) {
     enableProdMode();
 }
-//noinspection TypeScriptValidateTypes
-bootstrap(AppComponent, [
-    disableDeprecatedForms(),
-    provideForms()
-]);
+
+platformBrowserDynamic().bootstrapModule(AppModule);

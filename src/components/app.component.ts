@@ -1,26 +1,20 @@
 import {Component, ViewChild, AfterViewInit} from '@angular/core';
-import {Router, RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
 import {HTTP_PROVIDERS, Http} from '@angular/http';
 import {TranslateService, TranslatePipe, TRANSLATE_PROVIDERS, TranslateLoader, TranslateStaticLoader} from 'ng2-translate/ng2-translate';
 import {CookieService} from 'angular2-cookie/core';
 import {MODAL_DIRECTIVES, ModalComponent} from 'ng2-bs3-modal/ng2-bs3-modal';
 
 import {AVAILABLE_LOCALES} from '../config';
-import {ROUTER_CONFIG} from '../router/app.routes';
 import LoginService from '../services/login.service';
 import APIClient from "../services/api-client.service";
-
-@RouteConfig(ROUTER_CONFIG)
 
 @Component({
     selector: 'fp-app',
     templateUrl: 'assets/templates/app.component.html',
     directives: [
-        ROUTER_DIRECTIVES,
         MODAL_DIRECTIVES
     ],
     providers: [
-        ROUTER_PROVIDERS,
         HTTP_PROVIDERS,
         TRANSLATE_PROVIDERS,
         {
@@ -53,12 +47,10 @@ export default class AppComponent implements AfterViewInit {
 
     /**
      * @constructor
-     * @param router Router to directly navigate to the shipping area
      * @param loginService Login service to check user status
      * @param translate The translation service
      */
-    constructor(private router: Router,
-        private loginService: LoginService,
+    constructor(private loginService: LoginService,
         public translate: TranslateService) {
         const locales = AVAILABLE_LOCALES.join('|');
         let userLang = (navigator.language || navigator.userLanguage || 'en-us').split('-')[0];
@@ -74,9 +66,15 @@ export default class AppComponent implements AfterViewInit {
     public ngAfterViewInit() {
         if (!this.loggedIn) {
             this.modalLogin.open();
-            this.modalLogin.onClose.subscribe(() => this.router.navigate(['Shipping'])); // TODO should be replaced with dashboard for go live
+            this.modalLogin.onClose.subscribe(() => this.openShippingPage());
         } else {
-            this.router.navigate(['Shipping']); // TODO should be replaced with dashboard for go live
+            this.openShippingPage();
+        }
+    }
+
+    private openShippingPage() {
+        if (document.location.href.indexOf('shipping') === -1) {
+            document.location.href = '/shipping';
         }
     }
 

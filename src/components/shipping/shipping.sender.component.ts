@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Output, Input} from '@angular/core';
 import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
 import ShippingSenderAddComponent from "./shipping.sender.add.component";
@@ -28,28 +28,27 @@ import {MAX_AC_RESULTS} from "../../config";
  */
 export default class ShippingSenderComponent {
 
-    @Output()
-    onError: EventEmitter<Error> = new EventEmitter();
+    @Output() onError: EventEmitter<Error> = new EventEmitter<Error>();
 
     /**
      * Sender.
      */
-    sender: AddressDisplayInfo;
+    @Input() sender: AddressDisplayInfo;
     senderInput: string = '';
-    @Output() senderChange: EventEmitter<AddressDisplayInfo> = new EventEmitter();
-    senderEvents: EventEmitter<any> = new EventEmitter();
+    @Output() senderChange: EventEmitter<AddressDisplayInfo> = new EventEmitter<AddressDisplayInfo>();
+    senderEvents: EventEmitter<any> = new EventEmitter<any>();
     senderSuggestions: AddressDisplayInfo[] = [];
 
     /**
      * Shipping Point.
      */
-    shippingPoint: string = '';
-    @Output() shippingPointChange: EventEmitter<string> = new EventEmitter();
+    @Input() shippingPoint: string = '';
+    @Output() shippingPointChange: EventEmitter<string> = new EventEmitter<string>();
 
     /**
      * Show modal dialog for adding new sender.
      */
-    showAddDialogChange: EventEmitter<boolean> = new EventEmitter();
+    showAddDialogChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /**
      * @constructor

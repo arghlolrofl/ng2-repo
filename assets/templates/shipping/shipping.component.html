@@ -15,20 +15,20 @@
 
   <div class="col-md-6 gray-line">
     <fp-shipping-sender (onError)="handleError($event)"
-                        [(sender)]="sender"
-                        [(shippingPoint)]="shippingPoint"></fp-shipping-sender>
+                        (senderChange)="sender = $event"
+                        (shippingPointChange)="shippingPoint = $event"></fp-shipping-sender>
 
     <fp-shipping-recipient (onError)="handleError($event)"
-                           [(recipient)]="recipient"></fp-shipping-recipient>
+                           (recipientChange)="recipient = $event"></fp-shipping-recipient>
 
     <fp-shipping-cost-center (onError)="handleError($event)"
-                             [(costCenter1)]="costCenter1"
-                             [(costCenter2)]="costCenter2"
-                             [(costCenter3)]="costCenter3"></fp-shipping-cost-center>
+                             (costCenter1Change)="costCenter1 = $event"
+                             (costCenter2Change)="costCenter2 = $event"
+                             (costCenter3Change)="costCenter3 = $event"></fp-shipping-cost-center>
 
     <fp-shipping-additional-information (onError)="handleError($event)"
-                                        [(additionalInfo1)]="additionalInfo1"
-                                        [(additionalInfo2)]="additionalInfo2"></fp-shipping-additional-information>
+                                        (additionalInfo1Change)="additionalInfo1 = $event"
+                                        (additionalInfo2Change)="additionalInfo2 = $event"></fp-shipping-additional-information>
   </div>
 
   <div class="col-md-6">
@@ -36,13 +36,13 @@
                                      [sender]="sender"
                                      [shippingPoint]="shippingPoint"
                                      [recipient]="recipient"
-                                     [(dimensions)]="dimensions"
-                                     [(weight)]="weight"
-                                     [(parcel)]="parcel"></fp-shipping-product-calculation>
+                                     (dimensionsChange)="dimensions = $event"
+                                     (weightChange)="weight = $event"
+                                     (parcelChange)="parcel = $event"></fp-shipping-product-calculation>
 
     <fp-shipping-options (onError)="handleError($event)"
                          (onBuyLabel)="buyLabel()"
-                         [(selectedOptions)]="options"
+                         (selectedOptionsChange)="options = $event"
                          [canBuy]="canBuy(buyRunning, parcel, shippingPoint, sender, recipient, weight, costCenter1)"
                          [parcel]="parcel"></fp-shipping-options>
   </div>

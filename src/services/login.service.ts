@@ -14,13 +14,13 @@ export default class LoginService {
      * Events for login status change.
      * @type {EventEmitter}
      */
-    public loginChange: EventEmitter<any> = new EventEmitter();
+    public loginChange: EventEmitter<any> = new EventEmitter<any>();
 
     /**
      * Events for login errors.
      * @type {EventEmitter}
      */
-    public loginError: EventEmitter<Error> = new EventEmitter();
+    public loginError: EventEmitter<Error> = new EventEmitter<Error>();
 
     /**
      * Bearer token to be send in requests.

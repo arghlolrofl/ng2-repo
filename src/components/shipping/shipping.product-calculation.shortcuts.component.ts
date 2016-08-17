@@ -24,13 +24,13 @@ import ShortcutInfo from "../../models/shortcut-info";
  */
 export default class ShippingProductCalculationShortcutsComponent implements AfterViewInit {
 
-    @Output() onError: EventEmitter<Error> = new EventEmitter();
+    @Output() onError: EventEmitter<Error> = new EventEmitter<Error>();
 
     /**
      * Shortcut has been selected or changed.
      * @type {EventEmitter}
      */
-    @Output() shortcutChange: EventEmitter<ShortcutInfo> = new EventEmitter();
+    @Output() shortcutChange: EventEmitter<ShortcutInfo> = new EventEmitter<ShortcutInfo>();
 
     /**
      * Modal dialog for sender
@@ -46,7 +46,7 @@ export default class ShippingProductCalculationShortcutsComponent implements Aft
     shortcutSuggestions: Array<ShortcutInfo> = [];
     displayedShortcutSuggestions: Array<ShortcutInfo> = [];
     searchInput: string = '';
-    searchInputChange: EventEmitter<string> = new EventEmitter();
+    searchInputChange: EventEmitter<string> = new EventEmitter<string>();
 
     /**
      * @constructor

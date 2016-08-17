@@ -26,31 +26,31 @@ import {MAX_AC_RESULTS} from "../../config";
  */
 export default class ShippingCostCenterComponent {
 
-    @Output() onError: EventEmitter<Error> = new EventEmitter();
+    @Output() onError: EventEmitter<Error> = new EventEmitter<Error>();
 
     /**
      * Cost Center 1.
      */
     costCenter1Input: string;
     costCenter1: CostCenterInfo;
-    @Output() costCenter1Change: EventEmitter<CostCenterInfo> = new EventEmitter();
-    costCenter1Events: EventEmitter<any> = new EventEmitter();
+    @Output() costCenter1Change: EventEmitter<CostCenterInfo> = new EventEmitter<CostCenterInfo>();
+    costCenter1Events: EventEmitter<any> = new EventEmitter<any>();
     costCenter1Suggestions: CostCenterInfo[] = [];
 
     /**
      * Cost Center 2
      */
     costCenter2Input: string;
-    @Output() costCenter2Change: EventEmitter<CostCenterInfo> = new EventEmitter();
-    costCenter2Events: EventEmitter<any> = new EventEmitter();
+    @Output() costCenter2Change: EventEmitter<CostCenterInfo> = new EventEmitter<CostCenterInfo>();
+    costCenter2Events: EventEmitter<any> = new EventEmitter<any>();
     costCenter2Suggestions: CostCenterInfo[] = [];
 
     /**
      * Cost Center 3.
      */
     costCenter3Input: string;
-    @Output() costCenter3Change: EventEmitter<CostCenterInfo> = new EventEmitter();
-    costCenter3Events: EventEmitter<any> = new EventEmitter();
+    @Output() costCenter3Change: EventEmitter<CostCenterInfo> = new EventEmitter<CostCenterInfo>();
+    costCenter3Events: EventEmitter<any> = new EventEmitter<any>();
     costCenter3Suggestions: CostCenterInfo[] = [];
 
     /**

@@ -18,3 +18,6 @@
 ## 1.1.0
 - Bugfix for language selection - FTP-40 Sprachauswahl fehlerhaft
 - Changed auto closing function of autocomplete function - FTP-43 Live-Suche schließt sich automatisch nach ca. 3 Sek.
+
+## 1.1.1
+- Upgrade to Angular RC5 because of build instability
