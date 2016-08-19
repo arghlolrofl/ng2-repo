@@ -72,10 +72,6 @@ export default class ShippingComponent {
      * @param {ShippingService} shippingService the shipping service client
      */
     constructor(private shippingService: ShippingService) {
-
-        setInterval(() => {
-            console.log(this.sender, this.shippingPoint, this.recipient);
-        }, 2000);
     }
 
     /**
