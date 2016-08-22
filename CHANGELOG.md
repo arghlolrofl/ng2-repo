@@ -21,3 +21,6 @@
 
 ## 1.1.1
 - Upgrade to Angular RC5 because of build instability
+
+## 1.2.0
+- Improved reliability of build process by replacing SystemJS with Webpack

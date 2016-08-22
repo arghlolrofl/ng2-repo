@@ -66,15 +66,6 @@ export default class AppComponent implements AfterViewInit {
     public ngAfterViewInit() {
         if (!this.loggedIn) {
             this.modalLogin.open();
-            this.modalLogin.onClose.subscribe(() => this.openShippingPage());
-        } else {
-            this.openShippingPage();
-        }
-    }
-
-    private openShippingPage() {
-        if (document.location.href.indexOf('shipping') === -1) {
-            document.location.href = '/shipping';
         }
     }
 

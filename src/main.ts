@@ -1,8 +1,6 @@
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {enableProdMode, NgModule} from '@angular/core';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import './rxjs-operators';
-import 'jquery';
-import 'bootstrap';
 
 import {DEBUG_MODE} from './config';
 import {AppModule} from './AppModule';

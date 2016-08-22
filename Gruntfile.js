@@ -131,37 +131,19 @@ module.exports = function (grunt) {
 			}
 		},
 
-		systemjs: {
-			options: {
-				sfx: true,
-				baseURL: './',
-				transpiler: 'typescript',
-				configFile: './systemjs.config.js',
-				minify: true,
-				build: {
-					mangle: true
-				}
-			},
-			app: {
-				files: [{
-					src: 'app/main.js',
-					dest: 'app/app.min.js'
-				}]
-			}
-		},
-
 		concat: {
 			files: {
 				src: [
+					'node_modules/jquery/dist/jquery.js',
+  					'node_modules/bootstrap/dist/js/bootstrap.js',
 					'node_modules/intl/dist/Intl.min.js',
 					'node_modules/intl/locale-data/jsonp/en.js',
 					'node_modules/core-js/client/shim.min.js',
 					'node_modules/zone.js/dist/zone.js',
 					'node_modules/reflect-metadata/Reflect.js',
-					'node_modules/systemjs/dist/system.js',
-					'app/app.min.js'
+					'node_modules/systemjs/dist/system.js'
 				],
-				dest: 'app/app.min.js'
+				dest: 'app/libs.js'
 			}
 		},
 
@@ -171,8 +153,8 @@ module.exports = function (grunt) {
 					archive: 'app.zip'
 				},
 				files: [
-					{src: ['index.prod.html'], dest: '.'},
-					{src: ['app/app.min.*'], dest: '.'},
+					{src: ['index.html'], dest: '.'},
+					{src: ['app/*'], dest: '.'},
 					{src: ['assets/**'], dest: '.'}
 				]
 			}
@@ -190,15 +172,14 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-postcss');
 	grunt.loadNpmTasks('grunt-webfont');
 	grunt.loadNpmTasks('grunt-contrib-concat');
-	grunt.loadNpmTasks('grunt-systemjs-builder');
 	grunt.loadNpmTasks('grunt-contrib-compress');
 
 	/* Tasks
 	 /* ----------------------------- */
-	grunt.registerTask('default', ['sass', 'cmq', 'postcss', 'cssmin', 'imagemin']);
+	grunt.registerTask('default', ['sass', 'cmq', 'postcss', 'cssmin', 'imagemin', 'concat']);
 	grunt.registerTask('css', ['sass', 'cmq', 'postcss', 'cssmin']);
 	grunt.registerTask('iconfont', ['webfont']);
 	grunt.registerTask('images', ['imagemin']);
 	grunt.registerTask('dev', ['sass', 'cmq', 'postcss', 'imagemin']);
-	grunt.registerTask('package', ['systemjs', 'concat', 'compress']);
+	grunt.registerTask('package', ['compress']);
 };

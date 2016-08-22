@@ -11,7 +11,7 @@ import ProfileComponent from '../components/profile/profile.component';
  */
 const appRoutes = [
     {
-        path: 'dashboard',
+        path: '',
         component: DashboardComponent
     },
     {
