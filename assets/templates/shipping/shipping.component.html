@@ -38,12 +38,19 @@
                                      [recipient]="recipient"
                                      (dimensionsChange)="dimensions = $event"
                                      (weightChange)="weight = $event"
+                                     (isDocumentChange)="isDocument = $event"
                                      (parcelChange)="parcel = $event"></fp-shipping-product-calculation>
 
     <fp-shipping-options (onError)="handleError($event)"
                          (onBuyLabel)="buyLabel()"
                          (selectedOptionsChange)="options = $event"
                          [canBuy]="canBuy(buyRunning, parcel, shippingPoint, sender, recipient, weight, costCenter1)"
-                         [parcel]="parcel"></fp-shipping-options>
+                         [parcel]="parcel"
+                         [dimensions]="dimensions"
+                         [weight]="weight"
+                         [isDocument]="isDocument"
+                         [shippingPoint]="shippingPoint"
+                         [recipient]="recipient"
+                         (parcelChange)="parcel = $event"></fp-shipping-options>
   </div>
 </div>

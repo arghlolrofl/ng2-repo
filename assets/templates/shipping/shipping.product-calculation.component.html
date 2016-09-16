@@ -148,7 +148,8 @@
       <div class="col-sm-12">
         <button *ngFor="let parcel of parcelSuggestions"
                 class="box-package"
-                (click)="parcelSelected(parcel)">
+                (click)="parcelSelected(parcel)"
+                [disabled]="calculationRunning">
           <span>{{parcel.Name}}</span>
           <span class="price">{{parcel.Price.Total | currency:'USD':true:'1.2-2'}}</span>
           <span>{{parcel.ExpectedTransitTime}} {{ 'PRODUCT_CALCULATION_BUSINESS_DAYS' | translate }} {{parcel.GuaranteedDelivery ? '(Guaranteed)' : ''}}*</span>
@@ -161,7 +162,8 @@
     <div class="row">
       <div class="col-sm-12">
         <button class="button popup"
-                (click)="modalProductSelect.close()">
+                (click)="modalProductSelect.close()"
+                [disabled]="calculationRunning">
           <span>{{ 'MODAL_CLOSE' | translate }}</span>
         </button>
       </div>
