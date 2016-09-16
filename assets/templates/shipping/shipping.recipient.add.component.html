@@ -233,6 +233,42 @@
       <div class="row">
         <div class="col-sm-12">
           <div class="field-container text-field">
+            <input type="text"
+                   name="additionalInformation"
+                   placeholder="{{ 'RECIPIENT_ADD_ADDITIONALINFORMATION_PLACEHOLDER' | translate }}"
+                   [(ngModel)]="address.AdditionalInformation"
+                   (keyup.esc)="address.AdditionalInformation = ''"
+                   required>
+            <button type="button"
+                    class="clear-submit"
+                    (click)="address.AdditionalInformation = ''">
+              <span class="icon-close"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="field-container text-field">
+            <input type="text"
+                   name="phoneNumber"
+                   placeholder="{{ 'RECIPIENT_ADD_PHONENUMBER_PLACEHOLDER' | translate }}"
+                   [(ngModel)]="address.PhoneNumber"
+                   (keyup.esc)="address.PhoneNumber = ''"
+                   required>
+            <button type="button"
+                    class="clear-submit"
+                    (click)="address.PhoneNumber = ''">
+              <span class="icon-close"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="field-container text-field">
             <select (change)="addressGroupChanged($event.target.value)"
                     [disabled]="addressGroups.length === 0">
               <option *ngFor="let addressGroup of addressGroups">
