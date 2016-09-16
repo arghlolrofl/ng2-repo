@@ -1,8 +1,7 @@
 import {Component, Output, EventEmitter} from '@angular/core';
-import {TranslatePipe} from 'ng2-translate/ng2-translate';
 import {Observable} from "rxjs/Observable";
 
-import {SuggestDirective, SuggestEvents} from "../../directives/suggest.directive";
+import {SuggestEvents} from "../../directives/suggest.directive";
 import CostCenterService from "../../services/cost-center.service";
 import CostCenterInfo from "../../models/cost-center-info";
 import {MAX_AC_RESULTS} from "../../config";
@@ -10,12 +9,6 @@ import {MAX_AC_RESULTS} from "../../config";
 @Component({
     selector: 'fp-shipping-cost-center',
     templateUrl: 'assets/templates/shipping/shipping.cost-center.component.html',
-    directives: [
-        SuggestDirective
-    ],
-    pipes: [
-        TranslatePipe
-    ],
     providers: [
         CostCenterService
     ]

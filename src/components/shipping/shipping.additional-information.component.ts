@@ -1,12 +1,8 @@
 import {Component, Output, EventEmitter} from '@angular/core';
-import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
 @Component({
     selector: 'fp-shipping-additional-information',
-    templateUrl: 'assets/templates/shipping/shipping.additional-information.component.html',
-    pipes: [
-        TranslatePipe
-    ]
+    templateUrl: 'assets/templates/shipping/shipping.additional-information.component.html'
 })
 
 /**

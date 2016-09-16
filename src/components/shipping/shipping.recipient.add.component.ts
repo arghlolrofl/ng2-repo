@@ -1,7 +1,5 @@
 import {Component, ViewChild, EventEmitter, Input, AfterViewInit} from '@angular/core';
-import {ControlGroup, FormBuilder, Validators} from "@angular/common";
-import {TranslatePipe} from 'ng2-translate/ng2-translate';
-import {MODAL_DIRECTIVES, ModalComponent} from 'ng2-bs3-modal/ng2-bs3-modal';
+import {ModalComponent} from 'ng2-bs3-modal/ng2-bs3-modal';
 
 import AddressCreationInfo from "../../models/address-creation-info";
 import RegionInfo from "../../models/region-info";
@@ -15,12 +13,6 @@ import ErrorUtils from "../../utils/error-utils";
 @Component({
     selector: 'fp-shipping-recipient-add',
     templateUrl: 'assets/templates/shipping/shipping.recipient.add.component.html',
-    directives: [
-        MODAL_DIRECTIVES
-    ],
-    pipes: [
-        TranslatePipe
-    ],
     providers: [
         RegionService,
         CountryService,

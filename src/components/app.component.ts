@@ -1,8 +1,8 @@
 import {Component, ViewChild, AfterViewInit} from '@angular/core';
-import {HTTP_PROVIDERS, Http} from '@angular/http';
-import {TranslateService, TranslatePipe, TRANSLATE_PROVIDERS, TranslateLoader, TranslateStaticLoader} from 'ng2-translate/ng2-translate';
+import {Http} from '@angular/http';
+import {TranslateService, TranslatePipe, TranslateLoader, TranslateStaticLoader} from 'ng2-translate/ng2-translate';
 import {CookieService} from 'angular2-cookie/core';
-import {MODAL_DIRECTIVES, ModalComponent} from 'ng2-bs3-modal/ng2-bs3-modal';
+import {ModalComponent} from 'ng2-bs3-modal/ng2-bs3-modal';
 
 import {AVAILABLE_LOCALES} from '../config';
 import LoginService from '../services/login.service';
@@ -11,23 +11,10 @@ import APIClient from "../services/api-client.service";
 @Component({
     selector: 'fp-app',
     templateUrl: 'assets/templates/app.component.html',
-    directives: [
-        MODAL_DIRECTIVES
-    ],
     providers: [
-        HTTP_PROVIDERS,
-        TRANSLATE_PROVIDERS,
-        {
-            provide: TranslateLoader,
-            useFactory: (http: Http) => new TranslateStaticLoader(http, 'assets/i18n', '.json'),
-            deps: [Http]
-        },
         CookieService,
         LoginService,
         APIClient
-    ],
-    pipes: [
-        TranslatePipe
     ]
 })
 

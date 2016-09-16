@@ -1,9 +1,7 @@
 import {Component, Output, EventEmitter, ViewChild, Input} from '@angular/core';
-import {TranslatePipe} from 'ng2-translate/ng2-translate';
-import {MODAL_DIRECTIVES, ModalComponent} from 'ng2-bs3-modal/ng2-bs3-modal';
+import {ModalComponent} from 'ng2-bs3-modal/ng2-bs3-modal';
 import * as _ from 'lodash';
 
-import ShippingProductCalculationShortcutsComponent from "./shipping.product-calculation.shortcuts.component";
 import AddressService from "../../services/address.service";
 import ShippingService from "../../services/shipping.service";
 import ParcelInfo from "../../models/parcel-info";
@@ -16,13 +14,6 @@ import AddressDisplayInfo from "../../models/address-display-info";
 @Component({
     selector: 'fp-shipping-product-calculation',
     templateUrl: 'assets/templates/shipping/shipping.product-calculation.component.html',
-    directives: [
-        MODAL_DIRECTIVES,
-        ShippingProductCalculationShortcutsComponent
-    ],
-    pipes: [
-        TranslatePipe
-    ],
     providers: [
         AddressService,
         ShippingService

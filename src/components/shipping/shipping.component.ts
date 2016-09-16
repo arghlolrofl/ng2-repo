@@ -1,13 +1,5 @@
 import {Component} from '@angular/core';
-import {TranslatePipe} from 'ng2-translate/ng2-translate';
 import * as _ from 'lodash';
-
-import ShippingSenderComponent from "./shipping.sender.component";
-import ShippingOptionsComponent from "./shipping.options.component";
-import ShippingProductCalculationComponent from "./shipping.product-calculation.component";
-import ShippingRecipientComponent from "./shipping.recipient.component";
-import ShippingCostCenterComponent from "./shipping.cost-center.component";
-import ShippingAdditionalInformationComponent from "./shipping.additional-information.component";
 
 import CostCenterInfo from "../../models/cost-center-info";
 import ParcelProductInfo from "../../models/parcel-product-info";
@@ -26,17 +18,6 @@ import ErrorUtils from "../../utils/error-utils";
     templateUrl: 'assets/templates/shipping/shipping.component.html',
     providers: [
         ShippingService
-    ],
-    directives: [
-        ShippingSenderComponent,
-        ShippingRecipientComponent,
-        ShippingCostCenterComponent,
-        ShippingAdditionalInformationComponent,
-        ShippingProductCalculationComponent,
-        ShippingOptionsComponent
-    ],
-    pipes: [
-        TranslatePipe
     ]
 })
 

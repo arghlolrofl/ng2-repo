@@ -1,6 +1,5 @@
 import {Component, ViewChild, AfterViewInit, Output, EventEmitter} from '@angular/core';
-import {TranslatePipe} from 'ng2-translate/ng2-translate';
-import {MODAL_DIRECTIVES, ModalComponent} from 'ng2-bs3-modal/ng2-bs3-modal';
+import {ModalComponent} from 'ng2-bs3-modal/ng2-bs3-modal';
 
 import ShortcutService from "../../services/shortcut.service";
 import ShortcutInfo from "../../models/shortcut-info";
@@ -8,12 +7,6 @@ import ShortcutInfo from "../../models/shortcut-info";
 @Component({
     selector: 'fp-shipping-product-calculation-shortcuts',
     templateUrl: 'assets/templates/shipping/shipping.product-calculation.shortcuts.component.html',
-    directives: [
-        MODAL_DIRECTIVES
-    ],
-    pipes: [
-        TranslatePipe
-    ],
     providers: [
         ShortcutService
     ]

@@ -1,7 +1,5 @@
 import {Component, EventEmitter, Output, Input} from '@angular/core';
-import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
-import ShippingSenderAddComponent from "./shipping.sender.add.component";
 import AddressService from "../../services/address.service";
 import AddressDisplayInfo from "../../models/address-display-info";
 import {SuggestDirective, SuggestEvents} from "../../directives/suggest.directive";
@@ -11,13 +9,6 @@ import {MAX_AC_RESULTS} from "../../config";
 @Component({
     selector: 'fp-shipping-sender',
     templateUrl: 'assets/templates/shipping/shipping.sender.component.html',
-    directives: [
-        SuggestDirective,
-        ShippingSenderAddComponent
-    ],
-    pipes: [
-        TranslatePipe
-    ],
     providers: [
         AddressService
     ]

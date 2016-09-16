@@ -1,24 +1,15 @@
 import {Component, EventEmitter, Output} from '@angular/core';
-import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
-import ShippingRecipientAddComponent from "./shipping.recipient.add.component";
 import AddressService from "../../services/address.service";
 import AddressDisplayInfo from "../../models/address-display-info";
 import AddressGroupInfo from "../../models/address-group-info";
-import {SuggestDirective, SuggestEvents} from "../../directives/suggest.directive";
+import {SuggestEvents} from "../../directives/suggest.directive";
 import {MAX_AC_RESULTS} from "../../config";
 
 
 @Component({
     selector: 'fp-shipping-recipient',
     templateUrl: 'assets/templates/shipping/shipping.recipient.component.html',
-    directives: [
-        SuggestDirective,
-        ShippingRecipientAddComponent
-    ],
-    pipes: [
-        TranslatePipe
-    ],
     providers: [
         AddressService
     ]

@@ -1,7 +1,5 @@
 import {Component, ViewChild, EventEmitter, Input, AfterViewInit} from '@angular/core';
-import {ControlGroup, FormBuilder, Validators} from "@angular/common";
-import {TranslatePipe} from 'ng2-translate/ng2-translate';
-import {MODAL_DIRECTIVES, ModalComponent} from 'ng2-bs3-modal/ng2-bs3-modal';
+import {ModalComponent} from 'ng2-bs3-modal/ng2-bs3-modal';
 
 import CountryService from "../../services/country.service";
 import CountryInfo from "../../models/country-info";
@@ -14,12 +12,6 @@ import ErrorUtils from "../../utils/error-utils";
 @Component({
     selector: 'fp-shipping-sender-add',
     templateUrl: 'assets/templates/shipping/shipping.sender.add.component.html',
-    directives: [
-        MODAL_DIRECTIVES
-    ],
-    pipes: [
-        TranslatePipe
-    ],
     providers: [
         RegionService,
         CountryService,
