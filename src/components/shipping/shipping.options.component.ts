@@ -112,7 +112,7 @@ export default class ShippingOptionsComponent implements AfterViewInit {
         parcelInfo.Product.Options = this.selectedOptions.map((o: PostalProductOptionInfo) => {
             const option = new ParcelOptionInfo();
             option.Code = o.Code;
-            option.Amount = o.Amount;
+            option.Amount = !o.Details ? undefined : 1;
             return option;
         });
 
@@ -157,7 +157,7 @@ export default class ShippingOptionsComponent implements AfterViewInit {
     private selectOption(option: PostalProductOptionInfo, checked) {
         if (checked) {
             // TODO option dependency
-            if (option.Code !== 'DC') {
+            if (option.Details) {
                 option.Amount = 1;
             }
             this.selectedOptions.push(option);
