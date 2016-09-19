@@ -93,6 +93,10 @@ export default class ShippingOptionsComponent implements AfterViewInit {
         initOptionsUI();
     }
 
+    /**
+     * Confirm options on save.
+     * @returns {null} 
+     */
     public confirmOptions() {
         const parcelInfo = new ParcelInfo()
         parcelInfo.Characteristic.Dimension = this.dimensions;
@@ -108,6 +112,7 @@ export default class ShippingOptionsComponent implements AfterViewInit {
         parcelInfo.Product.Options = this.selectedOptions.map((o: PostalProductOptionInfo) => {
             const option = new ParcelOptionInfo();
             option.Code = o.Code;
+            option.Amount = o.Amount;
             return option;
         });
 
@@ -116,6 +121,7 @@ export default class ShippingOptionsComponent implements AfterViewInit {
             (parcel: PostalProductInfo) => {
                 this.parcelChange.emit(parcel);
                 this.confirmationRunning = false;
+                this.selectedOptionsChange.emit(this.selectedOptions);
                 this.modalOptionSelect.close();
             }, 
             (error: Error) => {
@@ -132,8 +138,14 @@ export default class ShippingOptionsComponent implements AfterViewInit {
      * @returns {string}
      */
     private getDisplayOptions() {
-        return this.selectedOptions /*.slice().slice(0, Math.min(5, this.options.length))*/
-            .map((option: PostalProductOptionInfo) => option.Name)
+        return this.selectedOptions
+            .map((option: PostalProductOptionInfo) => {
+                let display = option.Name;
+                if (option.Amount > 0) {
+                    display += ` (${option.Amount})`
+                }
+                return display;
+            })
             .join(', ');
     }
 
@@ -144,12 +156,39 @@ export default class ShippingOptionsComponent implements AfterViewInit {
      */
     private selectOption(option: PostalProductOptionInfo, checked) {
         if (checked) {
+            // TODO option dependency
+            if (option.Code !== 'DC') {
+                option.Amount = 1;
+            }
             this.selectedOptions.push(option);
+
+            // TODO option dependency
+            if (option.Code !== 'DC' 
+                && !this.selectedOptions.find((o: PostalProductOptionInfo) => o.Code === 'DC')) {
+                this.selectedOptions.push(
+                    this.parcel.Price.Options.find((o: PostalProductOptionInfo) => o.Code === 'DC'));
+            }
         } else {
             this.selectedOptions = this.selectedOptions.filter(
                 (r: PostalProductOptionInfo) => r.Code !== option.Code);
+
+            // TODO option dependency
+            if (this.selectedOptions.length > 0 
+                && !this.selectedOptions.find((o: PostalProductOptionInfo) => o.Code === 'DC')) {
+                this.selectedOptions.push(
+                    this.parcel.Price.Options.find((o: PostalProductOptionInfo) => o.Code === 'DC'));
+            }
         }
-        this.selectedOptionsChange.emit(this.selectedOptions);
+    }
+
+    /**
+     * Checks if the option must be selected.
+     * @returns {boolean}
+     */
+    private mustBeSelected(option: PostalProductOptionInfo) {
+        // TODO option dependency
+        return option.Code === 'DC' 
+            && this.selectedOptions.filter((o: PostalProductOptionInfo) => o.Code !== 'DC').length > 0;
     }
 
     /**
@@ -157,7 +196,6 @@ export default class ShippingOptionsComponent implements AfterViewInit {
      * @returns {number}
      */
     private getOptionCosts() {
-        // TODO still necessary?!
         return this.selectedOptions.reduce((p, r: PostalProductOptionInfo) => p + r.Price, 0);
     }
 
