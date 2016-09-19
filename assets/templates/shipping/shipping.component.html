@@ -45,12 +45,11 @@
                          (onBuyLabel)="buyLabel()"
                          (selectedOptionsChange)="options = $event"
                          [canBuy]="canBuy(buyRunning, parcel, shippingPoint, sender, recipient, weight, costCenter1)"
-                         [parcel]="parcel"
+                         [(parcel)]="parcel"
                          [dimensions]="dimensions"
                          [weight]="weight"
                          [isDocument]="isDocument"
                          [shippingPoint]="shippingPoint"
-                         [recipient]="recipient"
-                         (parcelChange)="parcel = $event"></fp-shipping-options>
+                         [recipient]="recipient"></fp-shipping-options>
   </div>
 </div>
