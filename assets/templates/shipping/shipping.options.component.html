@@ -77,7 +77,7 @@
   </div>
 </section>
 
-<modal #modalOptionSelect>
+<modal #modalOptionSelect [keyboard]="false" [backdrop]="'static'">
   <modal-header>
     <div class="row">
       <div class="col-sm-12">
@@ -93,7 +93,7 @@
                  type="checkbox"
                  (click)="selectOption(option, cb.checked)"
                  [checked]="isOptionActive(option)"
-                 [disabled]="confirmationRunning"/>
+                 [disabled]="confirmationRunning || mustBeSelected(option)"/>
           {{option.Name}}
         </li>
       </ul>

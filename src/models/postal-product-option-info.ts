@@ -8,4 +8,6 @@ export default class PostalProductOptionInfo {
     Name: string;
 
     Price: number;
+
+    Amount: number = 1;
 }
