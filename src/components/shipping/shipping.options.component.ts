@@ -37,12 +37,6 @@ export default class ShippingOptionsComponent implements AfterViewInit {
     @Output() onBuyLabel: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /**
-     * Updated when the parcel changes, because of options changes.
-     * @type {EventEmitter<PostalProductInfo>}
-     */
-    @Output() parcelChange: EventEmitter<PostalProductInfo> = new EventEmitter<PostalProductInfo>();
-
-    /**
      * Modal dialog for sender
      */
     @ViewChild('modalOptionSelect') modalOptionSelect: ModalComponent;
@@ -66,7 +60,7 @@ export default class ShippingOptionsComponent implements AfterViewInit {
     /**
      * Options.
      */
-    selectedOptions: Array<PostalProductOptionInfo> = [];
+    @Input() selectedOptions: Array<PostalProductOptionInfo>;
     @Output() selectedOptionsChange: EventEmitter<Array<PostalProductOptionInfo>> = 
         new EventEmitter<Array<PostalProductOptionInfo>>();
 
@@ -112,14 +106,15 @@ export default class ShippingOptionsComponent implements AfterViewInit {
         parcelInfo.Product.Options = this.selectedOptions.map((o: PostalProductOptionInfo) => {
             const option = new ParcelOptionInfo();
             option.Code = o.Code;
-            option.Amount = !o.Details ? undefined : 1;
+            if (o.Details && o.Details.IncludedAmount) {
+                option.Amount = o.Details.IncludedAmount;
+            }
             return option;
         });
 
         this.confirmationRunning = true;
         this.shippingService.calculate(parcelInfo).subscribe(
             (parcel: PostalProductInfo) => {
-                this.parcelChange.emit(parcel);
                 this.confirmationRunning = false;
                 this.selectedOptionsChange.emit(this.selectedOptions);
                 this.modalOptionSelect.close();

@@ -46,7 +46,7 @@ export default class ShippingComponent {
     dimensions: DimensionInfo;
     weight: WeightInfo;
     isDocument: boolean;
-    options: Array<PostalProductOptionInfo>;
+    options: Array<PostalProductOptionInfo> = new Array<PostalProductOptionInfo>();
     buyRunning: boolean = false;
 
     /**

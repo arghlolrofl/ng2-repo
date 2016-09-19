@@ -46,6 +46,13 @@ export default class ShippingProductCalculationComponent {
     @Input() recipient: AddressDisplayInfo;
 
     /**
+     * Options.
+     */
+    @Input() selectedOptions: Array<PostalProductOptionInfo>;
+    @Output() selectedOptionsChange: EventEmitter<Array<PostalProductOptionInfo>> = 
+        new EventEmitter<Array<PostalProductOptionInfo>>();
+
+    /**
      * Modal dialog for sender
      */
     @ViewChild('modalProductSelect') modalProductSelect: ModalComponent;
@@ -233,10 +240,12 @@ export default class ShippingProductCalculationComponent {
             (parcel: PostalProductInfo) => {
                 this.calculationRunning = false;
                 this.parcelChange.emit(parcel);
+                this.selectedOptionsChange.emit([]);
                 this.modalProductSelect.close();
             },
             (error: Error) => {
                 this.parcelChange.emit(null);
+                this.selectedOptionsChange.emit([]);
                 this.onError.emit(error);
                 this.calculationRunning = false;
                 this.modalProductSelect.close();
