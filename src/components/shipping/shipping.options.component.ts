@@ -153,7 +153,7 @@ export default class ShippingOptionsComponent implements AfterViewInit {
         if (checked) {
             // TODO option dependency
             if (option.Details) {
-                option.Amount = 1;
+                option.Amount = option.Details.IncludedAmount;
             }
             this.selectedOptions.push(option);
 
