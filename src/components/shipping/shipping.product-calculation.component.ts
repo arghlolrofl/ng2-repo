@@ -239,6 +239,9 @@ export default class ShippingProductCalculationComponent {
         this.shippingService.calculate(this.parcelInfo).subscribe(
             (parcel: PostalProductInfo) => {
                 this.calculationRunning = false;
+                // Prepare amount for options
+                parcel.Price.Options.forEach(
+                    (o: PostalProductOptionInfo) => o.Amount = o.Details ? o.Details.IncludedAmount || 0 : null);
                 this.parcelChange.emit(parcel);
                 this.selectedOptionsChange.emit([]);
                 this.modalProductSelect.close();

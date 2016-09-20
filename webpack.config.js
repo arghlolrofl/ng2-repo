@@ -18,6 +18,7 @@ module.exports = {
     },
     devtool: 'source-map',
     devServer: {
+        inline: true,
         historyApiFallback: {
             index: 'index.html'
         }
