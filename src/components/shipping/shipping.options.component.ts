@@ -1,5 +1,6 @@
-import {Component, Input, Output, EventEmitter, ViewChild, AfterViewInit} from '@angular/core';
+import {Component, Input, Output, EventEmitter, ViewChild, AfterViewInit, OnChanges} from '@angular/core';
 import {ModalComponent} from 'ng2-bs3-modal/ng2-bs3-modal';
+import * as _ from 'lodash';
 
 import PostalProductInfo from "../../models/postal-product-info";
 import PostalProductOptionInfo from "../../models/postal-product-option-info";
@@ -26,7 +27,7 @@ import {initOptionsUI} from "../../ui/ui";
 /**
  * Shipping options component.
  */
-export default class ShippingOptionsComponent implements AfterViewInit {
+export default class ShippingOptionsComponent implements AfterViewInit, OnChanges {
 
     @Output() onError: EventEmitter<Error> = new EventEmitter<Error>();
 
@@ -46,11 +47,13 @@ export default class ShippingOptionsComponent implements AfterViewInit {
      */
     @Input() dimensions: DimensionInfo;
     @Input() weight: WeightInfo;
+    prevParcel: PostalProductInfo;
     @Input() parcel: PostalProductInfo;
     @Input() isDocument: boolean;
     @Input() shippingPoint: string;
     @Input() recipient: AddressDisplayInfo;
     @Input() canBuy: () => boolean = () => true;
+    @Output() parcelChange: EventEmitter<PostalProductInfo> = new EventEmitter<PostalProductInfo>();
 
     /**
      * Consumer information.
@@ -60,6 +63,7 @@ export default class ShippingOptionsComponent implements AfterViewInit {
     /**
      * Options.
      */
+    availableOptions: Array<PostalProductOptionInfo>;
     @Input() selectedOptions: Array<PostalProductOptionInfo>;
     @Output() selectedOptionsChange: EventEmitter<Array<PostalProductOptionInfo>> = 
         new EventEmitter<Array<PostalProductOptionInfo>>();
@@ -87,6 +91,19 @@ export default class ShippingOptionsComponent implements AfterViewInit {
         initOptionsUI();
     }
 
+    ngOnChanges(changes: any) {
+        if (this.parcel) {
+            if (changes.parcel && changes.parcel.previousValue) {
+                const prev: PostalProductInfo = changes.parcel.previousValue;
+                if ((this.parcel.Code === prev.Code && !this.availableOptions) || this.parcel.Code !== prev.Code) {
+                    this.availableOptions = _.cloneDeep(this.parcel.Price.Options);
+                }
+            } else if (changes.parcel) {
+                this.availableOptions = _.cloneDeep(this.parcel.Price.Options);
+            }
+        }
+    }
+
     /**
      * Confirm options on save.
      * @returns {null} 
@@ -106,9 +123,7 @@ export default class ShippingOptionsComponent implements AfterViewInit {
         parcelInfo.Product.Options = this.selectedOptions.map((o: PostalProductOptionInfo) => {
             const option = new ParcelOptionInfo();
             option.Code = o.Code;
-            if (o.Details && o.Details.IncludedAmount) {
-                option.Amount = o.Details.IncludedAmount;
-            }
+            option.Amount = o.Amount;
             return option;
         });
 
@@ -116,6 +131,7 @@ export default class ShippingOptionsComponent implements AfterViewInit {
         this.shippingService.calculate(parcelInfo).subscribe(
             (parcel: PostalProductInfo) => {
                 this.confirmationRunning = false;
+                this.parcelChange.emit(parcel);
                 this.selectedOptionsChange.emit(this.selectedOptions);
                 this.modalOptionSelect.close();
             }, 
@@ -127,7 +143,7 @@ export default class ShippingOptionsComponent implements AfterViewInit {
                 this.modalOptionSelect.close();
             });
     }
-    
+
     /**
      * Get the options that should be displayed (reduced list).
      * @returns {string}
@@ -187,20 +203,17 @@ export default class ShippingOptionsComponent implements AfterViewInit {
     }
 
     /**
-     * Get option costs for selected options.
-     * @returns {number}
-     */
-    private getOptionCosts() {
-        return this.selectedOptions.reduce((p, r: PostalProductOptionInfo) => p + r.Price, 0);
-    }
-
-    /**
      * Get the extra service costs based on the selected options.
      * @returns {number}
      */
     private getExtraServiceCosts() {
-        return this.getOptionCosts() +
-            this.parcel.Price.Adjustments.reduce((p, r: PostalProductAdjustmentInfo) => p + r.Cost, 0);
+        let costs = this.parcel.Price.Adjustments.reduce((p, r: PostalProductAdjustmentInfo) => p + r.Cost, 0);
+        if (this.selectedOptions.length > 0) {
+            costs += this.parcel.Price.Options
+                .filter(r => !!this.selectedOptions.find((o: PostalProductOptionInfo) => o.Code === r.Code))
+                .reduce((p, r: PostalProductOptionInfo) => p + (r.Price || 0), 0);
+        }
+        return costs;
     }
 
     /**

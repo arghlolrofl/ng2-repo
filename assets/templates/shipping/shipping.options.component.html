@@ -46,7 +46,7 @@
           </tr>
           <tr>
             <td>{{ 'OPTIONS_TOTAL' | translate }}:</td>
-            <td *ngIf="parcel">{{(parcel.Price.Total + getOptionCosts()) | currency:'USD':true:'1.2-2'}}</td>
+            <td *ngIf="parcel">{{(parcel.Price.Total) | currency:'USD':true:'1.2-2'}}</td>
             <td *ngIf="!parcel">{{ 'OPTIONS_PRICE_PLACEHOLDER' | translate }}</td>
           </tr>
         </table>
@@ -87,14 +87,24 @@
   </modal-header>
   <modal-body>
     <div class="col-sm-12">
-      <ul *ngIf="parcel && parcel.Price.Options">
-        <li *ngFor="let option of parcel.Price.Options">
+      <ul *ngIf="parcel && availableOptions">
+        <li *ngFor="let option of availableOptions">
           <input #cb
                  type="checkbox"
                  (click)="selectOption(option, cb.checked)"
                  [checked]="isOptionActive(option)"
                  [disabled]="confirmationRunning || mustBeSelected(option)"/>
           {{option.Name}}
+
+          <input *ngIf="option.Details && option.Details.StepSize > 0"
+                 #cbInput
+                 type="number"
+                 [value]="option.Details.IncludedAmount || 0"
+                 [min]="option.Details.IncludedAmount || 0"
+                 [max]="option.Details.MaxValue"
+                 [step]="option.Details.StepSize"
+                 [hidden]="!isOptionActive(option)"
+                 [(ngModel)]="option.Amount"/>
         </li>
       </ul>
     </div>
