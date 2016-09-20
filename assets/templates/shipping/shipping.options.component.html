@@ -77,7 +77,7 @@
   </div>
 </section>
 
-<modal #modalOptionSelect>
+<modal #modalOptionSelect [keyboard]="false" [backdrop]="'static'">
   <modal-header>
     <div class="row">
       <div class="col-sm-12">
@@ -91,7 +91,9 @@
         <li *ngFor="let option of parcel.Price.Options">
           <input #cb
                  type="checkbox"
-                 (click)="selectOption(option, cb.checked)"/>
+                 (click)="selectOption(option, cb.checked)"
+                 [checked]="isOptionActive(option)"
+                 [disabled]="confirmationRunning || mustBeSelected(option)"/>
           {{option.Name}}
         </li>
       </ul>
@@ -101,7 +103,8 @@
     <div class="row">
       <div class="col-sm-12">
         <button class="button popup"
-                (click)="modalOptionSelect.close()">
+                (click)="confirmOptions()"
+                [disabled]="confirmationRunning">
           <span>{{ 'MODAL_SAVE' | translate }}</span>
         </button>
       </div>

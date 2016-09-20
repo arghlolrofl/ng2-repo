@@ -1,4 +1,4 @@
-import PostalProductionOptionDetail from './postal-product-option-detail';
+import PostalProductOptionDetail from './postal-product-option-detail';
 
 /**
  * PostalProductOptionInfo model.
@@ -11,5 +11,7 @@ export default class PostalProductOptionInfo {
 
     Price: number;
 
-    Details: PostalProductionOptionDetail
+    Amount: number;
+
+    Details: PostalProductOptionDetail;
 }

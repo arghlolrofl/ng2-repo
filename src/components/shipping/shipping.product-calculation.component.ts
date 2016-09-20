@@ -10,6 +10,9 @@ import DimensionInfo from "../../models/dimension-info";
 import WeightInfo from "../../models/weight-info";
 import ShortcutInfo from "../../models/shortcut-info";
 import AddressDisplayInfo from "../../models/address-display-info";
+import PostalProductOptionInfo from '../../models/postal-product-option-info';
+import ParcelOptionInfo from '../../models/parcel-option-info';
+import ParcelProductInfo from '../../models/parcel-product-info';
 
 @Component({
     selector: 'fp-shipping-product-calculation',
@@ -43,6 +46,13 @@ export default class ShippingProductCalculationComponent {
     @Input() recipient: AddressDisplayInfo;
 
     /**
+     * Options.
+     */
+    @Input() selectedOptions: Array<PostalProductOptionInfo>;
+    @Output() selectedOptionsChange: EventEmitter<Array<PostalProductOptionInfo>> = 
+        new EventEmitter<Array<PostalProductOptionInfo>>();
+
+    /**
      * Modal dialog for sender
      */
     @ViewChild('modalProductSelect') modalProductSelect: ModalComponent;
@@ -68,7 +78,7 @@ export default class ShippingProductCalculationComponent {
     heightInputChange: EventEmitter<number> = new EventEmitter<number>();
     @Output() dimensionsChange: EventEmitter<DimensionInfo> = new EventEmitter<DimensionInfo>();
     @Output() weightChange: EventEmitter<WeightInfo> = new EventEmitter<WeightInfo>();
-    isDocumentChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+    @Output() isDocumentChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /**
      * Defines if calculation is running or not.
@@ -121,7 +131,7 @@ export default class ShippingProductCalculationComponent {
 
         this.widthInputChange.subscribe((value: string) => {
             resetParcel();
-            
+
             const num = this.parseNumber(value);
             if (num || value === '') {
                 this.validWidthInput = true;
@@ -168,6 +178,7 @@ export default class ShippingProductCalculationComponent {
         }
         this.calculationRunning = true;
 
+        this.parcelInfo.Product = null;
         this.parcelInfo.PostalCode = this.shippingPoint.replace(/ /g, '');
         this.parcelInfo.Destination.PostalCode = this.recipient.ZipCode.replace(/ /g, '');
 
@@ -177,7 +188,6 @@ export default class ShippingProductCalculationComponent {
             .first()
             .subscribe(
             (r: PostalProductInfo) => {
-                this.parcelChange.emit(r);
                 this.calculationRunning = false;
                 this.modalProductSelect.open();
             },
@@ -221,8 +231,25 @@ export default class ShippingProductCalculationComponent {
      * @param {PostalProductInfo} parcel the selected parcel
      */
     public parcelSelected(parcel: PostalProductInfo) {
-        this.parcelChange.emit(parcel);
-        this.modalProductSelect.close();
+        if (!this.parcelInfo.Product) {
+            this.parcelInfo.Product = new ParcelProductInfo();
+        }
+        this.parcelInfo.Product.Code = parcel.Code;
+        this.calculationRunning = true;
+        this.shippingService.calculate(this.parcelInfo).subscribe(
+            (parcel: PostalProductInfo) => {
+                this.calculationRunning = false;
+                this.parcelChange.emit(parcel);
+                this.selectedOptionsChange.emit([]);
+                this.modalProductSelect.close();
+            },
+            (error: Error) => {
+                this.parcelChange.emit(null);
+                this.selectedOptionsChange.emit([]);
+                this.onError.emit(error);
+                this.calculationRunning = false;
+                this.modalProductSelect.close();
+            });
     }
 
     /**

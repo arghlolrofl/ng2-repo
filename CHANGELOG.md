@@ -24,3 +24,7 @@
 
 ## 1.2.0
 - Improved reliability of build process by replacing SystemJS with Webpack
+
+## WIP
+- Multiple calls to calculation API - FTP-47 Produktberechnung (CR)
+- Added new fields to address inputs - FTP-44 Addressen Additionalinformation / Telefonnummer (CR)

@@ -1,7 +1,13 @@
 /**
+<<<<<<< HEAD
  * PostalProductionOptionDetail model.
  */
 export default class PostalProductionOptionDetail {
+=======
+ * PostalProductOptionDetail model.
+ */
+export default class PostalProductOptionDetail {
+>>>>>>> develop
 
     IncludedAmount: number;
 

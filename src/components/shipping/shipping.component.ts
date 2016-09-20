@@ -45,7 +45,8 @@ export default class ShippingComponent {
     parcel: ParcelProductInfo;
     dimensions: DimensionInfo;
     weight: WeightInfo;
-    options: Array<PostalProductOptionInfo>;
+    isDocument: boolean;
+    options: Array<PostalProductOptionInfo> = new Array<PostalProductOptionInfo>();
     buyRunning: boolean = false;
 
     /**
@@ -107,6 +108,7 @@ export default class ShippingComponent {
             request.Product.Options = this.options.map((r: PostalProductOptionInfo) => {
                 const option: Option = new Option();
                 option.Code = r.Code;
+                option.Amount = r.Amount;
                 return option;
             });
         }
