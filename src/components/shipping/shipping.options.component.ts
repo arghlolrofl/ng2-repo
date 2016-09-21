@@ -91,6 +91,11 @@ export default class ShippingOptionsComponent implements AfterViewInit, OnChange
         initOptionsUI();
     }
 
+    /**
+     * Changes on objects.
+     * @param {any} changes all changes in one object
+     * @returns {null}
+     */
     ngOnChanges(changes: any) {
         if (this.parcel) {
             if (changes.parcel && changes.parcel.previousValue) {

@@ -67,10 +67,10 @@ export class SuggestDirective implements OnInit {
                     data: this.suggestions
                 });
             })
-            .filter((term) => !!term)
+            .filter((term: string) => !!term && term.length > 1)
             .distinctUntilChanged()
             .debounceTime(400)
-            .switchMap((term) => (term.length > 1) ? this.mapper(el.nativeElement.value) : [])
+            .switchMap((term: string) => this.mapper(term) || [])
             .subscribe(
             (item) => {
                 this.suggestions.push(item);
