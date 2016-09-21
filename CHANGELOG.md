@@ -25,6 +25,8 @@
 ## 1.2.0
 - Improved reliability of build process by replacing SystemJS with Webpack
 
-## WIP
+## 1.3.0
+- Update to Angular 2 Final Release
 - Multiple calls to calculation API - FTP-47 Produktberechnung (CR)
 - Added new fields to address inputs - FTP-44 Addressen Additionalinformation / Telefonnummer (CR)
+- Added option input field - FTP-48 Optionen Werteingabe (CR)
