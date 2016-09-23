@@ -75,6 +75,7 @@
   "OPTIONS_TOTAL": "Gesamt",
   "OPTIONS_PRICE_PLACEHOLDER": "-",
   "OPTIONS_BUYLABEL_BUTTON": "bestellen",
+  "OPTIONS_INFO_BOX": "<table><tr><td>grün</td><td>noch ausreichend Kreditvolumen vorhanden</td></tr><tr><td>gelb</td><td>Schwellenwert Warnung erreicht. (Einstellbar in Profile)</td></tr><tr><td>rot</td><td>Account gesperrt. Bitte kontaktieren Sie FP.</td></tr></table>",
   "MODAL_CLOSE": "schließen",
   "MODAL_SAVE": "speichern",
   "MODAL_HINT_TEXT": "* gekenntzeichnete Felder sind Pflichtfelder",

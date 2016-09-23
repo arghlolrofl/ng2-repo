@@ -285,6 +285,10 @@
   @include mobile {
     left: - 76px;
   }
+
+  tr td:first-child {
+    width: 60px;
+  }
 }
 
 .row.addressInfo {
