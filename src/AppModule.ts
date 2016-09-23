@@ -11,7 +11,14 @@ import {SuggestDirective} from "./directives/suggest.directive";
 import AppComponent from './components/app.component';
 import DashboardComponent from './components/dashboard/dashboard.component';
 import AdministrationComponent from './components/administration/administration.component';
+
+import SettingsComponent from './components/administration/settings/settings.component';
+import SettingsAccountLevelsComponent from './components/administration/settings/settings.account-levels';
+import SettingsAmountPerLabelComponent from './components/administration/settings/settings.amount-per-label';
+import SettingsBalanceWarningLevelComponent from './components/administration/settings/settings.balance-warning-level';
+
 import ProfileComponent from './components/profile/profile.component';
+
 import ShippingComponent from './components/shipping/shipping.component';
 import ShippingSenderComponent from "./components/shipping/shipping.sender.component";
 import ShippingOptionsComponent from "./components/shipping/shipping.options.component";
@@ -41,7 +48,14 @@ import ShippingProductCalculationShortcutsComponent from "./components/shipping/
         AppComponent,
         DashboardComponent,
         AdministrationComponent,
+
+        SettingsComponent,
+        SettingsAccountLevelsComponent,
+        SettingsAmountPerLabelComponent,
+        SettingsBalanceWarningLevelComponent,
+
         ProfileComponent,
+
         ShippingComponent,
         ShippingSenderComponent,
         ShippingSenderAddComponent,
