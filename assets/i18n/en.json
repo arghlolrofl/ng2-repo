@@ -32,6 +32,7 @@
   "RECIPIENT_HEADLINE": "Recipient",
   "RECIPIENT_FILTER_PLACEHOLDER": "Filter recipient categories",
   "RECIPIENT_PLACEHOLDER": "Recipient",
+  "RECIPIENT_NO_ADDRESS_SELECTED": "No selected address",
   "RECIPIENT_ADD_HEADLINE": "Add new recipient",
   "RECIPIENT_ADD_COMPANY_PLACEHOLDER": "Company",
   "RECIPIENT_ADD_TITLE_PLACEHOLDER": "Title*",
