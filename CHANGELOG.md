@@ -33,3 +33,7 @@
 
 ## 1.3.1
 - Bugfix for option input - FTP-52 Collect on Delivery - Keine Werteingabe
+
+## 1.3.2
+- Added missing address output for recipient - FTP-53 Fehlende Addressanzeige
+- Improved options info box text output  - FTP-54 Mouse over Text für InfoFeld
