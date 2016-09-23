@@ -76,6 +76,7 @@
   "OPTIONS_TOTAL": "Total",
   "OPTIONS_PRICE_PLACEHOLDER": "-",
   "OPTIONS_BUYLABEL_BUTTON": "buy label",
+  "OPTIONS_INFO_BOX": "<table><tr><td>green</td><td>Enough volume of credit available</td></tr><tr><td>yellow</td><td>Threshold alert. (Configurable in Profile)</td></tr><tr><td>red</td><td>Account disabled. Please contact FP.</td></tr></table>",
   "MODAL_CLOSE": "close",
   "MODAL_SAVE": "save",
   "MODAL_HINT_TEXT": "* marked fields are required",
