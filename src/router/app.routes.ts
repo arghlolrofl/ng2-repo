@@ -4,6 +4,7 @@ import DashboardComponent from '../components/dashboard/dashboard.component';
 import ShippingComponent from '../components/shipping/shipping.component';
 import AdministrationComponent from '../components/administration/administration.component';
 import ProfileComponent from '../components/profile/profile.component';
+import ShippingLabelComponent from '../components/shipping/shipping.label.component';
 
 /**
  * The routes to all areas (with parameterized routes).
@@ -17,6 +18,10 @@ const appRoutes = [
     {
         path: 'shipping',
         component: ShippingComponent
+    },
+    {
+        path: 'shipping/label/:id',
+        component: ShippingLabelComponent        
     },
     {
         path: 'administration',
