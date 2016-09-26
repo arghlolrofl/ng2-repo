@@ -39,4 +39,5 @@
 - Improved options info box text output  - FTP-54 Mouse over Text für InfoFeld
 
 ## wip
+- Correction for mandatory fields in add dialogues - FTP-55 Neuen Empfänger hinzufügen - Pflichtfelder unklar
 - Automatic cleaning of input fields after successful saving new addresses - FTP-56 Adressen-Eingabe löschen der Felder
