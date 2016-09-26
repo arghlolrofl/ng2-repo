@@ -136,7 +136,12 @@ export default class APIClient {
      * @returns {Object} response as JS object
      */
     private static extractJson(res: Response) {
-        return res.json();
+        try {
+            return res.json();
+        } catch (e) {
+            console.warn("Invalid JSON object in response, returning empty object!");
+            return {};
+        }
     }
 
     /**

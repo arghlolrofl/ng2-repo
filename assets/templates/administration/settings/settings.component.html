@@ -1,0 +1,65 @@
+﻿<h3>
+    <i class="icon-class icon-cogwheel"></i>
+    {{ 'ADMINISTRATION_SETTINGS_HEADLINE' | translate }}
+</h3>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <section *ngIf="error"
+                 class="sectiontemplate box-error">
+            <div class="content">
+                {{ error.message }}
+            </div>
+            <button type="button"
+                    class="clear-submit"
+                    (click)="error = null">
+                <span class="icon-close"></span>
+            </button>
+        </section>
+    </div>
+</div>
+<div class="row">
+    <div *ngIf="isInEditMode" class="col-md-12 status-message" id="status-box">
+        <i class="icon-interface">
+            <span>Edit Mode</span>
+        </i>
+    </div>
+</div>
+<fp-administration-settings-account-levels [costCenterLevelOneName]="mailOneSettings.CostCenterLevelOneName"
+                                           [costCenterLevelTwoName]="mailOneSettings.CostCenterLevelTwoName"
+                                           [costCenterLevelThreeName]="mailOneSettings.CostCenterLevelThreeName"
+                                           [numberOfLevels]="mailOneSettings.NumberOfLevels"
+                                           [isInEditMode]="isInEditMode"
+                                           (notifyNumberOfLevels)="onNumberOfAccountLevelsChanged($event)"
+                                           (notifyCostCenterLevelOneName)="onCostCenterLevelNameChanged(1, $event)"
+                                           (notifyCostCenterLevelTwoName)="onCostCenterLevelNameChanged(2, $event)"
+                                           (notifyCostCenterLevelThreeName)="onCostCenterLevelNameChanged(3, $event)">
+</fp-administration-settings-account-levels>
+<hr />
+<fp-administration-settings-amount-per-label [maximumAmountPerLabel]="mailOneSettings.MaximumAmountPerLabel"
+                                             [isInEditMode]="isInEditMode"
+                                             (notifyMaximumAmountPerLabel)="onMaximumAmountPerLabelChanged($event)">
+
+</fp-administration-settings-amount-per-label>
+<hr />
+<fp-administration-balance-warning-level [balanceWarningLevel]="mailOneSettings.BalanceWarningLevel"
+                                         [isInEditMode]="isInEditMode"
+                                         (notifyBalanceWarningLevel)="onBalanceWarningLevelChanged($event)">
+
+</fp-administration-balance-warning-level>
+
+<div class="row">
+    <div class="col-md-2 col-md-offset-8 col-sm-6">
+        <button *ngIf="isInEditMode" class="button color" (click)="cancelEditMode()">
+            <span>Cancel</span>
+        </button>
+    </div>
+    <div class="col-md-2 col-sm-6">
+        <button *ngIf="!isInEditMode" class="button color" (click)="enableEditMode()">
+            <span>Edit</span>
+        </button>
+        <button *ngIf="isInEditMode" class="button color" (click)="saveChanges()">
+            <span>Save</span>
+        </button>
+    </div>
+</div>

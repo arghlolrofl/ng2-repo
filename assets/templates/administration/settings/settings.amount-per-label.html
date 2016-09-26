@@ -1,0 +1,38 @@
+﻿<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <label style="width: 250px; height: 18px;">{{ 'ADMINISTRATION_SETTINGS_HEAD_MAX_AMOUNT_PER_LABEL' | translate }}</label>
+    </div>
+</div>
+<div class="row">
+
+    <!-- Input -->
+    <div class="col-md-4 col-sm-12">
+        <div class="field-container text-field">
+            <input type="text"
+                   name="name-max-amount"
+                   [(ngModel)]="maximumAmountPerLabel"
+                   placeholder="{{ 'ADMINISTRATION_SETTINGS_HEAD_MAX_AMOUNT_PER_LABEL' | translate }}"
+                   (change)="notifyMaximumAmountPerLabel.emit(maximumAmountPerLabel);"
+                   [disabled]="!isInEditMode">
+            <button class="clear-submit"
+                    (click)="resetButton_onClick();">
+                <span class="icon-close"></span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Up/Down Buttons -->
+    <div class="field-container box-icon col-md-1 col-sm-6 col-md-offset-1">
+        <button (click)="maximumAmountPerLabel_OnDownClicked();"
+                [disabled]="!isInEditMode">
+            <span class="icon-class icon-arrow-down"></span>
+        </button>
+    </div>
+    <div class="field-container box-icon col-md-1 col-sm-6">
+        <button (click)="maximumAmountPerLabel_OnUpClicked();"
+                [disabled]="!isInEditMode">
+            <span class="icon-class icon-arrow-up"></span>
+        </button>
+    </div>
+
+</div>
