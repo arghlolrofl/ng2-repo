@@ -141,7 +141,8 @@ export default class ShippingRecipientAddComponent implements AfterViewInit {
      */
     public close() {
         this.modal.close();
-
+        this.addressGroup = null;
+        this.address = new AddressCreationInfo();
         return false;
     }
 
@@ -150,11 +151,7 @@ export default class ShippingRecipientAddComponent implements AfterViewInit {
      */
     public save() {
         this.addressService.addNewToAddressGroup(this.addressGroup.GroupName, this.address).subscribe(
-            () => {
-                this.modal.close();
-                this.addressGroup = null;
-                this.address = new AddressCreationInfo();
-            },
+            () => this.close(),
             (error: Error) => this.error = ErrorUtils.toError(error));
     }
 
