@@ -133,7 +133,10 @@ export default class ShippingSenderAddComponent implements AfterViewInit {
      */
     public save() {
         this.addressService.addNewToAddressGroup('Sender', this.address).subscribe(
-            () => this.modal.close(),
+            () => {
+                this.modal.close();
+                this.address = new AddressCreationInfo();
+            },
             (error: Error) => this.error = ErrorUtils.toError(error));
     }
 

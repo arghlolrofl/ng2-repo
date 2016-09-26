@@ -37,3 +37,6 @@
 ## 1.3.2
 - Added missing address output for recipient - FTP-53 Fehlende Addressanzeige
 - Improved options info box text output  - FTP-54 Mouse over Text für InfoFeld
+
+## wip
+- Automatic cleaning of input fields after successful saving new addresses - FTP-56 Adressen-Eingabe löschen der Felder
