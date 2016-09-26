@@ -30,3 +30,6 @@
 - Multiple calls to calculation API - FTP-47 Produktberechnung (CR)
 - Added new fields to address inputs - FTP-44 Addressen Additionalinformation / Telefonnummer (CR)
 - Added option input field - FTP-48 Optionen Werteingabe (CR)
+
+## 1.3.1
+- Bugfix for option input - FTP-52 Collect on Delivery - Keine Werteingabe

@@ -174,7 +174,7 @@ export default class ShippingOptionsComponent implements AfterViewInit, OnChange
         if (checked) {
             // TODO option dependency
             if (option.Details) {
-                option.Amount = option.Details.IncludedAmount;
+                option.Amount = option.Details.IncludedAmount || 1;
             }
             this.selectedOptions.push(option);
 

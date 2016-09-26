@@ -3,6 +3,7 @@ import {Routes, RouterModule} from '@angular/router';
 import DashboardComponent from '../components/dashboard/dashboard.component';
 import ShippingComponent from '../components/shipping/shipping.component';
 import ProfileComponent from '../components/profile/profile.component';
+import ShippingLabelComponent from '../components/shipping/shipping.label.component';
 
 import AdministrationComponent from '../components/administration/administration.component';
 import SettingsComponent from '../components/administration/settings/settings.component';
@@ -23,6 +24,10 @@ const appRoutes = [
         component: ShippingComponent
     },
 
+    {
+        path: 'shipping/label/:id',
+        component: ShippingLabelComponent        
+    },
     {
         path: 'administration',
         component: AdministrationComponent

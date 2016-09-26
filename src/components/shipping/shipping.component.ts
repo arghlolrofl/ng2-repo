@@ -1,12 +1,14 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import * as _ from 'lodash';
 
+import { Router } from '@angular/router';
 import CostCenterInfo from "../../models/cost-center-info";
 import ParcelProductInfo from "../../models/parcel-product-info";
 import AddressDisplayInfo from "../../models/address-display-info";
 import PostalProductOptionInfo from "../../models/postal-product-option-info";
 import ShippingService from "../../services/shipping.service";
 import ShipmentRequest from "../../models/shipment-request";
+import ShipmentResponse from "../../models/shipment-response";
 import {LabelOutputFormat} from "../../models/label-output-format";
 import WeightInfo from "../../models/weight-info";
 import DimensionInfo from "../../models/dimension-info";
@@ -25,7 +27,6 @@ import ErrorUtils from "../../utils/error-utils";
  * Shipping component.
  */
 export default class ShippingComponent {
-
     /**
      * Error if there is one.
      */
@@ -48,12 +49,15 @@ export default class ShippingComponent {
     isDocument: boolean;
     options: Array<PostalProductOptionInfo> = new Array<PostalProductOptionInfo>();
     buyRunning: boolean = false;
+    pdf: any;
 
     /**
      * @constructor
      * @param {ShippingService} shippingService the shipping service client
      */
-    constructor(private shippingService: ShippingService) {
+    constructor(
+        private shippingService: ShippingService,
+        private router: Router) {
     }
 
     /**
@@ -69,13 +73,14 @@ export default class ShippingComponent {
     /**
      * Executed when label should be bought.
      */
-    public buyLabel() {
+    public buyLabel() {        
         this.buyRunning = true;
         const request = this.generateShipmentRequest();
+        var reader = new FileReader();
         this.shippingService.create(request).subscribe(
-            () => {
-                console.log('success');
-                this.buyRunning = false;
+            (response: ShipmentResponse) => {
+                console.log('success');  
+                this.router.navigate(['/shipping/label', response.Id])                                                     
             },
             (error: Error) => {
                 this.handleError(error);

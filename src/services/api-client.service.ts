@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Http, Response, Headers, RequestOptions} from '@angular/http';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs/Rx';
 
 import {CONSUMER_API_BASE_URL, API_TIMEOUT, AUTHORIZATION_API_URL, API_RETRIES, API_RETRY_DELAY} from '../config';
 import LoginService from "./login.service";
@@ -114,6 +114,18 @@ export default class APIClient {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
             'Authorization': 'Bearer ' + this.loginService.getToken()
+        });
+        return new RequestOptions({ headers: headers });
+    }
+
+    private prepareBlobHeaders() : RequestOptions {
+        if (!this.loginService.isLoggedIn()) {
+            throw new Error('User is not logged in');
+        }
+
+        let headers = new Headers({
+            'Authorization': 'Bearer ' + this.loginService.getToken(),
+            'responseType' : 'application/blob'
         });
         return new RequestOptions({ headers: headers });
     }

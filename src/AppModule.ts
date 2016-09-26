@@ -5,6 +5,7 @@ import {Http, HttpModule} from '@angular/http';
 
 import {TranslateModule, TranslateLoader, TranslateStaticLoader} from 'ng2-translate/ng2-translate';
 import {Ng2Bs3ModalModule} from 'ng2-bs3-modal/ng2-bs3-modal';
+import { PdfViewerComponent } from "ng2-pdf-viewer";
 
 import {routing, appRoutingProviders} from './router/app.routes';
 import {SuggestDirective} from "./directives/suggest.directive";
@@ -29,6 +30,7 @@ import ShippingAdditionalInformationComponent from "./components/shipping/shippi
 import ShippingSenderAddComponent from "./components/shipping/shipping.sender.add.component";
 import ShippingRecipientAddComponent from "./components/shipping/shipping.recipient.add.component";
 import ShippingProductCalculationShortcutsComponent from "./components/shipping/shipping.product-calculation.shortcuts.component";
+import ShippingLabelComponent from "./components/shipping/shipping.label.component";
 
 @NgModule({
     imports: [
@@ -65,7 +67,9 @@ import ShippingProductCalculationShortcutsComponent from "./components/shipping/
         ShippingRecipientComponent,
         ShippingRecipientAddComponent,
         ShippingCostCenterComponent,
-        ShippingAdditionalInformationComponent
+        ShippingAdditionalInformationComponent,
+        ShippingLabelComponent,
+        PdfViewerComponent
     ],
     providers: [
         appRoutingProviders

@@ -45,7 +45,7 @@
   border-radius: $boxBorderRadius;
 
   &:hover {
-    box-shadow: $boxShadowDefault;
+    box-shadow: $boxShadowCalculate;
     border-color: $icon-box-hover-color;
   }
 

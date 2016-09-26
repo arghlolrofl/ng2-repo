@@ -96,11 +96,10 @@
                  [disabled]="confirmationRunning || mustBeSelected(option)"/>
           {{option.Name}}
 
-          <input *ngIf="option.Details && option.Details.StepSize > 0"
+          <input *ngIf="option.Details"
                  #cbInput
                  type="number"
-                 [value]="option.Details.IncludedAmount || 0"
-                 [min]="option.Details.IncludedAmount || 0"
+                 [min]="option.Details.IncludedAmount || 1"
                  [max]="option.Details.MaxValue"
                  [step]="option.Details.StepSize"
                  [hidden]="!isOptionActive(option)"
