@@ -125,6 +125,7 @@ export default class ShippingSenderAddComponent implements AfterViewInit {
      */
     public close() {
         this.modal.close();
+        this.address = new AddressCreationInfo();
         return false;
     }
 
@@ -133,7 +134,7 @@ export default class ShippingSenderAddComponent implements AfterViewInit {
      */
     public save() {
         this.addressService.addNewToAddressGroup('Sender', this.address).subscribe(
-            () => this.modal.close(),
+            () => this.close(),
             (error: Error) => this.error = ErrorUtils.toError(error));
     }
 
