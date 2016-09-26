@@ -38,6 +38,6 @@
 - Added missing address output for recipient - FTP-53 Fehlende Addressanzeige
 - Improved options info box text output  - FTP-54 Mouse over Text für InfoFeld
 
-## wip
+## 1.3.3
 - Correction for mandatory fields in add dialogues - FTP-55 Neuen Empfänger hinzufügen - Pflichtfelder unklar
 - Automatic cleaning of input fields after successful saving new addresses - FTP-56 Adressen-Eingabe löschen der Felder
