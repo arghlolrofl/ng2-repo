@@ -1,0 +1,28 @@
+/* Tables
+/* ----------------------------- */
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    th {
+        height: 40px;
+        vertical-align: middle;
+        padding: 0 15px 0 15px;
+        font-size: 1.7rem;
+    }
+    tbody {
+        border: 1px solid #f0f0f0;
+    }
+    td {
+        height: 40px;
+        vertical-align: middle;
+        padding: 0 15px 0 15px;
+    }
+    tr:nth-child(even) {
+        background-color: #f0f0f0;
+    }
+}
+
+.shipment-table {}
