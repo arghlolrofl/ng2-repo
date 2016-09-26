@@ -22,7 +22,11 @@ const $ = w.$;
     selector: 'fp-administration-settings',
     templateUrl: 'assets/templates/administration/settings/settings.component.html',
     styles: [
-        '.status-message { font-weight: bold; font-size: 16pt; border: 1px solid lightgray; padding: 15px; background-color: #eee; }'
+        '.status-message { font-weight: bold; font-size: 16pt; border: 1px solid lightgray; padding: 15px; background-color: #eee; }',
+        'input::-webkit-input-placeholder { color: red !important; }',
+        'input:-moz-placeholder { color: red !important;  }',
+        'input::-moz-placeholder { color: red !important; }',
+        'input:-ms-input-placeholder { color: red !important; }'
     ],
     providers: [
         SettingsService
@@ -33,12 +37,15 @@ const $ = w.$;
  * Administration - Settings component.
  */
 export default class SettingsComponent {
-    private settingsService: SettingsService;
-    private elementFadeTime: any = 100;
-    private error: Error;
+    //#region Fields
 
-    public isInEditMode: boolean = false;
-    public mailOneSettings: MailOneSettings;
+    private error: Error;
+    private settingsService: SettingsService;
+    private isInEditMode: boolean = false;
+    private mailOneSettings: MailOneSettings;
+    private mailOneSettingsCached: MailOneSettings;
+
+    //#endregion
 
     @Output()
     onError: EventEmitter<Error> = new EventEmitter<Error>();
@@ -50,6 +57,11 @@ export default class SettingsComponent {
     }
 
     private ngOnInit() {
+        this.refreshDataSource();
+        this.disableEditMode();
+    }
+
+    private refreshDataSource() {
         this.settingsService.getAllSettings().subscribe(
             (r: MailOneSettings) => {
                 if (r.NumberOfLevels < 1)
@@ -62,39 +74,37 @@ export default class SettingsComponent {
                 this.onError.emit(error);
             }
         );
-
-        this.disableEditMode(false);
-    }
-
-    public toggleEditMode() {
-        if (this.isInEditMode)
-            this.disableEditMode();
-        else
-            this.enableEditMode();
     }
 
     private enableEditMode() {
+        // create a shallow clone
+        this.mailOneSettingsCached = MailOneSettings.createClone(this.mailOneSettings);
+        console.log("ORIGINAL");
+        console.info(this.mailOneSettings);
+        console.log("CACHED");
+        console.info(this.mailOneSettingsCached);
+
         this.isInEditMode = true;
-        $('#status-box').fadeIn(this.elementFadeTime);
-        $('#save-button').fadeIn(this.elementFadeTime);
     }
 
-    private disableEditMode(shouldFade?: boolean) {
+    private disableEditMode() {
         this.isInEditMode = false;
-
-        if (shouldFade == null || shouldFade) {
-            $('#status-box').fadeOut(this.elementFadeTime);
-            $('#save-button').fadeOut(this.elementFadeTime);
-        } else {
-            $('#status-box').hide();
-            $('#save-button').hide();
-        }
     }
+
+    private cancelEditMode() {
+        console.log("Restoring ...");
+        this.mailOneSettings = MailOneSettings.createClone(this.mailOneSettingsCached);
+        console.log("ORIGINAL");
+        console.info(this.mailOneSettings);
+        console.log("CACHED");
+        console.info(this.mailOneSettingsCached);
+        this.disableEditMode();
+    }
+
+    //#region SubComponent Event Handlers
 
     private onNumberOfAccountLevelsChanged(count: number) {
-        console.info("Updating mailOneSettings.NumberOfLevels to: " + count);
         this.mailOneSettings.NumberOfLevels = count;
-        console.info(this);
     }
 
     private onCostCenterLevelNameChanged(level: number, name: string) {
@@ -114,14 +124,14 @@ export default class SettingsComponent {
     }
 
     private onMaximumAmountPerLabelChanged(amount: number) {
-        console.log("Parent received: " + amount);
         this.mailOneSettings.MaximumAmountPerLabel = amount;
     }
 
     private onBalanceWarningLevelChanged(balance: number) {
-        console.log("Parent received: " + balance);
         this.mailOneSettings.BalanceWarningLevel = balance;
     }
+
+    //#endregion
 
     private saveChanges() {
         console.info("Posting settings:");

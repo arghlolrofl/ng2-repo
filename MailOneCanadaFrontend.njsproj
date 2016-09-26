@@ -46,7 +46,7 @@
     <TypeScriptCompile Include="src\models\settings\mailone-settings.ts" />
     <TypeScriptCompile Include="src\rxjs-operators.ts" />
     <TypeScriptCompile Include="src\services\settings.service.ts" />
-    <TypeScriptCompile Include="src\ui\keyValuePair.ts" />
+    <TypeScriptCompile Include="src\ui\key-value-pair.ts" />
     <TypeScriptCompile Include="typings\index.d.ts" />
     <Compile Include="app\components\app.component.js" />
     <Compile Include="app\directives\suggest.directive.js" />

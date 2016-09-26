@@ -2,51 +2,53 @@
 /* ----------------------------- */
 
 h1 {
-  margin: 0;
-  @include calc-font-size(4.2rem);
-  font-weight: 400;
+    margin: 0;
+    @include calc-font-size(4.2rem);
+    font-weight: 400;
 }
 
 h2 {
-  margin: 0 0 10px;
-  @include calc-font-size(3.6rem);
-  font-weight: 400;
+    margin: 0 0 10px;
+    @include calc-font-size(3.6rem);
+    font-weight: 400;
 }
 
 h3 {
-  margin: 0 0 15px;
-  @include calc-font-size(2.4rem);
-  font-weight: 400;
+    margin: 0 0 15px;
+    @include calc-font-size(2.4rem);
+    font-weight: 400;
 }
 
 h4 {
-  margin: 0 0 15px;
-  @include calc-font-size(2.0rem);
-  font-weight: 400;
+    margin: 0 0 15px;
+    @include calc-font-size(2.0rem);
+    font-weight: 400;
 }
 
 h5 {
-  margin: 0 0 10px;
-  @include calc-font-size(1.6rem);
-  font-weight: 400;
+    margin: 0 0 10px;
+    @include calc-font-size(1.6rem);
+    font-weight: 400;
 }
 
 h6 {
-  margin: 0 0 10px;
-  @include calc-font-size(1.4rem);
-  font-weight: 400;
+    margin: 0 0 10px;
+    @include calc-font-size(1.4rem);
+    font-weight: 400;
 }
+
 
 /* Paragraph
 /* ----------------------------- */
 
 p {
-  margin-bottom: 15px;
-  font-size: 1.4rem;
-  line-height: 1.8rem;
-  font-weight: normal;
-  color: $brand-gray-2;
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+    font-weight: normal;
+    color: $brand-gray-2;
 }
+
 
 /* Anchor
 /* ----------------------------- */
@@ -54,294 +56,85 @@ p {
 a,
 a:visited,
 a:focus {
-  color: $brand-gray-2;
-  text-decoration: none;
-  transition: color $transitionFast;
-
-  &:active,
-  &:hover {
-    color: $brand-primary;
-    text-decoration: underline;
-
-    &::before {
-      text-decoration: none;
+    color: $brand-gray-2;
+    text-decoration: none;
+    transition: color $transitionFast;
+    &:active,
+    &:hover {
+        color: $brand-primary;
+        text-decoration: underline;
+        &::before {
+            text-decoration: none;
+        }
     }
-  }
 }
 
 // icon
 i.icon-class {
-  &:before {
-    padding-right: 10px;
-    font-size: 3.0rem;
-  }
+    &:before {
+        padding-right: 10px;
+        font-size: 3.0rem;
+        line-height: 2.4rem;
+    }
 }
 
 // Box Icon
 // -------------------------------------
-
 .box-icon {
-  float: left;
-
-  & + .box-icon {
-    margin-left: 15px;
-  }
-
-  button {
-    border: 1px solid $icon-box-color;
-    font-size: 1.7rem;
-    line-height: $input-line-height;
-    background: $white;
-    width: $button-width;
-    height: $button-height;
-    position: relative;
-    border-radius: $boxBorderRadius;
-    transition: all $transitionFast $transitionTiming;
-
-    [class^='icon-']::before,
-    [class*='icon-']::before {
-      margin: 0;
-      padding: 0;
-      position: absolute;
-      top: 11px;
-      left: 10px;
-      color: $icon-box-color;
-      font-size: 1.7rem;
-      transition: color $transitionFast $transitionTiming;
+    float: left;
+    &+ .box-icon {
+        margin-left: 15px;
     }
-
-    &:hover {
-      border: 1px solid $icon-box-hover-color;
-      box-shadow: $boxShadowDefault;
-
-      [class^='icon-']::before,
-      [class*='icon-']::before {
-        color: $icon-box-hover-color;
-      }
-    }
-
-    &:disabled {
-      background: $brand-gray-1;
-      border-color: $brand-gray-2;
-      color: $brand-gray-2;
-
-      [class^='icon-']::before,
-      [class*='icon-']::before {
-        color: $brand-gray-2;
-      }
-
-      &:hover {
-        background: $brand-gray-1;
-        border-color: $brand-gray-2;
-        color: $brand-gray-2;
-        box-shadow: none;
-
+    button {
+        border: 1px solid $icon-box-color;
+        font-size: 1.7rem;
+        line-height: $input-line-height;
+        background: $white;
+        width: $button-width;
+        height: $button-height;
+        position: relative;
+        border-radius: $boxBorderRadius;
+        transition: all $transitionFast $transitionTiming;
         [class^='icon-']::before,
         [class*='icon-']::before {
-          color: $brand-gray-2;
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            top: 11px;
+            left: 10px;
+            color: $icon-box-color;
+            font-size: 1.7rem;
+            transition: color $transitionFast $transitionTiming;
         }
-      }
+        &:hover {
+            border: 1px solid $icon-box-hover-color;
+            box-shadow: $boxShadowDefault;
+            [class^='icon-']::before,
+            [class*='icon-']::before {
+                color: $icon-box-hover-color;
+            }
+        }
+        &:disabled {
+            background: $brand-gray-1;
+            border-color: $brand-gray-2;
+            color: $brand-gray-2;
+            [class^='icon-']::before,
+            [class*='icon-']::before {
+                color: $brand-gray-2;
+            }
+            &:hover {
+                background: $brand-gray-1;
+                border-color: $brand-gray-2;
+                color: $brand-gray-2;
+                box-shadow: none;
+                [class^='icon-']::before,
+                [class*='icon-']::before {
+                    color: $brand-gray-2;
+                }
+            }
+        }
+        @include mobile {
+            margin: 0 0 15px 0;
+        }
     }
-
-    @include mobile {
-      margin: 0 0 15px 0;
-    }
-  }
-}
-
-
-/* button
-/* ----------------------------- */
-.button {
-  border: 1px solid $icon-box-color;
-  position: relative;
-  border-radius: $boxBorderRadius;
-  transition: all $transitionFast $transitionTiming;
-  display: block;
-  float: left;
-  margin-left: 15px;
-  padding: 0 3px;
-  overflow: hidden;
-  text-align: center;
-  background: $icon-box-color;
-  color: $white;
-
-  &:hover {
-    border: 1px solid $icon-box-hover-color;
-    text-decoration: none;
-    background: $icon-box-hover-color;
-    box-shadow: $boxShadowDefault;
-  }
-
-  @include mobile {
-    width: 100%;
-    float: none;
-    margin: 0 0 15px 0;
-  }
-
-  span {
-    display: table-cell;
-    vertical-align: middle;
-    font-size: 1.7rem;
-    line-height: 2.0rem;
-    width: 1000px;
-    height: $input-height;
-  }
-
-  &.submit {
-    height: 71px;
-    width: 140px;
-    margin-left: 0;
-
-    @include desktop-large {
-      width: 180px;
-    }
-
-    @include tablet {
-      width: 200px;
-    }
-
-    @include mobile {
-      width: 100%;
-      float: none;
-      margin: 0 0 15px 0;
-    }
-
-    &:disabled {
-      background: $brand-gray-1;
-      border-color: $brand-gray-2;
-      color: $brand-gray-2;
-
-      &:hover {
-        text-decoration: none;
-        background: $brand-gray-1;
-        border-color: $brand-gray-2;
-        box-shadow: none;
-      }
-    }
-  }
-
-  &.color {
-    height: 71px;
-    width: 115px;
-
-    @include desktop-large {
-      width: 135px;
-    }
-
-    @include tablet {
-      width: 168px;
-    }
-
-    @include mobile {
-      width: 100%;
-      float: none;
-      margin: 0 0 15px 0;
-    }
-
-    &:disabled {
-      background: $brand-gray-1;
-      border-color: $brand-gray-2;
-      color: $brand-gray-2;
-
-      &:hover {
-        text-decoration: none;
-        background: $brand-gray-1;
-        border-color: $brand-gray-2;
-        box-shadow: none;
-      }
-    }
-  }
-
-  &.shortcut {
-    height: $input-height;
-    width: 60px;
-    background: $white;
-    color: $icon-box-color;
-
-    &:first-child {
-      margin-left: 40px;
-    }
-
-    &:hover {
-      border: 1px solid $icon-box-hover-color;
-      color: $icon-box-hover-color;
-      text-decoration: none;
-      background: $white;
-      box-shadow: $boxShadowDefault;
-    }
-
-    &:disabled {
-      background: $brand-gray-1;
-      border-color: $brand-gray-2;
-
-      &:hover {
-        text-decoration: none;
-        background: $brand-gray-1;
-        border-color: $brand-gray-2;
-        box-shadow: none;
-        color: $icon-box-color;
-      }
-    }
-
-    &.placeholder,
-    &.placeholder:disabled {
-      background: none;
-      color: $brand-gray-2;
-      border: 1px dotted $brand-gray-2;
-      border-radius: 5px;
-
-      &:hover {
-        text-decoration: none;
-        box-shadow: none;
-      }
-    }
-
-    span {
-      font-size: 1.2rem;
-      line-height: 1.4rem;
-    }
-
-    @include desktop-large {
-      width: 80px;
-    }
-
-    @include tablet {
-      width: 113px;
-    }
-
-    @include mobile {
-      width: 100%;
-      float: none;
-      margin: 0 0 15px 0;
-
-      &:first-child {
-        margin: 0 0 15px 0;
-      }
-    }
-  }
-
-  &.popup {
-    width: 100px;
-    height: $input-height;
-
-    &:first-child {
-      margin-left: 0;
-    }
-
-    &:disabled {
-      background: $brand-gray-1;
-      border-color: $brand-gray-2;
-    }
-
-    @include mobile {
-      width: 100px;
-      float: left;
-      margin-left: 15px;
-
-      &:first-child {
-        margin-left: 0;
-      }
-    }
-  }
 }

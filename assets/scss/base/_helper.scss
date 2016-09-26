@@ -49,10 +49,3 @@
     clear: both;
   }
 }
-
-@import "../vendor/bootstrap-v3-3-6/bootstrap/variables";
-@media(max-width: $screen-sm-max) {
-    .voffset-sm-15 {
-        margin-top: 15px;
-    }
-}

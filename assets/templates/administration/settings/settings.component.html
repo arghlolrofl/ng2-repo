@@ -19,7 +19,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-12 status-message" id="status-box">
+    <div *ngIf="isInEditMode" class="col-md-12 status-message" id="status-box">
         <i class="icon-interface">
             <span>Edit Mode</span>
         </i>
@@ -50,12 +50,15 @@
 
 <div class="row">
     <div class="col-md-2 col-md-offset-8 col-sm-6">
-        <button class="button color" (click)="toggleEditMode()">
-            <span>Edit</span>
+        <button *ngIf="isInEditMode" class="button color" (click)="cancelEditMode()">
+            <span>Cancel</span>
         </button>
     </div>
-    <div class="col-md-2 col-sm-6" style="display:none;" id="save-button">
-        <button class="button color" (click)="saveChanges()">
+    <div class="col-md-2 col-sm-6">
+        <button *ngIf="!isInEditMode" class="button color" (click)="enableEditMode()">
+            <span>Edit</span>
+        </button>
+        <button *ngIf="isInEditMode" class="button color" (click)="saveChanges()">
             <span>Save</span>
         </button>
     </div>

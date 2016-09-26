@@ -12,9 +12,25 @@
                    placeholder="{{ 'ADMINISTRATION_SETTINGS_HEAD_BALANCE_WARNING_LEVEL' | translate }}"
                    (change)="notifyBalanceWarningLevel.emit(balanceWarningLevel);"
                    [disabled]="!isInEditMode">
-            <button class="clear-submit">
+            <button class="clear-submit"
+                    (click)="resetButton_onClick();">
                 <span class="icon-close"></span>
             </button>
         </div>
     </div>
+
+    <!-- Up/Down Buttons -->
+    <div class="field-container box-icon col-md-1 col-sm-6 col-md-offset-1">
+        <button (click)="balanceWarningLevel_OnDownClicked()"
+                [disabled]="!isInEditMode">
+            <span class="icon-class icon-arrow-down"></span>
+        </button>
+    </div>
+    <div class="field-container box-icon col-md-1 col-sm-6">
+        <button (click)="balanceWarningLevel_OnUpClicked()"
+                [disabled]="!isInEditMode">
+            <span class="icon-class icon-arrow-up"></span>
+        </button>
+    </div>
+
 </div>
