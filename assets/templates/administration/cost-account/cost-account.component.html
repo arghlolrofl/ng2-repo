@@ -1,0 +1,38 @@
+﻿<h3>
+    <i class="icon-class icon-cogwheel"></i>
+    {{ 'ADMINISTRATION_COST_ACCOUNT_HEADLINE' | translate }}
+</h3>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <section *ngIf="error"
+                 class="sectiontemplate box-error">
+            <div class="content">
+                {{ error.message }}
+            </div>
+            <button type="button"
+                    class="clear-submit"
+                    (click)="error = null">
+                <span class="icon-close"></span>
+            </button>
+        </section>
+    </div>
+</div>
+<div class="row">
+    <div *ngIf="isInEditMode" class="col-md-12 status-message" id="status-box">
+        <i class="icon-interface">
+            <span>Edit Mode</span>
+        </i>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <button class="button color">
+            <span>{{ 'NEW' | translate }}</span>
+        </button>
+    </div>
+</div>
+<fp-administration-cost-account-table-filter></fp-administration-cost-account-table-filter>
+<fp-administration-cost-account-table-paging></fp-administration-cost-account-table-paging>
+<fp-administration-cost-account-table></fp-administration-cost-account-table>
+<fp-administration-cost-account-table-paging></fp-administration-cost-account-table-paging>

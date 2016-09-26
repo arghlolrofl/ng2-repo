@@ -5,7 +5,6 @@ import {Http, HttpModule} from '@angular/http';
 
 import {TranslateModule, TranslateLoader, TranslateStaticLoader} from 'ng2-translate/ng2-translate';
 import {Ng2Bs3ModalModule} from 'ng2-bs3-modal/ng2-bs3-modal';
-import { PdfViewerComponent } from "ng2-pdf-viewer";
 
 import {routing, appRoutingProviders} from './router/app.routes';
 import {SuggestDirective} from "./directives/suggest.directive";
@@ -17,6 +16,11 @@ import SettingsComponent from './components/administration/settings/settings.com
 import SettingsAccountLevelsComponent from './components/administration/settings/settings.account-levels';
 import SettingsAmountPerLabelComponent from './components/administration/settings/settings.amount-per-label';
 import SettingsBalanceWarningLevelComponent from './components/administration/settings/settings.balance-warning-level';
+
+import CostAccountComponent from './components/administration/cost-account/cost-account.component';
+import CostAccountTableComponent from './components/administration/cost-account/cost-account.table';
+import CostAccountTablePagingComponent from './components/administration/cost-account/cost-account.table.paging';
+import CostAccountTableFilterComponent from './components/administration/cost-account/cost-account.table.filter';
 
 import ProfileComponent from './components/profile/profile.component';
 
@@ -56,6 +60,11 @@ import ShippingLabelComponent from "./components/shipping/shipping.label.compone
         SettingsAmountPerLabelComponent,
         SettingsBalanceWarningLevelComponent,
 
+        CostAccountComponent,
+        CostAccountTableComponent,
+        CostAccountTablePagingComponent,
+        CostAccountTableFilterComponent,
+
         ProfileComponent,
 
         ShippingComponent,
@@ -68,8 +77,7 @@ import ShippingLabelComponent from "./components/shipping/shipping.label.compone
         ShippingRecipientAddComponent,
         ShippingCostCenterComponent,
         ShippingAdditionalInformationComponent,
-        ShippingLabelComponent,
-        PdfViewerComponent
+        ShippingLabelComponent
     ],
     providers: [
         appRoutingProviders

@@ -19,10 +19,16 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
+    <Content Include="assets\templates\administration\cost-account\cost-account.component.html" />
+    <Content Include="assets\templates\administration\cost-account\cost-account.item-details.html" />
+    <Content Include="assets\templates\administration\cost-account\cost-account.table.paging.html" />
+    <Content Include="assets\templates\administration\cost-account\cost-account.table.filter.html" />
+    <Content Include="assets\templates\administration\cost-account\cost-account.table.html" />
     <Content Include="assets\templates\administration\settings\settings.account-levels.html" />
     <Content Include="assets\templates\administration\settings\settings.amount-per-label.html" />
     <Content Include="assets\templates\administration\settings\settings.balance-warning-level.html" />
     <Content Include="assets\templates\administration\settings\settings.component.html" />
+    <Content Include="assets\templates\shipping\shipping.label.component.html" />
     <Content Include="index.html" />
     <Content Include=".lite-server.json" />
     <Content Include="package.json" />
@@ -37,10 +43,16 @@
     <Compile Include="app\main.js" />
     <Compile Include="app\rxjs-operators.js" />
     <TypeScriptCompile Include="src\AppModule.ts" />
+    <TypeScriptCompile Include="src\components\administration\cost-account\cost-account.component.ts" />
+    <TypeScriptCompile Include="src\components\administration\cost-account\cost-account.item-details.ts" />
+    <TypeScriptCompile Include="src\components\administration\cost-account\cost-account.table.paging.ts" />
+    <TypeScriptCompile Include="src\components\administration\cost-account\cost-account.table.filter.ts" />
+    <TypeScriptCompile Include="src\components\administration\cost-account\cost-account.table.ts" />
     <TypeScriptCompile Include="src\components\administration\settings\settings.account-levels.ts" />
     <TypeScriptCompile Include="src\components\administration\settings\settings.amount-per-label.ts" />
     <TypeScriptCompile Include="src\components\administration\settings\settings.balance-warning-level.ts" />
     <TypeScriptCompile Include="src\components\administration\settings\settings.component.ts" />
+    <TypeScriptCompile Include="src\components\shipping\shipping.label.component.ts" />
     <TypeScriptCompile Include="src\config.ts" />
     <TypeScriptCompile Include="src\main.ts" />
     <TypeScriptCompile Include="src\models\settings\mailone-settings.ts" />
@@ -278,6 +290,7 @@
     <Folder Include="assets\scss\vendor\bootstrap-v3-3-6\bootstrap\mixins" />
     <Folder Include="assets\templates" />
     <Folder Include="assets\templates\administration" />
+    <Folder Include="assets\templates\administration\cost-account\" />
     <Folder Include="assets\templates\administration\settings\" />
     <Folder Include="assets\templates\dashboard" />
     <Folder Include="assets\templates\profile" />
@@ -285,6 +298,7 @@
     <Folder Include="src" />
     <Folder Include="src\components" />
     <Folder Include="src\components\administration" />
+    <Folder Include="src\components\administration\cost-account\" />
     <Folder Include="src\components\administration\settings\" />
     <Folder Include="src\components\dashboard" />
     <Folder Include="src\components\profile" />
