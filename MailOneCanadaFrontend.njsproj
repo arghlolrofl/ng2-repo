@@ -121,7 +121,6 @@
     <Compile Include="app\components\administration\address-groups\administration.address-groups-manage-controllable-list.component.js" />
     <Compile Include="app\components\administration\address-groups\administration.address-groups-manage-filter.component.js" />
     <Compile Include="app\components\administration\address-groups\administration.address-groups-manage-list.component.js" />
-    <Compile Include="app\components\administration\address-groups\administration.address-groups-manage.component.js" />
     <Compile Include="app\components\administration\address-groups\list-gear.component.js" />
     <Compile Include="app\components\administration\settings\settings.component.js" />
     <Compile Include="app\components\administration\settings\settings.cost-account-levels.component.js" />
@@ -246,10 +245,6 @@
     <TypeScriptCompile Include="typings\globals\node\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app" />
-    <Folder Include="app\components" />
-    <Folder Include="app\components\administration" />
-    <Folder Include="app\components\administration\address-groups" />
     <Folder Include="app\components\administration\settings" />
     <Folder Include="app\components\dashboard" />
     <Folder Include="app\components\profile" />
