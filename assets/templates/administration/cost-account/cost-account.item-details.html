@@ -1,0 +1,152 @@
+﻿<modal #modalCostAccountItemDetails [keyboard]="false">
+    <modal-header>
+        <div class="row">
+            <div class="col-md-12">
+                <h3>{{ 'COST_ACCOUNT' | translate }}: <strong>{{Number}} {{Name}}</strong></h3>
+            </div>
+        </div>
+    </modal-header>
+    <form #editForm="ngForm"
+          (ngSubmit)="save()">
+
+        <modal-body>
+            <div class="row">
+                <div class="col-md-12">
+                    <section *ngIf="error"
+                             class="sectiontemplate box-error">
+                        <div class="content">
+                            {{ error.message }}
+                        </div>
+                        <button type="button"
+                                class="clear-submit"
+                                (click)="error = null">
+                            <span class="icon-close"></span>
+                        </button>
+                    </section>
+                </div>
+            </div>
+
+            <!-- Name -->
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <label>{{ 'NAME' | translate }}</label>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <input type="text"
+                           [(ngModel)]="Name"
+                           [ngModelOptions]="{standalone: true}"
+                           [disabled]="!isInEditMode" />
+                </div>
+            </div>
+
+            <!-- Active -->
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <label>{{ 'ACTIVE' | translate }}</label>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <input type="checkbox"
+                           id="active-box"
+                           [(ngModel)]="IsCostAccountActive"
+                           [ngModelOptions]="{standalone: true}"
+                           [disabled]="!isInEditMode" />
+                </div>
+            </div>
+
+            <!-- Number-->
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <label>{{ 'NUMBER' | translate }}</label>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <input type="text"
+                           [(ngModel)]="Number"
+                           [ngModelOptions]="{standalone: true}"
+                           [disabled]="!isInEditMode" />
+                </div>
+            </div>
+
+            <!-- Surcharge -->
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <label>{{ 'SERVICE_CHARGE' | translate }}</label>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <input type="text"
+                           [(ngModel)]="Surcharge"
+                           [ngModelOptions]="{standalone: true}"
+                           [disabled]="!isInEditMode" />
+                </div>
+            </div>
+
+            <!-- Level -->
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <label>{{ 'LEVEL' | translate }}</label>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <input type="text"
+                           [(ngModel)]="Level"
+                           [ngModelOptions]="{standalone: true}"
+                           [disabled]="!isInEditMode" />
+                </div>
+            </div>
+
+            <!-- SurchargeType -->
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <label>{{ 'SERVICE_CHARGE_TYPE' | translate }}</label>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <input type="text"
+                           [(ngModel)]="SurchargeType"
+                           [ngModelOptions]="{standalone: true}"
+                           [disabled]="!isInEditMode" />
+                </div>
+            </div>
+
+        </modal-body>
+
+        <hr />
+
+        <modal-footer>
+            <div class="row">
+                <div class="col-sm-12">
+                    <button type="button"
+                            class="button popup"
+                            (click)="close()">
+                        <span>{{ 'MODAL_CLOSE' | translate }}</span>
+                    </button>
+
+                    <button *ngIf="!isInEditMode"
+                            type="button"
+                            class="button popup align-right"
+                            (click)="enableEditMode()">
+                        <span>{{ 'EDIT' | translate }}</span>
+                    </button>
+
+                    <button *ngIf="!isInEditMode"
+                            type="button"
+                            class="button popup align-right"
+                            (click)="deleteItem()">
+                        <span>{{ 'DELETE' | translate }}</span>
+                    </button>
+
+                    <button *ngIf="isInEditMode"
+                            type="submit"
+                            class="button popup align-right"
+                            [disabled]="!editForm.form.valid">
+                        <span>{{ 'MODAL_SAVE' | translate }}</span>
+                    </button>
+
+                    <button *ngIf="isInEditMode"
+                            type="button"
+                            class="button popup align-right"
+                            (click)="cancelEditMode()">
+                        <span>{{ 'CANCEL' | translate }}</span>
+                    </button>
+                </div>
+            </div>
+        </modal-footer>
+    </form>
+</modal>

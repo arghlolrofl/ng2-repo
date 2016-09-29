@@ -1,0 +1,27 @@
+﻿<div class="row">
+    <table class="data-table" style="margin-top: 10px; margin-bottom: 10px;">
+        <thead>
+            <tr>
+                <th>{{ 'NUMBER' | translate }}</th>
+                <th>{{ 'NAME' | translate }}</th>
+                <th>{{ 'LEVEL' | translate }}</th>
+                <th>{{ 'ACTIVE' | translate }}</th>
+                <th>{{ 'DETAILS' | translate }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of items" class="table-row">
+                <td>{{ item.Number }}</td>
+                <td>{{ item.Name }}</td>
+                <td>{{ item.Level }}</td>
+                <td>{{ item.IsActive }}</td>
+                <td>
+                    <button type="button" class="cell-button"
+                            (click)="showDetails.emit(item);">
+                        <span class="icon-class icon-eye"></span>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

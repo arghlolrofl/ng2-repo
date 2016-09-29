@@ -8,6 +8,8 @@ import {Ng2Bs3ModalModule} from 'ng2-bs3-modal/ng2-bs3-modal';
 
 import {routing, appRoutingProviders} from './router/app.routes';
 import {SuggestDirective} from "./directives/suggest.directive";
+
+import LoadingAnimationComponent from './components/common/loading-animation.component';
 import AppComponent from './components/app.component';
 import UserPropertiesComponent from './components/user-properties.component';
 import DashboardComponent from './components/dashboard/dashboard.component';
@@ -17,6 +19,12 @@ import SettingsComponent from './components/administration/settings/settings.com
 import SettingsAccountLevelsComponent from './components/administration/settings/settings.account-levels';
 import SettingsAmountPerLabelComponent from './components/administration/settings/settings.amount-per-label';
 import SettingsBalanceWarningLevelComponent from './components/administration/settings/settings.balance-warning-level';
+
+import CostAccountComponent from './components/administration/cost-account/cost-account.component';
+import CostAccountTableComponent from './components/administration/cost-account/cost-account.table';
+import CostAccountTablePagingComponent from './components/administration/cost-account/cost-account.table.paging';
+import CostAccountTableFilterComponent from './components/administration/cost-account/cost-account.table.filter';
+import CostAccountTableItemDetailsComponent from './components/administration/cost-account/cost-account.item-details';
 
 import ProfileComponent from './components/profile/profile.component';
 
@@ -46,6 +54,8 @@ import ShippingLabelComponent from "./components/shipping/shipping.label.compone
         routing
     ],
     declarations: [
+        LoadingAnimationComponent,
+
         SuggestDirective,
         AppComponent,
         UserPropertiesComponent,
@@ -56,6 +66,12 @@ import ShippingLabelComponent from "./components/shipping/shipping.label.compone
         SettingsAccountLevelsComponent,
         SettingsAmountPerLabelComponent,
         SettingsBalanceWarningLevelComponent,
+
+        CostAccountComponent,
+        CostAccountTableComponent,
+        CostAccountTablePagingComponent,
+        CostAccountTableFilterComponent,
+        CostAccountTableItemDetailsComponent,
 
         ProfileComponent,
 
