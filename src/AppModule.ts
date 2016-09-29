@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {NgModule, ErrorHandler, Provider} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
 import {Http, HttpModule} from '@angular/http';
@@ -30,6 +30,8 @@ import ShippingSenderAddComponent from "./components/shipping/shipping.sender.ad
 import ShippingRecipientAddComponent from "./components/shipping/shipping.recipient.add.component";
 import ShippingProductCalculationShortcutsComponent from "./components/shipping/shipping.product-calculation.shortcuts.component";
 import ShippingLabelComponent from "./components/shipping/shipping.label.component";
+import CustomErrorHandler from "./hooks/custom-error-handler"
+import NotificationService from "./services/notification-service"
 
 @NgModule({
     imports: [
@@ -70,7 +72,9 @@ import ShippingLabelComponent from "./components/shipping/shipping.label.compone
         ShippingLabelComponent
     ],
     providers: [
-        appRoutingProviders
+        appRoutingProviders,
+        NotificationService,
+        [{provide:ErrorHandler, useClass:CustomErrorHandler}]
     ],
     bootstrap: [
         AppComponent
