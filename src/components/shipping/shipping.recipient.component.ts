@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Output, Input} from '@angular/core';
 
 import AddressService from "../../services/address.service";
 import AddressDisplayInfo from "../../models/address-display-info";
@@ -26,6 +26,7 @@ export default class ShippingRecipientComponent {
      * Updated when recipient has been changed.
      * @type {EventEmitter<AddressDisplayInfo>}
      */
+    @Input() recipient: AddressDisplayInfo;
     recipientInput: string = '';
     recipientEvents: EventEmitter<any> = new EventEmitter<any>();
     @Output() recipientChange: EventEmitter<AddressDisplayInfo> = new EventEmitter<AddressDisplayInfo>();
@@ -96,20 +97,21 @@ export default class ShippingRecipientComponent {
                     break;
 
                 case SuggestEvents.SELECTED:
+                    this.recipient = event.data;
                     this.recipientChange.emit(event.data);
-                    this.recipientInput = `${event.data.FirstName} ${event.data.LastName} (${event.data.Company})`
-                        + ` - ${event.data.PostalAddress} ${event.data.ZipCode} ${event.data.City}`;
+                    this.recipientInput = `${event.data.FirstName} ${event.data.LastName} (${event.data.Company})`;
                     break;
 
                 case SuggestEvents.CLEARED:
+                    this.recipient = null;
                     this.recipientChange.emit(null);
                     this.recipientInput = '';
                     this.recipientSuggestions = [];
                     break;
 
                 case SuggestEvents.SHOW:
-                    this.recipientInput = `${event.data.FirstName} ${event.data.LastName} (${event.data.Company})`
-                        + ` - ${event.data.PostalAddress} ${event.data.ZipCode} ${event.data.City}`;
+                    this.recipient = event.data;
+                    this.recipientInput = `${event.data.FirstName} ${event.data.LastName} (${event.data.Company})`;
                     break;
             }
         });

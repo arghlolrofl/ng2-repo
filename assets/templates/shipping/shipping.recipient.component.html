@@ -62,6 +62,12 @@
           <span class="icon-close"></span>
         </button>
       </div>
+
+      <div class="row addressInfo">
+        <p *ngIf="!recipient">{{ 'RECIPIENT_NO_ADDRESS_SELECTED' | translate }}</p>
+        <p *ngIf="recipient">{{recipient.PostalAddress}} {{recipient.ZipCode}} {{recipient.City}}</p>
+      </div>
+
       <div class="row autocomplete"
            [class.open]="recipientSuggestions.length > 0">
         <ul>
