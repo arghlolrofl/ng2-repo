@@ -9,6 +9,7 @@ import {Ng2Bs3ModalModule} from 'ng2-bs3-modal/ng2-bs3-modal';
 import {routing, appRoutingProviders} from './router/app.routes';
 import {SuggestDirective} from "./directives/suggest.directive";
 import AppComponent from './components/app.component';
+import UserPropertiesComponent from './components/user-properties.component';
 import DashboardComponent from './components/dashboard/dashboard.component';
 import AdministrationComponent from './components/administration/administration.component';
 
@@ -47,6 +48,7 @@ import ShippingLabelComponent from "./components/shipping/shipping.label.compone
     declarations: [
         SuggestDirective,
         AppComponent,
+        UserPropertiesComponent,
         DashboardComponent,
         AdministrationComponent,
 
