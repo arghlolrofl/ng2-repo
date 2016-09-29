@@ -1,303 +1,329 @@
-    /* Inputs
+/* Inputs
 /* ----------------------------- */
-    
-    select,
-    input[type="text"],
-    input[type="password"],
-    input[type="tel"],
-    input[type="email"],
-    input[type="number"],
-    input[type="search"] {
-        width: 100%;
-        outline: none;
-        height: $input-height;
-        border: 1px solid $brand-gray-1;
-        font-size: 1.7rem;
-        line-height: $input-line-height;
-        color: $brand-gray-2;
-        padding: 0 40px 0 10px;
-        background: $white;
-        border-radius: 0;
-    }
-    
-    input[type="checkbox"] {
-        margin: 0 5px 0 0;
-    }
-    
-    ul {
-        padding: 0 15px;
-        width: 100%;
-        border-top: none;
-        li {
-            text-align: left;
-            height: auto;
-            font-size: 1.7rem;
-            line-height: 2.0rem;
-            padding: 5px 0;
-        }
-    }
-    /* small-input fields
+
+select,
+input[type="text"],
+input[type="password"],
+input[type="tel"],
+input[type="email"],
+input[type="number"],
+input[type="search"] {
+  width: 100%;
+  outline: none;
+  height: $input-height;
+  border: 1px solid $brand-gray-1;
+  font-size: 1.7rem;
+  line-height: $input-line-height;
+  color: $brand-gray-2;
+  padding: 0 40px 0 10px;
+  background: $white;
+  border-radius: 0;
+}
+
+input[type="number"] {
+  padding: 0 10px 0 10px;
+  margin: 5px 0 0 25px;
+}
+
+select {
+  padding: 0;
+}
+
+input[type="checkbox"] {
+  margin: 0 5px 0 0;
+}
+
+ul {
+  padding: 0 15px;
+  width: 100%;
+  border-top: none;
+  li {
+    text-align: left;
+    height: auto;
+    font-size: 1.7rem;
+    line-height: 2.0rem;
+    padding: 5px 0;
+  }
+}
+
+
+/* small-input fields
 /* ----------------------------- */
-    
-    .small-input {
-        .text-field {
-            width: 108px;
-            float: left;
-            margin-right: 15px;
-            &:last-child {
-                margin: 0;
-            }
-        }
-        @include desktop-large {
-            .text-field {
-                width: 143px;
-                margin-right: 15px;
-            }
-        }
-        @include tablet {
-            .text-field {
-                width: 198px;
-                margin-right: 15px;
-            }
-        }
-        @include mobile {
-            .text-field {
-                width: 100%;
-                margin: 0 0 15px 0;
-                float: none;
-                &:last-child {
-                    margin: 0 0 15px 0;
-                }
-            }
-        }
+
+.small-input {
+  .text-field {
+    width: 108px;
+    float: left;
+    margin-right: 15px;
+    &:last-child {
+      margin: 0;
     }
-    /* medium-input fields
-/* ----------------------------- */
-    
-    .medium-input {
-        .text-field {
-            width: 100px;
-            float: inherit;
-            margin: 0 15px 15px 0;
-            &:last-child {
-                margin: 0;
-            }
-        }
-        @include desktop-large {
-            .text-field {
-                width: 361px;
-            }
-        }
-        @include tablet {
-            .text-field {
-                width: 100%;
-                margin: 0 0 15px 0;
-                float: none;
-            }
-        }
-        @include mobile {
-            .text-field {
-                width: 100%;
-                margin: 0 0 15px 0;
-                float: none;
-            }
-        }
-    }
-    /* field
-/* ----------------------------- */
-    
+  }
+  @include desktop-large {
     .text-field {
-        margin: 0;
-        position: relative;
-        width: 100%;
-        @include mobile {
-            margin: 0 0 15px 0;
-        }
+      width: 143px;
+      margin-right: 15px;
     }
-    
-    .text-field-search {
-        margin: 0;
-        position: relative;
-        width: 100%;
-        @include mobile {
-            margin: 0 0 15px 0;
-        }
-        input[type="text"],
-        input[type="password"],
-        input[type="tel"],
-        input[type="email"],
-        input[type="number"],
-        input[type="search"] {
-            padding-left: 40px;
-        }
+  }
+  @include tablet {
+    .text-field {
+      width: 198px;
+      margin-right: 15px;
     }
-    
-    .error {
-        input[type="text"],
-        input[type="password"],
-        input[type="tel"],
-        input[type="email"],
-        input[type="number"],
-        input[type="search"] {
-            border-color: $brand-primary;
-        }
+  }
+  @include mobile {
+    .text-field {
+      width: 100%;
+      margin: 0 0 15px 0;
+      float: none;
+      &:last-child {
+        margin: 0 0 15px 0;
+      }
     }
-    
-    .disabled {
-        cursor: default;
-        input[type="text"],
-        input[type="password"],
-        input[type="tel"],
-        input[type="email"],
-        input[type="number"],
-        input[type="search"] {
-            background: $brand-gray-1;
-            border-color: $brand-gray-1;
-        }
-    }
-    
-    .search-submit {
-        position: absolute;
-        top: 0;
-        left: 15px;
-        background: none;
-        border: none;
-        padding: 0;
-        height: $input-height;
-        z-index: 2;
-        [class^="icon-"]::before,
-        [class*=" icon-"]::before {
-            color: $brand-gray-2;
-            font-size: 1.7rem;
-            padding: 0;
-            margin: 0;
-            top: 13px;
-            position: absolute;
-        }
-    }
-    
-    .clear-submit {
-        position: absolute;
-        top: 0;
-        right: 15px;
-        background: none;
-        border: none;
-        padding: 0;
-        height: $input-height;
-        [class^="icon-"]::before,
-        [class*=" icon-"]::before {
-            color: $brand-alert;
-            line-height: $input-line-height;
-            font-size: 1.7rem;
-            padding: 0;
-            margin: 0;
-        }
-    }
-    /* labeling
+  }
+}
+
+
+/* medium-input fields
 /* ----------------------------- */
-    
-    label {
-        height: $input-height;
-        font-size: 1.7rem;
-        line-height: $input-line-height;
-        float: left;
-        width: 150px;
-        .icon-class {
-            &:before {
-                font-size: 1.8rem;
-                padding-right: 0;
-            }
-        }
-        &+ .text-field-search,
-        &+ .text-field {
-            width: 195px;
-            margin-left: 15px;
-            float: left;
-        }
-        @include desktop-large {
-            &+ .text-field-search,
-            &+ .text-field {
-                width: 295px;
-            }
-        }
-        @include tablet {
-            &+ .text-field-search,
-            &+ .text-field {
-                width: 460px;
-            }
-        }
-        @include mobile {
-            height: auto;
-            font-size: 1.4rem;
-            line-height: 1.7rem;
-            float: none;
-            width: 100%;
-            margin: 0 0 15px 0;
-            &+ .text-field-search,
-            &+ .text-field {
-                width: 100%;
-                margin-left: 0px;
-                float: none;
-            }
-        }
+
+.medium-input {
+  .medium-dropdown-menu,
+  .text-field {
+    width: 90%;
+    float: left;
+    //margin-bottom: 15px;
+    //margin-right: 15px;
+  }
+  @include desktop-large {
+    .medium-dropdown-menu,
+    .text-field {}
+  }
+  @include tablet {
+    .medium-dropdown-menu,
+    .text-field {
+      width: 100%;
+      margin: 0 0 15px 0;
+      float: none;
     }
-    
-    .staticLabel {
-        float: inherit;
-        padding: 0 5px 0 5px;
-        text-align: inherit;
-        height: 40px;
-        @include mobile {
-            height: $input-height;
-            font-size: 1.7rem;
-            line-height: $input-line-height;
-            float: inherit;
-            width: 150px;
-        }
+  }
+  @include mobile {
+    .medium-dropdown-menu,
+    .text-field {
+      width: 100%;
+      margin: 0 0 15px 0;
+      float: none;
     }
-    /* autocomplete
+  }
+}
+
+
+/* field
 /* ----------------------------- */
-    
-    .autocomplete {
-        position: absolute;
-        left: 0;
-        top: 40px;
-        display: none;
-        z-index: 10;
-        width: 100%;
-        ul {
-            background: $white;
-            padding: 0 15px;
-            width: 100%;
-            box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
-            border: 1px solid $brand-gray-1;
-            border-top: none;
-            li {
-                text-align: left;
-                height: auto;
-                font-size: 1.7rem;
-                line-height: 2.0rem;
-                cursor: pointer;
-                padding: 5px 0;
-                &:last-child {
-                    border: none;
-                }
-                &:hover {
-                    text-decoration: none;
-                    color: $brand-secondary;
-                }
-                .company {
-                    display: block;
-                    font-size: 1.6rem;
-                }
-                .address {
-                    display: block;
-                    font-size: 1.0rem;
-                }
-            }
-        }
-        &.open {
-            display: block;
-        }
-        @include mobile {}
+
+.text-field {
+  margin: 0;
+  position: relative;
+  width: 100%;
+  @include mobile {
+    margin: 0 0 15px 0;
+  }
+}
+
+.text-field-search {
+  margin: 0;
+  position: relative;
+  width: 100%;
+  @include mobile {
+    margin: 0 0 15px 0;
+  }
+  input[type="text"],
+  input[type="password"],
+  input[type="tel"],
+  input[type="email"],
+  input[type="number"],
+  input[type="search"] {
+    padding-left: 40px;
+  }
+}
+
+.error {
+  input[type="text"],
+  input[type="password"],
+  input[type="tel"],
+  input[type="email"],
+  input[type="number"],
+  input[type="search"] {
+    border-color: $brand-primary;
+  }
+}
+
+.disabled {
+  cursor: default;
+  input[type="text"],
+  input[type="password"],
+  input[type="tel"],
+  input[type="email"],
+  input[type="number"],
+  input[type="search"] {
+    background: $brand-gray-1;
+    border-color: $brand-gray-1;
+  }
+}
+
+.search-submit {
+  position: absolute;
+  top: 0;
+  left: 15px;
+  background: none;
+  border: none;
+  padding: 0;
+  height: $input-height;
+  z-index: 2;
+  [class^="icon-"]::before,
+  [class*=" icon-"]::before {
+    color: $brand-gray-2;
+    font-size: 1.7rem;
+    padding: 0;
+    margin: 0;
+    top: 13px;
+    position: absolute;
+  }
+}
+
+.clear-submit {
+  position: absolute;
+  top: 0;
+  right: 15px;
+  background: none;
+  border: none;
+  padding: 0;
+  height: $input-height;
+  [class^="icon-"]::before,
+  [class*=" icon-"]::before {
+    color: $brand-alert;
+    line-height: $input-line-height;
+    font-size: 1.7rem;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+
+/* autocomplete
+/* ----------------------------- */
+
+.autocomplete {
+  position: absolute;
+  left: 0;
+  top: 40px;
+  display: none;
+  z-index: 10;
+  width: 100%;
+  ul {
+    background: $white;
+    padding: 0 15px;
+    width: 100%;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+    border: 1px solid $brand-gray-1;
+    border-top: none;
+    li {
+      text-align: left;
+      height: auto;
+      font-size: 1.7rem;
+      line-height: 2.0rem;
+      cursor: pointer;
+      padding: 5px 0;
+      &:last-child {
+        border: none;
+      }
+      &:hover {
+        text-decoration: none;
+        color: $brand-secondary;
+      }
+      .company {
+        display: block;
+        font-size: 1.6rem;
+      }
+      .address {
+        display: block;
+        font-size: 1.0rem;
+      }
     }
+  }
+  &.open {
+    display: block;
+  }
+  @include mobile {}
+}
+
+
+/* labeling
+/* ----------------------------- */
+
+label {
+  height: $input-height;
+  font-size: 1.7rem;
+  line-height: $input-line-height;
+  float: left;
+  width: 150px;
+  .icon-class {
+    &:before {
+      font-size: 1.8rem;
+      padding-right: 0;
+    }
+  }
+  &+ .text-field-search,
+  &+ .text-field,
+  &+ .small-autocomplete {
+    width: 195px;
+    margin-left: 15px;
+    float: left;
+  }
+  @include desktop-large {
+    &+ .text-field-search,
+    &+ .text-field,
+    &+ .small-autocomplete {
+      width: 295px;
+    }
+  }
+  @include tablet {
+    &+ .text-field-search,
+    &+ .text-field,
+    &+ .small-autocomplete {
+      width: 460px;
+    }
+  }
+  @include mobile {
+    height: auto;
+    font-size: 1.4rem;
+    float: none;
+    width: 100%;
+    margin: 0 0 15px 0;
+    &+ .text-field-search,
+    &+ .text-field,
+    &+ .small-autocomplete {
+      width: 100%;
+      margin-left: 0;
+      float: none;
+    }
+  }
+}
+
+.staticLabel {
+  float: inherit;
+  padding: 0 5px 0 5px;
+  text-align: inherit;
+  height: 40px;
+  @include mobile {
+    height: $input-height;
+    font-size: 1.7rem;
+    line-height: $input-line-height;
+    float: inherit;
+    width: 150px;
+  }
+}
+
+.small-autocomplete {
+  position: relative;
+}
