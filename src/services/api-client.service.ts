@@ -102,6 +102,49 @@ export default class APIClient {
     }
 
     /**
+     * HTTP PUT request to the API.
+     * @param {string} path the path of the API to be requested
+     * @param {any} data the request data
+     * @param {RequestOptions} options additional options to pass to the server
+     * @returns {Observable<any>}
+     */
+    public put(path: string, data: any, options?: RequestOptions): Observable<Response> {
+        try {
+            let opt = this.prepareHeaders();
+            if (options) {
+                opt = opt.merge(options);
+            }
+            return this.http
+                .put(CONSUMER_API_BASE_URL + path, JSON.stringify(data), opt)
+                .timeout(API_TIMEOUT, new Error('API timeout'))
+                .retryWhen(RxUtils.errorDelay(API_RETRIES, API_RETRY_DELAY))
+                .catch((error) => {
+                    return this.handleError(error);
+                });
+        } catch (e) {
+            return Observable.throw(e);
+        }
+    }
+
+    public delete(path: string, options?: RequestOptions): Observable<Response> {
+        try {
+            let opt = this.prepareHeaders();
+            if (options) {
+                opt = opt.merge(options);
+            }
+            return this.http
+                .delete(CONSUMER_API_BASE_URL + path, opt)
+                .timeout(API_TIMEOUT, new Error('API timeout'))
+                .retryWhen(RxUtils.errorDelay(API_RETRIES, API_RETRY_DELAY))
+                .catch((error) => {
+                    return this.handleError(error);
+                });
+        } catch (e) {
+            return Observable.throw(e);
+        }
+    }
+
+    /**
      * Prepares the authentication header.
      * @returns {RequestOptions} all options (can be modified)
      */

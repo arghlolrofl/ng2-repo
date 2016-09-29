@@ -8,6 +8,8 @@ import {Ng2Bs3ModalModule} from 'ng2-bs3-modal/ng2-bs3-modal';
 
 import {routing, appRoutingProviders} from './router/app.routes';
 import {SuggestDirective} from "./directives/suggest.directive";
+
+import LoadingAnimationComponent from './components/common/loading-animation.component';
 import AppComponent from './components/app.component';
 import DashboardComponent from './components/dashboard/dashboard.component';
 import AdministrationComponent from './components/administration/administration.component';
@@ -21,6 +23,7 @@ import CostAccountComponent from './components/administration/cost-account/cost-
 import CostAccountTableComponent from './components/administration/cost-account/cost-account.table';
 import CostAccountTablePagingComponent from './components/administration/cost-account/cost-account.table.paging';
 import CostAccountTableFilterComponent from './components/administration/cost-account/cost-account.table.filter';
+import CostAccountTableItemDetailsComponent from './components/administration/cost-account/cost-account.item-details';
 
 import ProfileComponent from './components/profile/profile.component';
 
@@ -50,6 +53,8 @@ import ShippingLabelComponent from "./components/shipping/shipping.label.compone
         routing
     ],
     declarations: [
+        LoadingAnimationComponent,
+
         SuggestDirective,
         AppComponent,
         DashboardComponent,
@@ -64,6 +69,7 @@ import ShippingLabelComponent from "./components/shipping/shipping.label.compone
         CostAccountTableComponent,
         CostAccountTablePagingComponent,
         CostAccountTableFilterComponent,
+        CostAccountTableItemDetailsComponent,
 
         ProfileComponent,
 

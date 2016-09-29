@@ -25,14 +25,36 @@
         </i>
     </div>
 </div>
-<div class="row">
+<div *ngIf="!isLoading" class="row">
     <div class="col-md-12">
-        <button class="button color">
+        <button class="button color"
+                (click)="costAccount_onCreateNew()">
             <span>{{ 'NEW' | translate }}</span>
         </button>
     </div>
 </div>
-<fp-administration-cost-account-table-filter></fp-administration-cost-account-table-filter>
-<fp-administration-cost-account-table-paging></fp-administration-cost-account-table-paging>
-<fp-administration-cost-account-table></fp-administration-cost-account-table>
-<fp-administration-cost-account-table-paging></fp-administration-cost-account-table-paging>
+
+<fp-loading-animation *ngIf="isLoading"></fp-loading-animation>
+
+<fp-administration-cost-account-table-filter *ngIf="!isLoading">
+
+</fp-administration-cost-account-table-filter>
+<fp-administration-cost-account-table-paging *ngIf="!isLoading">
+
+</fp-administration-cost-account-table-paging>
+<fp-administration-cost-account-table *ngIf="!isLoading"
+                                      [items]="costAccountList"
+                                      (showDetails)="costAccount_onShowDetails($event)">
+
+</fp-administration-cost-account-table>
+<fp-administration-cost-account-table-paging *ngIf="!isLoading">
+
+</fp-administration-cost-account-table-paging>
+
+<fp-cost-account-item-details [showChange]="showEditDialogChange"
+                              [costAccount]="SelectedCostAccount"
+                              (costAccountCreated)="costAccount_onCreated($event)"
+                              (costAccountDeleted)="costAccount_onDeleted($event)"
+                              (costAccountChanged)="costAccount_onChanged($event)">
+
+</fp-cost-account-item-details>
