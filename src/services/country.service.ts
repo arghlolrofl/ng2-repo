@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 
 import APIClient from './api-client.service';
-import PagedResultsOf from "../models/paged-results";
+import PagedResultsOf from "../models/base/paged-results";
 import CountryInfo from "../models/country-info";
 
 /**

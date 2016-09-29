@@ -3,7 +3,10 @@ import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
 @Component({
     selector: 'fp-administration',
-    templateUrl: 'assets/templates/administration/administration.component.html'
+    templateUrl: 'assets/templates/administration/administration.component.html',
+    styles: [
+        'ul li { float: left; }'
+    ]
 })
 
 /**

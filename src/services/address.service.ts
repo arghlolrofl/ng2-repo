@@ -4,7 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import APIClient from './api-client.service';
 import AddressGroupInfo from '../models/address-group-info';
 import AddressDisplayInfo from '../models/address-display-info';
-import PagedResultsOf from "../models/paged-results";
+import PagedResultsOf from "../models/base/paged-results";
 import AddressCreationInfo from "../models/address-creation-info";
 
 /**

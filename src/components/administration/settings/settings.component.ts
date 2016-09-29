@@ -79,11 +79,6 @@ export default class SettingsComponent {
     private enableEditMode() {
         // create a shallow clone
         this.mailOneSettingsCached = MailOneSettings.createClone(this.mailOneSettings);
-        console.log("ORIGINAL");
-        console.info(this.mailOneSettings);
-        console.log("CACHED");
-        console.info(this.mailOneSettingsCached);
-
         this.isInEditMode = true;
     }
 
@@ -92,12 +87,7 @@ export default class SettingsComponent {
     }
 
     private cancelEditMode() {
-        console.log("Restoring ...");
         this.mailOneSettings = MailOneSettings.createClone(this.mailOneSettingsCached);
-        console.log("ORIGINAL");
-        console.info(this.mailOneSettings);
-        console.log("CACHED");
-        console.info(this.mailOneSettingsCached);
         this.disableEditMode();
     }
 
@@ -143,8 +133,6 @@ export default class SettingsComponent {
                 this.disableEditMode();
             },
             (error: any) => {
-                console.info(error);
-
                 if (error.hasOwnProperty("message"))
                     this.error = error;
                 else if (error.hasOwnProperty("_body"))

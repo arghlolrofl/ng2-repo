@@ -110,7 +110,7 @@ export default class ShippingSenderAddComponent implements AfterViewInit {
                 this.address.Region = this.region.RegionName;
                 this.address.RegionAbbreviation = this.region.RegionAbbreviation;
             },
-            (error: Error) => { 
+            (error: Error) => {
                 this.error = ErrorUtils.toError(error);
                 this.address.RegionAbbreviation = null;
             });
