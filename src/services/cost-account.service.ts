@@ -6,6 +6,7 @@ import APIClient from './api-client.service';
 import SortedPagedRequest from '../models/base/sorted-paged-request';
 import SortedPagedResults from '../models/base/sorted-paged-results';
 import CostAccountInfo from '../models/cost-account/cost-account-info';
+import CostAccountFilterRequest from '../models/cost-account/cost-account-filter-request';
 
 @Injectable()
 export default class CostAccountService {
@@ -33,6 +34,10 @@ export default class CostAccountService {
         return this.apiClient.post('CostCenter/GetAll', sortedPagedRequest);
     }
 
+    public getFilteredCostCenters(costAccountRequest: CostAccountFilterRequest): Observable<SortedPagedResults<CostAccountInfo>> {
+        return this.apiClient.post("CostCenter/GetFiltered", costAccountRequest);
+    }
+
     public delete(id: number): Observable<Response> {
         return this.apiClient.delete('CostCenter/Delete?id=' + id);
     }
@@ -44,4 +49,6 @@ export default class CostAccountService {
     public create(costAccount: CostAccountInfo) {
         return this.apiClient.post('CostCenter/AddNew', costAccount);
     }
+
+
 }

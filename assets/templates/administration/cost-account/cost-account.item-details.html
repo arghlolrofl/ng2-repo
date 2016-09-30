@@ -26,19 +26,6 @@
                 </div>
             </div>
 
-            <!-- Name -->
-            <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <label>{{ 'NAME' | translate }}</label>
-                </div>
-                <div class="col-md-6 col-sm-12">
-                    <input type="text"
-                           [(ngModel)]="Name"
-                           [ngModelOptions]="{standalone: true}"
-                           [disabled]="!isInEditMode" />
-                </div>
-            </div>
-
             <!-- Active -->
             <div class="row">
                 <div class="col-md-6 col-sm-12">
@@ -48,6 +35,19 @@
                     <input type="checkbox"
                            id="active-box"
                            [(ngModel)]="IsCostAccountActive"
+                           [ngModelOptions]="{standalone: true}"
+                           [disabled]="!isInEditMode" />
+                </div>
+            </div>
+
+            <!-- Name -->
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <label>{{ 'NAME' | translate }}</label>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <input type="text"
+                           [(ngModel)]="Name"
                            [ngModelOptions]="{standalone: true}"
                            [disabled]="!isInEditMode" />
                 </div>
@@ -66,6 +66,23 @@
                 </div>
             </div>
 
+            <!-- Level -->
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <label>{{ 'LEVEL' | translate }}</label>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <select class="dropdown-menu"
+                            [(ngModel)]="Level"
+                            [ngModelOptions]="{standalone: true}"
+                            [disabled]="!isInEditMode">
+                        <option value="1" [selected]="Level < 2">{{ 'LEVEL' | translate }}&nbsp;1</option>
+                        <option value="2" [selected]="Level == 2">{{ 'LEVEL' | translate }}&nbsp;2</option>
+                        <option value="3" [selected]="Level > 2">{{ 'LEVEL' | translate }}&nbsp;3</option>
+                    </select>
+                </div>
+            </div>
+
             <!-- Surcharge -->
             <div class="row">
                 <div class="col-md-6 col-sm-12">
@@ -79,29 +96,20 @@
                 </div>
             </div>
 
-            <!-- Level -->
-            <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <label>{{ 'LEVEL' | translate }}</label>
-                </div>
-                <div class="col-md-6 col-sm-12">
-                    <input type="text"
-                           [(ngModel)]="Level"
-                           [ngModelOptions]="{standalone: true}"
-                           [disabled]="!isInEditMode" />
-                </div>
-            </div>
-
             <!-- SurchargeType -->
             <div class="row">
                 <div class="col-md-6 col-sm-12">
                     <label>{{ 'SERVICE_CHARGE_TYPE' | translate }}</label>
                 </div>
                 <div class="col-md-6 col-sm-12">
-                    <input type="text"
-                           [(ngModel)]="SurchargeType"
-                           [ngModelOptions]="{standalone: true}"
-                           [disabled]="!isInEditMode" />
+                    <select class="dropdown-menu"
+                            [(ngModel)]="SurchargeType"
+                            [ngModelOptions]="{standalone: true}"
+                            [disabled]="!isInEditMode">
+                        <option value="0" [selected]="SurchargeType < 1">{{ 'FIXED_ABSOLUTE' | translate }}</option>
+                        <option value="1" [selected]="SurchargeType > 0">{{ 'PERCENTAGE' | translate }}</option>
+                    </select>
+
                 </div>
             </div>
 

@@ -100,5 +100,11 @@
   "DELETE": "Delete",
   "EDIT": "Edit",
   "CANCEL": "Cancel",
-  "ADMINISTRATION_COST_ACCOUNT_HEADLINE": "Cost Account Management"
+  "ADMINISTRATION_COST_ACCOUNT_HEADLINE": "Cost Account Management",
+  "PAGE": "Page",
+  "YES": "Yes",
+  "NO": "No",
+  "BOTH": "Both",
+  "FIXED_ABSOLUTE": "Fixed (absolute)",
+  "PERCENTAGE": "Percentage"
 }

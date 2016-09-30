@@ -57,6 +57,8 @@
     <TypeScriptCompile Include="src\models\base\identifiable-object.ts" />
     <TypeScriptCompile Include="src\models\base\sorted-paged-results.ts" />
     <TypeScriptCompile Include="src\models\base\sorting-info.ts" />
+    <TypeScriptCompile Include="src\models\cost-account\cost-account-filter-request.ts" />
+    <TypeScriptCompile Include="src\models\cost-account\cost-account-filter.ts" />
     <TypeScriptCompile Include="src\models\cost-account\cost-account-info.ts" />
     <TypeScriptCompile Include="src\models\base\sorted-paged-request.ts" />
     <TypeScriptCompile Include="src\models\settings\mailone-settings.ts" />

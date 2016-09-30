@@ -1,30 +1,33 @@
 ﻿<div class="row">
     <div class="field-container text-field col-md-2">
-        <input type="text" value="" placeholder="{{ 'NUMBER' | translate }}">
-        <button class="clear-submit">
+        <input type="text" [(ngModel)]="NumberFilter" placeholder="{{ 'NUMBER' | translate }}">
+        <button class="clear-submit" (click)="NumberFilter = null;">
             <span class="icon-close"></span>
         </button>
     </div>
     <div class="field-container text-field col-md-2">
-        <input type="text" value="" placeholder="{{ 'NAME' | translate }}">
-        <button class="clear-submit">
+        <input type="text" [(ngModel)]="NameFilter" placeholder="{{ 'NAME' | translate }}">
+        <button class="clear-submit" (click)="NameFilter = null;">
             <span class="icon-close"></span>
         </button>
     </div>
     <div class="field-container text-field col-md-2">
-        <input type="text" value="" placeholder="{{ 'LEVEL' | translate }}">
-        <button class="clear-submit">
+        <input type="text" [(ngModel)]="LevelFilter" placeholder="{{ 'LEVEL' | translate }}">
+        <button class="clear-submit" (click)="LevelFilter = null;">
             <span class="icon-close"></span>
         </button>
     </div>
     <div class="field-container text-field col-md-2">
-        <input type="text" value="" placeholder="{{ 'ACTIVE' | translate }}">
-        <button class="clear-submit">
-            <span class="icon-close"></span>
-        </button>
+        <select [(ngModel)]="SelectedIsActiveFilter">
+            <option value="0" [selected]="SelectedIsActiveFilter === 0">{{ 'NO' | translate }}</option>
+            <option value="1" [selected]="SelectedIsActiveFilter === 1">{{ 'YES' | translate }}</option>
+            <option value="2" [selected]="SelectedIsActiveFilter > 1">{{ 'BOTH' | translate }}</option>
+        </select>
+        <!--<input type="text" [(ngModel)]="FilterActive" placeholder="{{ 'ACTIVE' | translate }}">-->
     </div>
     <div class="col-md-4">
-        <button class="button submit height-40">
+        <button class="button submit height-40"
+                (click)="applyFilter()">
             <span>{{ 'APPLY' | translate }}</span>
         </button>
     </div>

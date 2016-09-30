@@ -13,7 +13,7 @@ import CostAccountInfo from '../../../models/cost-account/cost-account-info';
         CostAccountService
     ],
     styles: [
-        '#active-box { height: 40px; vertical-align: middle; margin-left: 5px; }',
+        '#active-box { margin-left: 5px; height: 40px; vertical-align: middle; }',
         '.align-right { float: right; }'
     ]
 })
@@ -24,8 +24,7 @@ export default class CostAccountTableItemDetailsComponent implements AfterViewIn
     /**
      * Object to be edited inside the modal dialog
      */
-    @Input()
-    costAccount: CostAccountInfo;
+    @Input() costAccount: CostAccountInfo;
 
     /**
      * Opens or closes the modal dialog.
@@ -40,17 +39,17 @@ export default class CostAccountTableItemDetailsComponent implements AfterViewIn
     /**
      * Notifies parent, that the item with the given id should be deleted.
      */
-    @Output()
-    costAccountDeleted: EventEmitter<number> = new EventEmitter<number>();
+    @Output() costAccountDeleted: EventEmitter<number> = new EventEmitter<number>();
 
     /**
      * Notifies parent, that the edited object has changed
      */
-    @Output()
-    costAccountChanged: EventEmitter<CostAccountInfo> = new EventEmitter<CostAccountInfo>();
+    @Output() costAccountChanged: EventEmitter<CostAccountInfo> = new EventEmitter<CostAccountInfo>();
 
-    @Output()
-    costAccountCreated: EventEmitter<CostAccountInfo> = new EventEmitter<CostAccountInfo>();
+    /**
+     * Notifies the parent, that an account has been created
+     */
+    @Output() costAccountCreated: EventEmitter<CostAccountInfo> = new EventEmitter<CostAccountInfo>();
 
     //#endregion
 
@@ -145,6 +144,7 @@ export default class CostAccountTableItemDetailsComponent implements AfterViewIn
         });
 
         this.modal.onOpen.subscribe(() => {
+            // enable edit mode when creating a cost account
             if (this.costAccount != null && this.costAccount.Id <= 0)
                 this.enableEditMode();
         });
@@ -152,17 +152,25 @@ export default class CostAccountTableItemDetailsComponent implements AfterViewIn
 
     //#endregion
 
-
+    /**
+     * Enables edit mode and caches current cost account object
+     */
     private enableEditMode() {
         this.cachedCostAccount = CostAccountInfo.createClone(this.costAccount);
         this.isInEditMode = true;
     }
 
+    /**
+     * Disables edit mode and restores cached cost account object
+     */
     private cancelEditMode() {
         this.isInEditMode = false;
         this.costAccount = CostAccountInfo.createClone(this.cachedCostAccount);
     }
 
+    /**
+     * Tries to delete the current cost account
+     */
     private deleteItem() {
         let id = this.costAccount.Id;
 
@@ -180,6 +188,9 @@ export default class CostAccountTableItemDetailsComponent implements AfterViewIn
 
     }
 
+    /**
+     * Persist current cost account
+     */
     private save() {
         if (this.costAccount.Id > 0) {
             this.costAccountService.update(this.costAccount).subscribe(
@@ -217,7 +228,10 @@ export default class CostAccountTableItemDetailsComponent implements AfterViewIn
         return false;
     }
 
-
+    /**
+     * Error Handler method
+     * @param {any} error Error during API request
+     */
     private apiRequest_onError(error: any) {
         console.error(error);
 
@@ -227,6 +241,10 @@ export default class CostAccountTableItemDetailsComponent implements AfterViewIn
             this.error = error;
     }
 
+    /**
+     * Extracts validation messages from an error object
+     * @param {any} responseError
+     */
     private extractValidationError(responseError: any): Error {
         let err = JSON.parse(responseError._body);
         // Sample:

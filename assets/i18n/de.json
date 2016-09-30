@@ -100,5 +100,11 @@
   "DELETE": "Löschen",
   "EDIT": "Ändern",
   "CANCEL": "Abbrechen",
-  "ADMINISTRATION_COST_ACCOUNT_HEADLINE": "Kostenstellenverwaltung"
+  "ADMINISTRATION_COST_ACCOUNT_HEADLINE": "Kostenstellenverwaltung",
+  "PAGE": "Seite",
+  "YES": "Ja",
+  "NO": "Nein",
+  "BOTH": "Beides",
+  "FIXED_ABSOLUTE": "Fix (absolut)",
+  "PERCENTAGE": "Prozentual"
 }
