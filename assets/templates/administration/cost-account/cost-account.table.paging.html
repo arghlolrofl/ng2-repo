@@ -6,11 +6,11 @@
     </div>
 
     <div class="col-md-3 col-sm-4">
-        <label class="paging-status">{{ 'PAGE' }}</label>
+        <label class="paging-status">{{ 'PAGE' | translate }} {{CurrentPage}}/{{MaxPage}}</label>
     </div>
 
     <div class="col-md-1 col-sm-2">
-        <button (click)="goTonextPage()">
+        <button (click)="goToNextPage()">
             <span class="icon-button icon-right-arrow"></span>
         </button>
     </div>

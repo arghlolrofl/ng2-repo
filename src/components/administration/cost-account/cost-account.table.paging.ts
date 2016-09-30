@@ -12,24 +12,26 @@ import {TranslatePipe} from 'ng2-translate/ng2-translate';
 })
 
 export default class CostAccountTablePagingComponent {
-    @Input()
-    resultCount: number;
+    //#region Input
 
-    @Input()
-    totalResultCount: number;
+    @Input() resultCount: number;
+    @Input() totalResultCount: number;
+    @Input() currentPage: number;
 
-    @Output()
-    nextPageRequested: EventEmitter<number> = new EventEmitter<number>();
+    //#endregion
 
-    @Output()
-    previousPageRequested: EventEmitter<number> = new EventEmitter<number>();
+    //#region Output
 
-    @Output()
-    resultCountChanged: EventEmitter<number> = new EventEmitter<number>();
+    @Output() changePageRequested: EventEmitter<number> = new EventEmitter<number>();
+    @Output() resultCountChanged: EventEmitter<number> = new EventEmitter<number>();
+    @Output() pageChanged: EventEmitter<number> = new EventEmitter<number>();
 
+    //#endregion
+
+    //#region Properties
 
     public get ResultCount(): number {
-        return this.resultCount;
+        return +this.resultCount;
     }
     public set ResultCount(val: number) {
         this.resultCount = val;
@@ -49,17 +51,59 @@ export default class CostAccountTablePagingComponent {
         return this.resultCount;
     }
 
-    private currentPage: number = 1;
     public get CurrentPage(): number { return this.currentPage; }
+    public set CurrentPage(val: number) {
+        this.currentPage = val;
+        console.info("Current Page set to: " + val);
 
-    private goToNextPage() {
+        this.pageChanged.emit(val);
+    }
+    public get MaxPage(): number {
+        if (this.ResultCount > this.totalResultCount)
+            return 1;
 
+        let rest: number = this.TotalResultCount % this.ResultCount;
+
+        let max: number = (this.TotalResultCount - rest) / this.ResultCount;
+
+        if (rest > 0)
+            max++;
+
+        return max;
     }
 
-    private goToPreviousPage() {
-        if (this.currentPage <= 1)
+    //#endregion
+
+    /**
+     * Emits an request to switch to the next page
+     */
+    private goToNextPage() {
+        if (this.CurrentPage >= this.MaxPage)
             return;
 
-        this.previousPageRequested.emit(
+        let pageIndex: number = this.CurrentPage;
+        this.CurrentPage = this.CurrentPage + 1;
+
+        let newStartIndex: number = pageIndex * this.ResultCount + 1;
+
+        console.info("PAGE: " + this.CurrentPage);
+
+        this.changePageRequested.emit(newStartIndex - 1);
+    }
+
+    /**
+     * Emits an request to switch to the previous page
+     */
+    private goToPreviousPage() {
+        if (this.CurrentPage <= 1)
+            return;
+
+        this.CurrentPage = this.CurrentPage - 1;
+
+        let newStartIndex: number = (this.CurrentPage - 1) * this.ResultCount + 1;
+
+        console.info("PAGE: " + this.CurrentPage);
+
+        this.changePageRequested.emit(newStartIndex - 1);
     }
 }

@@ -1,4 +1,4 @@
-﻿import {Component} from '@angular/core';
+﻿import {Component, Input} from '@angular/core';
 
 @Component({
     selector: 'fp-loading-animation',
@@ -14,5 +14,4 @@
 })
 
 export default class LoadingAnimationComponent {
-
 }
