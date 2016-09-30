@@ -21,7 +21,7 @@
 <div class="row">
     <div *ngIf="isInEditMode" class="col-md-12 status-message" id="status-box">
         <i class="icon-interface">
-            <span>Edit Mode</span>
+            <span>{{ 'EDIT_MODE' | translate }}</span>
         </i>
     </div>
 </div>
@@ -51,15 +51,15 @@
 <div class="row">
     <div class="col-md-2 col-md-offset-8 col-sm-6">
         <button *ngIf="isInEditMode" class="button color" (click)="cancelEditMode()">
-            <span>Cancel</span>
+            <span>{{ 'CANCEL' | translate }}</span>
         </button>
     </div>
     <div class="col-md-2 col-sm-6">
         <button *ngIf="!isInEditMode" class="button color" (click)="enableEditMode()">
-            <span>Edit</span>
+            <span>{{ 'EDIT' | translate }}</span>
         </button>
         <button *ngIf="isInEditMode" class="button color" (click)="saveChanges()">
-            <span>Save</span>
+            <span>{{ 'SAVE' | translate }}</span>
         </button>
     </div>
 </div>

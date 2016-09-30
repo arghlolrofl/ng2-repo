@@ -39,7 +39,10 @@
 <fp-administration-cost-account-table-filter *ngIf="!isLoading">
 
 </fp-administration-cost-account-table-filter>
-<fp-administration-cost-account-table-paging *ngIf="!isLoading">
+<fp-administration-cost-account-table-paging *ngIf="!isLoading"
+                                             [resultCount]="selectedResultCount"
+                                             [totalResultCount]="TotalResultCount"
+                                             (resultCountChanged)="paging_onResultCountChanged($event)">
 
 </fp-administration-cost-account-table-paging>
 <fp-administration-cost-account-table *ngIf="!isLoading"
@@ -47,7 +50,10 @@
                                       (showDetails)="costAccount_onShowDetails($event)">
 
 </fp-administration-cost-account-table>
-<fp-administration-cost-account-table-paging *ngIf="!isLoading">
+<fp-administration-cost-account-table-paging *ngIf="!isLoading"
+                                             [resultCount]="selectedResultCount"
+                                             [totalResultCount]="TotalResultCount"
+                                             (resultCountChanged)="paging_onResultCountChanged($event)">
 
 </fp-administration-cost-account-table-paging>
 

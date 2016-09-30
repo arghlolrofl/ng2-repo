@@ -4,6 +4,7 @@ import {TranslatePipe} from 'ng2-translate/ng2-translate';
 import CostAccountService from '../../../services/cost-account.service';
 import SortedPagedResults from '../../../models/base/sorted-paged-results';
 import CostAccountInfo from '../../../models/cost-account/cost-account-info';
+import SortedPagedRequest from '../../../models/base/sorted-paged-request';
 
 @Component({
     selector: 'fp-administration-cost-account',
@@ -17,6 +18,21 @@ import CostAccountInfo from '../../../models/cost-account/cost-account-info';
  * Administration - Settings component.
  */
 export default class CostAccountComponent implements OnInit {
+    private selectedResultCount: number = 10;
+    get SelectedResultCount(): number { return this.selectedResultCount; }
+    set SelectedResultCount(val: number) {
+        console.info("Selected: " + val);
+        this.selectedResultCount = val;
+        this.refreshCostAccounts();
+    }
+
+    private totalResultCount: number;
+    get TotalResultCount(): number { return this.totalResultCount; }
+    set TotalResultCount(val: number) {
+        console.info("Total: " + val);
+        this.totalResultCount = val;
+    }
+
     //#region Fields
 
     private error: Error;
@@ -51,22 +67,46 @@ export default class CostAccountComponent implements OnInit {
         this.refreshCostAccounts();
     }
 
-    private refreshCostAccounts() {
+    private refreshCostAccounts(startIndex?: number) {
         this.isLoading = true;
-
         this.selectedCostAccount = null;
-        this.costAccountService
-            .getAllCostCenters()
-            .subscribe(
+
+        if (this.selectedResultCount == null) {
+            this.costAccountService
+                .getAllCostCenters()
+                .subscribe(
                 (response: SortedPagedResults<CostAccountInfo>) => {
                     this.costAccountList = response.ItemList;
                     this.isLoading = false;
+                    this.TotalResultCount = response.TotalItemCount;
                 },
                 (error: Error) => {
                     this.isLoading = false;
                     console.error(error);
                 }
-            );
+                );
+        } else {
+            let req = new SortedPagedRequest();
+            req.Descending = false;
+            req.ResultCount = this.selectedResultCount;
+
+            if (startIndex != null)
+                req.StartValue = startIndex;
+
+            this.costAccountService
+                .getCostCenters(req)
+                .subscribe(
+                    (response: SortedPagedResults<CostAccountInfo>) => {
+                        this.costAccountList = response.ItemList;
+                        this.TotalResultCount = response.TotalItemCount;
+                        this.isLoading = false;
+                    },
+                    (error: Error) => {
+                        this.isLoading = false;
+                        console.error(error);
+                    }
+                );
+        }
     }
 
     public ngOnInit() {
@@ -97,5 +137,9 @@ export default class CostAccountComponent implements OnInit {
 
     private costAccount_onDeleted(id: number) {
         this.refreshCostAccounts();
+    }
+
+    private paging_onResultCountChanged(count: number) {
+        this.SelectedResultCount = count;
     }
 }
