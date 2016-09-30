@@ -13,7 +13,7 @@ import CostAccountInfo from '../../../models/cost-account/cost-account-info';
         CostAccountService
     ],
     styles: [
-        '#active-box { width: 40px; height: 40px; vertical-align: middle; }',
+        '#active-box { height: 40px; vertical-align: middle; margin-left: 5px; }',
         '.align-right { float: right; }'
     ]
 })
