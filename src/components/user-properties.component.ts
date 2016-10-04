@@ -1,4 +1,4 @@
-﻿import {NgZone, Component, EventEmitter, Output, AfterViewInit} from '@angular/core';
+﻿import {NgZone, Component, EventEmitter, Input, Output, AfterViewInit} from '@angular/core';
 import {TranslatePipe} from 'ng2-translate/ng2-translate';
 import CustomerService from "../services/customer.service";
 import LoginService from "../services/login.service";
@@ -19,13 +19,11 @@ import ConsumerInfo from "../models/consumer-info";
 export default class UserPropertiesComponent implements AfterViewInit {
     @Output() onError: EventEmitter<Error> = new EventEmitter<Error>();
 
-    /**
-     * Consumer information.
-     */
-    //consumer: ConsumerInfo;
+    //#region Input
+    @Input() loginName:  string;
+    @Input() customerNo: string;
+    //#endregion
 
-    loginName:  string;
-    customerNo: string;
     /**
      * @constructor
      * @param {CustomerService} customerService the customer client
@@ -33,17 +31,30 @@ export default class UserPropertiesComponent implements AfterViewInit {
     constructor(private customerService: CustomerService, private loginService: LoginService, private zone: NgZone) {
     }
 
+    /**
+     * Subscribe to loginChange.
+     */
     ngAfterViewInit(): void {
+        this.getCustomerInfo();
         this.loginService.loginChange.subscribe((event) => {
             if (event.loggedIn) {
                 this.getCustomerInfo();
             }
+            else {
+                this.loginName = "";
+                this.customerNo = "";
+            }
         });
     }
 
+    /**
+     * Get the customer info to display.
+     */
     private getCustomerInfo(): void {
         this.customerService.getConsumerInfo().subscribe(
-            (r: ConsumerInfo) => this.zone.run(() => { this.loginName = r.Login; this.customerNo = r.Customer.CustomerNumber; }),
-            (error: Error) => this.onError.emit(error));
+            (r: ConsumerInfo) =>
+                this.zone.run(() =>
+                    { this.loginName = r.Login; this.customerNo = r.Customer.CustomerNumber; }),
+                (error: Error) => this.onError.emit(error));
     }
 }
