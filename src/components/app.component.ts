@@ -46,7 +46,15 @@ export default class AppComponent implements AfterViewInit {
         private notificationService: NotificationService,
         private zone:NgZone) {
         const locales = AVAILABLE_LOCALES.join('|');
-        let userLang = (navigator.language || navigator.userLanguage || 'en-us').split('-')[0];
+
+        // w.waitz (05.10.2016)
+        // workaround
+        // navigator.userLanguage throws an typescript transpile error.
+        // why? i dont know
+        // access the property per indexer solve this problem
+        let userLang = (navigator.language || navigator['userLanguage'] || 'en-us').split('-')[0];
+        console.log(navigator.language);
+        console.log(navigator['userLanguage']);
         userLang = (new RegExp(`(${locales})`, 'gi')).test(userLang) ? userLang : AVAILABLE_LOCALES[0];
         translate.use(userLang);
         this.loggedIn = this.loginService.isLoggedIn();
