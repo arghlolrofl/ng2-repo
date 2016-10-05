@@ -30,6 +30,7 @@
     <Content Include="assets\templates\administration\settings\settings.component.html" />
     <Content Include="assets\templates\common\loading-animation.component.html" />
     <Content Include="assets\templates\shipping\shipping.label.component.html" />
+    <Content Include="assets\templates\user-properties.component.html" />
     <Content Include="index.html" />
     <Content Include=".lite-server.json" />
     <Content Include="package.json" />
@@ -52,11 +53,14 @@
     <TypeScriptCompile Include="src\components\administration\settings\settings.component.ts" />
     <TypeScriptCompile Include="src\components\common\loading-animation.component.ts" />
     <TypeScriptCompile Include="src\components\shipping\shipping.label.component.ts" />
+    <TypeScriptCompile Include="src\components\user-properties.component.ts" />
     <TypeScriptCompile Include="src\config.ts" />
     <TypeScriptCompile Include="src\main.ts" />
     <TypeScriptCompile Include="src\models\base\identifiable-object.ts" />
     <TypeScriptCompile Include="src\models\base\sorted-paged-results.ts" />
     <TypeScriptCompile Include="src\models\base\sorting-info.ts" />
+    <TypeScriptCompile Include="src\models\cost-account\cost-account-filter-request.ts" />
+    <TypeScriptCompile Include="src\models\cost-account\cost-account-filter.ts" />
     <TypeScriptCompile Include="src\models\cost-account\cost-account-info.ts" />
     <TypeScriptCompile Include="src\models\base\sorted-paged-request.ts" />
     <TypeScriptCompile Include="src\models\settings\mailone-settings.ts" />

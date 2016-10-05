@@ -39,7 +39,7 @@ export const API_TIMEOUT = 15000;
  * API request retries.
  * @type {number}
  */
-export const API_RETRIES = 2;
+export const API_RETRIES = 0;
 
 /**
  * API request retry delay.
