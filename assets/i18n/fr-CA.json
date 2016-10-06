@@ -107,8 +107,6 @@
   "ALL": "Alle",
   "FIXED_ABSOLUTE": "Fix (absolut)",
   "BOTH": "Beides",
-  "ALL": "Alle",
-  "FIXED_ABSOLUTE": "Fix (absolut)",
   "PERCENTAGE": "Prozentual",
   "PASSWORD_CHANGE": "Passwort ändern",
   "PASSWORD_REPEAT": "Password wiederholen",
@@ -117,4 +115,5 @@
   "EDIT_MODE": "Editiermodus",
   "SAVE": "Speichern",
   "INACTIVE": "Inaktiv",
-  "COST_ACCOUNT": "Kostenstelle"}
+  "COST_ACCOUNT": "Kostenstelle"
+}

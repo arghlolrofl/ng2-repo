@@ -106,6 +106,7 @@
   "NO": "No",
   "ALL": "All",
   "FIXED_ABSOLUTE": "Fixed (absolute)",
+  "BOTH": "Both",
   "PERCENTAGE": "Percentage",
   "PASSWORD_CHANGE": "Change Password",
   "PASSWORD_REPEAT": "Repeat Password",
