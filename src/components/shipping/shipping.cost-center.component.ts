@@ -56,9 +56,6 @@ export default class ShippingCostCenterComponent {
         this.costCenterService.getDefaultCostCenter().subscribe(
             (response: SortedPagedResults<CostCenterInfo>) => {
                 for (let i = 0; i < response.ItemList.length; i++) {
-
-                    response.ItemList[i].IsDefault = true;
-
                     if (response.ItemList[i].IsDefault) {
                         this.costCenter1 = response.ItemList[i];
                         this.costCenter1Input = this.costCenter1.Name;
