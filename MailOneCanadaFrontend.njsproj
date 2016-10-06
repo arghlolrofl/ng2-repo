@@ -34,7 +34,6 @@
     <Content Include="index.html" />
     <Content Include=".lite-server.json" />
     <Content Include="package.json" />
-    <Content Include="php.md" />
     <Content Include="tsconfig.json" />
     <Content Include="typings.json" />
     <Content Include="CHANGELOG.md" />
@@ -63,9 +62,14 @@
     <TypeScriptCompile Include="src\models\cost-account\cost-account-filter.ts" />
     <TypeScriptCompile Include="src\models\cost-account\cost-account-info.ts" />
     <TypeScriptCompile Include="src\models\base\sorted-paged-request.ts" />
+    <TypeScriptCompile Include="src\models\profile\user-claim-preferred-culture.ts" />
+    <TypeScriptCompile Include="src\models\profile\user-claim-role.ts" />
+    <TypeScriptCompile Include="src\models\profile\user-claim.ts" />
+    <TypeScriptCompile Include="src\models\profile\user-claims.ts" />
     <TypeScriptCompile Include="src\models\settings\mailone-settings.ts" />
     <TypeScriptCompile Include="src\rxjs-operators.ts" />
     <TypeScriptCompile Include="src\services\cost-account.service.ts" />
+    <TypeScriptCompile Include="src\services\profile-service.ts" />
     <TypeScriptCompile Include="src\services\settings.service.ts" />
     <TypeScriptCompile Include="src\ui\key-value-pair.ts" />
     <TypeScriptCompile Include="typings\index.d.ts" />
@@ -227,6 +231,7 @@
     <Folder Include="src\models" />
     <Folder Include="src\models\cost-account\" />
     <Folder Include="src\models\base\" />
+    <Folder Include="src\models\profile\" />
     <Folder Include="src\models\settings\" />
     <Folder Include="src\router" />
     <Folder Include="src\services" />

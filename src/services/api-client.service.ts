@@ -26,19 +26,25 @@ export default class APIClient {
      * @param {RequestOptions} options additional options to pass to the server
      * @returns {Observable<any>}
      */
-    public get(path: string, options?: RequestOptions): Observable<any> {
+    public get(path: string, baseUrlOp?: string, options?: RequestOptions): Observable<any> {
+        let baseUrl: string = CONSUMER_API_BASE_URL;
+
         try {
             let opt = this.prepareHeaders();
             if (options) {
                 opt = opt.merge(options);
             }
+            if (baseUrlOp) {
+                baseUrl = baseUrlOp;
+            }
+
             // workaround, because there is a bug in rc5 of angulars http client.
             // Angular RC5 does not allow sending empty bodies.
             // The bug will soon be fixed as it is already in the master branch of angular
             // https://github.com/angular/angular/pull/10668
             opt.body = '';
             return this.http
-                .get(CONSUMER_API_BASE_URL + path, opt)
+                .get(baseUrl + path, opt)
                 .timeout(API_TIMEOUT, new Error('API timeout'))
                 .retryWhen(RxUtils.errorDelay(API_RETRIES, API_RETRY_DELAY))
                 .map(APIClient.extractJson)
@@ -57,14 +63,19 @@ export default class APIClient {
      * @param {RequestOptions} options additional options to pass to the server
      * @returns {Observable<any>}
      */
-    public post(path: string, data: any, options?: RequestOptions): Observable<any> {
+    public post(path: string, data: any, baseUrlOp?: string, options?: RequestOptions): Observable<any> {
+        let baseUrl: string = CONSUMER_API_BASE_URL;
+
         try {
             let opt = this.prepareHeaders();
             if (options) {
                 opt = opt.merge(options);
             }
+            if (baseUrlOp) {
+                baseUrl = baseUrlOp;
+            }
             return this.http
-                .post(CONSUMER_API_BASE_URL + path, JSON.stringify(data), opt)
+                .post(baseUrl + path, JSON.stringify(data), opt)
                 .timeout(API_TIMEOUT, new Error('API timeout'))
                 .retryWhen(RxUtils.errorDelay(API_RETRIES, API_RETRY_DELAY))
                 .map(APIClient.extractJson)
@@ -83,14 +94,19 @@ export default class APIClient {
      * @param {RequestOptions} options additional options to pass to the server
      * @returns {Observable<void>}
      */
-    public postNoRes(path: string, data: any, options?: RequestOptions): Observable<void> {
+    public postNoRes(path: string, data: any, baseUrlOp?: string, options?: RequestOptions): Observable<void> {
+        let baseUrl: string = CONSUMER_API_BASE_URL;
+
         try {
             let opt = this.prepareHeaders();
             if (options) {
                 opt = opt.merge(options);
             }
+            if (baseUrlOp) {
+                baseUrl = baseUrlOp;
+            }
             return this.http
-                .post(CONSUMER_API_BASE_URL + path, JSON.stringify(data), opt)
+                .post(baseUrl + path, JSON.stringify(data), opt)
                 .timeout(API_TIMEOUT, new Error('API timeout'))
                 .retryWhen(RxUtils.errorDelay(API_RETRIES, API_RETRY_DELAY))
                 .catch((error) => {
@@ -108,14 +124,19 @@ export default class APIClient {
      * @param {RequestOptions} options additional options to pass to the server
      * @returns {Observable<any>}
      */
-    public put(path: string, data: any, options?: RequestOptions): Observable<Response> {
+    public put(path: string, data: any, baseUrlOp?: string, options?: RequestOptions): Observable<Response> {
+        let baseUrl: string = CONSUMER_API_BASE_URL;
+
         try {
             let opt = this.prepareHeaders();
             if (options) {
                 opt = opt.merge(options);
             }
+            if (baseUrlOp) {
+                baseUrl = baseUrlOp;
+            }
             return this.http
-                .put(CONSUMER_API_BASE_URL + path, JSON.stringify(data), opt)
+                .put(baseUrl + path, JSON.stringify(data), opt)
                 .timeout(API_TIMEOUT, new Error('API timeout'))
                 .retryWhen(RxUtils.errorDelay(API_RETRIES, API_RETRY_DELAY))
                 .catch((error) => {
@@ -126,14 +147,19 @@ export default class APIClient {
         }
     }
 
-    public delete(path: string, options?: RequestOptions): Observable<Response> {
+    public delete(path: string, baseUrlOp?: string, options?: RequestOptions): Observable<Response> {
+        let baseUrl: string = CONSUMER_API_BASE_URL;
+
         try {
             let opt = this.prepareHeaders();
             if (options) {
                 opt = opt.merge(options);
             }
+            if (baseUrlOp) {
+                baseUrl = baseUrlOp;
+            }
             return this.http
-                .delete(CONSUMER_API_BASE_URL + path, opt)
+                .delete(baseUrl + path, opt)
                 .timeout(API_TIMEOUT, new Error('API timeout'))
                 .retryWhen(RxUtils.errorDelay(API_RETRIES, API_RETRY_DELAY))
                 .catch((error) => {

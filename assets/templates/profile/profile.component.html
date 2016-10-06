@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="field-container text-field">
-                        <input type="password" name="name" value="" placeholder="Change password">
+                        <input type="password" name="password" [(ngModel)]="password" placeholder="{{'PASSWORD_CHANGE' | translate}}">
                         <button class="clear-submit">
                             <span class="icon-close"></span>
                         </button>
@@ -13,7 +13,7 @@
                 <div class="col-sm-6 remove-margin-bottom">
                     <div class="row">
                         <div class="field-container text-field">
-                            <input type="password" name="name" value="" placeholder="Repeat password">
+                            <input type="password" name="password-repeated" [(ngModel)]="passwordRepeated" placeholder="{{'PASSWORD_REPEAT' | translate}}">
                             <button class="clear-submit">
                                 <span class="icon-close"></span>
                             </button>
@@ -25,18 +25,17 @@
             <div class="row">
                 <div class="col-sm-8"></div>
                 <div class="col-sm-4">
-                    <button class="button color pull-right">
-                        <span>set password</span>
+                    <button class="button color pull-right"
+                            (click)="setPasswordClicked()">
+                        <span>{{'PASSWORD_SET_BUTTON' | translate}}</span>
                     </button>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-sm-6">
-                    <select class="full-width-element">
-                        <option value="1">english</option>
-                        <option value="2">français</option>
-                        <option value="3">deutsch</option>
+                    <select class="dropdown-menu" id="active-culture" [(ngModel)]="SelectedOption">
+                        <option *ngFor="let kv of comboBoxItems" value="{{kv.Key}}">{{kv.Value}}</option>
                     </select>
                 </div>
                 <div class="col-sm6"></div>
@@ -46,14 +45,11 @@
                 <div class="col-sm-6">
                     <label>
                         <i class="icon-class "></i>
-                        Assigned Roles:
+                        {{'ASSIGNED_ROLES_HEADER' | translate}}
                     </label>
                     <table class="data-table">
-                        <tr>
-                            <td>shipper</td>
-                        </tr>
-                        <tr>
-                            <td>manager</td>
+                        <tr *ngFor="let role of roles" >
+                            <td>{{role.RoleName}}</td>
                         </tr>
                     </table>
                 </div>

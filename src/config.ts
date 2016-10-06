@@ -9,25 +9,25 @@ const w:any = window;
 export const DEBUG_MODE = w.debug;
 
 /**
- * Available locales for translation (defaults to en).
- * @type {string[]}
- */
-export const AVAILABLE_LOCALES = [
-    'en',
-    'de'
-];
-
-/**
  * Base URL of the consumer API.
  * @type {string}
  */
 export const CONSUMER_API_BASE_URL = 'http://62.220.24.49/M1Consumer/api/';
+//export const CONSUMER_API_BASE_URL = 'http://localhost:3494/api/';
 
 /**
  * Authentication API url.
  * @type {string}
  */
 export const AUTHORIZATION_API_URL = 'http://62.220.24.49/M1Authentication/token';
+//export const AUTHORIZATION_API_URL = 'http://localhost:33181/token';
+
+/**
+ * Base URL of the Authentication API.
+ * @type {string}
+ */
+export const AUTHORIZATION_API_BASE_URL = 'http://62.220.24.49/M1Authentication/api/';
+//export const AUTHORIZATION_API_BASE_URL = 'http://localhost:33181/api/';
 
 /**
  * API request timeout.
@@ -58,3 +58,9 @@ export const MAX_AC_RESULTS = 5;
  * If the error code is not in this list N retries will be executed.
  */
 export const EARLY_FAIL_HTTP_STATUS_CODES = [400];
+
+/**
+ * Minimum password length.
+ * @type {number}
+ */
+export const MIN_PASSWORD_LENGTH = 6;
