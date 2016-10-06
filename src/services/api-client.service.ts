@@ -8,6 +8,9 @@ import RxUtils from "../utils/rx-utils";
 
 /**
  * API Client Wrapper.
+ *
+ * retryWhen => has been commented out, because it will throw an
+ * uncatchable error, when a retry count of 0 has been set in the config.
  */
 @Injectable()
 export default class APIClient {
@@ -46,7 +49,7 @@ export default class APIClient {
             return this.http
                 .get(baseUrl + path, opt)
                 .timeout(API_TIMEOUT, new Error('API timeout'))
-                .retryWhen(RxUtils.errorDelay(API_RETRIES, API_RETRY_DELAY))
+                /*.retryWhen(RxUtils.errorDelay(API_RETRIES, API_RETRY_DELAY))*/    //see class documentation above
                 .map(APIClient.extractJson)
                 .catch((error) => {
                     return this.handleError(error);
@@ -77,7 +80,7 @@ export default class APIClient {
             return this.http
                 .post(baseUrl + path, JSON.stringify(data), opt)
                 .timeout(API_TIMEOUT, new Error('API timeout'))
-                .retryWhen(RxUtils.errorDelay(API_RETRIES, API_RETRY_DELAY))
+                /*.retryWhen(RxUtils.errorDelay(API_RETRIES, API_RETRY_DELAY))*/    //see class documentation above
                 .map(APIClient.extractJson)
                 .catch((error) => {
                     return this.handleError(error);
@@ -108,7 +111,7 @@ export default class APIClient {
             return this.http
                 .post(baseUrl + path, JSON.stringify(data), opt)
                 .timeout(API_TIMEOUT, new Error('API timeout'))
-                .retryWhen(RxUtils.errorDelay(API_RETRIES, API_RETRY_DELAY))
+                /*.retryWhen(RxUtils.errorDelay(API_RETRIES, API_RETRY_DELAY))*/    //see class documentation above
                 .catch((error) => {
                     return this.handleError(error);
                 });
@@ -138,7 +141,7 @@ export default class APIClient {
             return this.http
                 .put(baseUrl + path, JSON.stringify(data), opt)
                 .timeout(API_TIMEOUT, new Error('API timeout'))
-                .retryWhen(RxUtils.errorDelay(API_RETRIES, API_RETRY_DELAY))
+                /*.retryWhen(RxUtils.errorDelay(API_RETRIES, API_RETRY_DELAY))*/    //see class documentation above
                 .catch((error) => {
                     return this.handleError(error);
                 });
@@ -161,7 +164,7 @@ export default class APIClient {
             return this.http
                 .delete(baseUrl + path, opt)
                 .timeout(API_TIMEOUT, new Error('API timeout'))
-                .retryWhen(RxUtils.errorDelay(API_RETRIES, API_RETRY_DELAY))
+                /*.retryWhen(RxUtils.errorDelay(API_RETRIES, API_RETRY_DELAY))*/    //see class documentation above
                 .catch((error) => {
                     return this.handleError(error);
                 });

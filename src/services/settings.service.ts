@@ -25,6 +25,6 @@ export default class SettingsService {
     }
 
     public postAllSettings(settings: MailOneSettings): Observable<MailOneSettings> {
-        return this.apiClient.post('Settings', settings);
+        return this.apiClient.post('Settings/AddOrUpdate', settings);
     }
 }

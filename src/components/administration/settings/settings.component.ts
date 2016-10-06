@@ -67,7 +67,8 @@ export default class SettingsComponent {
                 if (r.NumberOfLevels < 1)
                     r.NumberOfLevels = this.mailOneSettings.NumberOfLevels;
 
-                this.mailOneSettings = r
+                this.mailOneSettings = r;
+                console.info(this.mailOneSettings);
             },
             (error: Error) => {
                 console.error(error);
@@ -124,6 +125,7 @@ export default class SettingsComponent {
     //#endregion
 
     private saveChanges() {
+        this.error = null;
         console.info("Posting settings:");
         console.info(this.mailOneSettings);
 
@@ -133,12 +135,13 @@ export default class SettingsComponent {
                 this.disableEditMode();
             },
             (error: any) => {
+                console.error(error);
+
                 if (error.hasOwnProperty("message"))
                     this.error = error;
                 else if (error.hasOwnProperty("_body"))
                     this.error = this.extractValidationError(error);
                 else {
-                    console.error(error);
                     this.error = error;
                 }
 

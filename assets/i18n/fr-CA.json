@@ -104,11 +104,17 @@
   "PAGE": "Seite",
   "YES": "Ja",
   "NO": "Nein",
+  "ALL": "Alle",
+  "FIXED_ABSOLUTE": "Fix (absolut)",
   "BOTH": "Beides",
+  "ALL": "Alle",
   "FIXED_ABSOLUTE": "Fix (absolut)",
   "PERCENTAGE": "Prozentual",
   "PASSWORD_CHANGE": "Passwort ändern",
-  "PASSWORD_REPEAT": "Passwort wiederholen",
-  "ASSIGNED_ROLES_HEADER": "zugewiesene Rollen:",
-  "PASSWORD_SET_BUTTON": "Passwort Speichern"
-}
+  "PASSWORD_REPEAT": "Password wiederholen",
+  "ASSIGNED_ROLES_HEADER": "Zugewiesene Rollen:",
+  "PASSWORD_SET_BUTTON": "Passwort setzen",
+  "EDIT_MODE": "Editiermodus",
+  "SAVE": "Speichern",
+  "INACTIVE": "Inaktiv",
+  "COST_ACCOUNT": "Kostenstelle"}

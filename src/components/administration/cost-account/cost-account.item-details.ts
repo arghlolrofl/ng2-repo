@@ -147,6 +147,8 @@ export default class CostAccountTableItemDetailsComponent implements AfterViewIn
             // enable edit mode when creating a cost account
             if (this.costAccount != null && this.costAccount.Id <= 0)
                 this.enableEditMode();
+            else
+                this.isInEditMode = false;
         });
     }
 
@@ -156,7 +158,7 @@ export default class CostAccountTableItemDetailsComponent implements AfterViewIn
      * Enables edit mode and caches current cost account object
      */
     private enableEditMode() {
-        this.cachedCostAccount = CostAccountInfo.createClone(this.costAccount);
+        //this.cachedCostAccount = CostAccountInfo.createClone(this.costAccount);
         this.isInEditMode = true;
     }
 
@@ -164,8 +166,13 @@ export default class CostAccountTableItemDetailsComponent implements AfterViewIn
      * Disables edit mode and restores cached cost account object
      */
     private cancelEditMode() {
+        //if (this.costAccount.Id < 1) {
+        //    this.showChange.emit(false);
+        //} else {
         this.isInEditMode = false;
-        this.costAccount = CostAccountInfo.createClone(this.cachedCostAccount);
+        this.showChange.emit(false);
+        //    this.costAccount = CostAccountInfo.createClone(this.cachedCostAccount);
+        //}
     }
 
     /**

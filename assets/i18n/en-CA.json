@@ -104,11 +104,15 @@
   "PAGE": "Page",
   "YES": "Yes",
   "NO": "No",
-  "BOTH": "Both",
+  "ALL": "All",
   "FIXED_ABSOLUTE": "Fixed (absolute)",
   "PERCENTAGE": "Percentage",
   "PASSWORD_CHANGE": "Change Password",
   "PASSWORD_REPEAT": "Repeat Password",
   "ASSIGNED_ROLES_HEADER": "Assigned Roles:",
-  "PASSWORD_SET_BUTTON": "Set Password"
+  "PASSWORD_SET_BUTTON": "Set Password",
+  "EDIT_MODE": "Edit Mode",
+  "SAVE": "Save",
+  "INACTIVE": "Inactive",
+  "COST_ACCOUNT": "Cost Account"
 }
