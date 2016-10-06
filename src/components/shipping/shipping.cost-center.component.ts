@@ -1,6 +1,7 @@
 import {Component, Output, EventEmitter} from '@angular/core';
 import {Observable} from "rxjs/Observable";
 
+import SortedPagedResults from "../../models/base/sorted-paged-results";
 import {SuggestEvents} from "../../directives/suggest.directive";
 import CostCenterService from "../../services/cost-center.service";
 import CostCenterInfo from "../../models/cost-center-info";
@@ -52,6 +53,23 @@ export default class ShippingCostCenterComponent {
      */
     constructor(private costCenterService: CostCenterService) {
         this.bindEvents();
+        this.costCenterService.getDefaultCostCenter().subscribe(
+            (response: SortedPagedResults<CostCenterInfo>) => {
+                for (let i = 0; i < response.ItemList.length; i++) {
+
+                    response.ItemList[i].IsDefault = true;
+
+                    if (response.ItemList[i].IsDefault) {
+                        this.costCenter1 = response.ItemList[i];
+                        this.costCenter1Input = this.costCenter1.Name;
+                        break;
+                    }
+                }
+            },
+            (error: any) => {
+                this.onError.emit(error);
+            }
+        );
     }
 
     /**

@@ -3,6 +3,7 @@ import {Observable} from 'rxjs/Observable';
 
 import APIClient from './api-client.service';
 import PagedResultsOf from "../models/base/paged-results";
+import SortedPagedResults from "../models/base/sorted-paged-results";
 import CostCenterInfo from "../models/cost-center-info";
 
 /**
@@ -15,6 +16,13 @@ export default class CostCenterService {
      * @param {APIClient} apiClient the APIClient
      */
     constructor(private apiClient: APIClient) {
+    }
+
+    public getDefaultCostCenter(): Observable<SortedPagedResults<CostCenterInfo>> {
+        return this.apiClient.post('CostCenter/GetFiltered', {
+            Level: 1,
+            IsDefault: true
+        });
     }
 
     /**
