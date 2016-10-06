@@ -104,9 +104,11 @@
   "PAGE": "Seite",
   "YES": "Ja",
   "NO": "Nein",
-  "BOTH": "Beides",
+  "ALL": "Alle",
   "FIXED_ABSOLUTE": "Fix (absolut)",
   "PERCENTAGE": "Prozentual",
   "EDIT_MODE": "Editiermodus",
-  "SAVE": "Speichern"
+  "SAVE": "Speichern",
+  "INACTIVE": "Inaktiv",
+  "COST_ACCOUNT": "Kostenstelle"
 }
