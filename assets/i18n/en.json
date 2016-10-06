@@ -106,5 +106,7 @@
   "NO": "No",
   "BOTH": "Both",
   "FIXED_ABSOLUTE": "Fixed (absolute)",
-  "PERCENTAGE": "Percentage"
+  "PERCENTAGE": "Percentage",
+  "EDIT_MODE": "Edit Mode",
+  "SAVE": "Save"
 }

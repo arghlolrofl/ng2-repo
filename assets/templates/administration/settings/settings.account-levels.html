@@ -6,7 +6,7 @@
 <div class="row">
     <div class="col-md-4 col-sm-12">
         <select class="dropdown-menu" id="account-levels" [(ngModel)]="SelectedOption" [disabled]="!isInEditMode">
-            <option *ngFor="let kv of comboBoxItems" value="{{kv.Key}}">{{kv.Value}}</option>
+            <option *ngFor="let kv of comboBoxItems" value="{{kv.Key}}" [selected]="kv.Key == numberOfLevels">{{kv.Value}}</option>
         </select>
     </div>
 
@@ -24,7 +24,7 @@
         </div>
     </div>
 </div>
-<div class="row">
+<div class="row" *ngIf="numberOfLevels > 1">
     <div class="col-md-4 col-md-offset-5 col-sm-12">
         <div class="field-container text-field" id="level2">
             <input type="text"
@@ -39,7 +39,7 @@
         </div>
     </div>
 </div>
-<div class="row">
+<div class="row" *ngIf="numberOfLevels > 2">
     <div class="col-md-4 col-md-offset-5 col-sm-12">
         <div class="field-container text-field" id="level3">
             <input type="text"

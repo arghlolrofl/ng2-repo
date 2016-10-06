@@ -106,5 +106,7 @@
   "NO": "Nein",
   "BOTH": "Beides",
   "FIXED_ABSOLUTE": "Fix (absolut)",
-  "PERCENTAGE": "Prozentual"
+  "PERCENTAGE": "Prozentual",
+  "EDIT_MODE": "Editiermodus",
+  "SAVE": "Speichern"
 }
