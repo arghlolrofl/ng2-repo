@@ -1,0 +1,150 @@
+﻿<modal #modalAccountCustomerItemDetails [keyboard]="false">
+    <modal-header>
+        <div class="row">
+            <div class="col-md-12">
+                <h3>{{ 'USER' | translate }}: <strong>{{Email}}</strong></h3>
+            </div>
+        </div>
+    </modal-header>
+    <form #editForm="ngForm"
+          (ngSubmit)="save()">
+
+        <modal-body>
+            <div class="row">
+                <div class="col-md-12">
+                    <section *ngIf="error"
+                             class="sectiontemplate box-error">
+                        <div class="content">
+                            {{ error.message }}
+                        </div>
+                        <button type="button"
+                                class="clear-submit"
+                                (click)="error = null">
+                            <span class="icon-close"></span>
+                        </button>
+                    </section>
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <label>{{ 'EMAIL' | translate }}</label>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <input type="text"
+                           [(ngModel)]="Email"
+                           [ngModelOptions]="{standalone: true}"
+                           [disabled]="!isInEditMode" />
+                </div>
+            </div>
+
+            <!-- Mail Confirmed -->
+            <div class="row" *ngIf="accountCustomer != null && accountCustomer.Id > 0">
+                <div class="col-md-6 col-sm-12">
+                    <label>{{ 'EMAIL_CONFIRMED' | translate }}</label>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <input type="checkbox"
+                           id="active-box"
+                           [(ngModel)]="IsMailConfirmed"
+                           [ngModelOptions]="{standalone: true}"
+                           [disabled]="true" />
+                </div>
+            </div>
+
+            <!-- Number-->
+            <div class="row" *ngIf="accountCustomer != null && accountCustomer.Id > 0">
+                <div class="col-md-6 col-sm-12">
+                    <label>{{ 'LOCKOUT_DATE' | translate }}</label>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <input type="text"
+                           [(ngModel)]="LockoutDate"
+                           [ngModelOptions]="{standalone: true}"
+                           [disabled]="!isInEditMode" />
+                </div>
+            </div>
+
+            <hr />
+
+            <!-- Roles -->
+            <div class="row" *ngIf="accountCustomer != null">
+                <div class="col-sm-4">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">{{ 'ASSIGNED_ROLES' | translate }}</div>
+                        <div class="panel-body">
+                            <div class="panel panel-default" *ngIf="accountCustomer.Roles.length > 0">
+                                <div class="panel-body">
+                                    <div *ngFor="let role of accountCustomer.Roles">
+                                        {{ role.RoleName }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">{{ 'ACTION' | translate }}</div>
+                        <div class="panel-body">
+                            <button type="button" class="role-action"><span><strong>&gt;&nbsp;&gt;</strong></span></button>
+                            <br />
+                            <button type="button" class="role-action v-offset-25"><span><strong>&lt;&nbsp;&lt;</strong></span></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="panel panel-warning">
+                        <div class="panel-heading">{{ 'AVAILABLE_ROLES' | translate }}</div>
+                        <div class="panel-body">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </modal-body>
+
+        <hr />
+
+        <modal-footer>
+            <div class="row">
+                <div class="col-sm-12">
+                    <button type="button"
+                            class="button popup"
+                            (click)="close()">
+                        <span>{{ 'MODAL_CLOSE' | translate }}</span>
+                    </button>
+
+                    <button *ngIf="!isInEditMode"
+                            type="button"
+                            class="button popup align-right"
+                            (click)="enableEditMode()">
+                        <span>{{ 'EDIT' | translate }}</span>
+                    </button>
+
+                    <button *ngIf="!isInEditMode"
+                            type="button"
+                            class="button popup align-right"
+                            (click)="deleteItem()">
+                        <span>{{ 'DELETE' | translate }}</span>
+                    </button>
+
+                    <button *ngIf="isInEditMode"
+                            type="submit"
+                            class="button popup align-right"
+                            [disabled]="!editForm.form.valid">
+                        <span>{{ 'MODAL_SAVE' | translate }}</span>
+                    </button>
+
+                    <button *ngIf="isInEditMode && accountCustomer != null && accountCustomer.Id > 0"
+                            type="button"
+                            class="button popup align-right"
+                            (click)="cancelEditMode()">
+                        <span>{{ 'CANCEL' | translate }}</span>
+                    </button>
+                </div>
+            </div>
+        </modal-footer>
+    </form>
+</modal>

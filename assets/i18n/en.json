@@ -106,5 +106,17 @@
   "NO": "No",
   "BOTH": "Both",
   "FIXED_ABSOLUTE": "Fixed (absolute)",
-  "PERCENTAGE": "Percentage"
+  "PERCENTAGE": "Percentage",
+  "NAV_ADMINISTRATION_USER_MANAGEMENT": "User Management",
+  "DETAILS": "Details",
+  "COST_ACCOUNT": "Cost Account",
+  "ADMINISTRATION_USER_MANAGEMENT_HEADLINE": "User Management",
+  "LOGIN": "Login",
+  "ROLE": "Role",
+  "MAIL_CONFIRMED": "Mail Confirmed",
+  "LOCKOUT_END_DATE": "Lockout End Date",
+  "USER": "User",
+  "EMAIL": "E-Mail",
+  "EMAIL_CONFIRMED": "Confirmed",
+  "LOCKOUT_DATE": "Lockout Date"
 }
