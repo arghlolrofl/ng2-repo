@@ -27,6 +27,8 @@ export default class UserPropertiesComponent implements AfterViewInit {
     /**
      * @constructor
      * @param {CustomerService} customerService the customer client
+     * @param {LoginService} loginService login information
+     * @param {NgZone} zone a zone to run in.
      */
     constructor(private customerService: CustomerService, private loginService: LoginService, private zone: NgZone) {
     }
@@ -55,6 +57,6 @@ export default class UserPropertiesComponent implements AfterViewInit {
             (r: ConsumerInfo) =>
                 this.zone.run(() =>
                     { this.loginName = r.Login; this.customerNo = r.Customer.CustomerNumber; }),
-                (error: Error) => this.onError.emit(error));
+            (error: Error) => this.onError.emit(error));
     }
 }

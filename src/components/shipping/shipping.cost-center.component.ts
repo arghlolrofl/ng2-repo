@@ -1,6 +1,7 @@
 import {Component, Output, EventEmitter} from '@angular/core';
 import {Observable} from "rxjs/Observable";
 
+import SortedPagedResults from "../../models/base/sorted-paged-results";
 import {SuggestEvents} from "../../directives/suggest.directive";
 import CostCenterService from "../../services/cost-center.service";
 import CostCenterInfo from "../../models/cost-center-info";
@@ -52,6 +53,20 @@ export default class ShippingCostCenterComponent {
      */
     constructor(private costCenterService: CostCenterService) {
         this.bindEvents();
+        this.costCenterService.getDefaultCostCenter().subscribe(
+            (response: SortedPagedResults<CostCenterInfo>) => {
+                for (let i = 0; i < response.ItemList.length; i++) {
+                    if (response.ItemList[i].IsDefault) {
+                        this.costCenter1 = response.ItemList[i];
+                        this.costCenter1Input = this.costCenter1.Name;
+                        break;
+                    }
+                }
+            },
+            (error: any) => {
+                this.onError.emit(error);
+            }
+        );
     }
 
     /**
@@ -157,12 +172,20 @@ export default class ShippingCostCenterComponent {
      * @param {CostCenterService} costCenterService the cost center to be wrapped
      * @returns {function(string): Observable<CostCenterInfo>}
      */
-    public mapCostCenter23(costCenterService: CostCenterService) {
+    public mapCostCenter2(costCenterService: CostCenterService) {
         return (term: string) => {
-            return Observable.merge(
-                costCenterService.getFilteredCostCenterByLevelAndFastQuery(2, term, 0, MAX_AC_RESULTS),
-                costCenterService.getFilteredCostCenterByLevelAndFastQuery(3, term, 0, MAX_AC_RESULTS)
-            ).take(MAX_AC_RESULTS);
+            return costCenterService.getFilteredCostCenterByLevelAndFastQuery(2, term, 0, MAX_AC_RESULTS);
+        }
+    }
+
+    /**
+     * Map Cost Center API call.
+     * @param {CostCenterService} costCenterService the cost center to be wrapped
+     * @returns {function(string): Observable<CostCenterInfo>}
+     */
+    public mapCostCenter3(costCenterService: CostCenterService) {
+        return (term: string) => {
+            return costCenterService.getFilteredCostCenterByLevelAndFastQuery(3, term, 0, MAX_AC_RESULTS);
         }
     }
 }

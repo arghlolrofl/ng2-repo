@@ -19,11 +19,10 @@
     </div>
     <div class="field-container text-field col-md-2">
         <select [(ngModel)]="SelectedIsActiveFilter">
-            <option value="0" [selected]="SelectedIsActiveFilter === 0">{{ 'NO' | translate }}</option>
-            <option value="1" [selected]="SelectedIsActiveFilter === 1">{{ 'YES' | translate }}</option>
-            <option value="2" [selected]="SelectedIsActiveFilter > 1">{{ 'BOTH' | translate }}</option>
+            <option value="0" [selected]="SelectedIsActiveFilter === 0">{{ 'INACTIVE' | translate }}</option>
+            <option value="1" [selected]="SelectedIsActiveFilter === 1">{{ 'ACTIVE' | translate }}</option>
+            <option value="2" [selected]="SelectedIsActiveFilter > 1">{{ 'ALL' | translate }}</option>
         </select>
-        <!--<input type="text" [(ngModel)]="FilterActive" placeholder="{{ 'ACTIVE' | translate }}">-->
     </div>
     <div class="col-md-4">
         <button class="button submit height-40"

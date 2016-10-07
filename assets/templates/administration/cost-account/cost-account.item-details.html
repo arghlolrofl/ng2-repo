@@ -36,7 +36,7 @@
                            id="active-box"
                            [(ngModel)]="IsCostAccountActive"
                            [ngModelOptions]="{standalone: true}"
-                           [disabled]="!isInEditMode" />
+                           [disabled]="!isInEditMode || costAccount.IsDefault" />
                 </div>
             </div>
 
@@ -75,7 +75,7 @@
                     <select class="dropdown-menu"
                             [(ngModel)]="Level"
                             [ngModelOptions]="{standalone: true}"
-                            [disabled]="!isInEditMode">
+                            [disabled]="!isInEditMode || costAccount.IsDefault">
                         <option value="1" [selected]="Level < 2">{{ 'LEVEL' | translate }}&nbsp;1</option>
                         <option value="2" [selected]="Level == 2">{{ 'LEVEL' | translate }}&nbsp;2</option>
                         <option value="3" [selected]="Level > 2">{{ 'LEVEL' | translate }}&nbsp;3</option>
@@ -120,11 +120,11 @@
         <modal-footer>
             <div class="row">
                 <div class="col-sm-12">
-                    <button type="button"
+                    <!--<button type="button"
                             class="button popup"
                             (click)="close()">
                         <span>{{ 'MODAL_CLOSE' | translate }}</span>
-                    </button>
+                    </button>-->
 
                     <button *ngIf="!isInEditMode"
                             type="button"

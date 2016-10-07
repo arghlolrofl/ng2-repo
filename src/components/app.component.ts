@@ -1,10 +1,9 @@
-import { Component, ViewChild, AfterViewInit, Input, NgZone} from '@angular/core';
-import {Http} from '@angular/http';
-import {TranslateService, TranslatePipe, TranslateLoader, TranslateStaticLoader} from 'ng2-translate/ng2-translate';
+import {Component, ViewChild, AfterViewInit, Input, NgZone} from '@angular/core';
+import {TranslateService} from 'ng2-translate/ng2-translate';
 import {CookieService} from 'angular2-cookie/core';
 import {ModalComponent} from 'ng2-bs3-modal/ng2-bs3-modal';
 
-import {AVAILABLE_LOCALES} from '../config';
+import {defaultCulture} from '../services/culture-service';
 import LoginService from '../services/login.service';
 import APIClient from "../services/api-client.service";
 import NotificationService from "../services/notification.service";
@@ -45,10 +44,8 @@ export default class AppComponent implements AfterViewInit {
         public translate: TranslateService,
         private notificationService: NotificationService,
         private zone:NgZone) {
-        const locales = AVAILABLE_LOCALES.join('|');
-        let userLang = (navigator.language || navigator.userLanguage || 'en-us').split('-')[0];
-        userLang = (new RegExp(`(${locales})`, 'gi')).test(userLang) ? userLang : AVAILABLE_LOCALES[0];
-        translate.use(userLang);
+
+        translate.use(defaultCulture());
         this.loggedIn = this.loginService.isLoggedIn();
         this.bindEvents();
     }
