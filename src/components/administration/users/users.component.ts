@@ -149,15 +149,15 @@ export default class UsersComponent {
     }
 
     private accountCustomer_onCreated(accountCustomer: AccountCustomer): void {
-
+        this.refreshAccountCustomers();
     }
 
     private accountCustomer_onChanged(accountCustomer: AccountCustomer): void {
-
+        this.refreshAccountCustomers();
     }
 
     private accountCustomer_onDeleted(id: number): void {
-
+        this.refreshAccountCustomers();
     }
 
 }

@@ -3,7 +3,6 @@ import {Response} from '@angular/http';
 import {ModalComponent} from 'ng2-bs3-modal/ng2-bs3-modal';
 import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
-import NotificationService from '../../../services/notification.service';
 import RoleService from '../../../services/role.service';
 import AccountCustomerService from '../../../services/account-customer.service';
 import AccountCustomer from '../../../models/users/account-customer';
@@ -21,7 +20,8 @@ import AccountRole from '../../../models/users/account-role';
         '#active-box { margin-left: 5px; height: 40px; vertical-align: middle; }',
         '.align-right { float: right; }',
         '.role-action { width: 50%; height: 40px; margin-left: 25%; }',
-        '.v-offset-25 { margin-top: 25px; }'
+        '.v-offset-25 { margin-top: 25px; }',
+        '.item-with-border { border: 1px solid lightgray; }'
     ]
 })
 
@@ -64,10 +64,10 @@ export default class UsersDetailsComponent implements AfterViewInit {
 
     private error: Error;
     private isInEditMode: boolean = false;
-    private cachedAccountCustomer: AccountCustomer;
     private roleService: RoleService;
-    private notificationService: NotificationService;
     private accountCustomerService: AccountCustomerService;
+    private allRoles: Array<AccountRole>;
+    private availableRoles: Array<AccountRole>;
 
     //#endregion
 
@@ -110,26 +110,31 @@ export default class UsersDetailsComponent implements AfterViewInit {
             return null;
     }
 
+    get CurrentAccountExists(): boolean {
+        if (this.accountCustomer == null)
+            return false;
+
+        return this.isValidGuid(this.accountCustomer.Id);
+    }
+
     //#endregion
 
     //#region Initialization
 
     constructor(
         accountCustomerService: AccountCustomerService,
-        roleService: RoleService,
-        notificationService: NotificationService) {
-
+        roleService: RoleService
+    ) {
         this.accountCustomerService = accountCustomerService;
         this.roleService = roleService;
 
         this.roleService.getAllRoles().subscribe(
             (response: SortedPagedResults<AccountRole>) => {
-                console.info(response);
-                alert("Fetched roles");
+                this.allRoles = response.ItemList;
             },
             (error: any) => {
                 console.log(error);
-                this.notificationService.sendError(error);
+                this.apiRequest_onError(error);
             }
         );
     }
@@ -147,18 +152,87 @@ export default class UsersDetailsComponent implements AfterViewInit {
 
         this.modal.onOpen.subscribe(() => {
             // enable edit mode when creating a cost account
-            if (this.accountCustomer != null && this.accountCustomer.Id <= 0)
-                this.enableEditMode();
+            if (this.accountCustomer != null) {
+                if (this.accountCustomer.Id === 0) {
+                    this.enableEditMode();
+                    this.availableRoles = this.allRoles;
+                } else if (this.isValidGuid(this.accountCustomer.Id)) {
+                    this.refreshAvailableRoles();
+                }
+            }
         });
     }
 
+    private isValidGuid(id: string): boolean {
+        let regex: RegExp = new RegExp("^[0-9a-f]{8}-?[0-9a-f]{4}-?[0-5][0-9a-f]{3}-?[089ab][0-9a-f]{3}-?[0-9a-f]{12}$", "i");
+        return regex.test(id);
+    }
+
+    private refreshAvailableRoles() {
+        // collect available roles
+        let roles: Array<AccountRole> = new Array<AccountRole>();
+        for (let i = 0; i < this.allRoles.length; i++) {
+            let role = this.accountCustomer.Roles.find(r => r.RoleName == this.allRoles[i].RoleName);
+            if (role == null)
+                roles.push(this.allRoles[i]);
+        }
+
+        this.availableRoles = roles;
+    }
+
+    private refreshAccountCustomer() {
+        this.accountCustomerService.getAccountCustomerDetails(this.accountCustomer.Id).subscribe(
+            (response: any) => {
+                this.accountCustomer = response;
+                this.refreshAvailableRoles();
+            },
+            (error: any) => {
+                this.apiRequest_onError(error);
+            }
+        );
+    }
+
+    private assignRole(role: AccountRole) {
+        if (this.CurrentAccountExists) {
+            this.accountCustomerService.assignRole(this.accountCustomer.Id, role.Id).subscribe(
+                (response: any) => {
+                    this.refreshAccountCustomer();
+                },
+                (error: any) => {
+                    this.apiRequest_onError(error);
+                }
+            );
+        } else {
+            this.accountCustomer.Roles = new Array<AccountRole>();
+            let newRole: AccountRole = new AccountRole();
+            newRole.Id = role.Id;
+            newRole.RoleName = role.RoleName;
+
+            this.accountCustomer.Roles.push(newRole);
+        }
+    }
+
+    private removeRole(role: AccountRole) {
+        if (this.CurrentAccountExists) {
+            this.accountCustomerService.removeRole(this.accountCustomer.Id, role.Id).subscribe(
+                (response: any) => {
+                    this.refreshAccountCustomer();
+                },
+                (error: any) => {
+                    this.apiRequest_onError(error);
+                }
+            );
+        } else {
+            this.accountCustomer.Roles = new Array<AccountRole>();
+        }
+    }
     //#endregion
 
     /**
      * Enables edit mode and caches current account customer object
      */
     private enableEditMode() {
-        this.cachedAccountCustomer = AccountCustomer.createClone(this.accountCustomer);
+        //this.cachedAccountCustomer = AccountCustomer.createClone(this.accountCustomer);
         this.isInEditMode = true;
     }
 
@@ -167,7 +241,12 @@ export default class UsersDetailsComponent implements AfterViewInit {
      */
     private cancelEditMode() {
         this.isInEditMode = false;
-        this.accountCustomer = AccountCustomer.createClone(this.cachedAccountCustomer);
+
+        if (!this.isValidGuid(this.accountCustomer.Id)) {
+            this.showChange.emit(false);
+        }
+
+        //this.accountCustomer = AccountCustomer.createClone(this.cachedAccountCustomer);
     }
 
     /**
@@ -194,12 +273,18 @@ export default class UsersDetailsComponent implements AfterViewInit {
      * Persist current account customer
      */
     private save() {
-        if (this.accountCustomer.Id > 0) {
+        this.isInEditMode = false;
+
+        if (this.isValidGuid(this.accountCustomer.Id)) {
+            console.log("SAVING >>");
+            console.info(this.accountCustomer);
+
             this.accountCustomerService.update(this.accountCustomer).subscribe(
                 (response: Response) => {
                     console.info("Item updated successfully: " + response.status + " " + response.statusText);
                     this.isInEditMode = false;
                     this.accountCustomerChanged.emit(this.accountCustomer);
+                    this.close();
                 },
                 (error: any) => {
                     this.apiRequest_onError(error);
@@ -207,7 +292,11 @@ export default class UsersDetailsComponent implements AfterViewInit {
                 }
             );
         } else {
-            this.accountCustomerService.create(this.accountCustomer).subscribe(
+            this.accountCustomerService.create({
+                Email: this.accountCustomer.Email,
+                RoleName: this.accountCustomer.Roles[0].RoleName,
+                MailConfirmationUrl: this.accountCustomer.Email
+            }).subscribe(
                 (response: Response) => {
                     console.info("Item created successfully: " + response.status + " " + response.statusText);
                     this.isInEditMode = false;
@@ -227,6 +316,7 @@ export default class UsersDetailsComponent implements AfterViewInit {
      */
     public close() {
         this.modal.close();
+        this.accountCustomerChanged.emit(this.accountCustomer);
         return false;
     }
 

@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Http, Response, Headers, RequestOptions} from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 
-import {CONSUMER_API_BASE_URL, API_TIMEOUT, AUTHORIZATION_API_URL, API_RETRIES, API_RETRY_DELAY} from '../config';
+import {CONSUMER_API_BASE_URL, API_TIMEOUT, AUTHENTICATION_TOKEN_URL, API_RETRIES, API_RETRY_DELAY} from '../config';
 import LoginService from "./login.service";
 import RxUtils from "../utils/rx-utils";
 

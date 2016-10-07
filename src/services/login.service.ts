@@ -2,7 +2,7 @@ import {Injectable, EventEmitter} from '@angular/core';
 import {CookieService} from 'angular2-cookie/core';
 import {Headers, Http} from "@angular/http";
 
-import {AUTHORIZATION_API_URL, API_TIMEOUT} from "../config";
+import {AUTHENTICATION_TOKEN_URL, API_TIMEOUT} from "../config";
 
 /**
  * Login service.
@@ -85,7 +85,7 @@ export default class LoginService {
         let body = `grant_type=password&username=${username}&password=${password}`;
 
         return this.http
-            .post(AUTHORIZATION_API_URL, body, { headers: headers })
+            .post(AUTHENTICATION_TOKEN_URL, body, { headers: headers })
             .timeout(API_TIMEOUT, new Error('API timeout'))
             .map((res) => res.json())
             .subscribe(

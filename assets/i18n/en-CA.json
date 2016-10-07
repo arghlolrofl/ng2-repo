@@ -128,5 +128,7 @@
   "USER": "User",
   "EMAIL": "E-Mail",
   "EMAIL_CONFIRMED": "Confirmed",
-  "LOCKOUT_DATE": "Lockout Date"
+  "LOCKOUT_DATE": "Lockout Date",
+  "ASSIGNED_ROLES": "Assigned Roles",
+  "AVAILABLE_ROLES": "Available Roles"
 }

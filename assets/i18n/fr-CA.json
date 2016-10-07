@@ -127,5 +127,7 @@
   "USER": "Benutzer",
   "EMAIL": "E-Mail",
   "EMAIL_CONFIRMED": "Bestätigt",
-  "LOCKOUT_DATE": "Sperrdatum"
+  "LOCKOUT_DATE": "Sperrdatum",
+  "ASSIGNED_ROLES": "Zugeordnete Rollen",
+  "AVAILABLE_ROLES": "Verfügbare Rollen"
 }

@@ -90,7 +90,6 @@
     <TypeScriptCompile Include="src\models\users\account-customer-filter.ts" />
     <TypeScriptCompile Include="src\rxjs-operators.ts" />
     <TypeScriptCompile Include="src\services\account-customer.service.ts" />
-    <TypeScriptCompile Include="src\services\base\api-client.authentication.service.ts" />
     <TypeScriptCompile Include="src\services\cost-account.service.ts" />
     <TypeScriptCompile Include="src\services\profile-service.ts" />
     <TypeScriptCompile Include="src\services\notification.service.ts" />
@@ -265,7 +264,6 @@
     <Folder Include="src\models\settings\" />
     <Folder Include="src\router" />
     <Folder Include="src\services" />
-    <Folder Include="src\services\base\" />
     <Folder Include="src\ui" />
     <Folder Include="src\utils" />
     <Folder Include="typings" />

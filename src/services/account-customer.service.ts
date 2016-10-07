@@ -33,8 +33,8 @@ export default class AccountCustomerService {
         return this.apiClient.post('AccountCustomer/GetFiltered', request);
     }
 
-    public create(accountCustomer: AccountCustomer) {
-        return this.apiClient.post('AccountCustomer/Register', accountCustomer);
+    public create(accountCustomerRegistration: any) {
+        return this.apiClient.post('AccountCustomer/Register', accountCustomerRegistration);
     }
 
     public delete(id: number): Observable<Response> {
@@ -43,5 +43,23 @@ export default class AccountCustomerService {
 
     public update(accountCustomer: AccountCustomer) {
         return this.apiClient.put('AccountCustomer/Update', accountCustomer);
+    }
+
+    public assignRole(userId: string, roleId: string) {
+        return this.apiClient.post('AccountCustomer/AddUserRole', {
+            UserId: userId,
+            RoleId: roleId
+        });
+    }
+
+    public removeRole(userId: string, roleId: string) {
+        return this.apiClient.post('AccountCustomer/RemoveUserRole', {
+            UserId: userId,
+            RoleId: roleId
+        });
+    }
+
+    public getAccountCustomerDetails(id: string): Observable<AccountCustomer> {
+        return this.apiClient.get('AccountCustomer/GetDetails?id=' + id);
     }
 }
