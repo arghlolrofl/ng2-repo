@@ -19,6 +19,7 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
+    <Content Include=".gitignore" />
     <Content Include="assets\templates\administration\cost-account\cost-account.component.html" />
     <Content Include="assets\templates\administration\cost-account\cost-account.item-details.html" />
     <Content Include="assets\templates\administration\cost-account\cost-account.table.paging.html" />
@@ -36,6 +37,8 @@
     <Content Include="assets\templates\common\loading-animation.component.html" />
     <Content Include="assets\templates\shipping\shipping.label.component.html" />
     <Content Include="assets\templates\user-properties.component.html" />
+    <Content Include="docs\Angular2-Basics.docx" />
+    <Content Include="docs\MailOneCanada-Frontend Environment Preparation.doc" />
     <Content Include="index.html" />
     <Content Include=".lite-server.json" />
     <Content Include="package.json" />
@@ -64,7 +67,9 @@
     <TypeScriptCompile Include="src\components\shipping\shipping.label.component.ts" />
     <TypeScriptCompile Include="src\components\user-properties.component.ts" />
     <TypeScriptCompile Include="src\config.ts" />
+    <TypeScriptCompile Include="src\hooks\custom-error-handler.ts" />
     <TypeScriptCompile Include="src\main.ts" />
+    <TypeScriptCompile Include="src\models\base64-content-info.ts" />
     <TypeScriptCompile Include="src\models\base\identifiable-object.ts" />
     <TypeScriptCompile Include="src\models\base\sorted-paged-results.ts" />
     <TypeScriptCompile Include="src\models\base\sorting-info.ts" />
@@ -72,7 +77,9 @@
     <TypeScriptCompile Include="src\models\cost-account\cost-account-filter.ts" />
     <TypeScriptCompile Include="src\models\cost-account\cost-account-info.ts" />
     <TypeScriptCompile Include="src\models\base\sorted-paged-request.ts" />
+    <TypeScriptCompile Include="src\models\notification-message.ts" />
     <TypeScriptCompile Include="src\models\settings\mailone-settings.ts" />
+    <TypeScriptCompile Include="src\models\shipment-response.ts" />
     <TypeScriptCompile Include="src\models\users\account-customer.ts" />
     <TypeScriptCompile Include="src\models\users\account-role.ts" />
     <TypeScriptCompile Include="src\models\users\account-customer-filter-request.ts" />
@@ -81,6 +88,7 @@
     <TypeScriptCompile Include="src\services\account-customer.service.ts" />
     <TypeScriptCompile Include="src\services\base\api-client.authentication.service.ts" />
     <TypeScriptCompile Include="src\services\cost-account.service.ts" />
+    <TypeScriptCompile Include="src\services\notification.service.ts" />
     <TypeScriptCompile Include="src\services\role.service.ts" />
     <TypeScriptCompile Include="src\services\settings.service.ts" />
     <TypeScriptCompile Include="src\ui\key-value-pair.ts" />
@@ -231,6 +239,7 @@
     <Folder Include="assets\templates\common\" />
     <Folder Include="assets\templates\profile" />
     <Folder Include="assets\templates\shipping" />
+    <Folder Include="docs\" />
     <Folder Include="src" />
     <Folder Include="src\components" />
     <Folder Include="src\components\administration" />
@@ -242,6 +251,7 @@
     <Folder Include="src\components\profile" />
     <Folder Include="src\components\shipping" />
     <Folder Include="src\directives" />
+    <Folder Include="src\hooks\" />
     <Folder Include="src\models" />
     <Folder Include="src\models\cost-account\" />
     <Folder Include="src\models\base\" />

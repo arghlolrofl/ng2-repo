@@ -8,7 +8,7 @@ export default class NotificationService {
     @Output() onNotification : EventEmitter<NotfificationMessage> = new EventEmitter<NotfificationMessage>();
 
     public sendError(error:any) : void {
-        console.log(error);
+        console.error(error);
 
         let realError = ErrorUtils.toError(error);
         let message = new NotfificationMessage(realError.message);

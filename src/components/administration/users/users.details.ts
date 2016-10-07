@@ -3,6 +3,7 @@ import {Response} from '@angular/http';
 import {ModalComponent} from 'ng2-bs3-modal/ng2-bs3-modal';
 import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
+import NotificationService from '../../../services/notification.service';
 import RoleService from '../../../services/role.service';
 import AccountCustomerService from '../../../services/account-customer.service';
 import AccountCustomer from '../../../models/users/account-customer';
@@ -65,6 +66,7 @@ export default class UsersDetailsComponent implements AfterViewInit {
     private isInEditMode: boolean = false;
     private cachedAccountCustomer: AccountCustomer;
     private roleService: RoleService;
+    private notificationService: NotificationService;
     private accountCustomerService: AccountCustomerService;
 
     //#endregion
@@ -112,7 +114,11 @@ export default class UsersDetailsComponent implements AfterViewInit {
 
     //#region Initialization
 
-    constructor(accountCustomerService: AccountCustomerService, roleService: RoleService) {
+    constructor(
+        accountCustomerService: AccountCustomerService,
+        roleService: RoleService,
+        notificationService: NotificationService) {
+
         this.accountCustomerService = accountCustomerService;
         this.roleService = roleService;
 
@@ -123,7 +129,7 @@ export default class UsersDetailsComponent implements AfterViewInit {
             },
             (error: any) => {
                 console.log(error);
-                this.error = error;
+                this.notificationService.sendError(error);
             }
         );
     }

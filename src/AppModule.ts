@@ -46,7 +46,7 @@ import ShippingRecipientAddComponent from "./components/shipping/shipping.recipi
 import ShippingProductCalculationShortcutsComponent from "./components/shipping/shipping.product-calculation.shortcuts.component";
 import ShippingLabelComponent from "./components/shipping/shipping.label.component";
 import CustomErrorHandler from "./hooks/custom-error-handler"
-import NotificationService from "./services/notification-service"
+import NotificationService from "./services/notification.service"
 
 @NgModule({
     imports: [

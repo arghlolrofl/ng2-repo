@@ -7,7 +7,7 @@ import {ModalComponent} from 'ng2-bs3-modal/ng2-bs3-modal';
 import {AVAILABLE_LOCALES} from '../config';
 import LoginService from '../services/login.service';
 import APIClient from "../services/api-client.service";
-import NotificationService from "../services/notification-service";
+import NotificationService from "../services/notification.service";
 import NotificationMessage from "../models/notification-message";
 
 @Component({

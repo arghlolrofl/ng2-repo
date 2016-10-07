@@ -2,7 +2,9 @@
 import {Response} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 
-import APIClient from './base/api-client.authentication.service';
+import {AUTHORIZATION_API_URL} from '../config';
+
+import APIClient from './api-client.service';
 import SortedPagedResults from '../models/base/sorted-paged-results';
 import AccountRole from '../models/users/account-role';
 
@@ -21,6 +23,6 @@ export default class AccountCustomerService {
     public getAllRoles(): Observable<SortedPagedResults<AccountRole>> {
         return this.apiClient.post('Role/GetAll', {
             "StartValue": 0
-        });
+        }, AUTHORIZATION_API_URL);
     }
 }
