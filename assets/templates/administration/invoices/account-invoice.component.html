@@ -1,0 +1,53 @@
+﻿<h3>
+    <i class="icon-class icon-cogwheel"></i>
+    {{ 'ADMINISTRATION_ACCOUNT_INVOICE_HEADLINE' | translate }}
+</h3>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <section *ngIf="error"
+                 class="sectiontemplate box-error">
+            <div class="content">
+                {{ error.message }}
+            </div>
+            <button type="button"
+                    class="clear-submit"
+                    (click)="error = null">
+                <span class="icon-close"></span>
+            </button>
+        </section>
+    </div>
+</div>
+
+<fp-loading-animation *ngIf="isLoading"></fp-loading-animation>
+
+<fp-administration-account-invoice-table-filter *ngIf="!isLoading"
+                                             [invoiceNumberFilter]="accountInvoiceFilter.InvoiceNumber"
+                                             [dateStartFilter]="accountInvoiceFilter.DateRangeFrom"
+                                             [dateEndFilter]="accountInvoiceFilter.DateRangeUntil"
+                                             (applyFilterRequested)="filter_onApply($event)">
+
+</fp-administration-account-invoice-table-filter>
+<fp-administration-account-invoice-table-paging *ngIf="!isLoading"
+                                             [resultCount]="selectedResultCount"
+                                             [totalResultCount]="TotalResultCount"
+                                             [currentPage]="currentPageIndex"
+                                             (resultCountChanged)="paging_onResultCountChanged($event)"
+                                             (changePageRequested)="paging_onPageChangeRequested($event)"
+                                             (pageChanged)="paging_onPageIndexChanged($event)">
+
+</fp-administration-account-invoice-table-paging>
+<fp-administration-account-invoice-table *ngIf="!isLoading"
+                                      [items]="accountInvoiceList"
+                                      (showDetails)="accountInvoice_onShowDetails($event)">
+
+</fp-administration-account-invoice-table>
+<fp-administration-account-invoice-table-paging *ngIf="!isLoading"
+                                             [resultCount]="selectedResultCount"
+                                             [totalResultCount]="TotalResultCount"
+                                             [currentPage]="currentPageIndex"
+                                             (resultCountChanged)="paging_onResultCountChanged($event)"
+                                             (changePageRequested)="paging_onPageChangeRequested($event)"
+                                             (pageChanged)="paging_onPageIndexChanged($event)">
+
+</fp-administration-account-invoice-table-paging>

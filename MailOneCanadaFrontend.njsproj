@@ -24,6 +24,10 @@
     <Content Include="assets\templates\administration\cost-account\cost-account.table.paging.html" />
     <Content Include="assets\templates\administration\cost-account\cost-account.table.filter.html" />
     <Content Include="assets\templates\administration\cost-account\cost-account.table.html" />
+    <Content Include="assets\templates\administration\invoices\account-invoice.table.paging.html" />
+    <Content Include="assets\templates\administration\invoices\account-invoice.table.html" />
+    <Content Include="assets\templates\administration\invoices\account-invoice.table.filter.html" />
+    <Content Include="assets\templates\administration\invoices\account-invoice.component.html" />
     <Content Include="assets\templates\administration\settings\settings.account-levels.html" />
     <Content Include="assets\templates\administration\settings\settings.amount-per-label.html" />
     <Content Include="assets\templates\administration\settings\settings.balance-warning-level.html" />
@@ -46,6 +50,10 @@
     <TypeScriptCompile Include="src\components\administration\cost-account\cost-account.table.paging.ts" />
     <TypeScriptCompile Include="src\components\administration\cost-account\cost-account.table.filter.ts" />
     <TypeScriptCompile Include="src\components\administration\cost-account\cost-account.table.ts" />
+    <TypeScriptCompile Include="src\components\administration\invoices\account-invoice.table.ts" />
+    <TypeScriptCompile Include="src\components\administration\invoices\account-invoice.table.paging.ts" />
+    <TypeScriptCompile Include="src\components\administration\invoices\account-invoice.table.filter.ts" />
+    <TypeScriptCompile Include="src\components\administration\invoices\account-invoice.component.ts" />
     <TypeScriptCompile Include="src\components\administration\settings\settings.account-levels.ts" />
     <TypeScriptCompile Include="src\components\administration\settings\settings.amount-per-label.ts" />
     <TypeScriptCompile Include="src\components\administration\settings\settings.balance-warning-level.ts" />
@@ -62,12 +70,16 @@
     <TypeScriptCompile Include="src\models\cost-account\cost-account-filter.ts" />
     <TypeScriptCompile Include="src\models\cost-account\cost-account-info.ts" />
     <TypeScriptCompile Include="src\models\base\sorted-paged-request.ts" />
+    <TypeScriptCompile Include="src\models\invoices\account-invoice-info.ts" />
+    <TypeScriptCompile Include="src\models\invoices\account-invoice-filter-request.ts" />
+    <TypeScriptCompile Include="src\models\invoices\account-invoice-filter.ts" />
     <TypeScriptCompile Include="src\models\profile\user-claim-preferred-culture.ts" />
     <TypeScriptCompile Include="src\models\profile\user-claim-role.ts" />
     <TypeScriptCompile Include="src\models\profile\user-claim.ts" />
     <TypeScriptCompile Include="src\models\profile\user-claims.ts" />
     <TypeScriptCompile Include="src\models\settings\mailone-settings.ts" />
     <TypeScriptCompile Include="src\rxjs-operators.ts" />
+    <TypeScriptCompile Include="src\services\account-invoice.service.ts" />
     <TypeScriptCompile Include="src\services\cost-account.service.ts" />
     <TypeScriptCompile Include="src\services\profile-service.ts" />
     <TypeScriptCompile Include="src\services\settings.service.ts" />
@@ -213,6 +225,7 @@
     <Folder Include="assets\templates" />
     <Folder Include="assets\templates\administration" />
     <Folder Include="assets\templates\administration\cost-account\" />
+    <Folder Include="assets\templates\administration\invoices\" />
     <Folder Include="assets\templates\administration\settings\" />
     <Folder Include="assets\templates\dashboard" />
     <Folder Include="assets\templates\common\" />
@@ -222,6 +235,7 @@
     <Folder Include="src\components" />
     <Folder Include="src\components\administration" />
     <Folder Include="src\components\administration\cost-account\" />
+    <Folder Include="src\components\administration\invoices\" />
     <Folder Include="src\components\administration\settings\" />
     <Folder Include="src\components\dashboard" />
     <Folder Include="src\components\common\" />
@@ -231,6 +245,7 @@
     <Folder Include="src\models" />
     <Folder Include="src\models\cost-account\" />
     <Folder Include="src\models\base\" />
+    <Folder Include="src\models\invoices\" />
     <Folder Include="src\models\profile\" />
     <Folder Include="src\models\settings\" />
     <Folder Include="src\router" />

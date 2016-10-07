@@ -26,6 +26,11 @@ import CostAccountTablePagingComponent from './components/administration/cost-ac
 import CostAccountTableFilterComponent from './components/administration/cost-account/cost-account.table.filter';
 import CostAccountTableItemDetailsComponent from './components/administration/cost-account/cost-account.item-details';
 
+import AccountInvoiceComponent from './components/administration/invoices/account-invoice.component';
+import AccountInvoiceTableComponent from './components/administration/invoices/account-invoice.table';
+import AccountInvoiceTablePagingComponent from './components/administration/invoices/account-invoice.table.paging';
+import AccountInvoiceTableFilterComponent from './components/administration/invoices/account-invoice.table.filter';
+
 import ProfileComponent from './components/profile/profile.component';
 
 import ShippingComponent from './components/shipping/shipping.component';
@@ -74,6 +79,11 @@ import NotificationService from "./services/notification-service"
         CostAccountTablePagingComponent,
         CostAccountTableFilterComponent,
         CostAccountTableItemDetailsComponent,
+
+        AccountInvoiceComponent,
+        AccountInvoiceTableComponent,
+        AccountInvoiceTablePagingComponent,
+        AccountInvoiceTableFilterComponent,
 
         ProfileComponent,
 

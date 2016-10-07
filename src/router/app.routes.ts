@@ -8,6 +8,7 @@ import ShippingLabelComponent from '../components/shipping/shipping.label.compon
 import AdministrationComponent from '../components/administration/administration.component';
 import SettingsComponent from '../components/administration/settings/settings.component';
 import CostAccountComponent from '../components/administration/cost-account/cost-account.component';
+import AccountInvoiceComponent from '../components/administration/invoices/account-invoice.component';
 
 
 /**
@@ -41,6 +42,10 @@ const appRoutes = [
     {
         path: 'administration/cost-account',
         component: CostAccountComponent
+    },
+    {
+        path: 'administration/invoices',
+        component: AccountInvoiceComponent
     },
 
     {
