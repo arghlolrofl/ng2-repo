@@ -172,12 +172,20 @@ export default class ShippingCostCenterComponent {
      * @param {CostCenterService} costCenterService the cost center to be wrapped
      * @returns {function(string): Observable<CostCenterInfo>}
      */
-    public mapCostCenter23(costCenterService: CostCenterService) {
+    public mapCostCenter2(costCenterService: CostCenterService) {
         return (term: string) => {
-            return Observable.merge(
-                costCenterService.getFilteredCostCenterByLevelAndFastQuery(2, term, 0, MAX_AC_RESULTS),
-                costCenterService.getFilteredCostCenterByLevelAndFastQuery(3, term, 0, MAX_AC_RESULTS)
-            ).take(MAX_AC_RESULTS);
+            return costCenterService.getFilteredCostCenterByLevelAndFastQuery(2, term, 0, MAX_AC_RESULTS);
+        }
+    }
+
+    /**
+     * Map Cost Center API call.
+     * @param {CostCenterService} costCenterService the cost center to be wrapped
+     * @returns {function(string): Observable<CostCenterInfo>}
+     */
+    public mapCostCenter3(costCenterService: CostCenterService) {
+        return (term: string) => {
+            return costCenterService.getFilteredCostCenterByLevelAndFastQuery(3, term, 0, MAX_AC_RESULTS);
         }
     }
 }
