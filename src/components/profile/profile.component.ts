@@ -2,7 +2,8 @@ import {Component, EventEmitter, NgZone, Output} from '@angular/core';
 import {TranslateService} from 'ng2-translate/ng2-translate';
 
 import {MIN_PASSWORD_LENGTH} from '../../config';
-import {AVAILABLE_CULTURES, AVAILABLE_CULTURE_DISPLAY_NAMES, defaultCulture} from '../../services/culture-service';
+import {AVAILABLE_CULTURES, AVAILABLE_CULTURE_DISPLAY_NAMES} from '../../services/culture-service';
+import CultureService from '../../services/culture-service';
 import ProfileService from '../../services/profile-service';
 import UserClaim from '../../models/profile/user-claim';
 import UserClaims from '../../models/profile/user-claims';
@@ -80,7 +81,11 @@ export default class ProfileComponent {
      * @param {NotificationService} notificationService the error and warning service.
      * @param {NgZone} zone a zone to run in.
      */
-    constructor(private profileService: ProfileService, private translate: TranslateService, private notificationService: NotificationService, private zone: NgZone) {
+    constructor(private profileService: ProfileService,
+                private translate: TranslateService,
+                private notificationService: NotificationService,
+                private cultureService: CultureService,
+                private zone: NgZone) {
         this.getUserClaims();
 
         this.comboBoxItems = new Array<DropdownValue<number, string>>();
@@ -138,7 +143,7 @@ export default class ProfileComponent {
                         this.setSelectedComboboxItem();
                     }
                     else {
-                        this.activeCulture = defaultCulture();
+                        this.activeCulture = this.cultureService.defaultCulture();
                     }
                     console.dir(this.activeCulture);
                     this.isInitialized = true;

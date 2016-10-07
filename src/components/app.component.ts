@@ -3,7 +3,7 @@ import {TranslateService} from 'ng2-translate/ng2-translate';
 import {CookieService} from 'angular2-cookie/core';
 import {ModalComponent} from 'ng2-bs3-modal/ng2-bs3-modal';
 
-import {defaultCulture} from '../services/culture-service';
+import CultureService from '../services/culture-service';
 import LoginService from '../services/login.service';
 import APIClient from "../services/api-client.service";
 import NotificationService from "../services/notification-service";
@@ -15,6 +15,7 @@ import NotificationMessage from "../models/notification-message";
     providers: [
         CookieService,
         LoginService,
+        CultureService,
         APIClient
     ]
 })
@@ -41,11 +42,12 @@ export default class AppComponent implements AfterViewInit {
      * @param translate The translation service
      */
     constructor(private loginService: LoginService,
-        public translate: TranslateService,
-        private notificationService: NotificationService,
-        private zone:NgZone) {
+                public translate: TranslateService,
+                private notificationService: NotificationService,
+                private cultureService: CultureService,
+                private zone:NgZone) {
 
-        translate.use(defaultCulture());
+        translate.use(cultureService.defaultCulture());
         this.loggedIn = this.loginService.isLoggedIn();
         this.bindEvents();
     }
