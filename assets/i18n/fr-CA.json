@@ -115,5 +115,7 @@
   "EDIT_MODE": "Editiermodus",
   "SAVE": "Speichern",
   "INACTIVE": "Inaktiv",
-  "COST_ACCOUNT": "Kostenstelle"
+  "COST_ACCOUNT": "Kostenstelle",
+  "ERROR_PASSWORDS_DONT_MATCH": "Passwort und Passwortwiederholung stimmen nicht überein.",
+  "ERROR_PASSWORD_TOO_SHORT": "Das Passwort muss mindestens 6 Zeichen lang sein."
 }
