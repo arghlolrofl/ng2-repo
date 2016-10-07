@@ -206,6 +206,8 @@ export default class ProfileComponent {
                 (response: Response) =>
                 {
                     console.info("set preferred culture: " + response.status + " " + response.statusText);
+                    this.originalCulture = this.activeCulture;
+                    this.translate.use(this.activeCulture);
                 },
                 (error: any) => {
                     this.notificationService.sendError(new Error(error));
