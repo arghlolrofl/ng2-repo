@@ -5,6 +5,7 @@ import {AUTHORIZATION_API_BASE_URL} from '../config';
 import APIClient from './api-client.service';
 import UserClaim from '../models/profile/user-claim';
 import SetPassword from '../models/profile/set-password';
+import {Response} from "@angular/http";
 
 
 @Injectable()
@@ -29,16 +30,16 @@ export default class ProfileService {
      * Post the new pw to the backend.
      * @param pw
      */
-    public setPassword(pw: SetPassword): void {
-        this.apiClient.post('Account/SetPassword', pw, AUTHORIZATION_API_BASE_URL);
+    public setPassword(pw: SetPassword): Observable<Response> {
+        return this.apiClient.post('Account/SetPassword', pw, AUTHORIZATION_API_BASE_URL);
     }
 
     /**
      * Post the new preferred culture to the backend.
      * @param culture
      */
-    public setPreferredCulture(culture: string): void {
+    public setPreferredCulture(culture: string): Observable<Response> {
         console.log('setPreferredCulture: ' + culture);
-        this.apiClient.post('Account/SetPreferredCulture', culture, AUTHORIZATION_API_BASE_URL);
+        return this.apiClient.post('Account/SetPreferredCulture', culture, AUTHORIZATION_API_BASE_URL);
     }
 }

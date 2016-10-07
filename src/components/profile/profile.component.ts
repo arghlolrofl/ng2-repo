@@ -1,13 +1,17 @@
 import {Component, EventEmitter, NgZone, Output} from '@angular/core';
+import {TranslateService} from 'ng2-translate/ng2-translate';
 
 import {MIN_PASSWORD_LENGTH} from '../../config';
-import {AVAILABLE_CULTURES, AVAILABLE_CULTURE_DISPLAY_NAMES, defaultCulture} from '../../services/culture-service';
+import {AVAILABLE_CULTURES, AVAILABLE_CULTURE_DISPLAY_NAMES} from '../../services/culture-service';
+import CultureService from '../../services/culture-service';
 import ProfileService from '../../services/profile-service';
 import UserClaim from '../../models/profile/user-claim';
 import UserClaims from '../../models/profile/user-claims';
 import UserClaimPreferredCulture from '../../models/profile/user-claim-preferred-culture';
 import SetPassword from '../../models/profile/set-password';
 import DropdownValue from '../../ui/key-value-pair';
+import NotificationService from "../../services/notification-service";
+import {Response} from "@angular/http";
 
 
 /**
@@ -73,9 +77,15 @@ export default class ProfileComponent {
     /**
      * @constructor
      * @param {ProfileService} profileService the profile client
+     * @param {TranslateService} translate the translation service.
+     * @param {NotificationService} notificationService the error and warning service.
      * @param {NgZone} zone a zone to run in.
      */
-    constructor(private profileService: ProfileService, private zone: NgZone) {
+    constructor(private profileService: ProfileService,
+                private translate: TranslateService,
+                private notificationService: NotificationService,
+                private cultureService: CultureService,
+                private zone: NgZone) {
         this.getUserClaims();
 
         this.comboBoxItems = new Array<DropdownValue<number, string>>();
@@ -126,7 +136,6 @@ export default class ProfileComponent {
                 {
                     let claims: UserClaims = new UserClaims(response);
                     this.roles = claims.AllRoles;
-                    //console.dir(this.roles);
                     this.preferredCulture = claims.PreferredCulture;
                     if (this.preferredCulture) {
                         this.activeCulture = this.preferredCulture.Culture;
@@ -134,7 +143,7 @@ export default class ProfileComponent {
                         this.setSelectedComboboxItem();
                     }
                     else {
-                        this.activeCulture = defaultCulture();
+                        this.activeCulture = this.cultureService.defaultCulture();
                     }
                     console.dir(this.activeCulture);
                     this.isInitialized = true;
@@ -152,10 +161,22 @@ export default class ProfileComponent {
         }
 
         if (this.password.length < MIN_PASSWORD_LENGTH) {
+            this.translate.get('ERROR_PASSWORD_TOO_SHORT').subscribe((text: string) => {
+                this.notificationService.sendError(new Error(text));
+            });
+
             return false;
         }
 
-        return this.password === this.passwordRepeated;
+        if (this.password !== this.passwordRepeated) {
+            this.translate.get('ERROR_PASSWORDS_DONT_MATCH').subscribe((text: string) => {
+                this.notificationService.sendError(new Error(text));
+            });
+
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -166,7 +187,15 @@ export default class ProfileComponent {
         pw.NewPassword = this.password;
         pw.ConfirmPassword = this.passwordRepeated;
 
-        this.profileService.setPassword(pw);
+        this.profileService.setPassword(pw).subscribe(
+            (response: Response) => {
+                console.info("set password: " + response.status + " " + response.statusText);
+            },
+            (error: any) => {
+                this.notificationService.sendError(new Error(error));
+                console.error(error);
+            }
+        );
 
         this.password = null;
         this.passwordRepeated = null;
@@ -178,7 +207,18 @@ export default class ProfileComponent {
     private setPreferredCulture(): void {
         console.log('setPreferredCulture() called with activeCulture= ' + this.activeCulture + ' and isInitialized= ' + this.isInitialized);
         if (this.isInitialized && this.activeCulture !== this.originalCulture) {
-            this.profileService.setPreferredCulture(this.activeCulture);
+            this.profileService.setPreferredCulture(this.activeCulture).subscribe(
+                (response: Response) =>
+                {
+                    console.info("set preferred culture: " + response.status + " " + response.statusText);
+                    this.originalCulture = this.activeCulture;
+                    this.translate.use(this.activeCulture);
+                },
+                (error: any) => {
+                    this.notificationService.sendError(new Error(error));
+                    console.error(error);
+                }
+            );
         }
     }
 

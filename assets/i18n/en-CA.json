@@ -115,5 +115,7 @@
   "EDIT_MODE": "Edit Mode",
   "SAVE": "Save",
   "INACTIVE": "Inactive",
-  "COST_ACCOUNT": "Cost Account"
+  "COST_ACCOUNT": "Cost Account",
+  "ERROR_PASSWORDS_DONT_MATCH": "Password and repeated password don't match.",
+  "ERROR_PASSWORD_TOO_SHORT": "Password must be at least 6 characters long."
 }
