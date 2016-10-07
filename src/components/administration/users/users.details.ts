@@ -3,15 +3,18 @@ import {Response} from '@angular/http';
 import {ModalComponent} from 'ng2-bs3-modal/ng2-bs3-modal';
 import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
+import RoleService from '../../../services/role.service';
 import AccountCustomerService from '../../../services/account-customer.service';
 import AccountCustomer from '../../../models/users/account-customer';
+import SortedPagedResults from '../../../models/base/sorted-paged-results';
 import AccountRole from '../../../models/users/account-role';
 
 @Component({
     selector: 'fp-administration-users-details',
     templateUrl: 'assets/templates/administration/users/users.details.html',
     providers: [
-        AccountCustomerService
+        AccountCustomerService,
+        RoleService
     ],
     styles: [
         '#active-box { margin-left: 5px; height: 40px; vertical-align: middle; }',
@@ -61,6 +64,7 @@ export default class UsersDetailsComponent implements AfterViewInit {
     private error: Error;
     private isInEditMode: boolean = false;
     private cachedAccountCustomer: AccountCustomer;
+    private roleService: RoleService;
     private accountCustomerService: AccountCustomerService;
 
     //#endregion
@@ -108,8 +112,20 @@ export default class UsersDetailsComponent implements AfterViewInit {
 
     //#region Initialization
 
-    constructor(accountCustomerService: AccountCustomerService) {
+    constructor(accountCustomerService: AccountCustomerService, roleService: RoleService) {
         this.accountCustomerService = accountCustomerService;
+        this.roleService = roleService;
+
+        this.roleService.getAllRoles().subscribe(
+            (response: SortedPagedResults<AccountRole>) => {
+                console.info(response);
+                alert("Fetched roles");
+            },
+            (error: any) => {
+                console.log(error);
+                this.error = error;
+            }
+        );
     }
 
     /**
