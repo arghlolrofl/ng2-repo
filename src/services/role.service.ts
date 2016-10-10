@@ -6,7 +6,7 @@ import {AUTHENTICATION_API_URL} from '../config';
 
 import APIClient from './api-client.service';
 import SortedPagedResults from '../models/base/sorted-paged-results';
-import AccountRole from '../models/users/account-role';
+import AccountRole from '../models/account-customer/account-role';
 
 @Injectable()
 export default class AccountCustomerService {
