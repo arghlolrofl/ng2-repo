@@ -10,7 +10,7 @@ import UserClaims from '../../models/profile/user-claims';
 import UserClaimPreferredCulture from '../../models/profile/user-claim-preferred-culture';
 import SetPassword from '../../models/profile/set-password';
 import DropdownValue from '../../ui/key-value-pair';
-import NotificationService from "../../services/notification-service";
+import NotificationService from "../../services/notification.service";
 import {Response} from "@angular/http";
 
 
