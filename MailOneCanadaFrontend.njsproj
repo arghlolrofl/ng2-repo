@@ -19,6 +19,8 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
+    <Content Include="assets\i18n\en-CA.json" />
+    <Content Include="assets\i18n\fr-CA.json" />
     <Content Include="assets\templates\administration\cost-account\cost-account.component.html" />
     <Content Include="assets\templates\administration\cost-account\cost-account.item-details.html" />
     <Content Include="assets\templates\administration\cost-account\cost-account.table.paging.html" />
@@ -73,6 +75,7 @@
     <TypeScriptCompile Include="src\models\invoices\account-invoice-info.ts" />
     <TypeScriptCompile Include="src\models\invoices\account-invoice-filter-request.ts" />
     <TypeScriptCompile Include="src\models\invoices\account-invoice-filter.ts" />
+    <TypeScriptCompile Include="src\models\profile\set-password.ts" />
     <TypeScriptCompile Include="src\models\profile\user-claim-preferred-culture.ts" />
     <TypeScriptCompile Include="src\models\profile\user-claim-role.ts" />
     <TypeScriptCompile Include="src\models\profile\user-claim.ts" />
@@ -81,13 +84,12 @@
     <TypeScriptCompile Include="src\rxjs-operators.ts" />
     <TypeScriptCompile Include="src\services\account-invoice.service.ts" />
     <TypeScriptCompile Include="src\services\cost-account.service.ts" />
+    <TypeScriptCompile Include="src\services\culture-service.ts" />
     <TypeScriptCompile Include="src\services\profile-service.ts" />
     <TypeScriptCompile Include="src\services\settings.service.ts" />
     <TypeScriptCompile Include="src\ui\key-value-pair.ts" />
     <TypeScriptCompile Include="typings\index.d.ts" />
     <Content Include="assets\css\style.min.css" />
-    <Content Include="assets\i18n\de.json" />
-    <Content Include="assets\i18n\en.json" />
     <Content Include="assets\img\apple-touch-icon-114x114.png" />
     <Content Include="assets\img\apple-touch-icon-120x120.png" />
     <Content Include="assets\img\apple-touch-icon-144x144.png" />
