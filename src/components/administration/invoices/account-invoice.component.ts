@@ -1,4 +1,5 @@
 ﻿import {Component, EventEmitter, Output} from '@angular/core';
+import * as fileSaver from 'file-saver'
 import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
 import AccountInvoiceService from '../../../services/account-invoice.service';
@@ -6,6 +7,8 @@ import AccountInvoiceFilterRequest from '../../../models/invoices/account-invoic
 import SortedPagedResults from '../../../models/base/sorted-paged-results';
 import AccountInvoiceInfo from '../../../models/invoices/account-invoice-info';
 import AccountInvoiceFilter from '../../../models/invoices/account-invoice-filter';
+import Base64ContentInfo from '../../../models/base64-content-info';
+import Base64Extension from '../../../common/Base64Extension';
 //import SortedPagedRequest from '../../../models/base/sorted-paged-request';
 
 @Component({
@@ -134,7 +137,23 @@ export default class AccountInvoiceComponent {
      * @param {AccountInvoiceInfo} accountInvoice The cost account to display details for
      */
     private accountInvoice_onShowDetails(accountInvoice: AccountInvoiceInfo) {
-        //TODO: download pdf
+        //download pdf
+        this.selectedAccountInvoice = accountInvoice;
+        this.isLoading = true;
+        this.accountInvoiceService
+            .getInvoiceContent(accountInvoice.Id)
+            .subscribe(
+            (response: Base64ContentInfo) => {
+                this.isLoading = false;
+                let blob = Base64Extension.b64toBlob(response.Content, 'application/pdf', 512)
+                let name = accountInvoice.InvoiceFile.FileName;
+                fileSaver.saveAs(blob, name);
+            },
+            (error: Error) => {
+                this.isLoading = false;
+                console.error(error);
+            }
+        );
     }
 
     /**

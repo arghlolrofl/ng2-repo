@@ -6,6 +6,7 @@ import APIClient from './api-client.service';
 import SortedPagedRequest from '../models/base/sorted-paged-request';
 import SortedPagedResults from '../models/base/sorted-paged-results';
 import AccountInvoiceInfo from '../models/invoices/account-invoice-info';
+import Base64ContentInfo from '../models/base64-content-info';
 import AccountInvoiceFilterRequest from '../models/invoices/account-invoice-filter-request';
 
 @Injectable()
@@ -39,6 +40,10 @@ export default class AccountInvoiceService {
     }
 
     public getById(id: number): Observable<AccountInvoiceInfo> {
-        return this.apiClient.get('CostCenter/GetById?id=' + id);
+        return this.apiClient.get('AccountInvoice/GetById?id=' + id);
+    }
+
+    public getInvoiceContent(id: number): Observable<Base64ContentInfo> {
+        return this.apiClient.get('AccountInvoice/GetInvoiceContent?id=' + id);
     }
 }

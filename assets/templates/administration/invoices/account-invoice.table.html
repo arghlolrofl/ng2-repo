@@ -11,8 +11,8 @@
         <tbody>
             <tr *ngFor="let item of items" class="table-row">
                 <td>{{ item.InvoiceNumber }}</td>
-                <td>{{ item.CreationDate }}</td>
-                <td>{{ item.InvoicedAmount }}</td>
+                <td>{{ item.CreationDate | date: 'yyyy-MM-dd' }}</td>
+                <td>{{ item.InvoicedAmount | currency:'USD':true:'1.2-2' }}</td>
                 <td>
                     <button type="button" class="cell-button"
                             (click)="showDetails.emit(item);">

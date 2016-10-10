@@ -15,3 +15,6 @@ app.zip
 /npm-debug.log.1881669368
 /npm-debug.log.1577279694
 /npm-debug.log.132068834
+/obj/Debug
+/src/common/Base64Extension.js.map
+/src/common/Base64Extension.js

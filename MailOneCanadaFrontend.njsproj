@@ -19,6 +19,8 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
+    <Content Include="assets\i18n\en-CA.json" />
+    <Content Include="assets\i18n\fr-CA.json" />
     <Content Include="assets\templates\administration\cost-account\cost-account.component.html" />
     <Content Include="assets\templates\administration\cost-account\cost-account.item-details.html" />
     <Content Include="assets\templates\administration\cost-account\cost-account.table.paging.html" />
@@ -45,6 +47,7 @@
     <Compile Include="Gruntfile.js" />
     <Compile Include="webpack.config.js" />
     <TypeScriptCompile Include="src\AppModule.ts" />
+    <TypeScriptCompile Include="src\common\Base64Extension.ts" />
     <TypeScriptCompile Include="src\components\administration\cost-account\cost-account.component.ts" />
     <TypeScriptCompile Include="src\components\administration\cost-account\cost-account.item-details.ts" />
     <TypeScriptCompile Include="src\components\administration\cost-account\cost-account.table.paging.ts" />
@@ -62,7 +65,10 @@
     <TypeScriptCompile Include="src\components\shipping\shipping.label.component.ts" />
     <TypeScriptCompile Include="src\components\user-properties.component.ts" />
     <TypeScriptCompile Include="src\config.ts" />
+    <TypeScriptCompile Include="src\hooks\custom-error-handler.ts" />
     <TypeScriptCompile Include="src\main.ts" />
+    <TypeScriptCompile Include="src\models\file-content-info.ts" />
+    <TypeScriptCompile Include="src\models\base64-content-info.ts" />
     <TypeScriptCompile Include="src\models\base\identifiable-object.ts" />
     <TypeScriptCompile Include="src\models\base\sorted-paged-results.ts" />
     <TypeScriptCompile Include="src\models\base\sorting-info.ts" />
@@ -73,21 +79,24 @@
     <TypeScriptCompile Include="src\models\invoices\account-invoice-info.ts" />
     <TypeScriptCompile Include="src\models\invoices\account-invoice-filter-request.ts" />
     <TypeScriptCompile Include="src\models\invoices\account-invoice-filter.ts" />
+    <TypeScriptCompile Include="src\models\notification-message.ts" />
+    <TypeScriptCompile Include="src\models\profile\set-password.ts" />
     <TypeScriptCompile Include="src\models\profile\user-claim-preferred-culture.ts" />
     <TypeScriptCompile Include="src\models\profile\user-claim-role.ts" />
     <TypeScriptCompile Include="src\models\profile\user-claim.ts" />
     <TypeScriptCompile Include="src\models\profile\user-claims.ts" />
     <TypeScriptCompile Include="src\models\settings\mailone-settings.ts" />
+    <TypeScriptCompile Include="src\models\shipment-response.ts" />
     <TypeScriptCompile Include="src\rxjs-operators.ts" />
     <TypeScriptCompile Include="src\services\account-invoice.service.ts" />
     <TypeScriptCompile Include="src\services\cost-account.service.ts" />
+    <TypeScriptCompile Include="src\services\culture-service.ts" />
+    <TypeScriptCompile Include="src\services\notification-service.ts" />
     <TypeScriptCompile Include="src\services\profile-service.ts" />
     <TypeScriptCompile Include="src\services\settings.service.ts" />
     <TypeScriptCompile Include="src\ui\key-value-pair.ts" />
     <TypeScriptCompile Include="typings\index.d.ts" />
     <Content Include="assets\css\style.min.css" />
-    <Content Include="assets\i18n\de.json" />
-    <Content Include="assets\i18n\en.json" />
     <Content Include="assets\img\apple-touch-icon-114x114.png" />
     <Content Include="assets\img\apple-touch-icon-120x120.png" />
     <Content Include="assets\img\apple-touch-icon-144x144.png" />
@@ -242,12 +251,14 @@
     <Folder Include="src\components\profile" />
     <Folder Include="src\components\shipping" />
     <Folder Include="src\directives" />
+    <Folder Include="src\hooks\" />
     <Folder Include="src\models" />
     <Folder Include="src\models\cost-account\" />
     <Folder Include="src\models\base\" />
     <Folder Include="src\models\invoices\" />
     <Folder Include="src\models\profile\" />
     <Folder Include="src\models\settings\" />
+    <Folder Include="src\common\" />
     <Folder Include="src\router" />
     <Folder Include="src\services" />
     <Folder Include="src\ui" />

@@ -1,5 +1,6 @@
 ﻿import IdentifiableObject from '../base/identifiable-object';
 import CostAccountInfo from '../cost-account/cost-account-info';
+import FileContentInfo from '../file-content-info';
 
 export default class AccountInvoiceInfo extends IdentifiableObject {
     CreationDate: Date;
@@ -9,6 +10,7 @@ export default class AccountInvoiceInfo extends IdentifiableObject {
     InvoicedAmount: number;
     Account: CostAccountInfo;
     CurrentDebitState: number;
+    InvoiceFile: FileContentInfo;
 
     public static createClone(ai: AccountInvoiceInfo): AccountInvoiceInfo {
         let aiInfo = new AccountInvoiceInfo();
@@ -20,6 +22,7 @@ export default class AccountInvoiceInfo extends IdentifiableObject {
         aiInfo.InvoicedAmount = ai.InvoicedAmount;
         aiInfo.Account = CostAccountInfo.createClone(ai.Account);
         aiInfo.CurrentDebitState = ai.CurrentDebitState;
+        aiInfo.InvoiceFile = FileContentInfo.createClone(ai.InvoiceFile);
         return aiInfo;
     }
 }
