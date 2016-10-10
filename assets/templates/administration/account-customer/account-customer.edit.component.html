@@ -1,0 +1,171 @@
+﻿<modal #modalAccountCustomerEdit [keyboard]="false">
+    <modal-header>
+        <div class="row">
+            <div class="col-md-12">
+                <h3>{{ 'USER' | translate }}: <strong>{{Email}}</strong></h3>
+            </div>
+        </div>
+    </modal-header>
+    <form #editForm="ngForm"
+          (ngSubmit)="save()">
+
+        <modal-body>
+            <div class="row">
+                <div class="col-md-12">
+                    <section *ngIf="error"
+                             class="sectiontemplate box-error">
+                        <div class="content">
+                            {{ error.message }}
+                        </div>
+                        <button type="button"
+                                class="clear-submit"
+                                (click)="error = null">
+                            <span class="icon-close"></span>
+                        </button>
+                    </section>
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div class="row">
+                <div class="col-md-3 col-sm-12">
+                    <label>{{ 'EMAIL' | translate }}</label>
+                </div>
+                <div class="col-md-9 col-sm-12">
+                    <input type="text"
+                           [(ngModel)]="Email"
+                           [ngModelOptions]="{standalone: true}"
+                           [disabled]="!isInEditMode" />
+                </div>
+            </div>
+
+            <!-- Mail Confirmed -->
+            <div class="row" *ngIf="accountCustomer != null && isValidGuid(accountCustomer.Id)">
+                <div class="col-md-3 col-sm-12">
+                    <label>{{ 'EMAIL_CONFIRMED' | translate }}</label>
+                </div>
+                <div class="col-md-9 col-sm-12">
+                    <input type="checkbox"
+                           id="active-box"
+                           [(ngModel)]="IsMailConfirmed"
+                           [ngModelOptions]="{standalone: true}"
+                           [disabled]="true" />
+                </div>
+            </div>
+
+            <!-- Number-->
+            <div class="row" *ngIf="accountCustomer != null && isValidGuid(accountCustomer.Id)">
+                <div class="col-md-3 col-sm-12">
+                    <label>{{ 'LOCKOUT_DATE' | translate }}</label>
+                </div>
+                <div class="col-md-5 col-sm-9">
+                    <input ng2-datetime-picker
+                           [(ngModel)]="LockoutDate"
+                           [ngModelOptions]="{standalone: true}"
+                           [disabled]="!isInEditMode"
+                           date-format="MM/DD/YYYY hh:mm"
+                           close-on-select="false" />
+                </div>
+                <div class="col-md-4 col-sm-3">
+                    <button type="button"
+                            class="button"
+                            (click)="resetLockoutDate()">
+                        <span>{{ 'RESET' | translate }}</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="accountCustomer != null && isValidGuid(accountCustomer.Id)">
+                <div class="col-md-6 col-sm-9">
+                    <label class="long-label">{{ 'ACCESS_FAILED_COUNT' | translate }}</label>
+                </div>
+                <div class="col-md-6 col-sm-2">
+                    <label><strong>{{AccessFailedCount}}</strong></label>
+                </div>
+            </div>
+
+            <hr />
+        </modal-body>
+
+        <modal-footer>
+            <div class="row">
+                <div class="col-sm-12">
+                    <button *ngIf="!isInEditMode"
+                            type="button"
+                            class="button popup"
+                            (click)="close()">
+                        <span>{{ 'MODAL_CLOSE' | translate }}</span>
+                    </button>
+
+                    <button *ngIf="!isInEditMode"
+                            type="button"
+                            class="button popup align-right"
+                            (click)="enableEditMode()">
+                        <span>{{ 'EDIT' | translate }}</span>
+                    </button>
+
+                    <button *ngIf="!isInEditMode"
+                            type="button"
+                            class="button popup align-right"
+                            (click)="deleteItem()">
+                        <span>{{ 'DELETE' | translate }}</span>
+                    </button>
+
+                    <button *ngIf="isInEditMode"
+                            type="submit"
+                            class="button popup align-right"
+                            [disabled]="!editForm.form.valid">
+                        <span>{{ 'MODAL_SAVE' | translate }}</span>
+                    </button>
+
+                    <button *ngIf="isInEditMode"
+                            type="button"
+                            class="button popup align-right"
+                            (click)="cancelEditMode()">
+                        <span>{{ 'CANCEL' | translate }}</span>
+                    </button>
+                </div>
+            </div>
+        </modal-footer>
+
+        <hr />
+
+        <!-- Roles -->
+        <div class="container-fluid">
+            <div class="row" *ngIf="accountCustomer != null">
+                <div class="col-sm-6">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">{{ 'ASSIGNED_ROLES' | translate }}</div>
+                        <div class="panel-body">
+                            <div class="panel panel-default" *ngIf="accountCustomer.Roles.length > 0">
+                                <div class="panel-body item-with-border"
+                                     *ngFor="let role of accountCustomer.Roles"
+                                     (click)="removeRole(role)">
+                                    <div>
+                                        {{ role.RoleName }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="panel panel-warning" *ngIf="isValidGuid(accountCustomer.Id) || (!isValidGuid(accountCustomer.Id) && accountCustomer.Roles.length < 1)">
+                        <div class="panel-heading">{{ 'AVAILABLE_ROLES' | translate }}</div>
+                        <div class="panel-body">
+                            <div class="panel panel-default" *ngIf="availableRoles != null && availableRoles.length > 0">
+                                <div class="panel-body item-with-border"
+                                     *ngFor="let role of availableRoles"
+                                     (click)="assignRole(role)">
+                                    <div>
+                                        {{ role.RoleName }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</modal>

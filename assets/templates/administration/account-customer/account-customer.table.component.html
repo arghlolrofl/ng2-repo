@@ -1,0 +1,27 @@
+﻿<div class="row">
+    <table class="data-table" style="margin-top: 10px; margin-bottom: 10px;">
+        <thead>
+            <tr>
+                <th>{{ 'LOGIN' | translate }}</th>
+                <th>{{ 'ROLE' | translate }}</th>
+                <th>{{ 'MAIL_CONFIRMED' | translate }}</th>
+                <th>{{ 'LOCKOUT_END_DATE' | translate }}</th>
+                <th>{{ 'DETAILS' | translate }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of items" class="table-row">
+                <td>{{ item.Email }}</td>
+                <td>{{ implodeRoles(item) }}</td>
+                <td>{{ item.EMailConfirmed }}</td>
+                <td>{{ item.LockoutEndDate }}</td>
+                <td>
+                    <button type="button" class="cell-button"
+                            (click)="showDetails.emit(item);">
+                        <span class="icon-class icon-eye"></span>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

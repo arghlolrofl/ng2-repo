@@ -115,7 +115,22 @@
   "EDIT_MODE": "Edit Mode",
   "SAVE": "Save",
   "INACTIVE": "Inactive",
-  "COST_ACCOUNT": "Cost Account",
+  "NAV_ADMINISTRATION_USER_MANAGEMENT": "User Management",
+  "DETAILS": "Details",
+  "ADMINISTRATION_USER_MANAGEMENT_HEADLINE": "User Management",
+  "LOGIN": "Login",
+  "ROLE": "Role",
+  "MAIL_CONFIRMED": "Mail Confirmed",
+  "LOCKOUT_END_DATE": "Lockout End Date",
+  "USER": "User",
+  "EMAIL": "E-Mail",
+  "EMAIL_CONFIRMED": "Confirmed",
+  "LOCKOUT_DATE": "Lockout Date",
+  "ASSIGNED_ROLES": "Assigned Roles",
+  "AVAILABLE_ROLES": "Available Roles",
+  "ACCESS_FAILED_COUNT": "Access Failed Count:",
+  "RESET": "Reset",
+  "REALLY_DELETE_USER": "Do you really want to delete the user?"
   "ERROR_PASSWORDS_DONT_MATCH": "Password and repeated password don't match.",
   "ERROR_PASSWORD_TOO_SHORT": "Password must be at least 6 characters long.",
   "ADDRESS_DETAILS_EDIT_HEADLINE": "edit address details",
@@ -133,6 +148,5 @@
   "ADDRESS_DETAILS_ZIPCODE_PLACEHOLDER": "Zip code",
   "ADDRESS_DETAILS_ADDITIONALZIPCODE_PLACEHOLDER": "Additional Zip Code",
   "ADDRESS_DETAILS_EMAIL_PLACEHOLDER": "E-Mail",
-  "ADDRESS_DETAILS_ADDITIONALINFORMATION_PLACEHOLDER": "Additional information",
-  "ADDRESS_DETAILS_PHONENUMBER_PLACEHOLDER": "Phone number"
+  "ADDRESS_DETAILS_ADDITIONALINFORMATION_PLACEHOLDER": "Additi
 }
