@@ -18,3 +18,5 @@ app.zip
 /obj/Debug
 /src/common/Base64Extension.js.map
 /src/common/Base64Extension.js
+src/**/*.js
+src/**/*.map
