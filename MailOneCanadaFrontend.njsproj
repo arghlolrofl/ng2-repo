@@ -57,6 +57,7 @@
     <Compile Include="Gruntfile.js" />
     <Compile Include="webpack.config.js" />
     <TypeScriptCompile Include="src\AppModule.ts" />
+    <TypeScriptCompile Include="src\common\Base64Extension.ts" />
     <TypeScriptCompile Include="src\components\administration\account-customer\account-customer.create.component.ts" />
     <TypeScriptCompile Include="src\components\administration\cost-account\cost-account.component.ts" />
     <TypeScriptCompile Include="src\components\administration\cost-account\cost-account.item-details.ts" />
@@ -89,6 +90,7 @@
     <TypeScriptCompile Include="src\models\cost-account\cost-account-filter.ts" />
     <TypeScriptCompile Include="src\models\cost-account\cost-account-info.ts" />
     <TypeScriptCompile Include="src\models\base\sorted-paged-request.ts" />
+    <TypeScriptCompile Include="src\models\file-content-info.ts" />
     <TypeScriptCompile Include="src\models\notification-message.ts" />
     <TypeScriptCompile Include="src\models\invoices\account-invoice-info.ts" />
     <TypeScriptCompile Include="src\models\invoices\account-invoice-filter-request.ts" />
@@ -262,6 +264,7 @@
     <Folder Include="assets\templates\shipping" />
     <Folder Include="docs\" />
     <Folder Include="src" />
+    <Folder Include="src\common\" />
     <Folder Include="src\components" />
     <Folder Include="src\components\administration" />
     <Folder Include="src\components\administration\cost-account\" />
