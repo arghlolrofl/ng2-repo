@@ -1,0 +1,20 @@
+﻿<div class="row">
+    <div class="field-container text-field col-md-2">
+        <input type="text" [(ngModel)]="LoginFilter" placeholder="{{ 'LOGIN' | translate }}">
+        <button class="clear-submit" (click)="LoginFilter = null;">
+            <span class="icon-close"></span>
+        </button>
+    </div>
+    <div class="field-container text-field col-md-2">
+        <input type="text" [(ngModel)]="RoleFilter" placeholder="{{ 'ROLE' | translate }}">
+        <button class="clear-submit" (click)="RoleFilter = null;">
+            <span class="icon-close"></span>
+        </button>
+    </div>
+    <div class="col-md-4">
+        <button class="button submit height-40"
+                (click)="applyFilter()">
+            <span>{{ 'APPLY' | translate }}</span>
+        </button>
+    </div>
+</div>

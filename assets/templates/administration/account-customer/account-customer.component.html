@@ -1,0 +1,80 @@
+﻿<h3>
+    <i class="icon-class icon-users"></i>
+    {{ 'ADMINISTRATION_USER_MANAGEMENT_HEADLINE' | translate }}
+</h3>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <section *ngIf="error"
+                 class="sectiontemplate box-error">
+            <div class="content">
+                {{ error.message }}
+            </div>
+            <button type="button"
+                    class="clear-submit"
+                    (click)="error = null">
+                <span class="icon-close"></span>
+            </button>
+        </section>
+    </div>
+</div>
+<!--<div class="row">
+    <div *ngIf="isInEditMode" class="col-md-12 status-message" id="status-box">
+        <i class="icon-interface">
+            <span>Edit Mode</span>
+        </i>
+    </div>
+</div>-->
+<div *ngIf="!isLoading" class="row">
+    <div class="col-md-12">
+        <button class="button color"
+                (click)="accountCustomer_onCreateNew()">
+            <span>{{ 'NEW' | translate }}</span>
+        </button>
+    </div>
+</div>
+
+<fp-loading-animation *ngIf="isLoading"></fp-loading-animation>
+
+<fp-administration-account-customer-filter *ngIf="!isLoading"
+                                           [loginFilter]="accountCustomerFilter.Login"
+                                           [roleFilter]="accountCustomerFilter.Role"
+                                           (applyFilterRequested)="filter_onApply($event)">
+
+</fp-administration-account-customer-filter>
+<fp-administration-account-customer-paging *ngIf="!isLoading"
+                                           [resultCount]="selectedResultCount"
+                                           [totalResultCount]="TotalResultCount"
+                                           [currentPage]="currentPageIndex"
+                                           (resultCountChanged)="paging_onResultCountChanged($event)"
+                                           (changePageRequested)="paging_onPageChangeRequested($event)"
+                                           (pageChanged)="paging_onPageIndexChanged($event)">
+
+</fp-administration-account-customer-paging>
+<fp-administration-account-customer-table *ngIf="!isLoading"
+                                          [items]="accountCustomers"
+                                          (showDetails)="accountCustomer_onShowDetails($event)">
+
+</fp-administration-account-customer-table>
+<fp-administration-account-customer-paging *ngIf="!isLoading"
+                                           [resultCount]="selectedResultCount"
+                                           [totalResultCount]="TotalResultCount"
+                                           [currentPage]="currentPageIndex"
+                                           (resultCountChanged)="paging_onResultCountChanged($event)"
+                                           (changePageRequested)="paging_onPageChangeRequested($event)"
+                                           (pageChanged)="paging_onPageIndexChanged($event)">
+
+</fp-administration-account-customer-paging>
+
+<fp-administration-account-customer-edit [showChange]="showEditDialogChange"
+                                         [accountCustomer]="SelectedAccountCustomer"
+                                         (accountCustomerDeleted)="accountCustomer_onDeleted($event)"
+                                         (accountCustomerChanged)="accountCustomer_onChanged($event)">
+
+</fp-administration-account-customer-edit>
+
+<fp-administration-account-customer-create [showChange]="showCreateDialogChange"
+                                           [accountCustomer]="SelectedAccountCustomer"
+                                           (accountCustomerCreated)="accountCustomer_onCreated($event)">
+
+</fp-administration-account-customer-create>

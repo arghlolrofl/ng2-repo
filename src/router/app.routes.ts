@@ -8,7 +8,7 @@ import ShippingLabelComponent from '../components/shipping/shipping.label.compon
 import AdministrationComponent from '../components/administration/administration.component';
 import SettingsComponent from '../components/administration/settings/settings.component';
 import CostAccountComponent from '../components/administration/cost-account/cost-account.component';
-import UsersComponent from '../components/administration/users/users.component';
+import AccountCustomerComponent from '../components/administration/account-customer/account-customer.component';
 
 
 /**
@@ -16,21 +16,23 @@ import UsersComponent from '../components/administration/users/users.component';
  * @type {{name: string, path: string, component: Object}[]}
  */
 const appRoutes = [
+    // Dashboard Components
     {
         path: '',
         component: DashboardComponent
     },
 
+    // Shipping Components
     {
         path: 'shipping',
         component: ShippingComponent
     },
-
     {
         path: 'shipping/label/:id',
         component: ShippingLabelComponent
     },
 
+    // Administration Components
     {
         path: 'administration',
         component: AdministrationComponent
@@ -45,9 +47,10 @@ const appRoutes = [
     },
     {
         path: 'administration/users',
-        component: UsersComponent
+        component: AccountCustomerComponent
     },
 
+    // Profile Component(s)
     {
         path: 'profile',
         component: ProfileComponent

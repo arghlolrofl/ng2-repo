@@ -1,17 +1,17 @@
 ﻿import {Component, ViewChild, EventEmitter, Input, Output, AfterViewInit} from '@angular/core';
 import {Response} from '@angular/http';
 import {ModalComponent} from 'ng2-bs3-modal/ng2-bs3-modal';
-import {TranslatePipe} from 'ng2-translate/ng2-translate';
+import {TranslateService} from 'ng2-translate/ng2-translate';
 
 import RoleService from '../../../services/role.service';
 import AccountCustomerService from '../../../services/account-customer.service';
-import AccountCustomer from '../../../models/users/account-customer';
+import AccountCustomer from '../../../models/account-customer/account-customer';
 import SortedPagedResults from '../../../models/base/sorted-paged-results';
-import AccountRole from '../../../models/users/account-role';
+import AccountRole from '../../../models/account-customer/account-role';
 
 @Component({
-    selector: 'fp-administration-users-details',
-    templateUrl: 'assets/templates/administration/users/users.details.html',
+    selector: 'fp-administration-account-customer-edit',
+    templateUrl: 'assets/templates/administration/account-customer/account-customer.edit.component.html',
     providers: [
         AccountCustomerService,
         RoleService
@@ -21,11 +21,13 @@ import AccountRole from '../../../models/users/account-role';
         '.align-right { float: right; }',
         '.role-action { width: 50%; height: 40px; margin-left: 25%; }',
         '.v-offset-25 { margin-top: 25px; }',
-        '.item-with-border { border: 1px solid lightgray; }'
+        '.v-offset-5 { margin-top: 25px; }',
+        '.item-with-border { border: 1px solid lightgray; }',
+        '.long-label { min-width: 250px; }'
     ]
 })
 
-export default class UsersDetailsComponent implements AfterViewInit {
+export default class AccountCustomerEditComponent implements AfterViewInit {
     //#region Input
 
     /**
@@ -37,7 +39,7 @@ export default class UsersDetailsComponent implements AfterViewInit {
      * Opens or closes the modal dialog.
      */
     @Input() showChange: EventEmitter<boolean>;
-    @ViewChild('modalAccountCustomerItemDetails') modal: ModalComponent;
+    @ViewChild('modalAccountCustomerEdit') modal: ModalComponent;
 
     //#endregion
 
@@ -53,18 +55,15 @@ export default class UsersDetailsComponent implements AfterViewInit {
      */
     @Output() accountCustomerChanged: EventEmitter<AccountCustomer> = new EventEmitter<AccountCustomer>();
 
-    /**
-     * Notifies the parent, that an account has been created
-     */
-    @Output() accountCustomerCreated: EventEmitter<AccountCustomer> = new EventEmitter<AccountCustomer>();
-
     //#endregion
 
     //#region Fields
 
     private error: Error;
+    private translatedStrings: any = { 'delete': null };
     private isInEditMode: boolean = false;
     private roleService: RoleService;
+    private cachedAccountCustomer: AccountCustomer;
     private accountCustomerService: AccountCustomerService;
     private allRoles: Array<AccountRole>;
     private availableRoles: Array<AccountRole>;
@@ -93,14 +92,22 @@ export default class UsersDetailsComponent implements AfterViewInit {
         this.accountCustomer.EMailConfirmed = val;
     }
 
-    get LockoutDate(): string {
+    get LockoutDate(): Date {
         if (this.accountCustomer != null)
             return this.accountCustomer.LockoutEndDate;
         else
             return null;
     }
-    set LockoutDate(val: string) {
+    set LockoutDate(val: Date) {
+        console.info(val);
         this.accountCustomer.LockoutEndDate = val;
+    }
+
+    get AccessFailedCount(): number {
+        if (this.accountCustomer != null)
+            return this.accountCustomer.AccessFailedCount;
+        else
+            return null;
     }
 
     get AssignedRoles(): Array<AccountRole> {
@@ -122,11 +129,21 @@ export default class UsersDetailsComponent implements AfterViewInit {
     //#region Initialization
 
     constructor(
+        translateService: TranslateService,
         accountCustomerService: AccountCustomerService,
         roleService: RoleService
     ) {
         this.accountCustomerService = accountCustomerService;
         this.roleService = roleService;
+
+        translateService.get('REALLY_DELETE_USER').subscribe(
+            (response: string) => {
+                this.translatedStrings['delete'] = response;
+            },
+            (error: any) => {
+                this.apiRequest_onError(error);
+            }
+        );
 
         this.roleService.getAllRoles().subscribe(
             (response: SortedPagedResults<AccountRole>) => {
@@ -151,15 +168,11 @@ export default class UsersDetailsComponent implements AfterViewInit {
         });
 
         this.modal.onOpen.subscribe(() => {
-            // enable edit mode when creating a cost account
-            if (this.accountCustomer != null) {
-                if (this.accountCustomer.Id === 0) {
-                    this.enableEditMode();
-                    this.availableRoles = this.allRoles;
-                } else if (this.isValidGuid(this.accountCustomer.Id)) {
-                    this.refreshAvailableRoles();
-                }
-            }
+            if (this.accountCustomer == null)
+                this.error = new Error("Error while loading details!");
+
+            this.refreshAccountCustomer();
+            this.refreshAvailableRoles();
         });
     }
 
@@ -169,20 +182,18 @@ export default class UsersDetailsComponent implements AfterViewInit {
     }
 
     private refreshAvailableRoles() {
-        // collect available roles
         let roles: Array<AccountRole> = new Array<AccountRole>();
         for (let i = 0; i < this.allRoles.length; i++) {
             let role = this.accountCustomer.Roles.find(r => r.RoleName == this.allRoles[i].RoleName);
             if (role == null)
                 roles.push(this.allRoles[i]);
         }
-
         this.availableRoles = roles;
     }
 
     private refreshAccountCustomer() {
         this.accountCustomerService.getAccountCustomerDetails(this.accountCustomer.Id).subscribe(
-            (response: any) => {
+            (response: AccountCustomer) => {
                 this.accountCustomer = response;
                 this.refreshAvailableRoles();
             },
@@ -193,38 +204,39 @@ export default class UsersDetailsComponent implements AfterViewInit {
     }
 
     private assignRole(role: AccountRole) {
-        if (this.CurrentAccountExists) {
-            this.accountCustomerService.assignRole(this.accountCustomer.Id, role.Id).subscribe(
-                (response: any) => {
-                    this.refreshAccountCustomer();
-                },
-                (error: any) => {
-                    this.apiRequest_onError(error);
-                }
-            );
-        } else {
-            this.accountCustomer.Roles = new Array<AccountRole>();
-            let newRole: AccountRole = new AccountRole();
-            newRole.Id = role.Id;
-            newRole.RoleName = role.RoleName;
-
-            this.accountCustomer.Roles.push(newRole);
-        }
+        this.accountCustomerService.assignRole(this.accountCustomer.Id, role.Id).subscribe(
+            (response: any) => {
+                this.refreshAccountCustomer();
+            },
+            (error: any) => {
+                this.apiRequest_onError(error);
+            }
+        );
     }
 
     private removeRole(role: AccountRole) {
-        if (this.CurrentAccountExists) {
-            this.accountCustomerService.removeRole(this.accountCustomer.Id, role.Id).subscribe(
-                (response: any) => {
-                    this.refreshAccountCustomer();
-                },
-                (error: any) => {
-                    this.apiRequest_onError(error);
-                }
-            );
-        } else {
-            this.accountCustomer.Roles = new Array<AccountRole>();
-        }
+        //@TODO: prevent managers from removing their own manager role
+        this.accountCustomerService.removeRole(this.accountCustomer.Id, role.Id).subscribe(
+            (response: any) => {
+                this.refreshAccountCustomer();
+            },
+            (error: any) => {
+                this.apiRequest_onError(error);
+            }
+        );
+    }
+
+    private resetLockoutDate() {
+        this.accountCustomer.LookoutEnabled = false;
+        this.accountCustomer.LockoutEndDate = null;
+        this.accountCustomerService.update(this.accountCustomer).subscribe(
+            (response: any) => {
+                console.info("LockoutEndDate has been reset");
+            },
+            (error: any) => {
+                this.apiRequest_onError(error);
+            }
+        );
     }
     //#endregion
 
@@ -232,7 +244,7 @@ export default class UsersDetailsComponent implements AfterViewInit {
      * Enables edit mode and caches current account customer object
      */
     private enableEditMode() {
-        //this.cachedAccountCustomer = AccountCustomer.createClone(this.accountCustomer);
+        this.cachedAccountCustomer = AccountCustomer.createCopy(this.accountCustomer);
         this.isInEditMode = true;
     }
 
@@ -241,12 +253,8 @@ export default class UsersDetailsComponent implements AfterViewInit {
      */
     private cancelEditMode() {
         this.isInEditMode = false;
-
-        if (!this.isValidGuid(this.accountCustomer.Id)) {
-            this.showChange.emit(false);
-        }
-
-        //this.accountCustomer = AccountCustomer.createClone(this.cachedAccountCustomer);
+        this.accountCustomer = this.cachedAccountCustomer;
+        this.cachedAccountCustomer = null;
     }
 
     /**
@@ -255,9 +263,11 @@ export default class UsersDetailsComponent implements AfterViewInit {
     private deleteItem() {
         let id = this.accountCustomer.Id;
 
+        if (!confirm(this.translatedStrings['delete']))
+            return;
+
         this.accountCustomerService.delete(id).subscribe(
             (response: Response) => {
-                console.info("Delete request: " + response.status + " " + response.statusText);
                 this.accountCustomerDeleted.emit(id);
                 this.close();
             },
@@ -275,40 +285,19 @@ export default class UsersDetailsComponent implements AfterViewInit {
     private save() {
         this.isInEditMode = false;
 
-        if (this.isValidGuid(this.accountCustomer.Id)) {
-            console.log("SAVING >>");
-            console.info(this.accountCustomer);
+        this.accountCustomerService.update(this.accountCustomer).subscribe(
+            (response: Response) => {
+                console.info("Item updated successfully: " + response.status + " " + response.statusText);
+                this.isInEditMode = false;
+                this.accountCustomerChanged.emit(this.accountCustomer);
+                this.close();
+            },
+            (error: any) => {
+                this.apiRequest_onError(error);
+                console.error(error);
+            }
+        );
 
-            this.accountCustomerService.update(this.accountCustomer).subscribe(
-                (response: Response) => {
-                    console.info("Item updated successfully: " + response.status + " " + response.statusText);
-                    this.isInEditMode = false;
-                    this.accountCustomerChanged.emit(this.accountCustomer);
-                    this.close();
-                },
-                (error: any) => {
-                    this.apiRequest_onError(error);
-                    console.error(error);
-                }
-            );
-        } else {
-            this.accountCustomerService.create({
-                Email: this.accountCustomer.Email,
-                RoleName: this.accountCustomer.Roles[0].RoleName,
-                MailConfirmationUrl: this.accountCustomer.Email
-            }).subscribe(
-                (response: Response) => {
-                    console.info("Item created successfully: " + response.status + " " + response.statusText);
-                    this.isInEditMode = false;
-                    this.accountCustomerCreated.emit(this.accountCustomer);
-                    this.close();
-                },
-                (error: any) => {
-                    this.apiRequest_onError(error);
-                    console.error(error);
-                }
-            );
-        }
     }
 
     /**

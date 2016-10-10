@@ -129,5 +129,8 @@
   "EMAIL_CONFIRMED": "Bestätigt",
   "LOCKOUT_DATE": "Sperrdatum",
   "ASSIGNED_ROLES": "Zugeordnete Rollen",
-  "AVAILABLE_ROLES": "Verfügbare Rollen"
+  "AVAILABLE_ROLES": "Verfügbare Rollen",
+  "ACCESS_FAILED_COUNT": "Anzahl fehlgeschlagener Zugriffe:",
+  "RESET": "Zurücksetzen",
+  "REALLY_DELETE_USER": "Wollen Sie den Nutzer wirklich löschen?"
 }

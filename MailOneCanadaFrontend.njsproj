@@ -20,6 +20,9 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
     <Content Include=".gitignore" />
+    <Content Include="assets\i18n\en-CA.json" />
+    <Content Include="assets\i18n\fr-CA.json" />
+    <Content Include="assets\templates\administration\account-customer\account-customer.create.component.html" />
     <Content Include="assets\templates\administration\cost-account\cost-account.component.html" />
     <Content Include="assets\templates\administration\cost-account\cost-account.item-details.html" />
     <Content Include="assets\templates\administration\cost-account\cost-account.table.paging.html" />
@@ -29,11 +32,11 @@
     <Content Include="assets\templates\administration\settings\settings.amount-per-label.html" />
     <Content Include="assets\templates\administration\settings\settings.balance-warning-level.html" />
     <Content Include="assets\templates\administration\settings\settings.component.html" />
-    <Content Include="assets\templates\administration\users\users.details.html" />
-    <Content Include="assets\templates\administration\users\users.table.filter.html" />
-    <Content Include="assets\templates\administration\users\users.table.html" />
-    <Content Include="assets\templates\administration\users\users.table.paging.html" />
-    <Content Include="assets\templates\administration\users\users.component.html" />
+    <Content Include="assets\templates\administration\account-customer\account-customer.edit.component.html" />
+    <Content Include="assets\templates\administration\account-customer\account-customer.filter.component.html" />
+    <Content Include="assets\templates\administration\account-customer\account-customer.table.component.html" />
+    <Content Include="assets\templates\administration\account-customer\account-customer.paging.component.html" />
+    <Content Include="assets\templates\administration\account-customer\account-customer.component.html" />
     <Content Include="assets\templates\common\loading-animation.component.html" />
     <Content Include="assets\templates\shipping\shipping.label.component.html" />
     <Content Include="assets\templates\user-properties.component.html" />
@@ -42,7 +45,7 @@
     <Content Include="index.html" />
     <Content Include=".lite-server.json" />
     <Content Include="package.json" />
-    <Content Include="src\components\administration\users\users.table.ts" />
+    <Content Include="src\components\administration\account-customer\account-customer.table.component.ts" />
     <Content Include="tsconfig.json" />
     <Content Include="typings.json" />
     <Content Include="CHANGELOG.md" />
@@ -50,6 +53,7 @@
     <Compile Include="Gruntfile.js" />
     <Compile Include="webpack.config.js" />
     <TypeScriptCompile Include="src\AppModule.ts" />
+    <TypeScriptCompile Include="src\components\administration\account-customer\account-customer.create.component.ts" />
     <TypeScriptCompile Include="src\components\administration\cost-account\cost-account.component.ts" />
     <TypeScriptCompile Include="src\components\administration\cost-account\cost-account.item-details.ts" />
     <TypeScriptCompile Include="src\components\administration\cost-account\cost-account.table.paging.ts" />
@@ -59,10 +63,10 @@
     <TypeScriptCompile Include="src\components\administration\settings\settings.amount-per-label.ts" />
     <TypeScriptCompile Include="src\components\administration\settings\settings.balance-warning-level.ts" />
     <TypeScriptCompile Include="src\components\administration\settings\settings.component.ts" />
-    <TypeScriptCompile Include="src\components\administration\users\users.component.ts" />
-    <TypeScriptCompile Include="src\components\administration\users\users.details.ts" />
-    <TypeScriptCompile Include="src\components\administration\users\users.table.filter.ts" />
-    <TypeScriptCompile Include="src\components\administration\users\users.table.paging.ts" />
+    <TypeScriptCompile Include="src\components\administration\account-customer\account-customer.component.ts" />
+    <TypeScriptCompile Include="src\components\administration\account-customer\account-customer.edit.component.ts" />
+    <TypeScriptCompile Include="src\components\administration\account-customer\account-customer.filter.component.ts" />
+    <TypeScriptCompile Include="src\components\administration\account-customer\account-customer.paging.component.ts" />
     <TypeScriptCompile Include="src\components\common\loading-animation.component.ts" />
     <TypeScriptCompile Include="src\components\shipping\shipping.label.component.ts" />
     <TypeScriptCompile Include="src\components\user-properties.component.ts" />
@@ -84,10 +88,10 @@
     <TypeScriptCompile Include="src\models\profile\user-claims.ts" />
     <TypeScriptCompile Include="src\models\settings\mailone-settings.ts" />
     <TypeScriptCompile Include="src\models\shipment-response.ts" />
-    <TypeScriptCompile Include="src\models\users\account-customer.ts" />
-    <TypeScriptCompile Include="src\models\users\account-role.ts" />
-    <TypeScriptCompile Include="src\models\users\account-customer-filter-request.ts" />
-    <TypeScriptCompile Include="src\models\users\account-customer-filter.ts" />
+    <TypeScriptCompile Include="src\models\account-customer\account-customer.ts" />
+    <TypeScriptCompile Include="src\models\account-customer\account-role.ts" />
+    <TypeScriptCompile Include="src\models\account-customer\account-customer-filter-request.ts" />
+    <TypeScriptCompile Include="src\models\account-customer\account-customer-filter.ts" />
     <TypeScriptCompile Include="src\rxjs-operators.ts" />
     <TypeScriptCompile Include="src\services\account-customer.service.ts" />
     <TypeScriptCompile Include="src\services\cost-account.service.ts" />
@@ -98,8 +102,6 @@
     <TypeScriptCompile Include="src\ui\key-value-pair.ts" />
     <TypeScriptCompile Include="typings\index.d.ts" />
     <Content Include="assets\css\style.min.css" />
-    <Content Include="assets\i18n\de.json" />
-    <Content Include="assets\i18n\en.json" />
     <Content Include="assets\img\apple-touch-icon-114x114.png" />
     <Content Include="assets\img\apple-touch-icon-120x120.png" />
     <Content Include="assets\img\apple-touch-icon-144x144.png" />
@@ -237,7 +239,7 @@
     <Folder Include="assets\templates" />
     <Folder Include="assets\templates\administration" />
     <Folder Include="assets\templates\administration\cost-account\" />
-    <Folder Include="assets\templates\administration\users\" />
+    <Folder Include="assets\templates\administration\account-customer\" />
     <Folder Include="assets\templates\administration\settings\" />
     <Folder Include="assets\templates\dashboard" />
     <Folder Include="assets\templates\common\" />
@@ -248,7 +250,7 @@
     <Folder Include="src\components" />
     <Folder Include="src\components\administration" />
     <Folder Include="src\components\administration\cost-account\" />
-    <Folder Include="src\components\administration\users\" />
+    <Folder Include="src\components\administration\account-customer\" />
     <Folder Include="src\components\administration\settings\" />
     <Folder Include="src\components\dashboard" />
     <Folder Include="src\components\common\" />
@@ -259,7 +261,7 @@
     <Folder Include="src\models" />
     <Folder Include="src\models\cost-account\" />
     <Folder Include="src\models\base\" />
-    <Folder Include="src\models\users\" />
+    <Folder Include="src\models\account-customer\" />
     <Folder Include="src\models\profile\" />
     <Folder Include="src\models\settings\" />
     <Folder Include="src\router" />

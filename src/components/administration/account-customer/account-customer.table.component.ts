@@ -1,11 +1,11 @@
 ﻿import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
-import AccountCustomer from '../../../models/users/account-customer';
+import AccountCustomer from '../../../models/account-customer/account-customer';
 
 @Component({
-    selector: 'fp-administration-users-table',
-    templateUrl: 'assets/templates/administration/users/users.table.html',
+    selector: 'fp-administration-account-customer-table',
+    templateUrl: 'assets/templates/administration/account-customer/account-customer.table.component.html',
     styles: [
         'table { width: 100%; }',
         'table thead tr th { font-weight: bold; }',

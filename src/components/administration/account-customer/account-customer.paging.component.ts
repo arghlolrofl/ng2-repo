@@ -2,8 +2,8 @@
 import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
 @Component({
-    selector: 'fp-administration-users-table-paging',
-    templateUrl: 'assets/templates/administration/users/users.table.paging.html',
+    selector: 'fp-administration-account-customer-paging',
+    templateUrl: 'assets/templates/administration/account-customer/account-customer.paging.component.html',
     styles: [
         '.paging-control { background-color: #eee; padding-top: 5px; padding-bottom: 0; }',
         '.paging-status { width: 100%; text-align: center; }',

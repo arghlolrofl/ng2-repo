@@ -1,9 +1,9 @@
 ﻿import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
-import AccountCustomer from '../../../models/users/account-customer';
-import AccountCustomerFilter from '../../../models/users/account-customer-filter';
-import AccountCustomerFilterRequest from '../../../models/users/account-customer-filter-request';
+import AccountCustomer from '../../../models/account-customer/account-customer';
+import AccountCustomerFilter from '../../../models/account-customer/account-customer-filter';
+import AccountCustomerFilterRequest from '../../../models/account-customer/account-customer-filter-request';
 import AccountCustomerService from '../../../services/account-customer.service';
 import SortedPagedResults from '../../../models/base/sorted-paged-results';
 
@@ -20,7 +20,7 @@ const $ = w.$;
 
 @Component({
     selector: 'fp-administration-user-management',
-    templateUrl: 'assets/templates/administration/users/users.component.html',
+    templateUrl: 'assets/templates/administration/account-customer/account-customer.component.html',
     styles: [
 
     ],
@@ -29,7 +29,7 @@ const $ = w.$;
     ]
 })
 
-export default class UsersComponent {
+export default class AccountCustomerComponent {
     //#region Fields
 
     private selectedResultCount: number = 10;
@@ -49,9 +49,14 @@ export default class UsersComponent {
     //#region Events
 
     /**
-     * Show modal dialog for item details.
+     * Show modal dialog for edit.
      */
     showEditDialogChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+    /**
+     * Show modal dialog for create.
+     */
+    showCreateDialogChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     //#endregion
 
@@ -97,43 +102,29 @@ export default class UsersComponent {
     private refreshAccountCustomers() {
         this.isLoading = true;
         this.selectedAccountCustomer = null;
+        let req: AccountCustomerFilterRequest = new AccountCustomerFilterRequest(this.accountCustomerFilter);
 
-        if (this.selectedResultCount == null) {
-            this.accountCustomerService
-                .getAllAccountCustomers()
-                .subscribe(
-                    (response: SortedPagedResults<AccountCustomer>) => {
-                        this.accountCustomers = response.ItemList;
-                        this.isLoading = false;
-                        this.TotalResultCount = response.TotalItemCount;
-                    },
-                    (error: Error) => {
-                        this.isLoading = false;
-                        console.error(error);
-                    }
-                );
-        } else {
-            let req: AccountCustomerFilterRequest = new AccountCustomerFilterRequest(this.accountCustomerFilter);
+        if (this.selectedResultCount != null)
+            req.ResultCount = +this.selectedResultCount;
 
-            req.ResultCount = this.selectedResultCount;
+        if (this.currentStartIndex != null)
+            req.StartValue = this.currentStartIndex;
 
-            if (this.currentStartIndex != null)
-                req.StartValue = this.currentStartIndex;
+        console.info(req);
 
-            this.accountCustomerService
-                .getFilteredAccountCustomers(req)
-                .subscribe(
-                    (response: SortedPagedResults<AccountCustomer>) => {
-                        this.accountCustomers = response.ItemList;
-                        this.TotalResultCount = response.TotalItemCount;
-                        this.isLoading = false;
-                    },
-                    (error: Error) => {
-                        this.isLoading = false;
-                        console.error(error);
-                    }
-                );
-        }
+        this.accountCustomerService
+            .getFilteredAccountCustomers(req)
+            .subscribe(
+            (response: SortedPagedResults<AccountCustomer>) => {
+                this.accountCustomers = response.ItemList;
+                this.TotalResultCount = response.TotalItemCount;
+                this.isLoading = false;
+            },
+            (error: Error) => {
+                this.isLoading = false;
+                console.error(error);
+            }
+            );
     }
 
     private accountCustomer_onShowDetails(accountCustomer: AccountCustomer) {
@@ -145,7 +136,7 @@ export default class UsersComponent {
         this.selectedAccountCustomer = new AccountCustomer();
         this.selectedAccountCustomer.Id = 0;
         this.selectedAccountCustomer.EMailConfirmed = false;
-        this.showEditDialogChange.emit(true);
+        this.showCreateDialogChange.emit(true);
     }
 
     private accountCustomer_onCreated(accountCustomer: AccountCustomer): void {
@@ -160,4 +151,41 @@ export default class UsersComponent {
         this.refreshAccountCustomers();
     }
 
+    /**
+     * Callback method when the number of items to be displayed
+     * on a single page has been changed
+     * @param {number} count Number of results per page
+     */
+    private paging_onResultCountChanged(count: number) {
+        this.currentPageIndex = 1;
+        this.SelectedResultCount = count;
+    }
+
+    /**
+     * Callback method when the user clicked on next or
+     * previous page button
+     * @param {number} startIndex New start index
+     */
+    private paging_onPageChangeRequested(startIndex: number) {
+        this.currentStartIndex = startIndex;
+        this.refreshAccountCustomers();
+    }
+
+    /**
+     * Callback method when the page index has changed
+     * @param {number} index New page index
+     */
+    private paging_onPageIndexChanged(index: number) {
+        this.currentPageIndex = index;
+    }
+
+    /**
+     * Callback method when the user has applyed a filter
+     * @param {CostAccountFilter} filter Filter options
+     */
+    private filter_onApply(filter: AccountCustomerFilter) {
+        this.accountCustomerFilter.Login = filter.Login;
+        this.accountCustomerFilter.Role = filter.Role;
+        this.refreshAccountCustomers();
+    }
 }

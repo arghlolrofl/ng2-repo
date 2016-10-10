@@ -130,5 +130,8 @@
   "EMAIL_CONFIRMED": "Confirmed",
   "LOCKOUT_DATE": "Lockout Date",
   "ASSIGNED_ROLES": "Assigned Roles",
-  "AVAILABLE_ROLES": "Available Roles"
+  "AVAILABLE_ROLES": "Available Roles",
+  "ACCESS_FAILED_COUNT": "Access Failed Count:",
+  "RESET": "Reset",
+  "REALLY_DELETE_USER": "Do you really want to delete the user?"
 }

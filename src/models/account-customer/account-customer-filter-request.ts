@@ -14,7 +14,5 @@ export default class AccountCustomerFilterRequest extends AccountCustomerFilter 
 
         this.Login = filter.Login;
         this.Role = filter.Role;
-        this.IsLocked = filter.IsLocked;
-        this.IsConfirmed = filter.IsConfirmed;
     }
 }

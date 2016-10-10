@@ -3,9 +3,9 @@ import {Response} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 
 import APIClient from './api-client.service';
-import AccountCustomerFilterRequest from '../models/users/account-customer-filter-request';
+import AccountCustomerFilterRequest from '../models/account-customer/account-customer-filter-request';
 import SortedPagedResults from '../models/base/sorted-paged-results';
-import AccountCustomer from '../models/users/account-customer';
+import AccountCustomer from '../models/account-customer/account-customer';
 
 @Injectable()
 export default class AccountCustomerService {

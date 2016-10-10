@@ -9,6 +9,8 @@ import {Ng2Bs3ModalModule} from 'ng2-bs3-modal/ng2-bs3-modal';
 import {routing, appRoutingProviders} from './router/app.routes';
 import {SuggestDirective} from "./directives/suggest.directive";
 
+import { Ng2DatetimePickerModule } from 'ng2-datetime-picker';
+
 import LoadingAnimationComponent from './components/common/loading-animation.component';
 import AppComponent from './components/app.component';
 import UserPropertiesComponent from './components/user-properties.component';
@@ -26,11 +28,12 @@ import CostAccountTablePagingComponent from './components/administration/cost-ac
 import CostAccountTableFilterComponent from './components/administration/cost-account/cost-account.table.filter';
 import CostAccountTableItemDetailsComponent from './components/administration/cost-account/cost-account.item-details';
 
-import AccountCustomerComponent from './components/administration/users/users.component';
-import AccountCustomerTableComponent from './components/administration/users/users.table';
-import AccountCustomerTablePagingComponent from './components/administration/users/users.table.paging';
-import AccountCustomerTableFilterComponent from './components/administration/users/users.table.filter';
-import AccountCustomerTableItemDetailsComponent from './components/administration/users/users.details';
+import AccountCustomerComponent from './components/administration/account-customer/account-customer.component';
+import AccountCustomerTableComponent from './components/administration/account-customer/account-customer.table.component';
+import AccountCustomerPagingComponent from './components/administration/account-customer/account-customer.paging.component';
+import AccountCustomerFilterComponent from './components/administration/account-customer/account-customer.filter.component';
+import AccountCustomerCreateComponent from './components/administration/account-customer/account-customer.create.component';
+import AccountCustomerEditComponent from './components/administration/account-customer/account-customer.edit.component';
 
 import ProfileComponent from './components/profile/profile.component';
 
@@ -59,6 +62,7 @@ import NotificationService from "./services/notification.service"
             deps: [Http]
         }),
         Ng2Bs3ModalModule,
+        Ng2DatetimePickerModule,
         routing
     ],
     declarations: [
@@ -83,9 +87,10 @@ import NotificationService from "./services/notification.service"
 
         AccountCustomerComponent,
         AccountCustomerTableComponent,
-        AccountCustomerTablePagingComponent,
-        AccountCustomerTableFilterComponent,
-        AccountCustomerTableItemDetailsComponent,
+        AccountCustomerPagingComponent,
+        AccountCustomerFilterComponent,
+        AccountCustomerCreateComponent,
+        AccountCustomerEditComponent,
 
         ProfileComponent,
 
