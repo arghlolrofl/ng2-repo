@@ -8,6 +8,7 @@ import ShippingLabelComponent from '../components/shipping/shipping.label.compon
 import AdministrationComponent from '../components/administration/administration.component';
 import SettingsComponent from '../components/administration/settings/settings.component';
 import CostAccountComponent from '../components/administration/cost-account/cost-account.component';
+import AccountCustomerComponent from '../components/administration/account-customer/account-customer.component';
 import AccountInvoiceComponent from '../components/administration/invoices/account-invoice.component';
 
 
@@ -16,21 +17,23 @@ import AccountInvoiceComponent from '../components/administration/invoices/accou
  * @type {{name: string, path: string, component: Object}[]}
  */
 const appRoutes = [
+    // Dashboard Components
     {
         path: '',
         component: DashboardComponent
     },
 
+    // Shipping Components
     {
         path: 'shipping',
         component: ShippingComponent
     },
-
     {
         path: 'shipping/label/:id',
         component: ShippingLabelComponent
     },
 
+    // Administration Components
     {
         path: 'administration',
         component: AdministrationComponent
@@ -44,10 +47,15 @@ const appRoutes = [
         component: CostAccountComponent
     },
     {
+        path: 'administration/users',
+        component: AccountCustomerComponent
+    },
+    {
         path: 'administration/invoices',
         component: AccountInvoiceComponent
     },
 
+    // Profile Component(s)
     {
         path: 'profile',
         component: ProfileComponent

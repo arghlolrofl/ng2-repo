@@ -9,6 +9,8 @@ import {Ng2Bs3ModalModule} from 'ng2-bs3-modal/ng2-bs3-modal';
 import {routing, appRoutingProviders} from './router/app.routes';
 import {SuggestDirective} from "./directives/suggest.directive";
 
+import { Ng2DatetimePickerModule } from 'ng2-datetime-picker';
+
 import LoadingAnimationComponent from './components/common/loading-animation.component';
 import AppComponent from './components/app.component';
 import UserPropertiesComponent from './components/user-properties.component';
@@ -24,7 +26,12 @@ import CostAccountComponent from './components/administration/cost-account/cost-
 import CostAccountTableComponent from './components/administration/cost-account/cost-account.table';
 import CostAccountTablePagingComponent from './components/administration/cost-account/cost-account.table.paging';
 import CostAccountTableFilterComponent from './components/administration/cost-account/cost-account.table.filter';
-import CostAccountTableItemDetailsComponent from './components/administration/cost-account/cost-account.item-details';
+import CostAccountTableItemDetailsComponent from './components/administration/cost-account/cost-account.item-details';import AccountCustomerComponent from './components/administration/account-customer/account-customer.component';
+import AccountCustomerTableComponent from './components/administration/account-customer/account-customer.table.component';
+import AccountCustomerPagingComponent from './components/administration/account-customer/account-customer.paging.component';
+import AccountCustomerFilterComponent from './components/administration/account-customer/account-customer.filter.component';
+import AccountCustomerCreateComponent from './components/administration/account-customer/account-customer.create.component';
+import AccountCustomerEditComponent from './components/administration/account-customer/account-customer.edit.component';
 
 import AccountInvoiceComponent from './components/administration/invoices/account-invoice.component';
 import AccountInvoiceTableComponent from './components/administration/invoices/account-invoice.table';
@@ -45,7 +52,7 @@ import ShippingRecipientAddComponent from "./components/shipping/shipping.recipi
 import ShippingProductCalculationShortcutsComponent from "./components/shipping/shipping.product-calculation.shortcuts.component";
 import ShippingLabelComponent from "./components/shipping/shipping.label.component";
 import CustomErrorHandler from "./hooks/custom-error-handler"
-import NotificationService from "./services/notification-service"
+import NotificationService from "./services/notification.service"
 
 @NgModule({
     imports: [
@@ -58,6 +65,7 @@ import NotificationService from "./services/notification-service"
             deps: [Http]
         }),
         Ng2Bs3ModalModule,
+        Ng2DatetimePickerModule,
         routing
     ],
     declarations: [
@@ -79,6 +87,13 @@ import NotificationService from "./services/notification-service"
         CostAccountTablePagingComponent,
         CostAccountTableFilterComponent,
         CostAccountTableItemDetailsComponent,
+
+        AccountCustomerComponent,
+        AccountCustomerTableComponent,
+        AccountCustomerPagingComponent,
+        AccountCustomerFilterComponent,
+        AccountCustomerCreateComponent,
+        AccountCustomerEditComponent,
 
         AccountInvoiceComponent,
         AccountInvoiceTableComponent,

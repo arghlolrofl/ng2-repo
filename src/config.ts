@@ -16,11 +16,17 @@ export const CONSUMER_API_BASE_URL = 'http://62.220.24.49/M1Consumer/api/';
 //export const CONSUMER_API_BASE_URL = 'http://localhost:3494/api/';
 
 /**
+ * Authentication Token url.
+ * @type {string}
+ */
+export const AUTHENTICATION_TOKEN_URL = 'http://62.220.24.49/M1Authentication/token';
+//export const AUTHORIZATION_API_URL = 'http://localhost:33181/token';
+
+/**
  * Authentication API url.
  * @type {string}
  */
-export const AUTHORIZATION_API_URL = 'http://62.220.24.49/M1Authentication/token';
-//export const AUTHORIZATION_API_URL = 'http://localhost:33181/token';
+export const AUTHENTICATION_API_URL = 'http://62.220.24.49/M1Authentication/api/';
 
 /**
  * Base URL of the Authentication API.
@@ -54,7 +60,7 @@ export const API_RETRY_DELAY = 1000;
 export const MAX_AC_RESULTS = 5;
 
 /**
- * HTTP Status Codes that should fail early. 
+ * HTTP Status Codes that should fail early.
  * If the error code is not in this list N retries will be executed.
  */
 export const EARLY_FAIL_HTTP_STATUS_CODES = [400];
