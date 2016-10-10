@@ -2,34 +2,11 @@
     <i class="icon-class icon-users"></i>
     {{ 'ADMINISTRATION_USER_MANAGEMENT_HEADLINE' | translate }}
 </h3>
-<hr />
-<div class="row">
-    <div class="col-md-12">
-        <section *ngIf="error"
-                 class="sectiontemplate box-error">
-            <div class="content">
-                {{ error.message }}
-            </div>
-            <button type="button"
-                    class="clear-submit"
-                    (click)="error = null">
-                <span class="icon-close"></span>
-            </button>
-        </section>
-    </div>
-</div>
-<!--<div class="row">
-    <div *ngIf="isInEditMode" class="col-md-12 status-message" id="status-box">
-        <i class="icon-interface">
-            <span>Edit Mode</span>
-        </i>
-    </div>
-</div>-->
-<div *ngIf="!isLoading" class="row">
-    <div class="col-md-12">
-        <button class="button color"
-                (click)="accountCustomer_onCreateNew()">
-            <span>{{ 'NEW' | translate }}</span>
+
+<div *ngIf="!isLoading" class="indented-row">
+    <div class="field-container box-icon">
+        <button (click)="costAccount_onCreateNew()">
+            <span class="icon-class icon-plus" title="{{ 'NEW' | translate }}"></span>
         </button>
     </div>
 </div>
